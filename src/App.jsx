@@ -1,4 +1,15 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+
+// Responsive hook — triggers re-render on resize
+function useWindowSize() {
+  const [size, setSize] = useState({ w: typeof window !== "undefined" ? window.innerWidth : 1024, h: typeof window !== "undefined" ? window.innerHeight : 768 });
+  useEffect(() => {
+    const handler = () => setSize({ w: window.innerWidth, h: window.innerHeight });
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return size;
+}
 
 // ──────────────────────────────────────────────
 // MADINAH ARABIC LEARNER — Full 92-session build
@@ -566,8 +577,14 @@ function TopBar({ onExit, streak, hearts, progress, total }) {
 function MCQ({ exercise, onResult }) {
   const [sel, setSel] = useState(null);
   const [done, setDone] = useState(false);
+  const { w } = useWindowSize();
   const isArEn = exercise.type === "ar_en";
   const isGrammar = exercise.type === "grammar_mcq" || exercise.type === "grammar_err";
+  const arPromptSize = w >= 1024 ? 56 : w >= 640 ? 50 : 44;
+  const enPromptSize = w >= 1024 ? 32 : w >= 640 ? 28 : 24;
+  const optArSize = w >= 1024 ? 24 : w >= 640 ? 22 : 20;
+  const optEnSize = w >= 1024 ? 16 : 14;
+  const cols = w >= 1024 ? "1fr 1fr 1fr 1fr" : "1fr 1fr";
 
   const handlePick = (opt) => {
     if (done) return;
@@ -588,15 +605,15 @@ function MCQ({ exercise, onResult }) {
       ) : isArEn ? (
         <>
           <p style={{color:"#64748b",fontSize:13,marginBottom:10}}>What does this mean?</p>
-          <div style={{fontSize:46,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl",marginBottom:24,lineHeight:1.4}}>{exercise.prompt}</div>
+          <div style={{fontSize:arPromptSize,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl",marginBottom:24,lineHeight:1.4}}>{exercise.prompt}</div>
         </>
       ) : (
         <>
           <p style={{color:"#64748b",fontSize:13,marginBottom:10}}>Select the Arabic for:</p>
-          <div style={{fontSize:28,fontWeight:700,color:"#0f172a",marginBottom:24}}>{exercise.promptEn}</div>
+          <div style={{fontSize:enPromptSize,fontWeight:700,color:"#0f172a",marginBottom:24}}>{exercise.promptEn}</div>
         </>
       )}
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+      <div style={{display:"grid",gridTemplateColumns:cols,gap:10}}>
         {exercise.options.map((opt,i)=>{
           const picked = sel===opt, correct = opt===exercise.correct;
           let bg="white",border="2px solid #e2e8f0",color="#1e293b";
@@ -606,7 +623,7 @@ function MCQ({ exercise, onResult }) {
           return (
             <button key={i} onClick={()=>handlePick(opt)} style={{
               padding:"14px 8px",borderRadius:12,border,background:bg,color,
-              fontSize:arabic?20:14,fontWeight:600,cursor:done?"default":"pointer",
+              fontSize:arabic?optArSize:optEnSize,fontWeight:600,cursor:done?"default":"pointer",
               fontFamily:arabic?arFont:"inherit",direction:arabic?"rtl":"ltr",
               boxShadow:"0 1px 4px rgba(0,0,0,0.07)",lineHeight:1.4,transition:"transform 0.15s"}}
               onMouseEnter={e=>{if(!done)e.currentTarget.style.transform="scale(1.03)"}}
@@ -674,6 +691,8 @@ function MatchEx({ exercise, onResult }) {
 function TileEx({ exercise, onResult }) {
   const [placed, setPlaced] = useState([]);
   const [remaining, setRemaining] = useState(()=>shuffle(exercise.tiles));
+  const { w } = useWindowSize();
+  const tileFont = w >= 1024 ? 26 : w >= 640 ? 22 : 20;
   const [checked, setChecked] = useState(false);
   const [correct, setCorrect] = useState(false);
 
@@ -688,12 +707,12 @@ function TileEx({ exercise, onResult }) {
       <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
         {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13}}>Tap tiles below to build the sentence</span>}
         {placed.map((tile,i)=>(
-          <button key={`${tile}-${i}`} onClick={()=>removeTile(tile,i)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:20,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{tile}</button>
+          <button key={`${tile}-${i}`} onClick={()=>removeTile(tile,i)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{tile}</button>
         ))}
       </div>
       <div style={{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",marginBottom:16,direction:"rtl"}}>
         {remaining.map((tile,i)=>(
-          <button key={`${tile}-${i}`} onClick={()=>addTile(tile,i)} style={{padding:"8px 12px",background:"white",border:"2px solid #e2e8f0",borderRadius:8,fontSize:20,fontFamily:arFont,fontWeight:700,cursor:"pointer",color:"#1e293b",transition:"transform 0.1s"}}
+          <button key={`${tile}-${i}`} onClick={()=>addTile(tile,i)} style={{padding:"8px 12px",background:"white",border:"2px solid #e2e8f0",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:"pointer",color:"#1e293b",transition:"transform 0.1s"}}
             onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.06)"}}
             onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
             {tile}</button>
@@ -709,6 +728,8 @@ function TileEx({ exercise, onResult }) {
 
 // Review tile builder with pre-baked words (tappable to toggle Arabic↔English)
 function ReviewTileEx({ exercise, onResult }) {
+  const { w } = useWindowSize();
+  const tileFont = w >= 1024 ? 26 : w >= 640 ? 22 : 20;
   const [placed, setPlaced] = useState([]);
   const [remaining, setRemaining] = useState(()=>shuffle(exercise.tiles.filter(t=>!exercise.prebaked.some(p=>p.ar===t))));
   const [checked, setChecked] = useState(false);
@@ -762,7 +783,7 @@ function ReviewTileEx({ exercise, onResult }) {
               {showing?item.en:item.tile}
             </button>;
           } else if(item.tile){
-            return <button key={`pl-${i}`} onClick={()=>removeTile(item.tile,item.gapIdx)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:20,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{item.tile}</button>;
+            return <button key={`pl-${i}`} onClick={()=>removeTile(item.tile,item.gapIdx)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{item.tile}</button>;
           } else {
             return <span key={`gap-${i}`} style={{width:60,height:40,border:"2px dashed #cbd5e1",borderRadius:8,display:"inline-block"}}/>;
           }
@@ -771,7 +792,7 @@ function ReviewTileEx({ exercise, onResult }) {
       {/* Tile bank */}
       <div style={{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",marginBottom:16,direction:"rtl"}}>
         {remaining.map((tile,i)=>(
-          <button key={`${tile}-${i}`} onClick={()=>addTile(tile,i)} style={{padding:"8px 12px",background:"white",border:"2px solid #e2e8f0",borderRadius:8,fontSize:20,fontFamily:arFont,fontWeight:700,cursor:"pointer",color:"#1e293b",transition:"transform 0.1s"}}
+          <button key={`${tile}-${i}`} onClick={()=>addTile(tile,i)} style={{padding:"8px 12px",background:"white",border:"2px solid #e2e8f0",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:"pointer",color:"#1e293b",transition:"transform 0.1s"}}
             onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.06)"}}
             onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
             {tile}</button>
@@ -788,13 +809,16 @@ function ReviewTileEx({ exercise, onResult }) {
 
 // Grammar intro card (regular sessions)
 function GrammarCard({ session, onStart }) {
+  const { w } = useWindowSize();
+  const titleSize = w >= 1024 ? 32 : w >= 640 ? 28 : 24;
+  const vocabArSize = w >= 1024 ? 26 : w >= 640 ? 24 : 22;
   return (
     <div style={{padding:"16px 16px 24px"}}>
       <div style={{background:"linear-gradient(135deg,#eff6ff,#dbeafe)",border:"1px solid #93c5fd",borderRadius:16,padding:"16px 16px 20px",marginBottom:16,textAlign:"center"}}>
         <div style={{fontSize:11,color:"#3b82f6",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>
           Book {session.book} · Lesson {session.lessonRef} · Part {session.part}
         </div>
-        <div style={{fontSize:26,fontWeight:700,color:"#1e40af",fontFamily:arFont,direction:"rtl",marginBottom:4,lineHeight:1.4}}>{session.title}</div>
+        <div style={{fontSize:titleSize,fontWeight:700,color:"#1e40af",fontFamily:arFont,direction:"rtl",marginBottom:4,lineHeight:1.4}}>{session.title}</div>
         <div style={{fontSize:15,fontWeight:600,color:"#1e3a5f",marginBottom:10}}>{session.titleEn}</div>
         <p style={{color:"#475569",fontSize:13,lineHeight:1.7,margin:0,textAlign:"left"}}>{session.grammar}</p>
       </div>
@@ -802,7 +826,7 @@ function GrammarCard({ session, onStart }) {
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:20}}>
         {session.vocab.map((w,i)=>(
           <div key={i} style={{background:"#f8fafc",borderRadius:10,padding:"10px",border:"1px solid #e2e8f0",textAlign:"center"}}>
-            <div style={{fontSize:22,fontWeight:700,color:"#1e293b",fontFamily:arFont,direction:"rtl",lineHeight:1.5}}>{w.ar}</div>
+            <div style={{fontSize:vocabArSize,fontWeight:700,color:"#1e293b",fontFamily:arFont,direction:"rtl",lineHeight:1.5}}>{w.ar}</div>
             <div style={{fontSize:13,color:"#475569",fontWeight:600}}>{w.en}</div>
           </div>
         ))}
@@ -909,8 +933,29 @@ export default function MadinahArabicApp() {
     },400);
   };
 
-  const cardStyle = {maxWidth:480,margin:"0 auto",background:"white",borderRadius:20,minHeight:580,boxShadow:"0 8px 30px rgba(0,0,0,0.10)",overflow:"hidden",fontFamily:"'Inter','Segoe UI',sans-serif"};
-  const pageStyle = {minHeight:"100vh",background:`linear-gradient(180deg,${DARK} 0%,#1e293b 100%)`,padding:"20px 14px"};
+  const { w, h } = useWindowSize();
+  const isSm = w < 640;           // phone
+  const isMd = w >= 640 && w < 1024; // iPad portrait, large phones landscape
+  const isLg = w >= 1024;         // iPad landscape, desktop
+
+  const cardStyle = {
+    width: isSm ? "100%" : isMd ? "90%" : "80%",
+    maxWidth: isSm ? "100%" : isMd ? 760 : 960,
+    margin: "0 auto",
+    background: "white",
+    borderRadius: isSm ? 0 : 20,
+    minHeight: isSm ? "100vh" : "auto",
+    boxShadow: isSm ? "none" : "0 8px 30px rgba(0,0,0,0.10)",
+    overflow: "hidden",
+    fontFamily: "'Inter','Segoe UI',sans-serif",
+  };
+  const pageStyle = {
+    minHeight: "100vh",
+    background: `linear-gradient(180deg,${DARK} 0%,#1e293b 100%)`,
+    padding: isSm ? 0 : isMd ? "24px 20px" : "32px 24px",
+  };
+  // Dynamic scroll area height — fills remaining viewport after top bar (~120px)
+  const scrollH = `calc(${h}px - 120px)`;
 
   // ── HOME ──
   if(screen==="home"){
@@ -963,7 +1008,7 @@ export default function MadinahArabicApp() {
             <span style={{color:"white",fontWeight:700,fontSize:16}}>All Sessions</span>
             <div style={{background:"rgba(255,255,255,0.2)",borderRadius:20,padding:"4px 10px",color:"white",fontWeight:700,fontSize:13}}>⭐ {xp}</div>
           </div>
-          <div style={{overflowY:"auto",maxHeight:540,padding:"14px 14px 20px"}}>
+          <div style={{overflowY:"auto",maxHeight:scrollH,padding:"14px 14px 20px"}}>
             {ALL_SESSIONS.map((s,idx)=>{
               const unlocked = idx <= numCompleted;
               const acc = completed[s.id];
@@ -1043,7 +1088,7 @@ export default function MadinahArabicApp() {
               {isReview?`Review · ${sessionData.coversLessons}`:`Session ${sessionData.id} of 84`}
             </span>
           </div>
-          <div style={{overflowY:"auto",maxHeight:540}}>
+          <div style={{overflowY:"auto",maxHeight:scrollH}}>
             {isReview
               ? <ReviewIntro review={sessionData} onStart={()=>setScreen("exercise")}/>
               : <GrammarCard session={sessionData} onStart={()=>setScreen("exercise")}/>}
@@ -1066,7 +1111,7 @@ export default function MadinahArabicApp() {
           {phase&&<div style={{background:phase==="Grammar"?"#eff6ff":"#fffbeb",padding:"6px 16px",fontSize:12,fontWeight:700,color:phase==="Grammar"?"#3b82f6":"#d97706",borderBottom:"1px solid",borderColor:phase==="Grammar"?"#bfdbfe":"#fde68a",textAlign:"center"}}>
             {phase==="Grammar"?"📖 Grammar Questions":"✏️ Sentence Building"} · {phase==="Grammar"?`${exIdx+1}/${grammarCount}`:`${exIdx-grammarCount+1}/${exercises.length-grammarCount}`}
           </div>}
-          <div style={{padding:"16px 16px 24px",overflowY:"auto",maxHeight:500}}>
+          <div style={{padding:"16px 16px 24px",overflowY:"auto",maxHeight:scrollH}}>
             {(ex.type==="ar_en"||ex.type==="en_ar"||ex.type==="grammar_mcq"||ex.type==="grammar_err")
               ? <MCQ key={exIdx} exercise={ex} onResult={handleResult}/>
               : ex.type==="match"
