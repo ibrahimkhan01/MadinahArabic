@@ -30,6 +30,29 @@ function shuffle(arr) {
   return a;
 }
 
+// ── Audio (Web Speech API) ──────────────────────
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = "ar-SA";
+  utt.rate = 0.82;
+  window.speechSynthesis.speak(utt);
+}
+
+function SpeakBtn({ text, size = 18 }) {
+  return (
+    <button
+      onClick={e => { e.stopPropagation(); speak(text); }}
+      title="Hear pronunciation"
+      style={{ background:"none", border:"none", cursor:"pointer",
+               fontSize:size, lineHeight:1, padding:"2px 8px",
+               opacity:0.55, verticalAlign:"middle" }}>
+      🔊
+    </button>
+  );
+}
+
 // ──────────────────────────────────────────────
 // SESSIONS (84 regular sessions, Books 1–4)
 // ──────────────────────────────────────────────
@@ -586,11 +609,11 @@ function MCQ({ exercise, onResult }) {
   const optEnSize = w >= 1024 ? 16 : 14;
   const cols = w >= 1024 ? "1fr 1fr 1fr 1fr" : "1fr 1fr";
 
-  const handlePick = (opt) => {
-    if (done) return;
-    setSel(opt);
+  const handleSelect = (opt) => { if (!done) { setSel(opt); if (isAr(opt)) speak(opt); } };
+  const handleConfirm = () => {
+    if (!sel || done) return;
     setDone(true);
-    setTimeout(() => onResult(opt === exercise.correct), 1100);
+    setTimeout(() => onResult(sel === exercise.correct), 1200);
   };
 
   return (
@@ -605,7 +628,10 @@ function MCQ({ exercise, onResult }) {
       ) : isArEn ? (
         <>
           <p style={{color:"#64748b",fontSize:13,marginBottom:10}}>What does this mean?</p>
-          <div style={{fontSize:arPromptSize,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl",marginBottom:24,lineHeight:1.4}}>{exercise.prompt}</div>
+          <div style={{marginBottom:24,lineHeight:1.4}}>
+            <span style={{fontSize:arPromptSize,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl"}}>{exercise.prompt}</span>
+            <SpeakBtn text={exercise.prompt} size={22} />
+          </div>
         </>
       ) : (
         <>
@@ -616,26 +642,43 @@ function MCQ({ exercise, onResult }) {
       <div style={{display:"grid",gridTemplateColumns:cols,gap:10}}>
         {exercise.options.map((opt,i)=>{
           const picked = sel===opt, correct = opt===exercise.correct;
-          let bg="white",border="2px solid #e2e8f0",color="#1e293b";
-          if(done&&correct){bg="#dcfce7";border="2px solid #22c55e";color="#166534";}
-          else if(done&&picked&&!correct){bg="#fee2e2";border="2px solid #ef4444";color="#991b1b";}
-          const arabic=isAr(opt);
+          let bg="white", border="2px solid #e2e8f0", color="#1e293b";
+          if (done && correct)              { bg="#dcfce7"; border="2px solid #22c55e"; color="#166534"; }
+          else if (done && picked && !correct){ bg="#fee2e2"; border="2px solid #ef4444"; color="#991b1b"; }
+          else if (!done && picked)          { bg="#dbeafe"; border="2px solid #3b82f6"; color="#1e40af"; }
+          const arabic = isAr(opt);
           return (
-            <button key={i} onClick={()=>handlePick(opt)} style={{
+            <button key={i} onClick={()=>handleSelect(opt)} style={{
               padding:"14px 8px",borderRadius:12,border,background:bg,color,
-              fontSize:arabic?optArSize:optEnSize,fontWeight:600,cursor:done?"default":"pointer",
+              fontSize:arabic?optArSize:optEnSize,fontWeight:600,
+              cursor:done?"default":"pointer",
               fontFamily:arabic?arFont:"inherit",direction:arabic?"rtl":"ltr",
-              boxShadow:"0 1px 4px rgba(0,0,0,0.07)",lineHeight:1.4,transition:"transform 0.15s"}}
-              onMouseEnter={e=>{if(!done)e.currentTarget.style.transform="scale(1.03)"}}
+              boxShadow:"0 1px 4px rgba(0,0,0,0.07)",lineHeight:1.4,transition:"all 0.15s"}}
+              onMouseEnter={e=>{if(!done&&sel!==opt)e.currentTarget.style.transform="scale(1.03)"}}
               onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
               {opt}
             </button>
           );
         })}
       </div>
-      {done&&<div style={{marginTop:14,padding:"10px 16px",borderRadius:10,background:sel===exercise.correct?"#dcfce7":"#fee2e2",color:sel===exercise.correct?"#166534":"#991b1b",fontWeight:700,fontSize:15}}>
-        {sel===exercise.correct?"✓ Correct!":isGrammar?`✓ Correct answer: ${exercise.correct}`:`✗ Answer: ${exercise.correct}`}
-      </div>}
+      {/* Confirm button — shown when an option is selected but not yet submitted */}
+      {!done && sel && (
+        <button onClick={handleConfirm} style={{
+          marginTop:16, width:"100%", padding:"14px",
+          background:`linear-gradient(135deg,${GREEN},#047857)`,
+          color:"white", border:"none", borderRadius:12,
+          fontSize:16, fontWeight:700, cursor:"pointer",
+          boxShadow:"0 4px 12px rgba(5,150,105,0.3)", transition:"opacity 0.2s"}}>
+          Confirm ✓
+        </button>
+      )}
+      {done && (
+        <div style={{marginTop:14,padding:"10px 16px",borderRadius:10,
+          background:sel===exercise.correct?"#dcfce7":"#fee2e2",
+          color:sel===exercise.correct?"#166534":"#991b1b",fontWeight:700,fontSize:15}}>
+          {sel===exercise.correct?"✓ Correct!":isGrammar?`✓ Correct answer: ${exercise.correct}`:`✗ Answer: ${exercise.correct}`}
+        </div>
+      )}
     </div>
   );
 }
@@ -643,19 +686,35 @@ function MCQ({ exercise, onResult }) {
 // Match pairs
 function MatchEx({ exercise, onResult }) {
   const [selAr, setSelAr] = useState(null);
+  const [selEn, setSelEn] = useState(null);
   const [matched, setMatched] = useState([]);
-  const [wrongEn, setWrongEn] = useState(null);
+  const [wrongPair, setWrongPair] = useState(null);
   const arList = useRef(shuffle(exercise.pairs.map(p=>p.ar))).current;
   const enList = useRef(shuffle(exercise.pairs.map(p=>p.en))).current;
   const doneEns = matched.map(ar=>exercise.pairs.find(p=>p.ar===ar)?.en);
 
-  const pickEn = (en) => {
-    if(!selAr||doneEns.includes(en)) return;
-    const pair = exercise.pairs.find(p=>p.ar===selAr);
+  const tryMatch = (ar, en) => {
+    const pair = exercise.pairs.find(p=>p.ar===ar);
     if(pair?.en===en){
-      const nm=[...matched,selAr]; setMatched(nm); setSelAr(null);
+      const nm=[...matched,ar]; setMatched(nm); setSelAr(null); setSelEn(null);
       if(nm.length===exercise.pairs.length) setTimeout(()=>onResult(true),500);
-    } else { setWrongEn(en); setTimeout(()=>{setWrongEn(null);setSelAr(null);},700); }
+    } else {
+      setWrongPair({ar,en});
+      setTimeout(()=>{setWrongPair(null);setSelAr(null);setSelEn(null);},700);
+    }
+  };
+
+  const pickAr = (ar) => {
+    if(matched.includes(ar)) return;
+    speak(ar);
+    if(selEn) { tryMatch(ar, selEn); return; }
+    setSelAr(ar===selAr ? null : ar);
+  };
+
+  const pickEn = (en) => {
+    if(doneEns.includes(en)) return;
+    if(selAr) { tryMatch(selAr, en); return; }
+    setSelEn(en===selEn ? null : en);
   };
 
   return (
@@ -663,24 +722,36 @@ function MatchEx({ exercise, onResult }) {
       <p style={{color:"#64748b",fontSize:13,marginBottom:14}}>Match the pairs:</p>
       <div style={{display:"flex",gap:12,justifyContent:"center"}}>
         <div style={{display:"flex",flexDirection:"column",gap:8}}>
-          {arList.map(ar=>{const done=matched.includes(ar);return(
-            <button key={ar} onClick={()=>!done&&setSelAr(ar)} style={{
-              padding:"12px 14px",borderRadius:10,minWidth:130,
-              border:selAr===ar?"2px solid #3b82f6":"2px solid #e2e8f0",
-              background:done?"#f0fdf4":selAr===ar?"#dbeafe":"white",
-              fontSize:20,fontFamily:arFont,direction:"rtl",fontWeight:700,
-              cursor:done?"default":"pointer",opacity:done?0.5:1,color:"#1e293b"}}>
-              {ar}</button>);})}
+          {arList.map(ar=>{
+            const done=matched.includes(ar);
+            const isWrong=wrongPair?.ar===ar;
+            const isSel=selAr===ar;
+            return(
+              <button key={ar} onClick={()=>pickAr(ar)} style={{
+                width:140,height:52,borderRadius:10,
+                border:isWrong?"2px solid #ef4444":isSel?"2px solid #3b82f6":"2px solid #e2e8f0",
+                background:done?"#f0fdf4":isWrong?"#fee2e2":isSel?"#dbeafe":"white",
+                fontSize:20,fontFamily:arFont,direction:"rtl",fontWeight:700,
+                cursor:done?"default":"pointer",opacity:done?0.5:1,color:"#1e293b",
+                display:"flex",alignItems:"center",justifyContent:"center"}}>
+              {ar}</button>);
+          })}
         </div>
         <div style={{display:"flex",flexDirection:"column",gap:8}}>
-          {enList.map(en=>{const done=doneEns.includes(en);return(
-            <button key={en} onClick={()=>pickEn(en)} style={{
-              padding:"12px 14px",borderRadius:10,minWidth:130,
-              border:wrongEn===en?"2px solid #ef4444":"2px solid #e2e8f0",
-              background:done?"#f0fdf4":wrongEn===en?"#fee2e2":"white",
-              fontSize:14,fontWeight:600,cursor:done?"default":"pointer",
-              opacity:done?0.5:1,color:"#1e293b"}}>
-              {en}</button>);})}
+          {enList.map(en=>{
+            const done=doneEns.includes(en);
+            const isWrong=wrongPair?.en===en;
+            const isSel=selEn===en;
+            return(
+              <button key={en} onClick={()=>pickEn(en)} style={{
+                width:140,height:52,borderRadius:10,
+                border:isWrong?"2px solid #ef4444":isSel?"2px solid #3b82f6":"2px solid #e2e8f0",
+                background:done?"#f0fdf4":isWrong?"#fee2e2":isSel?"#dbeafe":"white",
+                fontSize:14,fontWeight:600,cursor:done?"default":"pointer",
+                opacity:done?0.5:1,color:"#1e293b",
+                display:"flex",alignItems:"center",justifyContent:"center"}}>
+              {en}</button>);
+          })}
         </div>
       </div>
     </div>
@@ -703,7 +774,10 @@ function TileEx({ exercise, onResult }) {
   return (
     <div style={{textAlign:"center"}}>
       <p style={{color:"#64748b",fontSize:13,marginBottom:6}}>Build the sentence:</p>
-      <p style={{fontSize:17,fontWeight:700,color:"#1e293b",marginBottom:16}}>"{exercise.en}"</p>
+      <p style={{fontSize:17,fontWeight:700,color:"#1e293b",marginBottom:4}}>"{exercise.en}"</p>
+      <p style={{fontSize:12,color:"#94a3b8",marginBottom:12}}>
+        <SpeakBtn text={exercise.answer.join(" ")} size={15} /> hear the sentence
+      </p>
       <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
         {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13}}>Tap tiles below to build the sentence</span>}
         {placed.map((tile,i)=>(
@@ -772,6 +846,9 @@ function ReviewTileEx({ exercise, onResult }) {
     <div style={{textAlign:"center"}}>
       <p style={{color:"#64748b",fontSize:12,marginBottom:4}}>Build the sentence:</p>
       <p style={{fontSize:16,fontWeight:700,color:"#1e293b",marginBottom:4}}>"{exercise.en}"</p>
+      <p style={{fontSize:12,color:"#94a3b8",marginBottom:prebakedSet.length>0?4:12}}>
+        <SpeakBtn text={exercise.answer.join(" ")} size={15} /> hear the sentence
+      </p>
       {prebakedSet.length>0&&<p style={{fontSize:11,color:"#d97706",fontWeight:600,marginBottom:12}}>✨ Gold tiles are pre-placed — tap to see their meaning</p>}
       {/* Answer zone */}
       <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
