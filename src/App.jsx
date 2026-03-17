@@ -117,73 +117,153 @@ const SESSIONS = [
 
   { id:1, book:1, lessonRef:"1.1", part:"A", title:"مَا هَذَا؟", titleEn:"What Is This? (Part 1)",
     grammar:'هَذَا means "this" for masculine objects. مَا هَذَا؟ = What is this? Answer: هَذَا كِتَابٌ. Nouns take ـٌ (tanwīn ḍamm) in the indefinite.',
-    vocab:[{ar:"كِتَابٌ",en:"book"},{ar:"قَلَمٌ",en:"pen"},{ar:"مِفْتَاحٌ",en:"key"},{ar:"بَابٌ",en:"door"}]},
+    vocab:[{ar:"كِتَابٌ",en:"book"},{ar:"قَلَمٌ",en:"pen"},{ar:"مِفْتَاحٌ",en:"key"},{ar:"بَابٌ",en:"door"}],
+    patternTiles:[
+      {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","كِتَابٌ"], answer:["هَذَا","كِتَابٌ"]},
+      {emoji:"🔑", question:"مَا هَذَا؟", tiles:["هَذَا","مِفْتَاحٌ"], answer:["هَذَا","مِفْتَاحٌ"]},
+    ]},
   { id:2, book:1, lessonRef:"1.1", part:"B", title:"مَا هَذَا؟", titleEn:"What Is This? (Part 2)",
     grammar:'More هَذَا sentences. Nouns ending in ـٌ are indefinite ("a book"). Every Arabic noun has a gender — masculine or feminine.',
-    vocab:[{ar:"بَيْتٌ",en:"house"},{ar:"مَسْجِدٌ",en:"mosque"},{ar:"نَجْمٌ",en:"star"},{ar:"حَجَرٌ",en:"stone"}]},
+    vocab:[{ar:"بَيْتٌ",en:"house"},{ar:"مَسْجِدٌ",en:"mosque"},{ar:"نَجْمٌ",en:"star"},{ar:"حَجَرٌ",en:"stone"}],
+    patternTiles:[
+      {emoji:"🏠", question:"مَا هَذَا؟", tiles:["هَذَا","بَيْتٌ"], answer:["هَذَا","بَيْتٌ"]},
+      {emoji:"🕌", question:"مَا هَذَا؟", tiles:["هَذَا","مَسْجِدٌ"], answer:["هَذَا","مَسْجِدٌ"]},
+    ]},
 
   { id:3, book:1, lessonRef:"1.2", part:"A", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 1)",
     grammar:'ذَلِكَ = "that" for masculine objects far away. Compare: هَذَا كِتَابٌ (This is a book) vs. ذَلِكَ كِتَابٌ (That is a book).',
-    vocab:[{ar:"سَرِيرٌ",en:"bed"},{ar:"كُرْسِيٌّ",en:"chair"},{ar:"مَكْتَبٌ",en:"desk/office"},{ar:"جِدَارٌ",en:"wall"}]},
+    vocab:[{ar:"سَرِيرٌ",en:"bed"},{ar:"كُرْسِيٌّ",en:"chair"},{ar:"مَكْتَبٌ",en:"desk/office"},{ar:"جِدَارٌ",en:"wall"}],
+    patternTiles:[
+      {emoji:"🛏️", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","سَرِيرٌ"], answer:["ذَلِكَ","سَرِيرٌ"]},
+      {emoji:"🪑", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","كُرْسِيٌّ"], answer:["ذَلِكَ","كُرْسِيٌّ"]},
+    ]},
   { id:4, book:1, lessonRef:"1.2", part:"B", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 2)",
     grammar:'Practice هَذَا and ذَلِكَ with more nouns. مَنْ هَذَا؟ = Who is this? (used for people).',
-    vocab:[{ar:"وَلَدٌ",en:"boy"},{ar:"رَجُلٌ",en:"man"},{ar:"طَالِبٌ",en:"student (m.)"},{ar:"مُدَرِّسٌ",en:"teacher (m.)"}]},
+    vocab:[{ar:"وَلَدٌ",en:"boy"},{ar:"رَجُلٌ",en:"man"},{ar:"طَالِبٌ",en:"student (m.)"},{ar:"مُدَرِّسٌ",en:"teacher (m.)"}],
+    patternTiles:[
+      {emoji:"👦", question:"مَنْ هَذَا؟", tiles:["هَذَا","وَلَدٌ"], answer:["هَذَا","وَلَدٌ"]},
+      {emoji:"👨‍🏫", question:"مَنْ هَذَا؟", tiles:["هَذَا","مُدَرِّسٌ"], answer:["هَذَا","مُدَرِّسٌ"]},
+    ]},
 
   { id:5, book:1, lessonRef:"1.3", part:"A", title:"الـ — The Definite Article (Part 1)", titleEn:"Making Nouns Definite",
     grammar:'الـ makes a noun definite: كِتَابٌ → الْكِتَابُ. The ـٌ disappears, replaced by ـُ. With "moon letters" الـ is fully pronounced: الْبَيْتُ.',
-    vocab:[{ar:"الْكِتَابُ",en:"the book"},{ar:"الْقَلَمُ",en:"the pen"},{ar:"الْبَيْتُ",en:"the house"},{ar:"الْبَابُ",en:"the door"}]},
+    vocab:[{ar:"الْكِتَابُ",en:"the book"},{ar:"الْقَلَمُ",en:"the pen"},{ar:"الْبَيْتُ",en:"the house"},{ar:"الْبَابُ",en:"the door"}],
+    patternTiles:[
+      {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","الْكِتَابُ"], answer:["هَذَا","الْكِتَابُ"]},
+      {emoji:"🚪", question:"مَا هَذَا؟", tiles:["هَذَا","الْبَابُ"], answer:["هَذَا","الْبَابُ"]},
+    ]},
   { id:6, book:1, lessonRef:"1.3", part:"B", title:"الـ — Sun & Moon Letters", titleEn:"Sun Letters (Part 2)",
     grammar:'With "sun letters" (ت،ث،د،ذ،ر،ز،س،ش،ص،ض،ط،ظ،ل،ن) the ل of الـ assimilates: الشَّمْسُ (ash-shams), الرَّجُلُ (ar-rajul). Written but not pronounced separately.',
-    vocab:[{ar:"الشَّمْسُ",en:"the sun"},{ar:"الرَّجُلُ",en:"the man"},{ar:"النَّجْمُ",en:"the star"},{ar:"الطَّالِبُ",en:"the student"}]},
+    vocab:[{ar:"الشَّمْسُ",en:"the sun"},{ar:"الرَّجُلُ",en:"the man"},{ar:"النَّجْمُ",en:"the star"},{ar:"الطَّالِبُ",en:"the student"}],
+    patternTiles:[
+      {emoji:"⭐", question:"مَا هَذَا؟", tiles:["هَذَا","النَّجْمُ"], answer:["هَذَا","النَّجْمُ"]},
+      {emoji:"👨", question:"مَنْ هَذَا؟", tiles:["هَذَا","الرَّجُلُ"], answer:["هَذَا","الرَّجُلُ"]},
+    ]},
 
   { id:7, book:1, lessonRef:"1.4", part:"A", title:"الصِّفَاتُ — Adjectives (Part 1)", titleEn:"Describing with Adjectives",
     grammar:'Adjectives come AFTER the noun. Definite noun + definite adjective: الْبَيْتُ الْكَبِيرُ. Indefinite noun + indefinite adjective: بَيْتٌ كَبِيرٌ.',
-    vocab:[{ar:"كَبِيرٌ",en:"big"},{ar:"صَغِيرٌ",en:"small"},{ar:"جَدِيدٌ",en:"new"},{ar:"قَدِيمٌ",en:"old"}]},
+    vocab:[{ar:"كَبِيرٌ",en:"big"},{ar:"صَغِيرٌ",en:"small"},{ar:"جَدِيدٌ",en:"new"},{ar:"قَدِيمٌ",en:"old"}],
+    patternTiles:[
+      {en:"This is a big house.", tiles:["هَذَا","بَيْتٌ","كَبِيرٌ"], answer:["هَذَا","بَيْتٌ","كَبِيرٌ"]},
+      {en:"That is a new book.", tiles:["ذَلِكَ","كِتَابٌ","جَدِيدٌ"], answer:["ذَلِكَ","كِتَابٌ","جَدِيدٌ"]},
+    ]},
   { id:8, book:1, lessonRef:"1.4", part:"B", title:"الصِّفَاتُ — More Adjectives (Part 2)", titleEn:"More Adjectives",
     grammar:'More masculine adjectives. هَذَا طَالِبٌ جَدِيدٌ = This is a new student (noun + adjective forms descriptive phrase).',
-    vocab:[{ar:"جَمِيلٌ",en:"beautiful"},{ar:"طَوِيلٌ",en:"tall/long"},{ar:"قَصِيرٌ",en:"short"},{ar:"رَخِيصٌ",en:"cheap"}]},
+    vocab:[{ar:"جَمِيلٌ",en:"beautiful"},{ar:"طَوِيلٌ",en:"tall/long"},{ar:"قَصِيرٌ",en:"short"},{ar:"رَخِيصٌ",en:"cheap"}],
+    patternTiles:[
+      {en:"This is a tall man.", tiles:["هَذَا","رَجُلٌ","طَوِيلٌ"], answer:["هَذَا","رَجُلٌ","طَوِيلٌ"]},
+      {en:"That is a short pen.", tiles:["ذَلِكَ","قَلَمٌ","قَصِيرٌ"], answer:["ذَلِكَ","قَلَمٌ","قَصِيرٌ"]},
+    ]},
 
   { id:9, book:1, lessonRef:"1.5", part:"A", title:"حُرُوفُ الْجَرِّ (Part 1)", titleEn:"Prepositions: في، عَلَى، مِنْ، إِلَى",
     grammar:'Prepositions put the following noun into genitive (ـِ or ـٍ): فِي الْبَيْتِ (in the house), عَلَى الْمَكْتَبِ (on the desk), مِنَ الْمَسْجِدِ (from the mosque), إِلَى الْمَدْرَسَةِ (to the school).',
-    vocab:[{ar:"فِي",en:"in"},{ar:"عَلَى",en:"on"},{ar:"مِنْ",en:"from"},{ar:"إِلَى",en:"to"}]},
+    vocab:[{ar:"فِي",en:"in"},{ar:"عَلَى",en:"on"},{ar:"مِنْ",en:"from"},{ar:"إِلَى",en:"to"}],
+    patternTiles:[
+      {en:"The book is on the desk.", tiles:["الْكِتَابُ","عَلَى","الْمَكْتَبِ"], answer:["الْكِتَابُ","عَلَى","الْمَكْتَبِ"]},
+      {en:"The key is in the house.", tiles:["الْمِفْتَاحُ","فِي","الْبَيْتِ"], answer:["الْمِفْتَاحُ","فِي","الْبَيْتِ"]},
+    ]},
   { id:10, book:1, lessonRef:"1.5", part:"B", title:"حُرُوفُ الْجَرِّ (Part 2)", titleEn:"Prepositions: تَحْتَ، فَوْقَ، أَمَامَ",
     grammar:'More location prepositions. أَيْنَ؟ = where? The answer: الْكِتَابُ عَلَى الْمَكْتَبِ. After a preposition, the noun loses ـٌ and takes ـٍ.',
-    vocab:[{ar:"تَحْتَ",en:"under"},{ar:"فَوْقَ",en:"above"},{ar:"أَمَامَ",en:"in front of"},{ar:"خَلْفَ",en:"behind"}]},
+    vocab:[{ar:"تَحْتَ",en:"under"},{ar:"فَوْقَ",en:"above"},{ar:"أَمَامَ",en:"in front of"},{ar:"خَلْفَ",en:"behind"}],
+    patternTiles:[
+      {en:"The pen is under the book.", tiles:["الْقَلَمُ","تَحْتَ","الْكِتَابِ"], answer:["الْقَلَمُ","تَحْتَ","الْكِتَابِ"]},
+      {en:"The door is in front of the house.", tiles:["الْبَابُ","أَمَامَ","الْبَيْتِ"], answer:["الْبَابُ","أَمَامَ","الْبَيْتِ"]},
+    ]},
 
   { id:11, book:1, lessonRef:"1.6", part:"A", title:"الضَّمَائِرُ (Part 1)", titleEn:"Personal Pronouns",
     grammar:'هُوَ (he), هِيَ (she), أَنَا (I), أَنْتَ (you m.). In equational sentences: هُوَ طَبِيبٌ = He is a doctor. Arabic has no verb "to be" in present tense.',
-    vocab:[{ar:"هُوَ",en:"he"},{ar:"هِيَ",en:"she"},{ar:"أَنَا",en:"I"},{ar:"أَنْتَ",en:"you (m.)"}]},
+    vocab:[{ar:"هُوَ",en:"he"},{ar:"هِيَ",en:"she"},{ar:"أَنَا",en:"I"},{ar:"أَنْتَ",en:"you (m.)"}],
+    patternTiles:[
+      {en:"He is a student.", tiles:["هُوَ","طَالِبٌ"], answer:["هُوَ","طَالِبٌ"]},
+      {en:"I am a teacher.", tiles:["أَنَا","مُدَرِّسٌ"], answer:["أَنَا","مُدَرِّسٌ"]},
+    ]},
   { id:12, book:1, lessonRef:"1.6", part:"B", title:"الضَّمَائِرُ (Part 2)", titleEn:"Pronouns with Professions",
     grammar:'مَنْ أَنْتَ؟ = Who are you? أَنَا طَالِبٌ = I am a student. هُوَ مُدَرِّسٌ = He is a teacher.',
-    vocab:[{ar:"طَبِيبٌ",en:"doctor (m.)"},{ar:"مُهَنْدِسٌ",en:"engineer"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"فَلَّاحٌ",en:"farmer"}]},
+    vocab:[{ar:"طَبِيبٌ",en:"doctor (m.)"},{ar:"مُهَنْدِسٌ",en:"engineer"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"فَلَّاحٌ",en:"farmer"}],
+    patternTiles:[
+      {emoji:"👨‍⚕️", en:"He is a doctor.", tiles:["هُوَ","طَبِيبٌ"], answer:["هُوَ","طَبِيبٌ"]},
+      {en:"I am a merchant.", tiles:["أَنَا","تَاجِرٌ"], answer:["أَنَا","تَاجِرٌ"]},
+    ]},
 
   { id:13, book:1, lessonRef:"1.7", part:"A", title:"الْمُؤَنَّثُ (Part 1)", titleEn:"Feminine Nouns & هَذِهِ",
     grammar:'Feminine nouns end in ةٌ. Use هَذِهِ (this, f.) and تِلْكَ (that, f.): هَذِهِ سَيَّارَةٌ. Adjectives must match: هَذِهِ سَيَّارَةٌ جَمِيلَةٌ.',
-    vocab:[{ar:"سَيَّارَةٌ",en:"car"},{ar:"مَدْرَسَةٌ",en:"school"},{ar:"غُرْفَةٌ",en:"room"},{ar:"حَدِيقَةٌ",en:"garden"}]},
+    vocab:[{ar:"سَيَّارَةٌ",en:"car"},{ar:"مَدْرَسَةٌ",en:"school"},{ar:"غُرْفَةٌ",en:"room"},{ar:"حَدِيقَةٌ",en:"garden"}],
+    patternTiles:[
+      {emoji:"🚗", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","سَيَّارَةٌ"], answer:["هَذِهِ","سَيَّارَةٌ"]},
+      {emoji:"🏫", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","مَدْرَسَةٌ"], answer:["هَذِهِ","مَدْرَسَةٌ"]},
+    ]},
   { id:14, book:1, lessonRef:"1.7", part:"B", title:"الْمُؤَنَّثُ (Part 2)", titleEn:"Feminine Adjectives & Professions",
     grammar:'Feminine adjectives add ةٌ: كَبِيرٌ → كَبِيرَةٌ. Professions too: مُدَرِّسٌ → مُدَرِّسَةٌ. هِيَ مُدَرِّسَةٌ = She is a teacher.',
-    vocab:[{ar:"مُدَرِّسَةٌ",en:"teacher (f.)"},{ar:"طَالِبَةٌ",en:"student (f.)"},{ar:"طَبِيبَةٌ",en:"doctor (f.)"},{ar:"جَمِيلَةٌ",en:"beautiful (f.)"}]},
+    vocab:[{ar:"مُدَرِّسَةٌ",en:"teacher (f.)"},{ar:"طَالِبَةٌ",en:"student (f.)"},{ar:"طَبِيبَةٌ",en:"doctor (f.)"},{ar:"جَمِيلَةٌ",en:"beautiful (f.)"}],
+    patternTiles:[
+      {emoji:"👩‍🏫", en:"She is a teacher.", tiles:["هِيَ","مُدَرِّسَةٌ"], answer:["هِيَ","مُدَرِّسَةٌ"]},
+      {emoji:"👩‍🎓", en:"She is a student.", tiles:["هِيَ","طَالِبَةٌ"], answer:["هِيَ","طَالِبَةٌ"]},
+    ]},
 
   { id:15, book:1, lessonRef:"1.8", part:"A", title:"الْإِضَافَةُ (Part 1)", titleEn:"Possessive Constructions",
     grammar:'Possession by juxtaposition: كِتَابُ الطَّالِبِ (the student\'s book). First noun loses tanwīn. Second noun takes genitive ـِ.',
-    vocab:[{ar:"بَابُ الْبَيْتِ",en:"the door of the house"},{ar:"كِتَابُ الطَّالِبِ",en:"the student's book"},{ar:"مَكْتَبُ الْمُدِيرِ",en:"the director's office"},{ar:"غُرْفَةُ الْوَلَدِ",en:"the boy's room"}]},
+    vocab:[{ar:"بَابُ الْبَيْتِ",en:"the door of the house"},{ar:"كِتَابُ الطَّالِبِ",en:"the student's book"},{ar:"مَكْتَبُ الْمُدِيرِ",en:"the director's office"},{ar:"غُرْفَةُ الْوَلَدِ",en:"the boy's room"}],
+    patternTiles:[
+      {en:"The student's book is on the desk.", tiles:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ"], answer:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ"]},
+      {en:"The door of the house is big.", tiles:["بَابُ","الْبَيْتِ","كَبِيرٌ"], answer:["بَابُ","الْبَيْتِ","كَبِيرٌ"]},
+    ]},
   { id:16, book:1, lessonRef:"1.8", part:"B", title:"الْإِضَافَةُ (Part 2)", titleEn:"Possessive Pronouns",
     grammar:'Attached pronouns: بَيْتِي (my house), بَيْتُكَ (your house), بَيْتُهُ (his house), بَيْتُهَا (her house). Pronoun attaches directly to noun.',
-    vocab:[{ar:"بَيْتِي",en:"my house"},{ar:"كِتَابُكَ",en:"your book"},{ar:"قَلَمُهُ",en:"his pen"},{ar:"غُرْفَتُهَا",en:"her room"}]},
+    vocab:[{ar:"بَيْتِي",en:"my house"},{ar:"كِتَابُكَ",en:"your book"},{ar:"قَلَمُهُ",en:"his pen"},{ar:"غُرْفَتُهَا",en:"her room"}],
+    patternTiles:[
+      {en:"My house is big.", tiles:["بَيْتِي","كَبِيرٌ"], answer:["بَيْتِي","كَبِيرٌ"]},
+      {en:"His pen is on the desk.", tiles:["قَلَمُهُ","عَلَى","الْمَكْتَبِ"], answer:["قَلَمُهُ","عَلَى","الْمَكْتَبِ"]},
+    ]},
 
   { id:17, book:1, lessonRef:"1.9", part:"A", title:"الْعَائِلَةُ (Part 1)", titleEn:"Family Vocabulary",
     grammar:'أَبٌ (father) and أَخٌ (brother) are irregular: أَبِي (my father), أَخِي (my brother). These are الْأَسْمَاءُ الْخَمْسَةُ — special nouns.',
-    vocab:[{ar:"أَبٌ",en:"father"},{ar:"أُمٌّ",en:"mother"},{ar:"أَخٌ",en:"brother"},{ar:"أُخْتٌ",en:"sister"}]},
+    vocab:[{ar:"أَبٌ",en:"father"},{ar:"أُمٌّ",en:"mother"},{ar:"أَخٌ",en:"brother"},{ar:"أُخْتٌ",en:"sister"}],
+    patternTiles:[
+      {emoji:"👨", en:"My father is generous.", tiles:["أَبِي","كَرِيمٌ"], answer:["أَبِي","كَرِيمٌ"]},
+      {en:"I have a brother and a sister.", tiles:["عِنْدِي","أَخٌ","وَأُخْتٌ"], answer:["عِنْدِي","أَخٌ","وَأُخْتٌ"]},
+    ]},
   { id:18, book:1, lessonRef:"1.9", part:"B", title:"الْعَائِلَةُ (Part 2)", titleEn:"Extended Family",
     grammar:'عِنْدِي أَخٌ وَأُخْتٌ = I have a brother and a sister. لِي أَبٌ كَرِيمٌ = I have a generous father.',
-    vocab:[{ar:"زَوْجٌ",en:"husband"},{ar:"زَوْجَةٌ",en:"wife"},{ar:"اِبْنٌ",en:"son"},{ar:"بِنْتٌ",en:"daughter"}]},
+    vocab:[{ar:"زَوْجٌ",en:"husband"},{ar:"زَوْجَةٌ",en:"wife"},{ar:"اِبْنٌ",en:"son"},{ar:"بِنْتٌ",en:"daughter"}],
+    patternTiles:[
+      {en:"My son is a student.", tiles:["اِبْنِي","طَالِبٌ"], answer:["اِبْنِي","طَالِبٌ"]},
+      {en:"His wife is a teacher.", tiles:["زَوْجَتُهُ","مُدَرِّسَةٌ"], answer:["زَوْجَتُهُ","مُدَرِّسَةٌ"]},
+    ]},
 
   { id:19, book:1, lessonRef:"1.10", part:"A", title:"الَّذِي — The One Who / Which", titleEn:"Relative Pronoun (Part 1)",
     grammar:'الَّذِي (who/which) for masculine singular. الَّتِي for feminine. الطَّالِبُ الَّذِي فِي الْفَصْلِ = The student who is in the class.',
-    vocab:[{ar:"الَّذِي",en:"who/which (m.)"},{ar:"الَّتِي",en:"who/which (f.)"},{ar:"الَّذِينَ",en:"who/which (m.pl.)"},{ar:"الْفَصْلُ",en:"classroom"}]},
+    vocab:[{ar:"الَّذِي",en:"who/which (m.)"},{ar:"الَّتِي",en:"who/which (f.)"},{ar:"الَّذِينَ",en:"who/which (m.pl.)"},{ar:"الْفَصْلُ",en:"classroom"}],
+    patternTiles:[
+      {en:"The student who is in the classroom.", tiles:["الطَّالِبُ","الَّذِي","فِي","الْفَصْلِ"], answer:["الطَّالِبُ","الَّذِي","فِي","الْفَصْلِ"]},
+      {en:"The book which is on the desk.", tiles:["الْكِتَابُ","الَّذِي","عَلَى","الْمَكْتَبِ"], answer:["الْكِتَابُ","الَّذِي","عَلَى","الْمَكْتَبِ"]},
+    ]},
   { id:20, book:1, lessonRef:"1.10", part:"B", title:"مُرَاجَعَةٌ — Book 1 Review", titleEn:"Book 1 Revision",
     grammar:'Review all Book 1 patterns: هَذَا/ذَلِكَ/هَذِهِ/تِلْكَ, الـ, adjective agreement, prepositions, pronouns, iḍāfa, الَّذِي.',
-    vocab:[{ar:"أَيْنَ",en:"where?"},{ar:"مَنْ",en:"who?"},{ar:"مَا",en:"what?"},{ar:"أَيْضًا",en:"also"}]},
+    vocab:[{ar:"أَيْنَ",en:"where?"},{ar:"مَنْ",en:"who?"},{ar:"مَا",en:"what?"},{ar:"أَيْضًا",en:"also"}],
+    patternTiles:[
+      {emoji:"🪑", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","كُرْسِيٌّ"], answer:["ذَلِكَ","كُرْسِيٌّ"]},
+      {en:"Where is the key?", tiles:["أَيْنَ","الْمِفْتَاحُ؟"], answer:["أَيْنَ","الْمِفْتَاحُ؟"]},
+    ]},
 
 // ═══ BOOK 2 · Lessons 1–12 · Sessions 21–44 ═══
 
@@ -595,12 +675,16 @@ function buildExercises(session) {
   // MCQ: Arabic → English (4 questions)
   shuffle(vocab).slice(0, 4).forEach(w => {
     const distractors = shuffle(pool.filter(x => x.en !== w.en)).slice(0, 3).map(x => x.en);
-    exercises.push({ type:"ar_en", prompt:w.ar, correct:w.en, options:shuffle([w.en,...distractors]) });
+    exercises.push({ type:"ar_en", prompt:w.ar, promptEn:w.en, correct:w.en, options:shuffle([w.en,...distractors]) });
   });
   // MCQ: English → Arabic (4 questions)
   shuffle(vocab).slice(0, 4).forEach(w => {
     const distractors = shuffle(pool.filter(x => x.ar !== w.ar)).slice(0, 3).map(x => x.ar);
-    exercises.push({ type:"en_ar", promptEn:w.en, correct:w.ar, options:shuffle([w.ar,...distractors]) });
+    const opts = shuffle([w.ar,...distractors]);
+    const allVocab = [...vocab, ...allPrior];
+    const meanings = {};
+    opts.forEach(ar => { const found = allVocab.find(x => x.ar === ar); if (found) meanings[ar] = found.en; });
+    exercises.push({ type:"en_ar", promptEn:w.en, correct:w.ar, options:opts, meanings });
   });
   // Match pairs
   if (vocab.length >= 4)
@@ -610,6 +694,10 @@ function buildExercises(session) {
     const eligibleReviews = REVIEWS.filter((_, i) => i < Math.floor((session.id - 1) / 10));
     const poolTiles = eligibleReviews.flatMap(r => r.sentenceTiles.filter(t => t.prebaked.length === 0));
     shuffle(poolTiles).slice(0, 2).forEach(t => exercises.push({ type:"tile", ...t }));
+  }
+  // Pattern sentence exercises (Book 1 only)
+  if (session.patternTiles) {
+    session.patternTiles.forEach(t => exercises.push({ type:"pattern_tile", ...t }));
   }
   return shuffle(exercises);
 }
@@ -733,11 +821,29 @@ function MCQ({ exercise, onResult }) {
           Confirm ✓
         </button>
       )}
-      {done && (
-        <div style={{marginTop:14,padding:"10px 16px",borderRadius:10,
-          background:sel===exercise.correct?"#dcfce7":"#fee2e2",
-          color:sel===exercise.correct?"#166534":"#991b1b",fontWeight:700,fontSize:15}}>
-          {sel===exercise.correct?"✓ Correct!":isGrammar?`✓ Correct answer: ${exercise.correct}`:`✗ Answer: ${exercise.correct}`}
+      {done && sel===exercise.correct && (
+        <div style={{marginTop:14,padding:"10px 16px",borderRadius:10,background:"#dcfce7",color:"#166534",fontWeight:700,fontSize:15}}>
+          ✓ Correct!
+        </div>
+      )}
+      {done && sel!==exercise.correct && (
+        <div style={{marginTop:14,borderRadius:10,overflow:"hidden",border:"1px solid #fca5a5"}}>
+          <div style={{padding:"10px 16px",background:"#fee2e2",color:"#991b1b",fontWeight:700,fontSize:15}}>
+            {isGrammar
+              ? `✗ Correct answer: ${exercise.correct}`
+              : exercise.type==="ar_en"
+                ? <span>✗ <span style={{fontFamily:arFont,fontSize:18,direction:"rtl"}}>{exercise.prompt}</span> means "{exercise.correct}"</span>
+                : <span>✗ The Arabic for "{exercise.promptEn}" is <span style={{fontFamily:arFont,fontSize:18,direction:"rtl"}}>{exercise.correct}</span></span>
+            }
+          </div>
+          {!isGrammar && (
+            <div style={{padding:"8px 16px",background:"#fff5f5",color:"#7f1d1d",fontSize:13,fontWeight:500}}>
+              {exercise.type==="ar_en"
+                ? `You chose "${sel}"`
+                : <span>You chose <span style={{fontFamily:arFont,fontSize:16,direction:"rtl"}}>{sel}</span>{exercise.meanings?.[sel] ? ` — "${exercise.meanings[sel]}"` : ""}</span>
+              }
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -841,6 +947,56 @@ function TileEx({ exercise, onResult }) {
       </p>
       <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
         {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13}}>Tap tiles below to build the sentence</span>}
+        {placed.map((tile,i)=>(
+          <button key={`${tile}-${i}`} onClick={()=>removeTile(tile,i)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{tile}</button>
+        ))}
+      </div>
+      <div style={{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",marginBottom:16,direction:"rtl"}}>
+        {remaining.map((tile,i)=>(
+          <button key={`${tile}-${i}`} onClick={()=>addTile(tile,i)} style={{padding:"8px 12px",background:"white",border:"2px solid #e2e8f0",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:"pointer",color:"#1e293b",transition:"transform 0.1s"}}
+            onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.06)"}}
+            onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
+            {tile}</button>
+        ))}
+      </div>
+      {!checked&&placed.length>0&&<button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)"}}>Check ✓</button>}
+      {checked&&<div style={{padding:"10px 16px",borderRadius:10,background:correct?"#dcfce7":"#fee2e2",color:correct?"#166534":"#991b1b",fontWeight:700,fontSize:15}}>
+        {correct?"✓ Perfect!":"✗ Correct: "+exercise.answer.join(" ")}
+      </div>}
+    </div>
+  );
+}
+
+// Pattern sentence builder — emoji/Arabic question prompt, no English
+function PatternTileEx({ exercise, onResult }) {
+  const { w } = useWindowSize();
+  const tileFont = w >= 1024 ? 26 : w >= 640 ? 22 : 20;
+  const [placed, setPlaced] = useState([]);
+  const [remaining, setRemaining] = useState(()=>shuffle([...exercise.tiles]));
+  const [checked, setChecked] = useState(false);
+  const [correct, setCorrect] = useState(false);
+
+  const addTile=(tile,idx)=>{if(checked)return;setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
+  const removeTile=(tile,idx)=>{if(checked)return;setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
+  const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);setTimeout(()=>onResult(ok),1200);};
+
+  return (
+    <div style={{textAlign:"center"}}>
+      {exercise.emoji
+        ? <div style={{fontSize:72,lineHeight:1,marginBottom:8}}>{exercise.emoji}</div>
+        : exercise.en && <p style={{fontSize:15,fontWeight:700,color:"#1e293b",marginBottom:8}}>"{exercise.en}"</p>
+      }
+      {exercise.question && (
+        <div style={{marginBottom:4}}>
+          <span style={{fontSize:28,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl"}}>{exercise.question}</span>
+          <SpeakBtn text={exercise.question} size={18}/>
+        </div>
+      )}
+      <p style={{fontSize:12,color:"#94a3b8",marginBottom:14}}>
+        <SpeakBtn text={exercise.answer.join(" ")} size={14}/> hear the answer
+      </p>
+      <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
+        {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13}}>Tap tiles to answer</span>}
         {placed.map((tile,i)=>(
           <button key={`${tile}-${i}`} onClick={()=>removeTile(tile,i)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{tile}</button>
         ))}
@@ -1333,7 +1489,9 @@ export default function MadinahArabicApp() {
                 ? <MatchEx key={exIdx} exercise={ex} onResult={handleResult}/>
                 : ex.type==="review_tile"
                   ? <ReviewTileEx key={exIdx} exercise={ex} onResult={handleResult}/>
-                  : <TileEx key={exIdx} exercise={ex} onResult={handleResult}/>}
+                  : ex.type==="pattern_tile"
+                    ? <PatternTileEx key={exIdx} exercise={ex} onResult={handleResult}/>
+                    : <TileEx key={exIdx} exercise={ex} onResult={handleResult}/>}
           </div>
         </div>
       </div>
