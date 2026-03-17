@@ -1155,8 +1155,10 @@ function GrammarPromptText({ text }) {
       {text.split(/(\s+)/).map((part, i) => {
         if (/^\s+$/.test(part)) return part;
         if (/[\u0600-\u06FF]/.test(part)) {
+          // Inline span only — no display:inline-block, which would isolate each
+          // word and break the Unicode bidi algorithm, reversing Arabic word order.
           return (
-            <span key={i} style={{fontFamily:arFont, fontSize:"1.08em", verticalAlign:"middle", display:"inline-block"}}>
+            <span key={i} style={{fontFamily:arFont, fontSize:"1.08em"}}>
               {part}
             </span>
           );
