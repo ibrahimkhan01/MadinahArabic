@@ -34,10 +34,24 @@ function shuffle(arr) {
 function speak(text) {
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
+
   const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = "ar-SA";
+  utt.lang = "ar";
   utt.rate = 0.82;
-  window.speechSynthesis.speak(utt);
+
+  const doSpeak = () => {
+    const voices = window.speechSynthesis.getVoices();
+    const arVoice = voices.find(v => v.lang.startsWith("ar"));
+    if (arVoice) utt.voice = arVoice;
+    window.speechSynthesis.speak(utt);
+  };
+
+  // Chrome loads voices asynchronously — wait if not ready yet
+  if (window.speechSynthesis.getVoices().length > 0) {
+    doSpeak();
+  } else {
+    window.speechSynthesis.addEventListener("voiceschanged", doSpeak, { once: true });
+  }
 }
 
 function SpeakBtn({ text, size = 18 }) {
