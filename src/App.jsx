@@ -1772,27 +1772,6 @@ export default function MadinahArabicApp() {
           </div>
           <div style={{padding:"24px 20px",display:"flex",flexDirection:"column",gap:14}}>
 
-            {/* Language selector */}
-            <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:14,padding:"16px 18px"}}>
-              <div style={{fontWeight:700,fontSize:15,color:"#1e293b",marginBottom:10}}>🌐 Interface Language</div>
-              <div style={{display:"flex",gap:8}}>
-                {[["en","English"],["ur","اردو"]].map(([code,label])=>(
-                  <button key={code} onClick={()=>setLang(code)} style={{
-                    flex:1,padding:"10px 8px",borderRadius:10,cursor:"pointer",
-                    fontWeight:700,fontSize:code==="ur"?17:14,
-                    fontFamily:code==="ur"?urFont:"inherit",
-                    border:lang===code?"2px solid #059669":"2px solid #e2e8f0",
-                    background:lang===code?"#dcfce7":"white",
-                    color:lang===code?"#166534":"#475569",
-                    transition:"all 0.15s"
-                  }}>{label}</button>
-                ))}
-              </div>
-              <div style={{fontSize:11,color:"#94a3b8",marginTop:8}}>
-                Urdu mode shows Urdu translations for vocabulary. Currently covers Book 1 fully — Book 2–4 fall back to English where Urdu isn't available yet.
-              </div>
-            </div>
-
             {/* Unlock all */}
             <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:14,padding:"16px 18px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
               <div>
@@ -1836,6 +1815,17 @@ export default function MadinahArabicApp() {
                     <div style={{fontSize:11,color:"#64748b",marginTop:2}}>{label}</div>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Credits */}
+            <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:14,padding:"16px 18px",textAlign:"center"}}>
+              <div style={{fontSize:13,color:"#166534",fontWeight:700,marginBottom:4}}>🕌 Madinah Arabic</div>
+              <div style={{fontSize:12,color:"#15803d",lineHeight:1.7}}>
+                Built by <strong>Muhammad Ibrahim Khan</strong>
+              </div>
+              <div style={{fontSize:11,color:"#4ade80",marginTop:6}}>
+                Powered by Claude · v1.0
               </div>
             </div>
 
