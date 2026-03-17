@@ -1129,7 +1129,7 @@ function buildExercises(session, lang = "en") {
 
 function buildReviewExercises(review) {
   const exercises = [];
-  review.grammarExercises.forEach(ex => exercises.push({ ...ex }));
+  review.grammarExercises.forEach(ex => exercises.push({ ...ex, options: shuffle([...ex.options]) }));
   review.sentenceTiles.forEach(t => {
     // Add up to 2 case-form variant distractors (keeping existing vocab distractors).
     // Skip prebaked tokens (already placed — no distractor needed for those).
