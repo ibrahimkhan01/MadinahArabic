@@ -24,7 +24,7 @@ const arFont = "'Noto Naskh Arabic', 'Scheherazade New', 'Amiri', serif";
 // ── Emoji lookup by English meaning ─────────────
 const EMOJI = {
   // Objects
-  "book":"📖","pen":"✏️","key":"🔑","door":"🚪","pencil":"✏️",
+  "book":"📖","pen":"🖊️","key":"🔑","door":"🚪","pencil":"✏️",
   "house":"🏠","home":"🏠","mosque":"🕌","star":"⭐","stone":"🪨","rock":"🪨",
   "bed":"🛏️","chair":"🪑","desk":"🖥️","desk/office":"🗂️","office":"🏢","wall":"🧱",
   "table":"🪑","lamp":"💡","light":"💡","window":"🪟","room":"🛋️",
