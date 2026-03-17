@@ -415,6 +415,15 @@ function MixedText({ text }) {
   );
 }
 
+// ── Analytics helper ─────────────────────────────────────────────────────────
+const track = (event, params = {}) => {
+  try {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", event, params);
+    }
+  } catch (_) {}
+};
+
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -1661,6 +1670,13 @@ export default function MadinahArabicApp() {
     setExercises(exs);
     setExIdx(0); setCorrect(0); setTotal(0); setHearts(5);
     setScreen("intro");
+    track("session_start", {
+      session_id: s.id,
+      session_title: s.titleEn || s.title,
+      book: s.book || "review",
+      session_type: s.type || "regular",
+      language: lang,
+    });
   };
 
   const handleResult = (wasCorrect) => {
@@ -1668,7 +1684,15 @@ export default function MadinahArabicApp() {
     const newCorrect = correct + (wasCorrect ? 1 : 0);
     setTotal(newTotal); setCorrect(newCorrect);
     if(wasCorrect) { setStreak(p=>p+1); }
-    else { setHearts(p=>Math.max(0,p-1)); setStreak(0); }
+    else {
+      setHearts(p=>Math.max(0,p-1)); setStreak(0);
+      track("exercise_wrong", {
+        session_id: sessionData?.id,
+        exercise_type: exercises[exIdx]?.type,
+        book: sessionData?.book || "review",
+        language: lang,
+      });
+    }
     setTimeout(()=>{
       const last = exIdx+1 >= exercises.length || hearts<=1;
       if(last){
@@ -1676,6 +1700,14 @@ export default function MadinahArabicApp() {
         const earned = Math.max(5, Math.round(acc/10)*5);
         setXp(p=>p+earned);
         setCompleted(prev=>({...prev,[sessionData.id]:acc}));
+        track("session_complete", {
+          session_id: sessionData?.id,
+          session_title: sessionData?.titleEn || sessionData?.title,
+          book: sessionData?.book || "review",
+          accuracy: acc,
+          xp_earned: earned,
+          language: lang,
+        });
         setScreen("complete");
       } else { setExIdx(p=>p+1); }
     },400);
