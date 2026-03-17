@@ -1339,9 +1339,11 @@ function TileEx({ exercise, onResult, lang = "en" }) {
     <div style={{textAlign:"center"}}>
       <p style={{color:"#64748b",fontSize:13,marginBottom:6,fontFamily:isUrdu?urFont:"inherit"}}>{t.buildSentence}</p>
       <p style={{fontSize:17,fontWeight:700,color:"#1e293b",marginBottom:4,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>"{exercise.en}"</p>
-      <p style={{fontSize:12,color:"#94a3b8",marginBottom:12}}>
-        <SpeakBtn text={exercise.answer.join(" ")} size={15} /> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearSentence}</span>
-      </p>
+      {checked && (
+        <p style={{fontSize:12,color:"#94a3b8",marginBottom:12}}>
+          <SpeakBtn text={exercise.answer.join(" ")} size={15} /> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearSentence}</span>
+        </p>
+      )}
       <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
         {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13,fontFamily:isUrdu?urFont:"inherit"}}>{t.tapToBuild}</span>}
         {placed.map((tile,i)=>(
@@ -1400,10 +1402,12 @@ function PatternTileEx({ exercise, onResult, lang = "en" }) {
           <SpeakBtn text={exercise.question} size={18}/>
         </div>
       )}
-      <p style={{fontSize:12,color:"#94a3b8",marginBottom:14}}>
-        <SpeakBtn text={exercise.answer.join(" ")} size={14}/> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearAnswer}</span>
-      </p>
-      <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
+      {checked && (
+        <p style={{fontSize:12,color:"#94a3b8",marginBottom:14}}>
+          <SpeakBtn text={exercise.answer.join(" ")} size={14}/> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearAnswer}</span>
+        </p>
+      )}
+      <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:checked?8:14,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
         {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13,fontFamily:isUrdu?urFont:"inherit"}}>{t.tapToAnswer}</span>}
         {placed.map((tile,i)=>(
           <button key={`${tile}-${i}`} onClick={()=>removeTile(tile,i)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{tile}</button>
@@ -1482,9 +1486,11 @@ function ReviewTileEx({ exercise, onResult, lang = "en" }) {
     <div style={{textAlign:"center"}}>
       <p style={{color:"#64748b",fontSize:12,marginBottom:4,fontFamily:isUrdu?urFont:"inherit"}}>{t.buildSentence}</p>
       <p style={{fontSize:16,fontWeight:700,color:"#1e293b",marginBottom:4,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>"{exercise.en}"</p>
-      <p style={{fontSize:12,color:"#94a3b8",marginBottom:prebakedSet.length>0?4:12}}>
-        <SpeakBtn text={exercise.answer.join(" ")} size={15} /> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearSentence}</span>
-      </p>
+      {checked && (
+        <p style={{fontSize:12,color:"#94a3b8",marginBottom:prebakedSet.length>0?4:12}}>
+          <SpeakBtn text={exercise.answer.join(" ")} size={15} /> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearSentence}</span>
+        </p>
+      )}
       {prebakedSet.length>0&&<p style={{fontSize:11,color:"#d97706",fontWeight:600,marginBottom:12,fontFamily:isUrdu?urFont:"inherit"}}>{t.goldTiles}</p>}
       {/* Answer zone */}
       <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
