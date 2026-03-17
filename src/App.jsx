@@ -1680,7 +1680,7 @@ function GrammarCard({ session, onStart, lang = "en" }) {
         <div style={{fontSize:11,color:"#3b82f6",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:4,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>
           {t.bookLessonPart(session.book, session.lessonRef, session.part)}
         </div>
-        <div style={{fontSize:titleSize,fontWeight:700,color:"#1e40af",fontFamily:arFont,direction:"rtl",marginBottom:4,lineHeight:1.4}}>{session.title}</div>
+        <div style={{fontSize:titleSize,fontWeight:700,color:"#1e40af",fontFamily:arFont,direction:"rtl",marginBottom:4,lineHeight:1.4}}>{isUrdu ? session.title.split(" — ")[0].split(" (")[0].trim() : session.title}</div>
         <div style={{fontSize:15,fontWeight:600,color:"#1e3a5f",marginBottom:10,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>{isUrdu ? getUrSessionTitle(session.titleEn) : session.titleEn}</div>
         <p style={{
           color:"#475569",fontSize:13,lineHeight:2.1,margin:0,
