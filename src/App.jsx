@@ -21,6 +21,47 @@ const DARK = "#0f172a";
 const isAr = (s) => /[\u0600-\u06FF]/.test(s);
 const arFont = "'Noto Naskh Arabic', 'Scheherazade New', 'Amiri', serif";
 
+// ── Emoji lookup by English meaning ─────────────
+const EMOJI = {
+  // Objects
+  "book":"📖","pen":"✏️","key":"🔑","door":"🚪","pencil":"✏️",
+  "house":"🏠","home":"🏠","mosque":"🕌","star":"⭐","stone":"🪨","rock":"🪨",
+  "bed":"🛏️","chair":"🪑","desk":"🖥️","desk/office":"🗂️","office":"🏢","wall":"🧱",
+  "table":"🪑","lamp":"💡","light":"💡","window":"🪟","room":"🛋️",
+  "shirt":"👕","clothes":"👔","garment":"👔","ring":"💍","sword":"⚔️",
+  "car":"🚗","boat":"⛵","ship":"🚢","road":"🛣️","path":"🛤️",
+  "food":"🍽️","bread":"🍞","water":"💧","milk":"🥛","fruit":"🍎",
+  "tree":"🌳","garden":"🌿","river":"🌊","mountain":"⛰️","sea":"🌊","ocean":"🌊",
+  "fire":"🔥","earth":"🌍","sky":"☁️","sun":"☀️","moon":"🌙","wind":"💨",
+  "night":"🌙","day":"☀️","morning":"🌅","evening":"🌆",
+  "book (lesson)":"📖","lesson":"📝","school":"🏫","university":"🎓","class":"🏫",
+  "letter":"✉️","word":"💬","speech":"💬","news":"📰","story":"📖",
+  "knowledge":"📚","wisdom":"💡","truth":"✅","guidance":"🧭",
+  // People
+  "man":"👨","woman":"👩","boy":"👦","girl":"👧",
+  "father":"👨","mother":"👩","son":"👦","daughter":"👧",
+  "brother":"👦","sister":"👧","family":"👨‍👩‍👧‍👦",
+  "teacher":"👨‍🏫","student":"👨‍🎓","friend":"🤝","servant":"🙇",
+  "king":"👑","prophet":"🕌","messenger":"📨","slave":"🙇",
+  "doctor":"👨‍⚕️","engineer":"👷","worker":"👷",
+  // Animals
+  "dog":"🐕","cat":"🐈","horse":"🐴","lion":"🦁","bird":"🐦",
+  "cow":"🐄","camel":"🐪","sheep":"🐑","elephant":"🐘","fish":"🐟",
+  // Religion / abstract
+  "prayer":"🤲","fasting":"🌙","pilgrimage":"🕌","zakat":"💰",
+  "paradise":"🌹","hellfire":"🔥","angel":"👼","devil":"😈",
+  "good":"✅","bad":"❌","mercy":"💚","patience":"⏳","gratitude":"🙏",
+  "world":"🌍","hereafter":"⭐","death":"💀","life":"🌱",
+  "heart":"❤️","hand":"✋","eye":"👁️","face":"😊","head":"🧠",
+  "city":"🏙️","village":"🏘️","country":"🗺️","market":"🛒",
+  "money":"💰","gold":"🥇","silver":"🥈",
+  "war":"⚔️","peace":"☮️","victory":"🏆",
+  "right":"➡️","left":"⬅️","near":"📍","far":"🔭",
+  "big":"🔼","small":"🔽","new":"✨","old":"📜",
+  "east":"🌅","west":"🌇","north":"⬆️","south":"⬇️",
+};
+const getEmoji = (en) => EMOJI[en.toLowerCase()] || EMOJI[en] || null;
+
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -642,6 +683,9 @@ function MCQ({ exercise, onResult }) {
       ) : isArEn ? (
         <>
           <p style={{color:"#64748b",fontSize:13,marginBottom:10}}>What does this mean?</p>
+          {exercise.promptEn && getEmoji(exercise.promptEn) && (
+            <div style={{fontSize:48,marginBottom:8,lineHeight:1}}>{getEmoji(exercise.promptEn)}</div>
+          )}
           <div style={{marginBottom:24,lineHeight:1.4}}>
             <span style={{fontSize:arPromptSize,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl"}}>{exercise.prompt}</span>
             <SpeakBtn text={exercise.prompt} size={22} />
@@ -650,6 +694,9 @@ function MCQ({ exercise, onResult }) {
       ) : (
         <>
           <p style={{color:"#64748b",fontSize:13,marginBottom:10}}>Select the Arabic for:</p>
+          {getEmoji(exercise.promptEn) && (
+            <div style={{fontSize:48,marginBottom:8,lineHeight:1}}>{getEmoji(exercise.promptEn)}</div>
+          )}
           <div style={{fontSize:enPromptSize,fontWeight:700,color:"#0f172a",marginBottom:24}}>{exercise.promptEn}</div>
         </>
       )}
@@ -915,12 +962,16 @@ function GrammarCard({ session, onStart }) {
       </div>
       <h3 style={{fontSize:14,fontWeight:700,color:"#1e293b",margin:"0 0 10px"}}>New Words:</h3>
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:20}}>
-        {session.vocab.map((w,i)=>(
-          <div key={i} style={{background:"#f8fafc",borderRadius:10,padding:"10px",border:"1px solid #e2e8f0",textAlign:"center"}}>
-            <div style={{fontSize:vocabArSize,fontWeight:700,color:"#1e293b",fontFamily:arFont,direction:"rtl",lineHeight:1.5}}>{w.ar}</div>
-            <div style={{fontSize:13,color:"#475569",fontWeight:600}}>{w.en}</div>
-          </div>
-        ))}
+        {session.vocab.map((w,i)=>{
+          const em = getEmoji(w.en);
+          return (
+            <div key={i} style={{background:"#f8fafc",borderRadius:10,padding:"10px",border:"1px solid #e2e8f0",textAlign:"center"}}>
+              {em && <div style={{fontSize:28,lineHeight:1.3}}>{em}</div>}
+              <div style={{fontSize:vocabArSize,fontWeight:700,color:"#1e293b",fontFamily:arFont,direction:"rtl",lineHeight:1.5}}>{w.ar}</div>
+              <div style={{fontSize:13,color:"#475569",fontWeight:600}}>{w.en}</div>
+            </div>
+          );
+        })}
       </div>
       <button onClick={onStart} style={{width:"100%",padding:"14px",background:"linear-gradient(135deg,#3b82f6,#2563eb)",color:"white",border:"none",borderRadius:14,fontSize:17,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(59,130,246,0.35)"}}>
         Start Practice →
@@ -985,7 +1036,7 @@ function CompleteScreen({ xp, accuracy, isReview, onContinue }) {
 // MAIN APP
 // ──────────────────────────────────────────────
 export default function MadinahArabicApp() {
-  const [screen, setScreen] = useState("home"); // home | map | intro | exercise | complete
+  const [screen, setScreen] = useState("home"); // home | map | intro | exercise | complete | settings
   const [sessionData, setSessionData] = useState(null);
   const [exercises, setExercises] = useState([]);
   const [exIdx, setExIdx] = useState(0);
@@ -994,7 +1045,14 @@ export default function MadinahArabicApp() {
   const [hearts, setHearts] = useState(5);
   const [streak, setStreak] = useState(0);
   const [xp, setXp] = useState(0);
-  const [completed, setCompleted] = useState({}); // { sessionId: accuracy }
+  const [completed, setCompleted] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("ma_completed") || "{}"); } catch { return {}; }
+  });
+  const [unlockAll, setUnlockAll] = useState(() => localStorage.getItem("ma_unlock") === "1");
+
+  // Persist completed + unlockAll
+  useEffect(() => { localStorage.setItem("ma_completed", JSON.stringify(completed)); }, [completed]);
+  useEffect(() => { localStorage.setItem("ma_unlock", unlockAll ? "1" : "0"); }, [unlockAll]);
 
   const numCompleted = Object.keys(completed).length;
 
@@ -1055,7 +1113,8 @@ export default function MadinahArabicApp() {
     return (
       <div style={pageStyle}>
         <div style={cardStyle}>
-          <div style={{background:`linear-gradient(135deg,${GREEN},#047857)`,padding:"32px 20px 24px",textAlign:"center",color:"white"}}>
+          <div style={{background:`linear-gradient(135deg,${GREEN},#047857)`,padding:"32px 20px 24px",textAlign:"center",color:"white",position:"relative"}}>
+            <button onClick={()=>setScreen("settings")} style={{position:"absolute",top:12,right:12,background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 10px",cursor:"pointer",fontSize:18,lineHeight:1}}>⚙️</button>
             <div style={{fontSize:52}}>🕌</div>
             <h1 style={{fontSize:28,fontWeight:800,margin:"8px 0 4px"}}>Madinah Arabic</h1>
             <p style={{fontSize:14,opacity:0.85,margin:"0 0 16px"}}>Complete course · Books 1–4 · 92 sessions</p>
@@ -1087,6 +1146,71 @@ export default function MadinahArabicApp() {
     );
   }
 
+  // ── SETTINGS ──
+  if(screen==="settings"){
+    const totalSessions = ALL_SESSIONS.length;
+    return (
+      <div style={pageStyle}>
+        <div style={cardStyle}>
+          <div style={{background:`linear-gradient(135deg,${GREEN},#047857)`,padding:"14px 16px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+            <button onClick={()=>setScreen("home")} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 12px",cursor:"pointer",fontWeight:700,fontSize:13}}>← Back</button>
+            <span style={{color:"white",fontWeight:700,fontSize:16}}>⚙️ Settings</span>
+            <div style={{width:60}}/>
+          </div>
+          <div style={{padding:"24px 20px",display:"flex",flexDirection:"column",gap:14}}>
+
+            {/* Unlock all */}
+            <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:14,padding:"16px 18px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+              <div>
+                <div style={{fontWeight:700,fontSize:15,color:"#1e293b",marginBottom:3}}>🔓 Unlock all lessons</div>
+                <div style={{fontSize:12,color:"#64748b"}}>Jump to any session without completing previous ones</div>
+              </div>
+              <button onClick={()=>setUnlockAll(u=>!u)} style={{
+                width:52,height:28,borderRadius:14,border:"none",cursor:"pointer",
+                background:unlockAll?"#059669":"#cbd5e1",
+                position:"relative",transition:"background 0.2s",flexShrink:0,marginLeft:12}}>
+                <div style={{
+                  width:22,height:22,borderRadius:11,background:"white",
+                  position:"absolute",top:3,
+                  left:unlockAll?27:3,transition:"left 0.2s",
+                  boxShadow:"0 1px 4px rgba(0,0,0,0.2)"}}/>
+              </button>
+            </div>
+
+            {/* Reset progress */}
+            <div style={{background:"#fff5f5",border:"1px solid #fecaca",borderRadius:14,padding:"16px 18px"}}>
+              <div style={{fontWeight:700,fontSize:15,color:"#991b1b",marginBottom:3}}>🗑️ Reset all progress</div>
+              <div style={{fontSize:12,color:"#b91c1c",marginBottom:12}}>This will clear all completed sessions, XP, and streaks. Cannot be undone.</div>
+              <button onClick={()=>{
+                if(window.confirm("Reset all progress? This cannot be undone.")){
+                  setCompleted({}); setXp(0); setStreak(0);
+                  localStorage.removeItem("ma_completed");
+                  setScreen("home");
+                }
+              }} style={{padding:"9px 20px",background:"#ef4444",color:"white",border:"none",borderRadius:10,fontWeight:700,fontSize:14,cursor:"pointer"}}>
+                Reset Progress
+              </button>
+            </div>
+
+            {/* Stats */}
+            <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:14,padding:"16px 18px"}}>
+              <div style={{fontWeight:700,fontSize:14,color:"#1e293b",marginBottom:10}}>📊 Your Stats</div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+                {[["Sessions done",numCompleted],["Total sessions",totalSessions],["XP earned",xp],["Streak",streak]].map(([label,val])=>(
+                  <div key={label} style={{background:"white",border:"1px solid #e2e8f0",borderRadius:10,padding:"10px 12px",textAlign:"center"}}>
+                    <div style={{fontSize:20,fontWeight:800,color:"#059669"}}>{val}</div>
+                    <div style={{fontSize:11,color:"#64748b",marginTop:2}}>{label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // ── SESSION MAP ──
   if(screen==="map"){
     const bookColors = {1:["#059669","#047857"],2:["#2563eb","#1d4ed8"],3:["#7c3aed","#6d28d9"],4:["#dc2626","#b91c1c"]};
@@ -1097,11 +1221,11 @@ export default function MadinahArabicApp() {
           <div style={{background:`linear-gradient(135deg,${GREEN},#047857)`,padding:"14px 16px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
             <button onClick={()=>setScreen("home")} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 12px",cursor:"pointer",fontWeight:700,fontSize:13}}>← Home</button>
             <span style={{color:"white",fontWeight:700,fontSize:16}}>All Sessions</span>
-            <div style={{background:"rgba(255,255,255,0.2)",borderRadius:20,padding:"4px 10px",color:"white",fontWeight:700,fontSize:13}}>⭐ {xp}</div>
+            <button onClick={()=>setScreen("settings")} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 10px",cursor:"pointer",fontSize:16,lineHeight:1}}>⚙️</button>
           </div>
           <div style={{overflowY:"auto",maxHeight:scrollH,padding:"14px 14px 20px"}}>
             {ALL_SESSIONS.map((s,idx)=>{
-              const unlocked = idx <= numCompleted;
+              const unlocked = unlockAll || idx <= numCompleted;
               const acc = completed[s.id];
               const done = acc !== undefined;
               const isReview = s.type==="review";
