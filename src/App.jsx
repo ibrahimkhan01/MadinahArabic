@@ -293,6 +293,128 @@ const UR_HINTS = {
 };
 const getUrHint = (en) => UR_HINTS[en] || null;
 
+// ── Urdu translations for session subtitle (titleEn) ──
+const UR_SESSION_TITLES = {
+  "What Is This? (Part 1)":"یہ کیا ہے؟ (حصہ اول)",
+  "What Is This? (Part 2)":"یہ کیا ہے؟ (حصہ دوم)",
+  "Far Demonstratives (Part 1)":"بعید اشارہ (حصہ اول)",
+  "Far Demonstratives (Part 2)":"بعید اشارہ (حصہ دوم)",
+  "Making Nouns Definite":"الف لام تعریف",
+  "Sun Letters (Part 2)":"شمسی حروف",
+  "Describing with Adjectives":"صفات کا استعمال",
+  "More Adjectives":"مزید صفات",
+  "Prepositions: في، عَلَى، مِنْ، إِلَى":"حروف جر: في، عَلَى، مِنْ، إِلَى",
+  "Prepositions: تَحْتَ، فَوْقَ، أَمَامَ":"حروف جر: تَحْتَ، فَوْقَ، أَمَامَ",
+  "Personal Pronouns":"ذاتی ضمائر",
+  "Pronouns with Professions":"پیشوں کے ساتھ ضمائر",
+  "Feminine Nouns & هَذِهِ":"مؤنث اسماء اور هَذِهِ",
+  "Feminine Adjectives & Professions":"مؤنث صفات اور پیشے",
+  "Possessive Constructions":"مضاف و مضاف الیہ",
+  "Possessive Pronouns":"ضمائر ملکیت",
+  "Family Vocabulary":"خاندانی الفاظ",
+  "Extended Family":"وسیع خاندان",
+  "Relative Pronoun (Part 1)":"اسم موصول (حصہ اول)",
+  "Book 1 Revision":"کتاب ۱ کی دہرائی",
+  "Present Tense: He":"فعل مضارع: وہ (مذکر)",
+  "Present Tense: More Verbs":"مضارع: مزید افعال",
+  "Present Tense: I & You":"مضارع: میں اور تم",
+  "Present Tense: We & They":"مضارع: ہم اور وہ",
+  "Commands":"فعل امر",
+  "Commands: Feminine & Plural":"امر: مؤنث اور جمع",
+  "Days of the Week (Part 1)":"ہفتے کے دن (حصہ اول)",
+  "Days of the Week (Part 2)":"ہفتے کے دن (حصہ دوم)",
+  "Plural Pronouns":"جمع ضمائر",
+  "Dual Form":"تثنیہ",
+  "Numbers 1–5":"اعداد ۱–۵",
+  "Numbers 6–10":"اعداد ۶–۱۰",
+  "Past Tense: He & She":"ماضی: وہ (مذکر و مؤنث)",
+  "Past Tense: All Pronouns":"ماضی: تمام ضمائر",
+  "Negation: لَا، مَا، لَيْسَ":"نفی: لَا، مَا، لَيْسَ",
+  "Yes, No, and Prohibition":"ہاں، نہیں اور ممانعت",
+  "Question Words":"سوالیہ الفاظ",
+  "Question Words Practice":"سوالیہ الفاظ کی مشق",
+  "Transitive Verbs & Objects":"متعدی افعال اور مفعول",
+  "Verb + Object Practice":"فعل اور مفعول کی مشق",
+  "Indirect Objects with لِـ":"لِـ کے ساتھ مفعول",
+  "Having: عِنْدَ & لَدَى":"ملکیت: عِنْدَ اور لَدَى",
+  "Book 2 Review (Part 1)":"کتاب ۲ دہرائی (حصہ اول)",
+  "Book 2 Review (Part 2)":"کتاب ۲ دہرائی (حصہ دوم)",
+  "inna & Sisters":"إِنَّ اور اخوات",
+  "Using inna in Sentences":"إِنَّ کا جملوں میں استعمال",
+  "Comparative & Superlative":"تفضیل",
+  "More Comparatives":"مزید تفضیل",
+  "Colors":"رنگ",
+  "More Colors":"مزید رنگ",
+  "Numbers 11–15":"اعداد ۱۱–۱۵",
+  "Numbers 16–20":"اعداد ۱۶–۲۰",
+  "The Verb كَانَ":"فعل كَانَ",
+  "Telling the Time":"وقت بتانا",
+  "Jussive Mood with لَمْ":"مجزوم: لَمْ کے ساتھ",
+  "Prohibition with لَا":"لَا ناہیہ",
+  "Conditional Sentences with إِذَا":"شرطیہ جملے: إِذَا",
+  "Conditional with إِنْ":"شرط: إِنْ",
+  "Passive Voice":"مجہول",
+  "Passive Voice Practice":"مجہول کی مشق",
+  "Verbal Nouns":"مصدر",
+  "Using Verbal Nouns":"مصدر کا استعمال",
+  "Book 3 Review (Part 1)":"کتاب ۳ دہرائی (حصہ اول)",
+  "Book 3 Review (Part 2)":"کتاب ۳ دہرائی (حصہ دوم)",
+  "Sound Masculine Plural (ـُونَ / ـِينَ)":"جمع مذکر سالم",
+  "Sound Feminine Plural (ـَاتٌ)":"جمع مؤنث سالم",
+  "Broken Plurals (Part 1)":"جمع تکسیر (حصہ اول)",
+  "Broken Plurals (Part 2)":"جمع تکسیر (حصہ دوم)",
+  "Verbal Sentences & Accusative":"جملہ فعلیہ اور منصوب",
+  "Object Pronoun Suffixes":"ضمائر مفعولی",
+  "I Want To... (Subjunctive)":"میں چاہتا ہوں... (منصوب)",
+  "Because & Purpose":"وجہ اور مقصد",
+  "Seasons & Weather":"موسم اور مہینے",
+  "Weather Expressions":"موسمی تعبیرات",
+  "Verb Form II (فَعَّلَ)":"باب فَعَّلَ",
+  "Form II in Sentences":"باب فَعَّلَ کی مشق",
+  "Verb Form IV (أَفْعَلَ)":"باب أَفْعَلَ",
+  "Form IV in Sentences":"باب أَفْعَلَ کی مشق",
+  "Active Participle":"اسم فاعل",
+  "Passive Participle":"اسم مفعول",
+  "Hypothetical Conditionals":"فرضی شرطیہ: لَوْ",
+  "Hypothetical Conditionals Practice":"لَوْ کی مشق",
+  "Final Review (Part 1)":"حتمی دہرائی (حصہ اول)",
+  "Final Review (Part 2)":"حتمی دہرائی (حصہ دوم)",
+  // Review sessions
+  "Review: Demonstratives, الـ, Adjectives & Prepositions":"دہرائی: اشارہ، الـ، صفات اور حروف جر",
+  "Review: Pronouns, Feminine, Iḍāfa & Relative Pronoun":"دہرائی: ضمائر، مؤنث، اضافہ اور موصول",
+  "Review: Present Tense, Imperatives & Days of Week":"دہرائی: مضارع، امر اور ایام",
+  "Review: Numbers, Past Tense, Negation & Questions":"دہرائی: اعداد، ماضی، نفی اور سوال",
+  "Review: Indirect Objects, Comparative, Colors & إِنَّ":"دہرائی: مفعول، تفضیل، رنگ اور إِنَّ",
+  "Review: Numbers 11–20, كَانَ, Jussive & Passive":"دہرائی: اعداد، كَانَ، مجزوم اور مجہول",
+  "Review: Verbal Nouns, Plurals & Verbal Sentences":"دہرائی: مصدر، جمع اور جملہ فعلیہ",
+  "Review: Subjunctive, Verb Forms II & IV, Participles":"دہرائی: منصوب، وزن دوم و چہارم، اسم فاعل/مفعول",
+};
+const getUrSessionTitle = (en) => UR_SESSION_TITLES[en] || en;
+
+// ── MixedText: renders Urdu prose mixed with Arabic words using correct fonts ─
+// Arabic words inside Urdu text carry harakat (vowel diacritics \u064B–\u0652,
+// \u0670). Urdu prose words do not. Split on whitespace, apply arFont only to
+// fully-vowelised tokens so Arabic words stand out cleanly.
+function MixedText({ text }) {
+  const hasHarakat = (w) => /[\u064B-\u0652\u0670]/.test(w);
+  const parts = text.split(/(\s+)/);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (/^\s+$/.test(part)) return part;
+        if (hasHarakat(part)) {
+          return (
+            <span key={i} style={{fontFamily:arFont, fontSize:"1.1em", lineHeight:1.5, display:"inline-block", verticalAlign:"middle"}}>
+              {part}
+            </span>
+          );
+        }
+        return <span key={i} style={{fontFamily:urFont}}>{part}</span>;
+      })}
+    </>
+  );
+}
+
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -432,7 +554,7 @@ const SESSIONS = [
     grammar:'مَنْ أَنْتَ؟ = Who are you? أَنَا طَالِبٌ = I am a student. هُوَ مُدَرِّسٌ = He is a teacher.',
     vocab:[{ar:"طَبِيبٌ",en:"doctor (m.)"},{ar:"مُهَنْدِسٌ",en:"engineer"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"فَلَّاحٌ",en:"farmer"}],
     patternTiles:[
-      {emoji:"👨‍⚕️", en:"He is a doctor.", tiles:["هُوَ","طَبِيبٌ","أَنَا","مُهَنْدِسٌ"], answer:["هُوَ","طَبِيبٌ"]},
+      {emoji:"👨‍⚕️", question:"مَنْ هُوَ؟", en:"He is a doctor.", tiles:["هُوَ","طَبِيبٌ","أَنَا","مُهَنْدِسٌ"], answer:["هُوَ","طَبِيبٌ"]},
       {en:"I am a merchant.", tiles:["أَنَا","تَاجِرٌ","هُوَ","فَلَّاحٌ"], answer:["أَنَا","تَاجِرٌ"]},
     ]},
 
@@ -447,8 +569,8 @@ const SESSIONS = [
     grammar:'Feminine adjectives add ةٌ: كَبِيرٌ → كَبِيرَةٌ. Professions too: مُدَرِّسٌ → مُدَرِّسَةٌ. هِيَ مُدَرِّسَةٌ = She is a teacher.',
     vocab:[{ar:"مُدَرِّسَةٌ",en:"teacher (f.)"},{ar:"طَالِبَةٌ",en:"student (f.)"},{ar:"طَبِيبَةٌ",en:"doctor (f.)"},{ar:"جَمِيلَةٌ",en:"beautiful (f.)"}],
     patternTiles:[
-      {emoji:"👩‍🏫", en:"She is a teacher.", tiles:["هِيَ","مُدَرِّسَةٌ","طَالِبَةٌ","هُوَ"], answer:["هِيَ","مُدَرِّسَةٌ"]},
-      {emoji:"👩‍🎓", en:"She is a student.", tiles:["هِيَ","طَالِبَةٌ","مُدَرِّسَةٌ","طَبِيبَةٌ"], answer:["هِيَ","طَالِبَةٌ"]},
+      {emoji:"👩‍🏫", question:"مَنْ هِيَ؟", en:"She is a teacher.", tiles:["هِيَ","مُدَرِّسَةٌ","طَالِبَةٌ","هُوَ"], answer:["هِيَ","مُدَرِّسَةٌ"]},
+      {emoji:"👩‍🎓", question:"مَنْ هِيَ؟", en:"She is a student.", tiles:["هِيَ","طَالِبَةٌ","مُدَرِّسَةٌ","طَبِيبَةٌ"], answer:["هِيَ","طَالِبَةٌ"]},
     ]},
 
   { id:15, book:1, lessonRef:"1.8", part:"A", title:"الْإِضَافَةُ (Part 1)", titleEn:"Possessive Constructions",
@@ -470,7 +592,7 @@ const SESSIONS = [
     grammar:'أَبٌ (father) and أَخٌ (brother) are irregular: أَبِي (my father), أَخِي (my brother). These are الْأَسْمَاءُ الْخَمْسَةُ — special nouns.',
     vocab:[{ar:"أَبٌ",en:"father"},{ar:"أُمٌّ",en:"mother"},{ar:"أَخٌ",en:"brother"},{ar:"أُخْتٌ",en:"sister"}],
     patternTiles:[
-      {emoji:"👨", en:"My father is generous.", tiles:["أَبِي","كَرِيمٌ","أُمِّي","أَخِي"], answer:["أَبِي","كَرِيمٌ"]},
+      {emoji:"👨", question:"كَيْفَ أَبُوكَ؟", en:"My father is generous.", tiles:["أَبِي","كَرِيمٌ","أُمِّي","أَخِي"], answer:["أَبِي","كَرِيمٌ"]},
       {en:"I have a brother and a sister.", tiles:["عِنْدِي","أَخٌ","وَأُخْتٌ","أَبٌ","وَأُمٌّ"], answer:["عِنْدِي","أَخٌ","وَأُخْتٌ"]},
     ]},
   { id:18, book:1, lessonRef:"1.9", part:"B", title:"الْعَائِلَةُ (Part 2)", titleEn:"Extended Family",
@@ -1418,11 +1540,12 @@ function GrammarCard({ session, onStart, lang = "en" }) {
         <div style={{fontSize:titleSize,fontWeight:700,color:"#1e40af",fontFamily:arFont,direction:"rtl",marginBottom:4,lineHeight:1.4}}>{session.title}</div>
         <div style={{fontSize:15,fontWeight:600,color:"#1e3a5f",marginBottom:10}}>{session.titleEn}</div>
         <p style={{
-          color:"#475569",fontSize:13,lineHeight:1.9,margin:0,
+          color:"#475569",fontSize:13,lineHeight:2.1,margin:0,
           textAlign: isUrdu ? "right" : "left",
-          fontFamily: isUrdu ? urFont : "inherit",
           direction: isUrdu ? "rtl" : "ltr",
-        }}>{grammarNote}</p>
+        }}>
+          {isUrdu ? <MixedText text={grammarNote} /> : grammarNote}
+        </p>
       </div>
       <h3 style={{
         fontSize:14,fontWeight:700,color:"#1e293b",margin:"0 0 10px",
@@ -1596,7 +1719,7 @@ export default function MadinahArabicApp() {
             <p style={{fontSize:14,opacity:0.85,margin:"0 0 12px"}}>Complete course · Books 1–4 · 92 sessions</p>
             {/* Language quick-select */}
             <div style={{display:"flex",gap:8,justifyContent:"center",marginBottom:14}}>
-              {[["en","🇬🇧","Start Learning","Learning"],["ur","🇵🇰","سیکھنا شروع کریں","جاری رکھیں"]].map(([code,flag,startLabel,contLabel])=>(
+              {[["en","🇬🇧","English"],["ur","🇵🇰","اردو"]].map(([code,flag,label])=>(
                 <button key={code} onClick={()=>setLang(code)} style={{
                   padding:"7px 14px",borderRadius:20,cursor:"pointer",fontWeight:700,
                   fontSize:code==="ur"?15:13,
@@ -1605,7 +1728,7 @@ export default function MadinahArabicApp() {
                   color:lang===code?GREEN:"white",
                   border:lang===code?"2px solid white":"2px solid rgba(255,255,255,0.4)",
                   transition:"all 0.15s"
-                }}>{flag} {doneCount===0||lang!==code?startLabel:contLabel}</button>
+                }}>{flag} {label}</button>
               ))}
             </div>
             <div style={{display:"flex",gap:10,justifyContent:"center"}}>
@@ -1616,18 +1739,18 @@ export default function MadinahArabicApp() {
           <div style={{padding:"20px 18px"}}>
             <div style={{background:"#f8fafc",borderRadius:14,padding:16,marginBottom:18,border:"1px solid #e2e8f0"}}>
               <div style={{display:"flex",justifyContent:"space-between",marginBottom:8}}>
-                <span style={{fontWeight:700,fontSize:14,color:"#1e293b"}}>Overall Progress</span>
-                <span style={{fontSize:13,color:"#64748b"}}>{doneCount}/{totalCount} sessions</span>
+                <span style={{fontWeight:700,fontSize:14,color:"#1e293b"}}>{UI_TEXT[lang].overallProg}</span>
+                <span style={{fontSize:13,color:"#64748b"}}>{doneCount}/{totalCount} {UI_TEXT[lang].sessions}</span>
               </div>
               <ProgressBar pct={(doneCount/totalCount)*100}/>
             </div>
-            <button onClick={()=>setScreen("map")} style={{width:"100%",padding:"15px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:14,fontSize:17,fontWeight:700,cursor:"pointer",marginBottom:12,boxShadow:"0 4px 14px rgba(5,150,105,0.35)"}}>
-              {doneCount===0?"Start Learning 🚀":"Continue Learning →"}
+            <button onClick={()=>setScreen("map")} style={{width:"100%",padding:"15px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:14,fontSize:17,fontWeight:700,cursor:"pointer",marginBottom:12,boxShadow:"0 4px 14px rgba(5,150,105,0.35)",fontFamily:lang==="ur"?urFont:"inherit"}}>
+              {doneCount===0 ? UI_TEXT[lang].startLearn : UI_TEXT[lang].continueLearn}
             </button>
             <div style={{background:"#fffbeb",border:"1px solid #fde68a",borderRadius:12,padding:14}}>
-              <p style={{fontSize:12,color:"#92400e",fontWeight:700,margin:"0 0 4px"}}>📖 How it works</p>
-              <p style={{fontSize:12,color:"#78350f",lineHeight:1.6,margin:0}}>
-                5–15 min daily · 2 sessions per lesson · Review session every 5 lessons · Pre-baked word previews · Spaced repetition from Week 3 · 8 review sessions with grammar & sentence building
+              <p style={{fontSize:12,color:"#92400e",fontWeight:700,margin:"0 0 4px"}}>{UI_TEXT[lang].howItWorks}</p>
+              <p style={{fontSize:12,color:"#78350f",lineHeight:1.6,margin:0,fontFamily:lang==="ur"?urFont:"inherit",textAlign:lang==="ur"?"right":"left",direction:lang==="ur"?"rtl":"ltr"}}>
+                {UI_TEXT[lang].howItWorksText}
               </p>
             </div>
           </div>
@@ -1730,8 +1853,8 @@ export default function MadinahArabicApp() {
       <div style={pageStyle}>
         <div style={cardStyle}>
           <div style={{background:`linear-gradient(135deg,${GREEN},#047857)`,padding:"14px 16px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-            <button onClick={()=>setScreen("home")} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 12px",cursor:"pointer",fontWeight:700,fontSize:13}}>← Home</button>
-            <span style={{color:"white",fontWeight:700,fontSize:16}}>All Sessions</span>
+            <button onClick={()=>setScreen("home")} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 12px",cursor:"pointer",fontWeight:700,fontSize:13,fontFamily:lang==="ur"?urFont:"inherit"}}>{lang==="ur"?"ہوم ←":"← Home"}</button>
+            <span style={{color:"white",fontWeight:700,fontSize:16,fontFamily:lang==="ur"?urFont:"inherit"}}>{UI_TEXT[lang].allSessions}</span>
             <button onClick={()=>setScreen("settings")} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 10px",cursor:"pointer",fontSize:16,lineHeight:1}}>⚙️</button>
           </div>
           <div style={{overflowY:"auto",maxHeight:scrollH,padding:"14px 14px 20px"}}>
@@ -1752,9 +1875,9 @@ export default function MadinahArabicApp() {
                   onMouseEnter={e=>{if(unlocked)e.currentTarget.style.transform="scale(1.01)"}}
                   onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
                   <div style={{flex:1}}>
-                    <div style={{fontSize:12,fontWeight:800,color:"#d97706",marginBottom:2}}>🏆 REVIEW · {s.coversLessons}</div>
-                    <div style={{fontSize:13,color:"#92400e",fontWeight:600}}>{s.titleEn}</div>
-                    <div style={{fontSize:11,color:"#d97706",marginTop:2}}>{s.grammarExercises.length} grammar + {s.sentenceTiles.length} sentence tiles</div>
+                    <div style={{fontSize:12,fontWeight:800,color:"#d97706",marginBottom:2,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>🏆 {lang==="ur"?"دہرائی":"REVIEW"} · {s.coversLessons}</div>
+                    <div style={{fontSize:13,color:"#92400e",fontWeight:600,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>{lang==="ur" ? getUrSessionTitle(s.titleEn) : s.titleEn}</div>
+                    <div style={{fontSize:11,color:"#d97706",marginTop:2,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>{lang==="ur" ? `${s.grammarExercises.length} گرامر + ${s.sentenceTiles.length} جملہ ٹائلز` : `${s.grammarExercises.length} grammar + ${s.sentenceTiles.length} sentence tiles`}</div>
                   </div>
                   <div style={{marginLeft:10,textAlign:"center"}}>
                     {!unlocked?<span style={{fontSize:18}}>🔒</span>:done?(
@@ -1770,8 +1893,8 @@ export default function MadinahArabicApp() {
                 <div key={s.id}>
                   {isFirstInBook&&(
                     <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8,marginTop:idx>0?8:0}}>
-                      <div style={{padding:"4px 12px",background:`linear-gradient(135deg,${colors[0]},${colors[1]})`,borderRadius:20,color:"white",fontWeight:700,fontSize:13}}>Book {s.book}</div>
-                      <span style={{fontSize:12,color:"#64748b"}}>{SESSIONS.filter(x=>x.book===s.book&&completed[x.id]).length}/{SESSIONS.filter(x=>x.book===s.book).length} done</span>
+                      <div style={{padding:"4px 12px",background:`linear-gradient(135deg,${colors[0]},${colors[1]})`,borderRadius:20,color:"white",fontWeight:700,fontSize:13,fontFamily:lang==="ur"?urFont:"inherit"}}>{lang==="ur"?`کتاب ${s.book}`:`Book ${s.book}`}</div>
+                      <span style={{fontSize:12,color:"#64748b",fontFamily:lang==="ur"?urFont:"inherit"}}>{SESSIONS.filter(x=>x.book===s.book&&completed[x.id]).length}/{SESSIONS.filter(x=>x.book===s.book).length} {lang==="ur"?"مکمل":"done"}</span>
                     </div>
                   )}
                   <button onClick={()=>unlocked&&startSession(s)} disabled={!unlocked} style={{
@@ -1784,8 +1907,8 @@ export default function MadinahArabicApp() {
                     onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
                     <div style={{flex:1}}>
                       <div style={{fontSize:16,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl",lineHeight:1.4}}>{s.title}</div>
-                      <div style={{fontSize:12,color:"#64748b",marginTop:1}}>{s.titleEn}</div>
-                      {s.id>=15&&<div style={{fontSize:11,color:"#059669",marginTop:2}}>🔁 Includes spaced review</div>}
+                      <div style={{fontSize:12,color:"#64748b",marginTop:1,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>{lang==="ur" ? getUrSessionTitle(s.titleEn) : s.titleEn}</div>
+                      {s.id>=15&&<div style={{fontSize:11,color:"#059669",marginTop:2,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>{lang==="ur"?"🔁 تکراری دہرائی شامل":"🔁 Includes spaced review"}</div>}
                     </div>
                     <div style={{marginLeft:10,textAlign:"center"}}>
                       {!unlocked?<span style={{fontSize:18}}>🔒</span>:done?(
