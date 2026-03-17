@@ -72,6 +72,13 @@ const UI_TEXT = {
     youChoseAr:     (sel, meaning) => `You chose ${sel}${meaning ? ` — "${meaning}"` : ""}`,
     wrongCorrect:   (ans) => `✗ Correct: ${ans}`,
     correctAns:     (ans) => `✗ Correct answer: ${ans}`,
+    reviewSession:  "REVIEW SESSION",
+    reviewCovers:   "Covers:",
+    grammarQs:      "Grammar Qs",
+    sentenceTiles:  "Sentence Tiles",
+    howItWorksRev:  "💡 How this works",
+    howItWorksRevText: (g, t) => `First answer ${g} grammar questions, then build ${t} Arabic sentences from English. Gold tiles are pre-placed — tap them to see their meaning!`,
+    startReview:    "Start Review 🏆",
   },
   ur: {
     whatMean:       "اس کا کیا مطلب ہے؟",
@@ -121,6 +128,13 @@ const UI_TEXT = {
     youChoseAr:     (sel, meaning) => `آپ نے چنا ${sel}${meaning ? ` — "${meaning}"` : ""}`,
     wrongCorrect:   (ans) => `✗ صحیح: ${ans}`,
     correctAns:     (ans) => `✗ صحیح جواب: ${ans}`,
+    reviewSession:  "دہرائی سیشن",
+    reviewCovers:   "احاطہ:",
+    grammarQs:      "قواعد کے سوالات",
+    sentenceTiles:  "جملہ ٹائلیں",
+    howItWorksRev:  "💡 یہ کیسے کام کرتا ہے",
+    howItWorksRevText: (g, t) => `پہلے ${g} قواعد کے سوالات حل کریں، پھر ${t} عربی جملے انگریزی سے بنائیں۔ سنہری ٹائلیں پہلے سے رکھی ہیں — مطلب دیکھنے کے لیے دبائیں!`,
+    startReview:    "دہراؤ شروع کریں 🏆",
   },
 };
 
@@ -174,7 +188,7 @@ const UR_VOCAB = {
   "book":"کتاب","pen":"قلم","key":"چابی","door":"دروازہ",
   "house":"گھر","mosque":"مسجد","star":"ستارہ","stone":"پتھر",
   // L2
-  "bed":"بستر","chair":"کرسی","desk/office":"میز / دفتر","wall":"دیوار",
+  "bed":"بستر","chair":"کرسی","desk/office":"ڈیسک / دفتر","wall":"دیوار",
   "boy":"لڑکا","man":"مرد","student (m.)":"طالب علم","teacher (m.)":"استاد",
   // L3 — definite forms
   "the book":"کتاب","the pen":"قلم","the house":"گھر","the door":"دروازہ",
@@ -241,7 +255,7 @@ const UR_GRAMMAR = {
   6:'"شمسی حروف" (ت،ث،د،ذ،ر،ز،س،ش،ص،ض،ط،ظ،ل،ن) کے ساتھ الـ کا ل مدغم ہو جاتا ہے: الشَّمْسُ (اش-شمس)، الرَّجُلُ (ار-رجل)۔',
   7:'صفات اسم کے بعد آتی ہیں۔ معرفہ اسم + معرفہ صفت: الْبَيْتُ الْكَبِيرُ۔ غیر معرفہ اسم + غیر معرفہ صفت: بَيْتٌ كَبِيرٌ۔',
   8:'مزید مذکر صفات۔ هَذَا طَالِبٌ جَدِيدٌ = یہ ایک نیا طالب علم ہے (اسم کے بعد صفت)۔',
-  9:'حروف جر اگلے اسم کو مجرور (ـِ یا ـٍ) بناتے ہیں: فِي الْبَيْتِ (گھر میں)، عَلَى الْمَكْتَبِ (میز پر)، مِنَ الْمَسْجِدِ (مسجد سے)، إِلَى الْمَدْرَسَةِ (اسکول کی طرف)۔',
+  9:'حروف جر اگلے اسم کو مجرور (ـِ یا ـٍ) بناتے ہیں: فِي الْبَيْتِ (گھر میں)، عَلَى الْمَكْتَبِ (ڈیسک پر)، مِنَ الْمَسْجِدِ (مسجد سے)، إِلَى الْمَدْرَسَةِ (اسکول کی طرف)۔',
   10:'مزید مقامی حروف جر۔ أَيْنَ؟ = کہاں؟ حرف جر کے بعد اسم سے ـٌ ختم ہو کر ـٍ آ جاتی ہے۔',
   11:'هُوَ (وہ م.)، هِيَ (وہ ف.)، أَنَا (میں)، أَنْتَ (تم م.)۔ اسمیہ جملوں میں: هُوَ طَبِيبٌ = وہ ڈاکٹر ہے۔ عربی حال میں "ہونا" فعل نہیں ہوتا۔',
   12:'مَنْ أَنْتَ؟ = تم کون ہو؟ أَنَا طَالِبٌ = میں طالب علم ہوں۔ هُوَ مُدَرِّسٌ = وہ استاد ہے۔',
@@ -261,7 +275,7 @@ const UR_HINTS = {
   "That is a new book.":"وہ ایک نئی کتاب ہے۔",
   "This is a tall man.":"یہ ایک لمبا مرد ہے۔",
   "That is a short pen.":"وہ ایک چھوٹا قلم ہے۔",
-  "The book is on the desk.":"کتاب میز پر ہے۔",
+  "The book is on the desk.":"کتاب ڈیسک پر ہے۔",
   "The key is in the house.":"چابی گھر میں ہے۔",
   "The pen is under the book.":"قلم کتاب کے نیچے ہے۔",
   "The door is in front of the house.":"دروازہ گھر کے سامنے ہے۔",
@@ -271,20 +285,20 @@ const UR_HINTS = {
   "I am a merchant.":"میں تاجر ہوں۔",
   "She is a teacher.":"وہ استانی ہیں۔",
   "She is a student.":"وہ طالبہ ہیں۔",
-  "The student's book is on the desk.":"طالب علم کی کتاب میز پر ہے۔",
+  "The student's book is on the desk.":"طالب علم کی کتاب ڈیسک پر ہے۔",
   "The door of the house is big.":"گھر کا دروازہ بڑا ہے۔",
   "My house is big.":"میرا گھر بڑا ہے۔",
-  "His pen is on the desk.":"اس کا قلم میز پر ہے۔",
+  "His pen is on the desk.":"اس کا قلم ڈیسک پر ہے۔",
   "My father is generous.":"میرے والد سخی ہیں۔",
   "I have a brother and a sister.":"میرے ایک بھائی اور ایک بہن ہیں۔",
   "My son is a student.":"میرا بیٹا طالب علم ہے۔",
   "His wife is a teacher.":"اس کی بیوی استانی ہیں۔",
   "The student who is in the classroom.":"وہ طالب علم جو کلاس میں ہے۔",
-  "The book which is on the desk.":"وہ کتاب جو میز پر ہے۔",
+  "The book which is on the desk.":"وہ کتاب جو ڈیسک پر ہے۔",
   "Where is the key?":"چابی کہاں ہے؟",
   // Review tile hints
   "This is a new book.":"یہ ایک نئی کتاب ہے۔",
-  "The pen is on the desk.":"قلم میز پر ہے۔",
+  "The pen is on the desk.":"قلم ڈیسک پر ہے۔",
   "That is a small chair.":"وہ ایک چھوٹی کرسی ہے۔",
   "This is a beautiful garden.":"یہ ایک خوبصورت باغ ہے۔",
   "The star is above the house.":"ستارہ گھر کے اوپر ہے۔",
@@ -586,8 +600,8 @@ const SESSIONS = [
     grammar:'Prepositions put the following noun into genitive (ـِ or ـٍ): فِي الْبَيْتِ (in the house), عَلَى الْمَكْتَبِ (on the desk), مِنَ الْمَسْجِدِ (from the mosque), إِلَى الْمَدْرَسَةِ (to the school).',
     vocab:[{ar:"فِي",en:"in"},{ar:"عَلَى",en:"on"},{ar:"مِنْ",en:"from"},{ar:"إِلَى",en:"to"}],
     patternTiles:[
-      {en:"The book is on the desk.", tiles:["الْكِتَابُ","عَلَى","الْمَكْتَبِ","فِي","الْبَيْتِ"], answer:["الْكِتَابُ","عَلَى","الْمَكْتَبِ"]},
-      {en:"The key is in the house.", tiles:["الْمِفْتَاحُ","فِي","الْبَيْتِ","عَلَى","الْبَابِ"], answer:["الْمِفْتَاحُ","فِي","الْبَيْتِ"]},
+      {en:"The book is on the desk.", tiles:["الْكِتَابُ","عَلَى","الْمَكْتَبِ","فِي","الْبَيْتِ","الْمَكْتَبُ"], answer:["الْكِتَابُ","عَلَى","الْمَكْتَبِ"]},
+      {en:"The key is in the house.", tiles:["الْمِفْتَاحُ","فِي","الْبَيْتِ","عَلَى","الْبَابِ","الْبَيْتُ"], answer:["الْمِفْتَاحُ","فِي","الْبَيْتِ"]},
     ]},
   { id:10, book:1, lessonRef:"1.5", part:"B", title:"حُرُوفُ الْجَرِّ (Part 2)", titleEn:"Prepositions: تَحْتَ، فَوْقَ، أَمَامَ",
     grammar:'More location prepositions. أَيْنَ؟ = where? The answer: الْكِتَابُ عَلَى الْمَكْتَبِ. After a preposition, the noun loses ـٌ and takes ـٍ.',
@@ -628,7 +642,7 @@ const SESSIONS = [
     ]},
 
   { id:15, book:1, lessonRef:"1.8", part:"A", title:"الْإِضَافَةُ (Part 1)", titleEn:"Possessive Constructions",
-    grammar:'Possession by juxtaposition: كِتَابُ الطَّالِبِ (the student\'s book). First noun loses tanwīn. Second noun takes genitive ـِ.',
+    grammar:'Iḍāfa (possessive construction): كِتَابُ الطَّالِبِ (the student\'s book). The first noun (mudāf) loses tanwīn and CANNOT take الـ. The second noun (mudāf ilayhi) takes genitive ـِ. Key rule: the first noun becomes definite automatically through the construction — بَابُ الْبَيْتِ means THE door of the house, not "a door", because the second noun (الْبَيْتِ) is definite. You cannot say الْبَابُ الْبَيْتِ — that breaks the iḍāfa.',
     vocab:[{ar:"بَابُ الْبَيْتِ",en:"the door of the house"},{ar:"كِتَابُ الطَّالِبِ",en:"the student's book"},{ar:"مَكْتَبُ الْمُدِيرِ",en:"the director's office"},{ar:"غُرْفَةُ الْوَلَدِ",en:"the boy's room"}],
     patternTiles:[
       {en:"The student's book is on the desk.", tiles:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ","فِي","الْبَيْتِ"], answer:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ"]},
@@ -921,10 +935,10 @@ const REVIEWS = [
     ],
     sentenceTiles:[
       { en:"This is a new book.", answer:["هَذَا","كِتَابٌ","جَدِيدٌ"], tiles:["هَذَا","كِتَابٌ","جَدِيدٌ","قَلَمٌ","ذَلِكَ"], prebaked:[] },
-      { en:"The pen is on the desk.", answer:["الْقَلَمُ","عَلَى","الْمَكْتَبِ"], tiles:["الْقَلَمُ","عَلَى","الْمَكْتَبِ","تَحْتَ","الْكِتَابُ"], prebaked:[] },
+      { en:"The pen is on the desk.", answer:["الْقَلَمُ","عَلَى","الْمَكْتَبِ"], tiles:["الْقَلَمُ","عَلَى","الْمَكْتَبِ","تَحْتَ","الْكِتَابُ","الْمَكْتَبُ"], prebaked:[] },
       { en:"That is a small chair.", answer:["ذَلِكَ","كُرْسِيٌّ","صَغِيرٌ"], tiles:["ذَلِكَ","كُرْسِيٌّ","صَغِيرٌ","هَذَا","كَبِيرٌ"], prebaked:[] },
       { en:"This is a beautiful garden.", answer:["هَذِهِ","حَدِيقَةٌ","جَمِيلَةٌ"], tiles:["هَذِهِ","جَمِيلَةٌ"], prebaked:[{ar:"حَدِيقَةٌ",en:"garden"}] },
-      { en:"The star is above the house.", answer:["النَّجْمُ","فَوْقَ","الْبَيْتِ"], tiles:["النَّجْمُ","فَوْقَ","الْبَيْتِ","تَحْتَ","الشَّمْسُ"], prebaked:[] },
+      { en:"The star is above the house.", answer:["النَّجْمُ","فَوْقَ","الْبَيْتِ"], tiles:["النَّجْمُ","فَوْقَ","الْبَيْتِ","تَحْتَ","الشَّمْسُ","الْبَيْتُ"], prebaked:[] },
     ]},
 
   // R2: After B1 L6-10 (sessions 11-20) · pronouns, feminine, iḍāfa, family, الذي
@@ -933,14 +947,14 @@ const REVIEWS = [
     grammarExercises:[
       { type:"grammar_mcq", promptEn:'Which pronoun means "she"?', correct:"هِيَ", options:["هِيَ","هُوَ","أَنَا","أَنْتَ"] },
       { type:"grammar_mcq", promptEn:'Feminine form of مُدَرِّسٌ (teacher):', correct:"مُدَرِّسَةٌ", options:["مُدَرِّسَةٌ","مُدَرِّسٌ","مُدَرِّسِي","مُدَرِّسَات"] },
-      { type:"grammar_mcq", promptEn:'In the iḍāfa كِتَابُ الطَّالِبِ, the second noun takes:', correct:"genitive (ـِ)", options:["genitive (ـِ)","nominative (ـُ)","accusative (ـَ)","no case ending"] },
+      { type:"grammar_mcq", promptEn:'In the iḍāfa كِتَابُ الطَّالِبِ, the second noun takes:', correct:"genitive (ـِ)", options:["genitive (ـِ)","nominative (ـُ)","accusative (ـَ)","no case ending"], explanation:'The second noun (mudāf ilayhi) always takes genitive ـِ: كِتَابُ الطَّالِبِ, بَابُ الْبَيْتِ, غُرْفَةُ الْوَلَدِ. Bonus rule: the first noun (mudāf) loses its tanwīn and becomes definite without الـ — بَابُ الْبَيْتِ = THE door of the house (not "a door"). Adding الـ to the first noun is a grammar error.' },
       { type:"grammar_mcq", promptEn:'الَّذِي is used for which type of noun?', correct:"masculine singular", options:["masculine singular","feminine singular","masculine plural","any noun"] },
       { type:"grammar_err", promptEn:'Find the error: "هُوَ مُدَرِّسَةٌ" (هُوَ = he)', correct:"مُدَرِّسٌ", options:["مُدَرِّسٌ","مُدَرِّسَةٌ","هُوَ","هِيَ"] },
     ],
     sentenceTiles:[
       { en:"She is a doctor.", answer:["هِيَ","طَبِيبَةٌ"], tiles:["هِيَ","طَبِيبَةٌ","هُوَ","طَبِيبٌ"], prebaked:[] },
       { en:"The boy's room is big.", answer:["غُرْفَةُ","الْوَلَدِ","كَبِيرَةٌ"], tiles:["غُرْفَةُ","الْوَلَدِ","كَبِيرَةٌ","صَغِيرَةٌ","الْبَيْتُ"], prebaked:[] },
-      { en:"My father is in the house.", answer:["أَبِي","فِي","الْبَيْتِ"], tiles:["أَبِي","فِي","الْبَيْتِ","عَلَى","أُمِّي"], prebaked:[] },
+      { en:"My father is in the house.", answer:["أَبِي","فِي","الْبَيْتِ"], tiles:["أَبِي","فِي","الْبَيْتِ","عَلَى","أُمِّي","الْبَيْتُ"], prebaked:[] },
       { en:"The student who is in the classroom is new.", answer:["الطَّالِبُ","الَّذِي","فِي","الْفَصْلِ","جَدِيدٌ"], tiles:["الطَّالِبُ","الَّذِي","فِي","الْفَصْلِ","جَدِيدٌ","قَدِيمٌ"], prebaked:[] },
       { en:"He is a generous merchant.", answer:["هُوَ","تَاجِرٌ","كَرِيمٌ"], tiles:["هُوَ","تَاجِرٌ","كَرِيمٌ","بَخِيلٌ"], prebaked:[{ar:"كَرِيمٌ",en:"generous"}] },
     ]},
@@ -1704,32 +1718,34 @@ function ReviewIntro({ review, onStart, lang = "en" }) {
   const grammarCount = review.grammarExercises.length;
   const tileCount = review.sentenceTiles.length;
   const isUrdu = lang === "ur";
+  const t = UI_TEXT[lang];
+  const reviewTitle = isUrdu ? getUrSessionTitle(review.titleEn) : review.titleEn;
   return (
     <div style={{padding:"16px 16px 24px"}}>
       <div style={{background:"linear-gradient(135deg,#fef9c3,#fef3c7)",border:"1px solid #f59e0b",borderRadius:16,padding:"16px 16px 20px",marginBottom:16,textAlign:"center"}}>
         <div style={{fontSize:36,marginBottom:8}}>🏆</div>
-        <div style={{fontSize:11,color:"#d97706",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>REVIEW SESSION</div>
-        <div style={{fontSize:18,fontWeight:800,color:"#92400e",marginBottom:6}}>{review.titleEn}</div>
-        <div style={{fontSize:13,color:"#78350f",fontWeight:600,marginBottom:12}}>Covers: {review.coversLessons}</div>
+        <div style={{fontSize:11,color:"#d97706",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:4,fontFamily:isUrdu?urFont:"inherit"}}>{t.reviewSession}</div>
+        <div style={{fontSize:18,fontWeight:800,color:"#92400e",marginBottom:6,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>{reviewTitle}</div>
+        <div style={{fontSize:13,color:"#78350f",fontWeight:600,marginBottom:12,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>{t.reviewCovers} {review.coversLessons}</div>
         <div style={{display:"flex",gap:10,justifyContent:"center"}}>
           <div style={{background:"rgba(255,255,255,0.6)",borderRadius:12,padding:"8px 14px",textAlign:"center"}}>
             <div style={{fontSize:22,fontWeight:800,color:"#d97706"}}>{grammarCount}</div>
-            <div style={{fontSize:11,color:"#92400e",fontWeight:700}}>Grammar Qs</div>
+            <div style={{fontSize:11,color:"#92400e",fontWeight:700,fontFamily:isUrdu?urFont:"inherit"}}>{t.grammarQs}</div>
           </div>
           <div style={{background:"rgba(255,255,255,0.6)",borderRadius:12,padding:"8px 14px",textAlign:"center"}}>
             <div style={{fontSize:22,fontWeight:800,color:"#d97706"}}>{tileCount}</div>
-            <div style={{fontSize:11,color:"#92400e",fontWeight:700}}>Sentence Tiles</div>
+            <div style={{fontSize:11,color:"#92400e",fontWeight:700,fontFamily:isUrdu?urFont:"inherit"}}>{t.sentenceTiles}</div>
           </div>
         </div>
       </div>
       <div style={{background:"#fffbeb",border:"1px solid #fde68a",borderRadius:12,padding:14,marginBottom:20}}>
-        <p style={{fontSize:12,color:"#92400e",fontWeight:700,margin:"0 0 4px"}}>💡 How this works</p>
-        <p style={{fontSize:12,color:"#78350f",lineHeight:1.6,margin:0}}>
-          First answer {grammarCount} grammar questions, then build {tileCount} Arabic sentences from English. Gold tiles are pre-placed — tap them to see their meaning!
+        <p style={{fontSize:12,color:"#92400e",fontWeight:700,margin:"0 0 4px",fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>{t.howItWorksRev}</p>
+        <p style={{fontSize:12,color:"#78350f",lineHeight:1.6,margin:0,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>
+          {t.howItWorksRevText(grammarCount, tileCount)}
         </p>
       </div>
       <button onClick={onStart} style={{width:"100%",padding:"14px",background:"linear-gradient(135deg,#f59e0b,#d97706)",color:"white",border:"none",borderRadius:14,fontSize:17,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(245,158,11,0.4)",fontFamily:isUrdu?urFont:"inherit"}}>
-        {isUrdu ? "دہراؤ شروع کریں 🏆" : "Start Review 🏆"}
+        {t.startReview}
       </button>
     </div>
   );
