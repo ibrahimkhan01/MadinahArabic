@@ -915,7 +915,7 @@ const REVIEWS = [
     grammarExercises:[
       { type:"grammar_mcq", promptEn:'Which word means "this" for a masculine noun?', correct:"هَذَا", options:["هَذَا","هَذِهِ","ذَلِكَ","تِلْكَ"], explanation:'هَذَا is for masculine nouns: هَذَا كِتَابٌ (this is a book). هَذِهِ is feminine: هَذِهِ سَيَّارَةٌ (this is a car). ذَلِكَ / تِلْكَ mean "that" (far away), not "this".' },
       { type:"grammar_mcq", promptEn:'Choose the correct definite form of قَلَمٌ (pen):', correct:"الْقَلَمُ", options:["الْقَلَمُ","الْقَلَمٌ","اَلْقَلَمِ","قَلَمُ"], explanation:'Adding الـ makes a noun definite and removes tanwīn: قَلَمٌ → الْقَلَمُ. The ـُ stays, only the ـٌ disappears. With sun letters the ل assimilates: النَّجْمُ, الشَّمْسُ.' },
-      { type:"grammar_mcq", promptEn:'Complete: الْبَيْتُ ___ (the big house — definite adjective):', correct:"الْكَبِيرُ", options:["الْكَبِيرُ","كَبِيرٌ","كَبِيرُ","الْكَبِيرٌ"], explanation:'A definite noun needs a definite adjective: الْبَيْتُ الْكَبِيرُ (the big house). كَبِيرٌ alone is a predicate — الْبَيْتُ كَبِيرٌ means "the house IS big", not "the big house".' },
+      { type:"grammar_mcq", promptEn:'Complete: ___ الْبَيْتُ (the big house — definite adjective):', correct:"الْكَبِيرُ", options:["الْكَبِيرُ","كَبِيرٌ","كَبِيرُ","الْكَبِيرٌ"], explanation:'A definite noun needs a definite adjective: الْبَيْتُ الْكَبِيرُ (the big house). كَبِيرٌ alone is a predicate — الْبَيْتُ كَبِيرٌ means "the house IS big", not "the big house".' },
       { type:"grammar_mcq", promptEn:'Which preposition means "on"?', correct:"عَلَى", options:["عَلَى","فِي","مِنْ","تَحْتَ"], explanation:'عَلَى = on: الْكِتَابُ عَلَى الْمَكْتَبِ (the book is on the desk). فِي = in, مِنْ = from, تَحْتَ = under. All prepositions take genitive: الْمَكْتَبِ not الْمَكْتَبُ.' },
       { type:"grammar_err", promptEn:'Find the error: "هَذِهِ بَيْتٌ كَبِيرٌ" (بَيْتٌ is masculine)', correct:"هَذَا", options:["هَذَا","هَذِهِ","بَيْتٌ","كَبِيرٌ"], explanation:'بَيْتٌ (house) is masculine, so the demonstrative must also be masculine: هَذَا بَيْتٌ كَبِيرٌ. هَذِهِ is only for feminine nouns — those ending in ةٌ like سَيَّارَةٌ (car) or مَدْرَسَةٌ (school).' },
     ],
@@ -1004,7 +1004,7 @@ const REVIEWS = [
     titleEn:"Review: Numbers 11–20, كَانَ, Jussive & Passive",
     grammarExercises:[
       { type:"grammar_mcq", promptEn:'How many students does خَمْسَةَ عَشَرَ طَالِبًا mean?', correct:"15 students", options:["15 students","13 students","50 students","5 students"] },
-      { type:"grammar_mcq", promptEn:'كَانَ الطَّالِبُ ___ (hardworking — after كَانَ = accusative):', correct:"مُجْتَهِدًا", options:["مُجْتَهِدًا","مُجْتَهِدٌ","مُجْتَهِدِ","مُجْتَهِدَةً"] },
+      { type:"grammar_mcq", promptEn:'كَانَ الطَّالِبُ ___ (fill in: hardworking — accusative after كَانَ):', correct:"مُجْتَهِدًا", options:["مُجْتَهِدًا","مُجْتَهِدٌ","مُجْتَهِدِ","مُجْتَهِدَةً"] },
       { type:"grammar_mcq", promptEn:'Passive past tense of كَتَبَ (he wrote):', correct:"كُتِبَ", options:["كُتِبَ","يُكْتَبُ","كَتَّبَ","كَاتِبٌ"] },
       { type:"grammar_mcq", promptEn:'لَا تَذْهَبْ means:', correct:"Don't go! (prohibition)", options:["Don't go! (prohibition)","He does not go","He did not go","You go"] },
       { type:"grammar_err", promptEn:'Find error: "إِذَا ذَهَبَ فَأَنَا يَذْهَبُ" (I = أَنَا, so verb should be 1st person)', correct:"أَذْهَبُ", options:["أَذْهَبُ","يَذْهَبُ","تَذْهَبُ","نَذْهَبُ"] },
@@ -1144,6 +1144,29 @@ function buildReviewExercises(review) {
   return exercises; // keep in order: grammar first, then tiles
 }
 
+// ── GrammarPromptText ─────────────────────────────────────────────────────
+// Renders grammar exercise prompt text with correct bidirectional handling.
+// Arabic tokens are wrapped in arFont spans. The parent element should have
+// dir="auto" so the browser picks RTL base-direction for fully-Arabic prompts
+// (e.g. كَانَ الطَّالِبُ ___) and LTR for English-led prompts ("Complete: ___").
+function GrammarPromptText({ text }) {
+  return (
+    <>
+      {text.split(/(\s+)/).map((part, i) => {
+        if (/^\s+$/.test(part)) return part;
+        if (/[\u0600-\u06FF]/.test(part)) {
+          return (
+            <span key={i} style={{fontFamily:arFont, fontSize:"1.08em", verticalAlign:"middle", display:"inline-block"}}>
+              {part}
+            </span>
+          );
+        }
+        return <span key={i}>{part}</span>;
+      })}
+    </>
+  );
+}
+
 // ──────────────────────────────────────────────
 // UI COMPONENTS
 // ──────────────────────────────────────────────
@@ -1205,7 +1228,9 @@ function MCQ({ exercise, onResult, lang = "en" }) {
           <div style={{fontSize:12,color:"#3b82f6",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:6}}>
             {exercise.type==="grammar_err" ? t.spotError : t.grammarTag}
           </div>
-          <p style={{fontSize:14,color:"#1e293b",fontWeight:600,margin:0,lineHeight:1.6}}>{exercise.promptEn}</p>
+          <p dir="auto" style={{fontSize:14,color:"#1e293b",fontWeight:600,margin:0,lineHeight:1.6}}>
+            <GrammarPromptText text={exercise.promptEn} />
+          </p>
         </div>
       ) : isArEn ? (
         <>
@@ -1284,6 +1309,11 @@ function MCQ({ exercise, onResult, lang = "en" }) {
                 : <span>✗ The Arabic for "{exercise.promptEn}" is <span style={{fontFamily:arFont,fontSize:18,direction:"rtl"}}>{exercise.correct}</span></span>
             )}
           </div>
+          {isGrammar && exercise.explanation && (
+            <div style={{padding:"10px 16px",background:"#fef9f0",borderTop:"1px solid #fde68a",color:"#78350f",fontSize:13,lineHeight:1.7}}>
+              <GrammarPromptText text={exercise.explanation} />
+            </div>
+          )}
           {!isGrammar && (
             <div style={{padding:"8px 16px",background:"#fff5f5",color:"#7f1d1d",fontSize:13,fontWeight:500,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>
               {exercise.type==="ar_en"
