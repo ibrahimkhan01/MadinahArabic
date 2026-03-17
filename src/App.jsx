@@ -119,150 +119,150 @@ const SESSIONS = [
     grammar:'هَذَا means "this" for masculine objects. مَا هَذَا؟ = What is this? Answer: هَذَا كِتَابٌ. Nouns take ـٌ (tanwīn ḍamm) in the indefinite.',
     vocab:[{ar:"كِتَابٌ",en:"book"},{ar:"قَلَمٌ",en:"pen"},{ar:"مِفْتَاحٌ",en:"key"},{ar:"بَابٌ",en:"door"}],
     patternTiles:[
-      {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","كِتَابٌ"], answer:["هَذَا","كِتَابٌ"]},
-      {emoji:"🔑", question:"مَا هَذَا؟", tiles:["هَذَا","مِفْتَاحٌ"], answer:["هَذَا","مِفْتَاحٌ"]},
+      {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","كِتَابٌ","قَلَمٌ","مِفْتَاحٌ"], answer:["هَذَا","كِتَابٌ"]},
+      {emoji:"🔑", question:"مَا هَذَا؟", tiles:["هَذَا","مِفْتَاحٌ","بَابٌ","كِتَابٌ"], answer:["هَذَا","مِفْتَاحٌ"]},
     ]},
   { id:2, book:1, lessonRef:"1.1", part:"B", title:"مَا هَذَا؟", titleEn:"What Is This? (Part 2)",
     grammar:'More هَذَا sentences. Nouns ending in ـٌ are indefinite ("a book"). Every Arabic noun has a gender — masculine or feminine.',
     vocab:[{ar:"بَيْتٌ",en:"house"},{ar:"مَسْجِدٌ",en:"mosque"},{ar:"نَجْمٌ",en:"star"},{ar:"حَجَرٌ",en:"stone"}],
     patternTiles:[
-      {emoji:"🏠", question:"مَا هَذَا؟", tiles:["هَذَا","بَيْتٌ"], answer:["هَذَا","بَيْتٌ"]},
-      {emoji:"🕌", question:"مَا هَذَا؟", tiles:["هَذَا","مَسْجِدٌ"], answer:["هَذَا","مَسْجِدٌ"]},
+      {emoji:"🏠", question:"مَا هَذَا؟", tiles:["هَذَا","بَيْتٌ","مَسْجِدٌ","نَجْمٌ"], answer:["هَذَا","بَيْتٌ"]},
+      {emoji:"🕌", question:"مَا هَذَا؟", tiles:["هَذَا","مَسْجِدٌ","بَيْتٌ","حَجَرٌ"], answer:["هَذَا","مَسْجِدٌ"]},
     ]},
 
   { id:3, book:1, lessonRef:"1.2", part:"A", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 1)",
     grammar:'ذَلِكَ = "that" for masculine objects far away. Compare: هَذَا كِتَابٌ (This is a book) vs. ذَلِكَ كِتَابٌ (That is a book).',
     vocab:[{ar:"سَرِيرٌ",en:"bed"},{ar:"كُرْسِيٌّ",en:"chair"},{ar:"مَكْتَبٌ",en:"desk/office"},{ar:"جِدَارٌ",en:"wall"}],
     patternTiles:[
-      {emoji:"🛏️", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","سَرِيرٌ"], answer:["ذَلِكَ","سَرِيرٌ"]},
-      {emoji:"🪑", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","كُرْسِيٌّ"], answer:["ذَلِكَ","كُرْسِيٌّ"]},
+      {emoji:"🛏️", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","سَرِيرٌ","كُرْسِيٌّ","مَكْتَبٌ"], answer:["ذَلِكَ","سَرِيرٌ"]},
+      {emoji:"🪑", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","كُرْسِيٌّ","سَرِيرٌ","جِدَارٌ"], answer:["ذَلِكَ","كُرْسِيٌّ"]},
     ]},
   { id:4, book:1, lessonRef:"1.2", part:"B", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 2)",
     grammar:'Practice هَذَا and ذَلِكَ with more nouns. مَنْ هَذَا؟ = Who is this? (used for people).',
     vocab:[{ar:"وَلَدٌ",en:"boy"},{ar:"رَجُلٌ",en:"man"},{ar:"طَالِبٌ",en:"student (m.)"},{ar:"مُدَرِّسٌ",en:"teacher (m.)"}],
     patternTiles:[
-      {emoji:"👦", question:"مَنْ هَذَا؟", tiles:["هَذَا","وَلَدٌ"], answer:["هَذَا","وَلَدٌ"]},
-      {emoji:"👨‍🏫", question:"مَنْ هَذَا؟", tiles:["هَذَا","مُدَرِّسٌ"], answer:["هَذَا","مُدَرِّسٌ"]},
+      {emoji:"👦", question:"مَنْ هَذَا؟", tiles:["هَذَا","وَلَدٌ","رَجُلٌ","طَالِبٌ"], answer:["هَذَا","وَلَدٌ"]},
+      {emoji:"👨‍🏫", question:"مَنْ هَذَا؟", tiles:["هَذَا","مُدَرِّسٌ","وَلَدٌ","طَالِبٌ"], answer:["هَذَا","مُدَرِّسٌ"]},
     ]},
 
   { id:5, book:1, lessonRef:"1.3", part:"A", title:"الـ — The Definite Article (Part 1)", titleEn:"Making Nouns Definite",
     grammar:'الـ makes a noun definite: كِتَابٌ → الْكِتَابُ. The ـٌ disappears, replaced by ـُ. With "moon letters" الـ is fully pronounced: الْبَيْتُ.',
     vocab:[{ar:"الْكِتَابُ",en:"the book"},{ar:"الْقَلَمُ",en:"the pen"},{ar:"الْبَيْتُ",en:"the house"},{ar:"الْبَابُ",en:"the door"}],
     patternTiles:[
-      {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","الْكِتَابُ"], answer:["هَذَا","الْكِتَابُ"]},
-      {emoji:"🚪", question:"مَا هَذَا؟", tiles:["هَذَا","الْبَابُ"], answer:["هَذَا","الْبَابُ"]},
+      {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","الْكِتَابُ","الْقَلَمُ","الْبَابُ"], answer:["هَذَا","الْكِتَابُ"]},
+      {emoji:"🚪", question:"مَا هَذَا؟", tiles:["هَذَا","الْبَابُ","الْبَيْتُ","الْكِتَابُ"], answer:["هَذَا","الْبَابُ"]},
     ]},
   { id:6, book:1, lessonRef:"1.3", part:"B", title:"الـ — Sun & Moon Letters", titleEn:"Sun Letters (Part 2)",
     grammar:'With "sun letters" (ت،ث،د،ذ،ر،ز،س،ش،ص،ض،ط،ظ،ل،ن) the ل of الـ assimilates: الشَّمْسُ (ash-shams), الرَّجُلُ (ar-rajul). Written but not pronounced separately.',
     vocab:[{ar:"الشَّمْسُ",en:"the sun"},{ar:"الرَّجُلُ",en:"the man"},{ar:"النَّجْمُ",en:"the star"},{ar:"الطَّالِبُ",en:"the student"}],
     patternTiles:[
-      {emoji:"⭐", question:"مَا هَذَا؟", tiles:["هَذَا","النَّجْمُ"], answer:["هَذَا","النَّجْمُ"]},
-      {emoji:"👨", question:"مَنْ هَذَا؟", tiles:["هَذَا","الرَّجُلُ"], answer:["هَذَا","الرَّجُلُ"]},
+      {emoji:"⭐", question:"مَا هَذَا؟", tiles:["هَذَا","النَّجْمُ","الشَّمْسُ","الطَّالِبُ"], answer:["هَذَا","النَّجْمُ"]},
+      {emoji:"👨", question:"مَنْ هَذَا؟", tiles:["هَذَا","الرَّجُلُ","الطَّالِبُ","الْوَلَدُ"], answer:["هَذَا","الرَّجُلُ"]},
     ]},
 
   { id:7, book:1, lessonRef:"1.4", part:"A", title:"الصِّفَاتُ — Adjectives (Part 1)", titleEn:"Describing with Adjectives",
     grammar:'Adjectives come AFTER the noun. Definite noun + definite adjective: الْبَيْتُ الْكَبِيرُ. Indefinite noun + indefinite adjective: بَيْتٌ كَبِيرٌ.',
     vocab:[{ar:"كَبِيرٌ",en:"big"},{ar:"صَغِيرٌ",en:"small"},{ar:"جَدِيدٌ",en:"new"},{ar:"قَدِيمٌ",en:"old"}],
     patternTiles:[
-      {en:"This is a big house.", tiles:["هَذَا","بَيْتٌ","كَبِيرٌ"], answer:["هَذَا","بَيْتٌ","كَبِيرٌ"]},
-      {en:"That is a new book.", tiles:["ذَلِكَ","كِتَابٌ","جَدِيدٌ"], answer:["ذَلِكَ","كِتَابٌ","جَدِيدٌ"]},
+      {en:"This is a big house.", tiles:["هَذَا","بَيْتٌ","كَبِيرٌ","صَغِيرٌ","قَدِيمٌ"], answer:["هَذَا","بَيْتٌ","كَبِيرٌ"]},
+      {en:"That is a new book.", tiles:["ذَلِكَ","كِتَابٌ","جَدِيدٌ","قَدِيمٌ","قَلَمٌ"], answer:["ذَلِكَ","كِتَابٌ","جَدِيدٌ"]},
     ]},
   { id:8, book:1, lessonRef:"1.4", part:"B", title:"الصِّفَاتُ — More Adjectives (Part 2)", titleEn:"More Adjectives",
     grammar:'More masculine adjectives. هَذَا طَالِبٌ جَدِيدٌ = This is a new student (noun + adjective forms descriptive phrase).',
     vocab:[{ar:"جَمِيلٌ",en:"beautiful"},{ar:"طَوِيلٌ",en:"tall/long"},{ar:"قَصِيرٌ",en:"short"},{ar:"رَخِيصٌ",en:"cheap"}],
     patternTiles:[
-      {en:"This is a tall man.", tiles:["هَذَا","رَجُلٌ","طَوِيلٌ"], answer:["هَذَا","رَجُلٌ","طَوِيلٌ"]},
-      {en:"That is a short pen.", tiles:["ذَلِكَ","قَلَمٌ","قَصِيرٌ"], answer:["ذَلِكَ","قَلَمٌ","قَصِيرٌ"]},
+      {en:"This is a tall man.", tiles:["هَذَا","رَجُلٌ","طَوِيلٌ","قَصِيرٌ","وَلَدٌ"], answer:["هَذَا","رَجُلٌ","طَوِيلٌ"]},
+      {en:"That is a short pen.", tiles:["ذَلِكَ","قَلَمٌ","قَصِيرٌ","طَوِيلٌ","كِتَابٌ"], answer:["ذَلِكَ","قَلَمٌ","قَصِيرٌ"]},
     ]},
 
   { id:9, book:1, lessonRef:"1.5", part:"A", title:"حُرُوفُ الْجَرِّ (Part 1)", titleEn:"Prepositions: في، عَلَى، مِنْ، إِلَى",
     grammar:'Prepositions put the following noun into genitive (ـِ or ـٍ): فِي الْبَيْتِ (in the house), عَلَى الْمَكْتَبِ (on the desk), مِنَ الْمَسْجِدِ (from the mosque), إِلَى الْمَدْرَسَةِ (to the school).',
     vocab:[{ar:"فِي",en:"in"},{ar:"عَلَى",en:"on"},{ar:"مِنْ",en:"from"},{ar:"إِلَى",en:"to"}],
     patternTiles:[
-      {en:"The book is on the desk.", tiles:["الْكِتَابُ","عَلَى","الْمَكْتَبِ"], answer:["الْكِتَابُ","عَلَى","الْمَكْتَبِ"]},
-      {en:"The key is in the house.", tiles:["الْمِفْتَاحُ","فِي","الْبَيْتِ"], answer:["الْمِفْتَاحُ","فِي","الْبَيْتِ"]},
+      {en:"The book is on the desk.", tiles:["الْكِتَابُ","عَلَى","الْمَكْتَبِ","فِي","الْبَيْتِ"], answer:["الْكِتَابُ","عَلَى","الْمَكْتَبِ"]},
+      {en:"The key is in the house.", tiles:["الْمِفْتَاحُ","فِي","الْبَيْتِ","عَلَى","الْبَابِ"], answer:["الْمِفْتَاحُ","فِي","الْبَيْتِ"]},
     ]},
   { id:10, book:1, lessonRef:"1.5", part:"B", title:"حُرُوفُ الْجَرِّ (Part 2)", titleEn:"Prepositions: تَحْتَ، فَوْقَ، أَمَامَ",
     grammar:'More location prepositions. أَيْنَ؟ = where? The answer: الْكِتَابُ عَلَى الْمَكْتَبِ. After a preposition, the noun loses ـٌ and takes ـٍ.',
     vocab:[{ar:"تَحْتَ",en:"under"},{ar:"فَوْقَ",en:"above"},{ar:"أَمَامَ",en:"in front of"},{ar:"خَلْفَ",en:"behind"}],
     patternTiles:[
-      {en:"The pen is under the book.", tiles:["الْقَلَمُ","تَحْتَ","الْكِتَابِ"], answer:["الْقَلَمُ","تَحْتَ","الْكِتَابِ"]},
-      {en:"The door is in front of the house.", tiles:["الْبَابُ","أَمَامَ","الْبَيْتِ"], answer:["الْبَابُ","أَمَامَ","الْبَيْتِ"]},
+      {en:"The pen is under the book.", tiles:["الْقَلَمُ","تَحْتَ","الْكِتَابِ","فَوْقَ","الْمَكْتَبِ"], answer:["الْقَلَمُ","تَحْتَ","الْكِتَابِ"]},
+      {en:"The door is in front of the house.", tiles:["الْبَابُ","أَمَامَ","الْبَيْتِ","خَلْفَ","الْمَسْجِدِ"], answer:["الْبَابُ","أَمَامَ","الْبَيْتِ"]},
     ]},
 
   { id:11, book:1, lessonRef:"1.6", part:"A", title:"الضَّمَائِرُ (Part 1)", titleEn:"Personal Pronouns",
     grammar:'هُوَ (he), هِيَ (she), أَنَا (I), أَنْتَ (you m.). In equational sentences: هُوَ طَبِيبٌ = He is a doctor. Arabic has no verb "to be" in present tense.',
     vocab:[{ar:"هُوَ",en:"he"},{ar:"هِيَ",en:"she"},{ar:"أَنَا",en:"I"},{ar:"أَنْتَ",en:"you (m.)"}],
     patternTiles:[
-      {en:"He is a student.", tiles:["هُوَ","طَالِبٌ"], answer:["هُوَ","طَالِبٌ"]},
-      {en:"I am a teacher.", tiles:["أَنَا","مُدَرِّسٌ"], answer:["أَنَا","مُدَرِّسٌ"]},
+      {en:"He is a student.", tiles:["هُوَ","طَالِبٌ","أَنَا","مُدَرِّسٌ"], answer:["هُوَ","طَالِبٌ"]},
+      {en:"I am a teacher.", tiles:["أَنَا","مُدَرِّسٌ","هُوَ","طَالِبٌ"], answer:["أَنَا","مُدَرِّسٌ"]},
     ]},
   { id:12, book:1, lessonRef:"1.6", part:"B", title:"الضَّمَائِرُ (Part 2)", titleEn:"Pronouns with Professions",
     grammar:'مَنْ أَنْتَ؟ = Who are you? أَنَا طَالِبٌ = I am a student. هُوَ مُدَرِّسٌ = He is a teacher.',
     vocab:[{ar:"طَبِيبٌ",en:"doctor (m.)"},{ar:"مُهَنْدِسٌ",en:"engineer"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"فَلَّاحٌ",en:"farmer"}],
     patternTiles:[
-      {emoji:"👨‍⚕️", en:"He is a doctor.", tiles:["هُوَ","طَبِيبٌ"], answer:["هُوَ","طَبِيبٌ"]},
-      {en:"I am a merchant.", tiles:["أَنَا","تَاجِرٌ"], answer:["أَنَا","تَاجِرٌ"]},
+      {emoji:"👨‍⚕️", en:"He is a doctor.", tiles:["هُوَ","طَبِيبٌ","أَنَا","مُهَنْدِسٌ"], answer:["هُوَ","طَبِيبٌ"]},
+      {en:"I am a merchant.", tiles:["أَنَا","تَاجِرٌ","هُوَ","فَلَّاحٌ"], answer:["أَنَا","تَاجِرٌ"]},
     ]},
 
   { id:13, book:1, lessonRef:"1.7", part:"A", title:"الْمُؤَنَّثُ (Part 1)", titleEn:"Feminine Nouns & هَذِهِ",
     grammar:'Feminine nouns end in ةٌ. Use هَذِهِ (this, f.) and تِلْكَ (that, f.): هَذِهِ سَيَّارَةٌ. Adjectives must match: هَذِهِ سَيَّارَةٌ جَمِيلَةٌ.',
     vocab:[{ar:"سَيَّارَةٌ",en:"car"},{ar:"مَدْرَسَةٌ",en:"school"},{ar:"غُرْفَةٌ",en:"room"},{ar:"حَدِيقَةٌ",en:"garden"}],
     patternTiles:[
-      {emoji:"🚗", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","سَيَّارَةٌ"], answer:["هَذِهِ","سَيَّارَةٌ"]},
-      {emoji:"🏫", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","مَدْرَسَةٌ"], answer:["هَذِهِ","مَدْرَسَةٌ"]},
+      {emoji:"🚗", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","سَيَّارَةٌ","مَدْرَسَةٌ","غُرْفَةٌ"], answer:["هَذِهِ","سَيَّارَةٌ"]},
+      {emoji:"🏫", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","مَدْرَسَةٌ","سَيَّارَةٌ","حَدِيقَةٌ"], answer:["هَذِهِ","مَدْرَسَةٌ"]},
     ]},
   { id:14, book:1, lessonRef:"1.7", part:"B", title:"الْمُؤَنَّثُ (Part 2)", titleEn:"Feminine Adjectives & Professions",
     grammar:'Feminine adjectives add ةٌ: كَبِيرٌ → كَبِيرَةٌ. Professions too: مُدَرِّسٌ → مُدَرِّسَةٌ. هِيَ مُدَرِّسَةٌ = She is a teacher.',
     vocab:[{ar:"مُدَرِّسَةٌ",en:"teacher (f.)"},{ar:"طَالِبَةٌ",en:"student (f.)"},{ar:"طَبِيبَةٌ",en:"doctor (f.)"},{ar:"جَمِيلَةٌ",en:"beautiful (f.)"}],
     patternTiles:[
-      {emoji:"👩‍🏫", en:"She is a teacher.", tiles:["هِيَ","مُدَرِّسَةٌ"], answer:["هِيَ","مُدَرِّسَةٌ"]},
-      {emoji:"👩‍🎓", en:"She is a student.", tiles:["هِيَ","طَالِبَةٌ"], answer:["هِيَ","طَالِبَةٌ"]},
+      {emoji:"👩‍🏫", en:"She is a teacher.", tiles:["هِيَ","مُدَرِّسَةٌ","طَالِبَةٌ","هُوَ"], answer:["هِيَ","مُدَرِّسَةٌ"]},
+      {emoji:"👩‍🎓", en:"She is a student.", tiles:["هِيَ","طَالِبَةٌ","مُدَرِّسَةٌ","طَبِيبَةٌ"], answer:["هِيَ","طَالِبَةٌ"]},
     ]},
 
   { id:15, book:1, lessonRef:"1.8", part:"A", title:"الْإِضَافَةُ (Part 1)", titleEn:"Possessive Constructions",
     grammar:'Possession by juxtaposition: كِتَابُ الطَّالِبِ (the student\'s book). First noun loses tanwīn. Second noun takes genitive ـِ.',
     vocab:[{ar:"بَابُ الْبَيْتِ",en:"the door of the house"},{ar:"كِتَابُ الطَّالِبِ",en:"the student's book"},{ar:"مَكْتَبُ الْمُدِيرِ",en:"the director's office"},{ar:"غُرْفَةُ الْوَلَدِ",en:"the boy's room"}],
     patternTiles:[
-      {en:"The student's book is on the desk.", tiles:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ"], answer:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ"]},
-      {en:"The door of the house is big.", tiles:["بَابُ","الْبَيْتِ","كَبِيرٌ"], answer:["بَابُ","الْبَيْتِ","كَبِيرٌ"]},
+      {en:"The student's book is on the desk.", tiles:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ","فِي","الْبَيْتِ"], answer:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ"]},
+      {en:"The door of the house is big.", tiles:["بَابُ","الْبَيْتِ","كَبِيرٌ","صَغِيرٌ","الْمَسْجِدِ"], answer:["بَابُ","الْبَيْتِ","كَبِيرٌ"]},
     ]},
   { id:16, book:1, lessonRef:"1.8", part:"B", title:"الْإِضَافَةُ (Part 2)", titleEn:"Possessive Pronouns",
     grammar:'Attached pronouns: بَيْتِي (my house), بَيْتُكَ (your house), بَيْتُهُ (his house), بَيْتُهَا (her house). Pronoun attaches directly to noun.',
     vocab:[{ar:"بَيْتِي",en:"my house"},{ar:"كِتَابُكَ",en:"your book"},{ar:"قَلَمُهُ",en:"his pen"},{ar:"غُرْفَتُهَا",en:"her room"}],
     patternTiles:[
-      {en:"My house is big.", tiles:["بَيْتِي","كَبِيرٌ"], answer:["بَيْتِي","كَبِيرٌ"]},
-      {en:"His pen is on the desk.", tiles:["قَلَمُهُ","عَلَى","الْمَكْتَبِ"], answer:["قَلَمُهُ","عَلَى","الْمَكْتَبِ"]},
+      {en:"My house is big.", tiles:["بَيْتِي","كَبِيرٌ","كِتَابُكَ","صَغِيرٌ"], answer:["بَيْتِي","كَبِيرٌ"]},
+      {en:"His pen is on the desk.", tiles:["قَلَمُهُ","عَلَى","الْمَكْتَبِ","فِي","كِتَابُكَ"], answer:["قَلَمُهُ","عَلَى","الْمَكْتَبِ"]},
     ]},
 
   { id:17, book:1, lessonRef:"1.9", part:"A", title:"الْعَائِلَةُ (Part 1)", titleEn:"Family Vocabulary",
     grammar:'أَبٌ (father) and أَخٌ (brother) are irregular: أَبِي (my father), أَخِي (my brother). These are الْأَسْمَاءُ الْخَمْسَةُ — special nouns.',
     vocab:[{ar:"أَبٌ",en:"father"},{ar:"أُمٌّ",en:"mother"},{ar:"أَخٌ",en:"brother"},{ar:"أُخْتٌ",en:"sister"}],
     patternTiles:[
-      {emoji:"👨", en:"My father is generous.", tiles:["أَبِي","كَرِيمٌ"], answer:["أَبِي","كَرِيمٌ"]},
-      {en:"I have a brother and a sister.", tiles:["عِنْدِي","أَخٌ","وَأُخْتٌ"], answer:["عِنْدِي","أَخٌ","وَأُخْتٌ"]},
+      {emoji:"👨", en:"My father is generous.", tiles:["أَبِي","كَرِيمٌ","أُمِّي","أَخِي"], answer:["أَبِي","كَرِيمٌ"]},
+      {en:"I have a brother and a sister.", tiles:["عِنْدِي","أَخٌ","وَأُخْتٌ","أَبٌ","وَأُمٌّ"], answer:["عِنْدِي","أَخٌ","وَأُخْتٌ"]},
     ]},
   { id:18, book:1, lessonRef:"1.9", part:"B", title:"الْعَائِلَةُ (Part 2)", titleEn:"Extended Family",
     grammar:'عِنْدِي أَخٌ وَأُخْتٌ = I have a brother and a sister. لِي أَبٌ كَرِيمٌ = I have a generous father.',
     vocab:[{ar:"زَوْجٌ",en:"husband"},{ar:"زَوْجَةٌ",en:"wife"},{ar:"اِبْنٌ",en:"son"},{ar:"بِنْتٌ",en:"daughter"}],
     patternTiles:[
-      {en:"My son is a student.", tiles:["اِبْنِي","طَالِبٌ"], answer:["اِبْنِي","طَالِبٌ"]},
-      {en:"His wife is a teacher.", tiles:["زَوْجَتُهُ","مُدَرِّسَةٌ"], answer:["زَوْجَتُهُ","مُدَرِّسَةٌ"]},
+      {en:"My son is a student.", tiles:["اِبْنِي","طَالِبٌ","بِنْتِي","مُدَرِّسٌ"], answer:["اِبْنِي","طَالِبٌ"]},
+      {en:"His wife is a teacher.", tiles:["زَوْجَتُهُ","مُدَرِّسَةٌ","زَوْجُهُ","طَالِبَةٌ"], answer:["زَوْجَتُهُ","مُدَرِّسَةٌ"]},
     ]},
 
   { id:19, book:1, lessonRef:"1.10", part:"A", title:"الَّذِي — The One Who / Which", titleEn:"Relative Pronoun (Part 1)",
     grammar:'الَّذِي (who/which) for masculine singular. الَّتِي for feminine. الطَّالِبُ الَّذِي فِي الْفَصْلِ = The student who is in the class.',
     vocab:[{ar:"الَّذِي",en:"who/which (m.)"},{ar:"الَّتِي",en:"who/which (f.)"},{ar:"الَّذِينَ",en:"who/which (m.pl.)"},{ar:"الْفَصْلُ",en:"classroom"}],
     patternTiles:[
-      {en:"The student who is in the classroom.", tiles:["الطَّالِبُ","الَّذِي","فِي","الْفَصْلِ"], answer:["الطَّالِبُ","الَّذِي","فِي","الْفَصْلِ"]},
-      {en:"The book which is on the desk.", tiles:["الْكِتَابُ","الَّذِي","عَلَى","الْمَكْتَبِ"], answer:["الْكِتَابُ","الَّذِي","عَلَى","الْمَكْتَبِ"]},
+      {en:"The student who is in the classroom.", tiles:["الطَّالِبُ","الَّذِي","فِي","الْفَصْلِ","الَّتِي","الْبَيْتِ"], answer:["الطَّالِبُ","الَّذِي","فِي","الْفَصْلِ"]},
+      {en:"The book which is on the desk.", tiles:["الْكِتَابُ","الَّذِي","عَلَى","الْمَكْتَبِ","الَّتِي","تَحْتَ"], answer:["الْكِتَابُ","الَّذِي","عَلَى","الْمَكْتَبِ"]},
     ]},
   { id:20, book:1, lessonRef:"1.10", part:"B", title:"مُرَاجَعَةٌ — Book 1 Review", titleEn:"Book 1 Revision",
     grammar:'Review all Book 1 patterns: هَذَا/ذَلِكَ/هَذِهِ/تِلْكَ, الـ, adjective agreement, prepositions, pronouns, iḍāfa, الَّذِي.',
     vocab:[{ar:"أَيْنَ",en:"where?"},{ar:"مَنْ",en:"who?"},{ar:"مَا",en:"what?"},{ar:"أَيْضًا",en:"also"}],
     patternTiles:[
-      {emoji:"🪑", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","كُرْسِيٌّ"], answer:["ذَلِكَ","كُرْسِيٌّ"]},
-      {en:"Where is the key?", tiles:["أَيْنَ","الْمِفْتَاحُ؟"], answer:["أَيْنَ","الْمِفْتَاحُ؟"]},
+      {emoji:"🪑", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","كُرْسِيٌّ","هَذَا","سَرِيرٌ"], answer:["ذَلِكَ","كُرْسِيٌّ"]},
+      {en:"Where is the key?", tiles:["أَيْنَ","الْمِفْتَاحُ؟","مَنْ","الْبَابُ؟"], answer:["أَيْنَ","الْمِفْتَاحُ؟"]},
     ]},
 
 // ═══ BOOK 2 · Lessons 1–12 · Sessions 21–44 ═══
@@ -771,9 +771,6 @@ function MCQ({ exercise, onResult }) {
       ) : isArEn ? (
         <>
           <p style={{color:"#64748b",fontSize:13,marginBottom:10}}>What does this mean?</p>
-          {exercise.promptEn && getEmoji(exercise.promptEn) && (
-            <div style={{fontSize:48,marginBottom:8,lineHeight:1}}>{getEmoji(exercise.promptEn)}</div>
-          )}
           <div style={{marginBottom:24,lineHeight:1.4}}>
             <span style={{fontSize:arPromptSize,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl"}}>{exercise.prompt}</span>
             <SpeakBtn text={exercise.prompt} size={22} />
