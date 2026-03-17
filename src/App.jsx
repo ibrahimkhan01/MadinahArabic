@@ -20,6 +20,109 @@ const GREEN = "#059669";
 const DARK = "#0f172a";
 const isAr = (s) => /[\u0600-\u06FF]/.test(s);
 const arFont = "'Noto Naskh Arabic', 'Scheherazade New', 'Amiri', serif";
+const urFont = "'Noto Nastaliq Urdu', serif";
+
+// ── UI strings (English + Urdu) ──────────────────
+const UI_TEXT = {
+  en: {
+    whatMean:       "What does this mean?",
+    selectArabic:   "Select the Arabic for:",
+    buildSentence:  "Build the sentence:",
+    tapToBuild:     "Tap tiles below to build the sentence",
+    tapToAnswer:    "Tap tiles to answer",
+    hearSentence:   "hear the sentence",
+    hearAnswer:     "hear the answer",
+    matchPairs:     "Match the pairs:",
+    checkBtn:       "Check ✓",
+    confirmBtn:     "Confirm ✓",
+    correctMsg:     "✓ Correct!",
+    perfectMsg:     "✓ Perfect!",
+    newWords:       "New Words:",
+    startPractice:  "Start Practice →",
+    grammarTag:     "📖 Grammar",
+    spotError:      "🔍 Spot the Error",
+    goldTiles:      "✨ Gold tiles are pre-placed — tap to see their meaning",
+    grammarPhase:   "📖 Grammar Questions",
+    sentencePhase:  "✏️ Sentence Building",
+    overallProg:    "Overall Progress",
+    sessions:       "sessions",
+    startLearn:     "Start Learning 🚀",
+    continueLearn:  "Continue Learning →",
+    allSessions:    "All Sessions",
+    howItWorks:     "📖 How it works",
+    howItWorksText: "5–15 min daily · 2 sessions per lesson · Review every 5 lessons · 4 books · 92 sessions",
+    settingsTitle:  "⚙️ Settings",
+    unlockLabel:    "🔓 Unlock all lessons",
+    unlockDesc:     "Jump to any session without completing previous ones",
+    resetLabel:     "🗑️ Reset all progress",
+    resetDesc:      "This will clear all completed sessions, XP, and streaks. Cannot be undone.",
+    resetBtn:       "Reset Progress",
+    resetConfirm:   "Reset all progress? This cannot be undone.",
+    statsLabel:     "📊 Your Stats",
+    statDone:       "Sessions done",
+    statTotal:      "Total sessions",
+    statXp:         "XP earned",
+    statStreak:     "Streak",
+    langLabel:      "🌐 Language",
+    back:           "← Back",
+    homeBtn:        "← Home",
+    wrongMeansAr:   (prompt, correct) => `✗ ${prompt} means "${correct}"`,
+    wrongMeansEn:   (promptEn, correct) => `✗ The Arabic for "${promptEn}" is`,
+    youChoseEn:     (sel) => `You chose "${sel}"`,
+    youChoseAr:     (sel, meaning) => `You chose ${sel}${meaning ? ` — "${meaning}"` : ""}`,
+    wrongCorrect:   (ans) => `✗ Correct: ${ans}`,
+    correctAns:     (ans) => `✗ Correct answer: ${ans}`,
+  },
+  ur: {
+    whatMean:       "اس کا کیا مطلب ہے؟",
+    selectArabic:   "عربی منتخب کریں:",
+    buildSentence:  "جملہ بنائیں:",
+    tapToBuild:     "نیچے سے ٹائلیں دبائیں جملہ بنانے کے لیے",
+    tapToAnswer:    "ٹائلیں دبائیں جواب دینے کے لیے",
+    hearSentence:   "جملہ سنیں",
+    hearAnswer:     "جواب سنیں",
+    matchPairs:     "جوڑے ملائیں:",
+    checkBtn:       "جانچیں ✓",
+    confirmBtn:     "تصدیق ✓",
+    correctMsg:     "✓ صحیح!",
+    perfectMsg:     "✓ بہترین!",
+    newWords:       "نئے الفاظ:",
+    startPractice:  "مشق شروع کریں ←",
+    grammarTag:     "📖 قواعد",
+    spotError:      "🔍 غلطی پکڑیں",
+    goldTiles:      "✨ سنہری ٹائلیں پہلے سے رکھی ہیں — مطلب دیکھنے کے لیے دبائیں",
+    grammarPhase:   "📖 قواعد کے سوالات",
+    sentencePhase:  "✏️ جملہ سازی",
+    overallProg:    "مجموعی پیشرفت",
+    sessions:       "سیشن",
+    startLearn:     "سیکھنا شروع کریں 🚀",
+    continueLearn:  "جاری رکھیں ←",
+    allSessions:    "تمام سیشن",
+    howItWorks:     "📖 کیسے کام کرتا ہے",
+    howItWorksText: "روزانہ ۵–۱۵ منٹ · ہر سبق میں ۲ سیشن · ہر ۵ اسباق کے بعد دہرائی · ۴ کتابیں · ۹۲ سیشن",
+    settingsTitle:  "⚙️ ترتیبات",
+    unlockLabel:    "🔓 تمام اسباق کھولیں",
+    unlockDesc:     "پچھلے مکمل کیے بغیر کسی بھی سیشن پر جائیں",
+    resetLabel:     "🗑️ تمام پیشرفت حذف کریں",
+    resetDesc:      "تمام مکمل سیشن، XP اور سلسلہ حذف ہو جائے گا۔ واپس نہیں ہو سکتا۔",
+    resetBtn:       "پیشرفت حذف کریں",
+    resetConfirm:   "تمام پیشرفت حذف کریں؟ واپس نہیں ہو سکتا۔",
+    statsLabel:     "📊 آپ کی کارکردگی",
+    statDone:       "مکمل سیشن",
+    statTotal:      "کل سیشن",
+    statXp:         "حاصل XP",
+    statStreak:     "سلسلہ",
+    langLabel:      "🌐 زبان",
+    back:           "← واپس",
+    homeBtn:        "← ہوم",
+    wrongMeansAr:   (prompt, correct) => `✗ ${prompt} کا مطلب ہے "${correct}"`,
+    wrongMeansEn:   (promptEn, correct) => `✗ "${promptEn}" کی عربی ہے`,
+    youChoseEn:     (sel) => `آپ نے چنا "${sel}"`,
+    youChoseAr:     (sel, meaning) => `آپ نے چنا ${sel}${meaning ? ` — "${meaning}"` : ""}`,
+    wrongCorrect:   (ans) => `✗ صحیح: ${ans}`,
+    correctAns:     (ans) => `✗ صحیح جواب: ${ans}`,
+  },
+};
 
 // ── Emoji lookup by English meaning ─────────────
 const EMOJI = {
@@ -61,6 +164,134 @@ const EMOJI = {
   "east":"🌅","west":"🌇","north":"⬆️","south":"⬇️",
 };
 const getEmoji = (en) => EMOJI[en.toLowerCase()] || EMOJI[en] || null;
+
+// ── Urdu vocabulary translations (English → Urdu) ──────────────
+const UR_VOCAB = {
+  // Book 1 — Lesson 1
+  "book":"کتاب","pen":"قلم","key":"چابی","door":"دروازہ",
+  "house":"گھر","mosque":"مسجد","star":"ستارہ","stone":"پتھر",
+  // L2
+  "bed":"بستر","chair":"کرسی","desk/office":"میز / دفتر","wall":"دیوار",
+  "boy":"لڑکا","man":"مرد","student (m.)":"طالب علم","teacher (m.)":"استاد",
+  // L3 — definite forms
+  "the book":"کتاب","the pen":"قلم","the house":"گھر","the door":"دروازہ",
+  "the sun":"سورج","the man":"مرد","the star":"ستارہ","the student":"طالب علم",
+  // L4 — adjectives
+  "big":"بڑا","small":"چھوٹا","new":"نیا","old":"پرانا",
+  "beautiful":"خوبصورت","tall/long":"لمبا","short":"پست / چھوٹا","cheap":"سستا",
+  // L5 — prepositions
+  "in":"میں","on":"پر","from":"سے","to":"کی طرف",
+  "under":"نیچے","above":"اوپر","in front of":"سامنے","behind":"پیچھے",
+  // L6 — pronouns
+  "he":"وہ (مذکر)","she":"وہ (مؤنث)","I":"میں","you (m.)":"تم (مذکر)",
+  "doctor (m.)":"ڈاکٹر","engineer":"انجینئر","merchant":"تاجر","farmer":"کسان",
+  // L7 — feminine
+  "car":"گاڑی","school":"اسکول","room":"کمرہ","garden":"باغ",
+  "teacher (f.)":"استانی","student (f.)":"طالبہ","doctor (f.)":"ڈاکٹر",
+  "beautiful (f.)":"خوبصورت",
+  // L8 — iḍāfa
+  "the door of the house":"گھر کا دروازہ",
+  "the student's book":"طالب علم کی کتاب",
+  "the director's office":"ڈائریکٹر کا دفتر",
+  "the boy's room":"لڑکے کا کمرہ",
+  // L8b — possessive
+  "my house":"میرا گھر","your book":"آپ کی کتاب",
+  "his pen":"اس کا قلم","her room":"اس کا کمرہ",
+  // L9 — family
+  "father":"والد","mother":"والدہ","brother":"بھائی","sister":"بہن",
+  "husband":"شوہر","wife":"بیوی","son":"بیٹا","daughter":"بیٹی",
+  // L10 — relative pronouns + question words
+  "who/which (m.)":"جو (مذکر)","who/which (f.)":"جو (مؤنث)",
+  "who/which (m.pl.)":"جو (جمع مذکر)","classroom":"فصل / کلاس",
+  "where?":"کہاں؟","who?":"کون؟","what?":"کیا؟","also":"بھی",
+  // Book 2 — verbs (common ones)
+  "he writes":"وہ لکھتا ہے","he reads":"وہ پڑھتا ہے",
+  "he goes":"وہ جاتا ہے","he sits":"وہ بیٹھتا ہے",
+  "he opens":"وہ کھولتا ہے","he goes out":"وہ نکلتا ہے",
+  "he enters":"وہ داخل ہوتا ہے","he eats":"وہ کھاتا ہے",
+  "I write":"میں لکھتا ہوں","you write (m.)":"تم لکھتے ہو",
+  "I go":"میں جاتا ہوں","you go (m.)":"تم جاتے ہو",
+  "we write":"ہم لکھتے ہیں","they write (m.)":"وہ لکھتے ہیں",
+  "we go":"ہم جاتے ہیں","they go (m.)":"وہ جاتے ہیں",
+  // Commands
+  "Write! (m.)":"لکھو!","Read! (m.)":"پڑھو!","Sit! (m.)":"بیٹھو!","Go out! (m.)":"نکلو!",
+  "Write! (f.)":"لکھو! (ف.)","Write! (pl.)":"لکھو! (جمع)",
+  // Days
+  "Sunday":"اتوار","Monday":"پیر","Tuesday":"منگل","Wednesday":"بدھ",
+  "Thursday":"جمعرات","Friday":"جمعہ","Saturday":"ہفتہ","When?":"کب؟",
+  // Numbers
+  "one":"ایک","two":"دو","three":"تین","four":"چار","five":"پانچ",
+  "six":"چھ","seven":"سات","eight":"آٹھ","nine":"نو","ten":"دس",
+  "yes":"ہاں","no":"نہیں","yes! (contradicting negative)":"بلکہ",
+  // Family (extended)
+  "how?":"کیسے؟","why?":"کیوں؟",
+};
+const getUrdu = (en) => UR_VOCAB[en] || null;
+
+// ── Urdu grammar notes (by session id) ────────────────────────
+const UR_GRAMMAR = {
+  1:'هَذَا کا مطلب "یہ" ہے مذکر اشیاء کے لیے۔ مَا هَذَا؟ = یہ کیا ہے؟ جواب: هَذَا كِتَابٌ۔ غیر معرفہ اسموں پر ـٌ (تنوین ضم) آتی ہے۔',
+  2:'مزید هَذَا جملے۔ ـٌ سے اسم غیر معرفہ ہوتا ہے ("ایک کتاب")۔ عربی میں ہر اسم مذکر یا مؤنث ہوتا ہے۔',
+  3:'ذَلِكَ = "وہ" — مذکر، دور کے لیے۔ هَذَا كِتَابٌ (یہ کتاب ہے) بمقابلہ ذَلِكَ كِتَابٌ (وہ کتاب ہے)۔',
+  4:'هَذَا اور ذَلِكَ کی مشق۔ مَنْ هَذَا؟ = یہ کون ہے؟ (انسانوں کے لیے)۔',
+  5:'الـ اسم کو معرفہ بناتا ہے: كِتَابٌ → الْكِتَابُ۔ ـٌ ختم ہو کر ـُ آتی ہے۔ "قمری حروف" کے ساتھ الـ پوری پڑھی جاتی ہے: الْبَيْتُ۔',
+  6:'"شمسی حروف" (ت،ث،د،ذ،ر،ز،س،ش،ص،ض،ط،ظ،ل،ن) کے ساتھ الـ کا ل مدغم ہو جاتا ہے: الشَّمْسُ (اش-شمس)، الرَّجُلُ (ار-رجل)۔',
+  7:'صفات اسم کے بعد آتی ہیں۔ معرفہ اسم + معرفہ صفت: الْبَيْتُ الْكَبِيرُ۔ غیر معرفہ اسم + غیر معرفہ صفت: بَيْتٌ كَبِيرٌ۔',
+  8:'مزید مذکر صفات۔ هَذَا طَالِبٌ جَدِيدٌ = یہ ایک نیا طالب علم ہے (اسم کے بعد صفت)۔',
+  9:'حروف جر اگلے اسم کو مجرور (ـِ یا ـٍ) بناتے ہیں: فِي الْبَيْتِ (گھر میں)، عَلَى الْمَكْتَبِ (میز پر)، مِنَ الْمَسْجِدِ (مسجد سے)، إِلَى الْمَدْرَسَةِ (اسکول کی طرف)۔',
+  10:'مزید مقامی حروف جر۔ أَيْنَ؟ = کہاں؟ حرف جر کے بعد اسم سے ـٌ ختم ہو کر ـٍ آ جاتی ہے۔',
+  11:'هُوَ (وہ م.)، هِيَ (وہ ف.)، أَنَا (میں)، أَنْتَ (تم م.)۔ اسمیہ جملوں میں: هُوَ طَبِيبٌ = وہ ڈاکٹر ہے۔ عربی حال میں "ہونا" فعل نہیں ہوتا۔',
+  12:'مَنْ أَنْتَ؟ = تم کون ہو؟ أَنَا طَالِبٌ = میں طالب علم ہوں۔ هُوَ مُدَرِّسٌ = وہ استاد ہے۔',
+  13:'مؤنث اسم پر ةٌ ہوتی ہے۔ هَذِهِ (یہ مؤنث) اور تِلْكَ (وہ مؤنث): هَذِهِ سَيَّارَةٌ۔ صفت بھی مؤنث: هَذِهِ سَيَّارَةٌ جَمِيلَةٌ۔',
+  14:'مؤنث صفت پر ةٌ آتی ہے: كَبِيرٌ → كَبِيرَةٌ۔ پیشے بھی: مُدَرِّسٌ → مُدَرِّسَةٌ۔ هِيَ مُدَرِّسَةٌ = وہ استانی ہے۔',
+  15:'اضافت: پہلا اسم تنوین کھو دیتا ہے، دوسرا مجرور ہوتا ہے: كِتَابُ الطَّالِبِ (طالب علم کی کتاب)۔',
+  16:'متصل ضمائر: بَيْتِي (میرا گھر)، بَيْتُكَ (تمہارا گھر)، بَيْتُهُ (اس کا گھر)، بَيْتُهَا (اس کا گھر ف.)۔',
+  17:'أَبٌ اور أَخٌ غیر معمولی: أَبِي (میرے والد)، أَخِي (میرے بھائی)۔ الأسماء الخمسة — خاص اسم۔',
+  18:'عِنْدِي أَخٌ وَأُخْتٌ = میرے ایک بھائی اور ایک بہن ہیں۔ لِي أَبٌ كَرِيمٌ = میرے ایک سخی والد ہیں۔',
+  19:'الَّذِي (جو) مذکر واحد کے لیے۔ الَّتِي مؤنث کے لیے۔ الطَّالِبُ الَّذِي فِي الْفَصْلِ = وہ طالب علم جو کلاس میں ہے۔',
+  20:'کتاب ۱ کا مکمل دہراؤ: هَذَا/ذَلِكَ/هَذِهِ/تِلْكَ، الـ، صفات، حروف جر، ضمائر، اضافت، الَّذِي۔',
+};
+
+// ── Urdu translations for English hint sentences (patternTiles & reviewTiles) ──
+const UR_HINTS = {
+  "This is a big house.":"یہ ایک بڑا گھر ہے۔",
+  "That is a new book.":"وہ ایک نئی کتاب ہے۔",
+  "This is a tall man.":"یہ ایک لمبا مرد ہے۔",
+  "That is a short pen.":"وہ ایک چھوٹا قلم ہے۔",
+  "The book is on the desk.":"کتاب میز پر ہے۔",
+  "The key is in the house.":"چابی گھر میں ہے۔",
+  "The pen is under the book.":"قلم کتاب کے نیچے ہے۔",
+  "The door is in front of the house.":"دروازہ گھر کے سامنے ہے۔",
+  "He is a student.":"وہ طالب علم ہے۔",
+  "I am a teacher.":"میں استاد ہوں۔",
+  "He is a doctor.":"وہ ڈاکٹر ہے۔",
+  "I am a merchant.":"میں تاجر ہوں۔",
+  "She is a teacher.":"وہ استانی ہیں۔",
+  "She is a student.":"وہ طالبہ ہیں۔",
+  "The student's book is on the desk.":"طالب علم کی کتاب میز پر ہے۔",
+  "The door of the house is big.":"گھر کا دروازہ بڑا ہے۔",
+  "My house is big.":"میرا گھر بڑا ہے۔",
+  "His pen is on the desk.":"اس کا قلم میز پر ہے۔",
+  "My father is generous.":"میرے والد سخی ہیں۔",
+  "I have a brother and a sister.":"میرے ایک بھائی اور ایک بہن ہیں۔",
+  "My son is a student.":"میرا بیٹا طالب علم ہے۔",
+  "His wife is a teacher.":"اس کی بیوی استانی ہیں۔",
+  "The student who is in the classroom.":"وہ طالب علم جو کلاس میں ہے۔",
+  "The book which is on the desk.":"وہ کتاب جو میز پر ہے۔",
+  "Where is the key?":"چابی کہاں ہے؟",
+  // Review tile hints
+  "This is a new book.":"یہ ایک نئی کتاب ہے۔",
+  "The pen is on the desk.":"قلم میز پر ہے۔",
+  "That is a small chair.":"وہ ایک چھوٹی کرسی ہے۔",
+  "This is a beautiful garden.":"یہ ایک خوبصورت باغ ہے۔",
+  "The star is above the house.":"ستارہ گھر کے اوپر ہے۔",
+  "She is a doctor.":"وہ ڈاکٹر ہیں۔",
+  "The boy's room is big.":"لڑکے کا کمرہ بڑا ہے۔",
+  "My father is in the house.":"میرے والد گھر میں ہیں۔",
+  "The student who is in the classroom is new.":"وہ طالب علم جو کلاس میں ہے نیا ہے۔",
+  "He is a generous merchant.":"وہ ایک سخی تاجر ہے۔",
+};
+const getUrHint = (en) => UR_HINTS[en] || null;
 
 function shuffle(arr) {
   const a = [...arr];
@@ -666,38 +897,48 @@ const ALL_SESSIONS = [
 // ──────────────────────────────────────────────
 // EXERCISE BUILDERS
 // ──────────────────────────────────────────────
-function buildExercises(session) {
+function buildExercises(session, lang = "en") {
   const vocab = session.vocab;
   const allPrior = SESSIONS.filter(s => s.id < session.id).flatMap(s => s.vocab);
   const pool = vocab.length >= 4 ? vocab : [...vocab, ...shuffle(allPrior).slice(0, 4 - vocab.length)];
   const exercises = [];
 
-  // MCQ: Arabic → English (4 questions)
+  // Helper: get display label for a vocab word in the active language
+  const getLabel = (w) => lang === "ur" ? (getUrdu(w.en) || w.en) : w.en;
+
+  // MCQ: Arabic → label (ar_en)
   shuffle(vocab).slice(0, 4).forEach(w => {
-    const distractors = shuffle(pool.filter(x => x.en !== w.en)).slice(0, 3).map(x => x.en);
-    exercises.push({ type:"ar_en", prompt:w.ar, promptEn:w.en, correct:w.en, options:shuffle([w.en,...distractors]) });
+    const distractors = shuffle(pool.filter(x => x.en !== w.en)).slice(0, 3).map(x => getLabel(x));
+    const label = getLabel(w);
+    exercises.push({ type:"ar_en", prompt:w.ar, promptEn:w.en, correct:label, options:shuffle([label,...distractors]) });
   });
-  // MCQ: English → Arabic (4 questions)
+  // MCQ: label → Arabic (en_ar)
   shuffle(vocab).slice(0, 4).forEach(w => {
     const distractors = shuffle(pool.filter(x => x.ar !== w.ar)).slice(0, 3).map(x => x.ar);
     const opts = shuffle([w.ar,...distractors]);
     const allVocab = [...vocab, ...allPrior];
     const meanings = {};
-    opts.forEach(ar => { const found = allVocab.find(x => x.ar === ar); if (found) meanings[ar] = found.en; });
-    exercises.push({ type:"en_ar", promptEn:w.en, correct:w.ar, options:opts, meanings });
+    opts.forEach(ar => { const found = allVocab.find(x => x.ar === ar); if (found) meanings[ar] = getLabel(found); });
+    exercises.push({ type:"en_ar", promptEn:getLabel(w), correct:w.ar, options:opts, meanings });
   });
   // Match pairs
   if (vocab.length >= 4)
-    exercises.push({ type:"match", pairs:shuffle(vocab).slice(0,4).map(w=>({ar:w.ar,en:w.en})) });
+    exercises.push({ type:"match", pairs:shuffle(vocab).slice(0,4).map(w=>({ar:w.ar,en:getLabel(w)})) });
   // Spaced repetition tiles from session 15+
   if (session.id >= 15) {
     const eligibleReviews = REVIEWS.filter((_, i) => i < Math.floor((session.id - 1) / 10));
     const poolTiles = eligibleReviews.flatMap(r => r.sentenceTiles.filter(t => t.prebaked.length === 0));
-    shuffle(poolTiles).slice(0, 2).forEach(t => exercises.push({ type:"tile", ...t }));
+    shuffle(poolTiles).slice(0, 2).forEach(t => {
+      const urHint = lang === "ur" ? (getUrHint(t.en) || t.en) : t.en;
+      exercises.push({ type:"tile", ...t, en: urHint });
+    });
   }
   // Pattern sentence exercises (Book 1 only)
   if (session.patternTiles) {
-    session.patternTiles.forEach(t => exercises.push({ type:"pattern_tile", ...t }));
+    session.patternTiles.forEach(t => {
+      const urHint = lang === "ur" && t.en ? (getUrHint(t.en) || t.en) : t.en;
+      exercises.push({ type:"pattern_tile", ...t, en: urHint });
+    });
   }
   return shuffle(exercises);
 }
@@ -740,10 +981,12 @@ function TopBar({ onExit, streak, hearts, progress, total }) {
 }
 
 // Standard MCQ (ar_en / en_ar / grammar_mcq / grammar_err)
-function MCQ({ exercise, onResult }) {
+function MCQ({ exercise, onResult, lang = "en" }) {
   const [sel, setSel] = useState(null);
   const [done, setDone] = useState(false);
   const { w } = useWindowSize();
+  const t = UI_TEXT[lang];
+  const isUrdu = lang === "ur";
   const isArEn = exercise.type === "ar_en";
   const isGrammar = exercise.type === "grammar_mcq" || exercise.type === "grammar_err";
   const arPromptSize = w >= 1024 ? 56 : w >= 640 ? 50 : 44;
@@ -755,8 +998,10 @@ function MCQ({ exercise, onResult }) {
   const handleSelect = (opt) => { if (!done) { setSel(opt); if (isAr(opt)) speak(opt); } };
   const handleConfirm = () => {
     if (!sel || done) return;
+    const ok = sel === exercise.correct;
     setDone(true);
-    setTimeout(() => onResult(sel === exercise.correct), 1200);
+    if (ok) setTimeout(() => onResult(true), 1200);
+    // wrong: wait for user to tap Next
   };
 
   return (
@@ -764,13 +1009,13 @@ function MCQ({ exercise, onResult }) {
       {isGrammar ? (
         <div style={{background:"#eff6ff",border:"1px solid #93c5fd",borderRadius:12,padding:"14px 16px",marginBottom:20}}>
           <div style={{fontSize:12,color:"#3b82f6",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:6}}>
-            {exercise.type==="grammar_err"?"🔍 Spot the Error":"📖 Grammar"}
+            {exercise.type==="grammar_err" ? t.spotError : t.grammarTag}
           </div>
           <p style={{fontSize:14,color:"#1e293b",fontWeight:600,margin:0,lineHeight:1.6}}>{exercise.promptEn}</p>
         </div>
       ) : isArEn ? (
         <>
-          <p style={{color:"#64748b",fontSize:13,marginBottom:10}}>What does this mean?</p>
+          <p style={{color:"#64748b",fontSize:13,marginBottom:10,fontFamily:isUrdu?urFont:"inherit"}}>{t.whatMean}</p>
           <div style={{marginBottom:24,lineHeight:1.4}}>
             <span style={{fontSize:arPromptSize,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl"}}>{exercise.prompt}</span>
             <SpeakBtn text={exercise.prompt} size={22} />
@@ -778,11 +1023,14 @@ function MCQ({ exercise, onResult }) {
         </>
       ) : (
         <>
-          <p style={{color:"#64748b",fontSize:13,marginBottom:10}}>Select the Arabic for:</p>
+          <p style={{color:"#64748b",fontSize:13,marginBottom:10,fontFamily:isUrdu?urFont:"inherit"}}>{t.selectArabic}</p>
           {getEmoji(exercise.promptEn) && (
             <div style={{fontSize:48,marginBottom:8,lineHeight:1}}>{getEmoji(exercise.promptEn)}</div>
           )}
-          <div style={{fontSize:enPromptSize,fontWeight:700,color:"#0f172a",marginBottom:24}}>{exercise.promptEn}</div>
+          <div style={{
+            fontSize:enPromptSize,fontWeight:700,color:"#0f172a",marginBottom:24,
+            fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr",
+          }}>{exercise.promptEn}</div>
         </>
       )}
       <div style={{display:"grid",gridTemplateColumns:cols,gap:10}}>
@@ -798,7 +1046,8 @@ function MCQ({ exercise, onResult }) {
               padding:"14px 8px",borderRadius:12,border,background:bg,color,
               fontSize:arabic?optArSize:optEnSize,fontWeight:600,
               cursor:done?"default":"pointer",
-              fontFamily:arabic?arFont:"inherit",direction:arabic?"rtl":"ltr",
+              fontFamily:arabic?arFont:(isUrdu?urFont:"inherit"),
+              direction:arabic?"rtl":(isUrdu?"rtl":"ltr"),
               boxShadow:"0 1px 4px rgba(0,0,0,0.07)",lineHeight:1.4,transition:"all 0.15s"}}
               onMouseEnter={e=>{if(!done&&sel!==opt)e.currentTarget.style.transform="scale(1.03)"}}
               onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
@@ -807,40 +1056,55 @@ function MCQ({ exercise, onResult }) {
           );
         })}
       </div>
-      {/* Confirm button — shown when an option is selected but not yet submitted */}
+      {/* Confirm button */}
       {!done && sel && (
         <button onClick={handleConfirm} style={{
           marginTop:16, width:"100%", padding:"14px",
           background:`linear-gradient(135deg,${GREEN},#047857)`,
           color:"white", border:"none", borderRadius:12,
           fontSize:16, fontWeight:700, cursor:"pointer",
-          boxShadow:"0 4px 12px rgba(5,150,105,0.3)", transition:"opacity 0.2s"}}>
-          Confirm ✓
+          boxShadow:"0 4px 12px rgba(5,150,105,0.3)", transition:"opacity 0.2s",
+          fontFamily:isUrdu?urFont:"inherit"}}>
+          {t.confirmBtn}
         </button>
       )}
       {done && sel===exercise.correct && (
-        <div style={{marginTop:14,padding:"10px 16px",borderRadius:10,background:"#dcfce7",color:"#166534",fontWeight:700,fontSize:15}}>
-          ✓ Correct!
+        <div style={{marginTop:14,padding:"10px 16px",borderRadius:10,background:"#dcfce7",color:"#166534",fontWeight:700,fontSize:15,fontFamily:isUrdu?urFont:"inherit"}}>
+          {t.correctMsg}
         </div>
       )}
       {done && sel!==exercise.correct && (
         <div style={{marginTop:14,borderRadius:10,overflow:"hidden",border:"1px solid #fca5a5"}}>
-          <div style={{padding:"10px 16px",background:"#fee2e2",color:"#991b1b",fontWeight:700,fontSize:15}}>
-            {isGrammar
-              ? `✗ Correct answer: ${exercise.correct}`
-              : exercise.type==="ar_en"
-                ? <span>✗ <span style={{fontFamily:arFont,fontSize:18,direction:"rtl"}}>{exercise.prompt}</span> means "{exercise.correct}"</span>
+          <div style={{padding:"10px 16px",background:"#fee2e2",color:"#991b1b",fontWeight:700,fontSize:15,fontFamily:isUrdu?urFont:"inherit"}}>
+            {isGrammar ? (
+              isUrdu
+                ? <span>✗ صحیح جواب: {exercise.correct}</span>
+                : <span>✗ Correct answer: {exercise.correct}</span>
+            ) : exercise.type==="ar_en" ? (
+              isUrdu
+                ? <span><span style={{fontFamily:arFont,fontSize:18,direction:"rtl",display:"inline"}}>{exercise.prompt}</span> کا مطلب ہے "{exercise.correct}"</span>
+                : <span>✗ <span style={{fontFamily:arFont,fontSize:18,direction:"rtl"}}>{exercise.prompt}</span> means "{exercise.correct}"</span>
+            ) : (
+              isUrdu
+                ? <span>✗ "{exercise.promptEn}" کی عربی ہے <span style={{fontFamily:arFont,fontSize:18,direction:"rtl"}}>{exercise.correct}</span></span>
                 : <span>✗ The Arabic for "{exercise.promptEn}" is <span style={{fontFamily:arFont,fontSize:18,direction:"rtl"}}>{exercise.correct}</span></span>
-            }
+            )}
           </div>
           {!isGrammar && (
-            <div style={{padding:"8px 16px",background:"#fff5f5",color:"#7f1d1d",fontSize:13,fontWeight:500}}>
+            <div style={{padding:"8px 16px",background:"#fff5f5",color:"#7f1d1d",fontSize:13,fontWeight:500,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>
               {exercise.type==="ar_en"
-                ? `You chose "${sel}"`
-                : <span>You chose <span style={{fontFamily:arFont,fontSize:16,direction:"rtl"}}>{sel}</span>{exercise.meanings?.[sel] ? ` — "${exercise.meanings[sel]}"` : ""}</span>
+                ? isUrdu
+                    ? <span>آپ نے چنا "{sel}"</span>
+                    : <span>You chose "{sel}"</span>
+                : isUrdu
+                    ? <span>آپ نے چنا <span style={{fontFamily:arFont,fontSize:16,direction:"rtl"}}>{sel}</span>{exercise.meanings?.[sel] ? ` — "${exercise.meanings[sel]}"` : ""}</span>
+                    : <span>You chose <span style={{fontFamily:arFont,fontSize:16,direction:"rtl"}}>{sel}</span>{exercise.meanings?.[sel] ? ` — "${exercise.meanings[sel]}"` : ""}</span>
               }
             </div>
           )}
+          <button onClick={()=>onResult(false)} style={{width:"100%",padding:"11px",background:"#ef4444",color:"white",border:"none",fontWeight:700,fontSize:15,cursor:"pointer",fontFamily:isUrdu?urFont:"inherit"}}>
+            {isUrdu ? "اگلا ←" : "Next →"}
+          </button>
         </div>
       )}
     </div>
@@ -848,7 +1112,7 @@ function MCQ({ exercise, onResult }) {
 }
 
 // Match pairs
-function MatchEx({ exercise, onResult }) {
+function MatchEx({ exercise, onResult, lang = "en" }) {
   const [selAr, setSelAr] = useState(null);
   const [selEn, setSelEn] = useState(null);
   const [matched, setMatched] = useState([]);
@@ -881,9 +1145,11 @@ function MatchEx({ exercise, onResult }) {
     setSelEn(en===selEn ? null : en);
   };
 
+  const t = UI_TEXT[lang];
+  const isUrdu = lang === "ur";
   return (
     <div style={{textAlign:"center"}}>
-      <p style={{color:"#64748b",fontSize:13,marginBottom:14}}>Match the pairs:</p>
+      <p style={{color:"#64748b",fontSize:13,marginBottom:14,fontFamily:isUrdu?urFont:"inherit"}}>{t.matchPairs}</p>
       <div style={{display:"flex",gap:12,justifyContent:"center"}}>
         <div style={{display:"flex",flexDirection:"column",gap:8}}>
           {arList.map(ar=>{
@@ -911,7 +1177,8 @@ function MatchEx({ exercise, onResult }) {
                 width:140,height:52,borderRadius:10,
                 border:isWrong?"2px solid #ef4444":isSel?"2px solid #3b82f6":"2px solid #e2e8f0",
                 background:done?"#f0fdf4":isWrong?"#fee2e2":isSel?"#dbeafe":"white",
-                fontSize:14,fontWeight:600,cursor:done?"default":"pointer",
+                fontSize:isUrdu?15:14,fontWeight:600,cursor:done?"default":"pointer",
+                fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr",
                 opacity:done?0.5:1,color:"#1e293b",
                 display:"flex",alignItems:"center",justifyContent:"center"}}>
               {en}</button>);
@@ -923,27 +1190,29 @@ function MatchEx({ exercise, onResult }) {
 }
 
 // Tile sentence builder (regular sessions)
-function TileEx({ exercise, onResult }) {
+function TileEx({ exercise, onResult, lang = "en" }) {
   const [placed, setPlaced] = useState([]);
   const [remaining, setRemaining] = useState(()=>shuffle(exercise.tiles));
   const { w } = useWindowSize();
+  const t = UI_TEXT[lang];
+  const isUrdu = lang === "ur";
   const tileFont = w >= 1024 ? 26 : w >= 640 ? 22 : 20;
   const [checked, setChecked] = useState(false);
   const [correct, setCorrect] = useState(false);
 
   const addTile=(tile,idx)=>{if(checked)return;setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
   const removeTile=(tile,idx)=>{if(checked)return;setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
-  const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);setTimeout(()=>onResult(ok),1200);};
+  const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);if(ok)setTimeout(()=>onResult(true),1200);};
 
   return (
     <div style={{textAlign:"center"}}>
-      <p style={{color:"#64748b",fontSize:13,marginBottom:6}}>Build the sentence:</p>
-      <p style={{fontSize:17,fontWeight:700,color:"#1e293b",marginBottom:4}}>"{exercise.en}"</p>
+      <p style={{color:"#64748b",fontSize:13,marginBottom:6,fontFamily:isUrdu?urFont:"inherit"}}>{t.buildSentence}</p>
+      <p style={{fontSize:17,fontWeight:700,color:"#1e293b",marginBottom:4,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>"{exercise.en}"</p>
       <p style={{fontSize:12,color:"#94a3b8",marginBottom:12}}>
-        <SpeakBtn text={exercise.answer.join(" ")} size={15} /> hear the sentence
+        <SpeakBtn text={exercise.answer.join(" ")} size={15} /> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearSentence}</span>
       </p>
       <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
-        {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13}}>Tap tiles below to build the sentence</span>}
+        {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13,fontFamily:isUrdu?urFont:"inherit"}}>{t.tapToBuild}</span>}
         {placed.map((tile,i)=>(
           <button key={`${tile}-${i}`} onClick={()=>removeTile(tile,i)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{tile}</button>
         ))}
@@ -956,17 +1225,28 @@ function TileEx({ exercise, onResult }) {
             {tile}</button>
         ))}
       </div>
-      {!checked&&placed.length>0&&<button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)"}}>Check ✓</button>}
-      {checked&&<div style={{padding:"10px 16px",borderRadius:10,background:correct?"#dcfce7":"#fee2e2",color:correct?"#166534":"#991b1b",fontWeight:700,fontSize:15}}>
-        {correct?"✓ Perfect!":"✗ Correct: "+exercise.answer.join(" ")}
-      </div>}
+      {!checked&&placed.length>0&&<button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)",fontFamily:isUrdu?urFont:"inherit"}}>{t.checkBtn}</button>}
+      {checked&&correct&&<div style={{padding:"10px 16px",borderRadius:10,background:"#dcfce7",color:"#166534",fontWeight:700,fontSize:15,fontFamily:isUrdu?urFont:"inherit"}}>{t.perfectMsg}</div>}
+      {checked&&!correct&&(
+        <div style={{borderRadius:10,overflow:"hidden",border:"1px solid #fca5a5",marginBottom:10}}>
+          <div style={{padding:"10px 16px",background:"#fee2e2",color:"#991b1b",fontWeight:700,fontSize:14,fontFamily:isUrdu?urFont:"inherit"}}>
+            {isUrdu ? "✗ صحیح: " : "✗ Correct: "}
+            <span style={{fontFamily:arFont,direction:"rtl",fontSize:18,display:"inline"}}>{exercise.answer.join(" ")}</span>
+          </div>
+          <button onClick={()=>onResult(false)} style={{width:"100%",padding:"11px",background:"#ef4444",color:"white",border:"none",fontWeight:700,fontSize:15,cursor:"pointer",fontFamily:isUrdu?urFont:"inherit"}}>
+            {isUrdu ? "اگلا ←" : "Next →"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
 
 // Pattern sentence builder — emoji/Arabic question prompt, no English
-function PatternTileEx({ exercise, onResult }) {
+function PatternTileEx({ exercise, onResult, lang = "en" }) {
   const { w } = useWindowSize();
+  const t = UI_TEXT[lang];
+  const isUrdu = lang === "ur";
   const tileFont = w >= 1024 ? 26 : w >= 640 ? 22 : 20;
   const [placed, setPlaced] = useState([]);
   const [remaining, setRemaining] = useState(()=>shuffle([...exercise.tiles]));
@@ -975,13 +1255,13 @@ function PatternTileEx({ exercise, onResult }) {
 
   const addTile=(tile,idx)=>{if(checked)return;setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
   const removeTile=(tile,idx)=>{if(checked)return;setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
-  const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);setTimeout(()=>onResult(ok),1200);};
+  const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);if(ok)setTimeout(()=>onResult(true),1200);};
 
   return (
     <div style={{textAlign:"center"}}>
       {exercise.emoji
         ? <div style={{fontSize:72,lineHeight:1,marginBottom:8}}>{exercise.emoji}</div>
-        : exercise.en && <p style={{fontSize:15,fontWeight:700,color:"#1e293b",marginBottom:8}}>"{exercise.en}"</p>
+        : exercise.en && <p style={{fontSize:15,fontWeight:700,color:"#1e293b",marginBottom:8,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>"{exercise.en}"</p>
       }
       {exercise.question && (
         <div style={{marginBottom:4}}>
@@ -990,10 +1270,10 @@ function PatternTileEx({ exercise, onResult }) {
         </div>
       )}
       <p style={{fontSize:12,color:"#94a3b8",marginBottom:14}}>
-        <SpeakBtn text={exercise.answer.join(" ")} size={14}/> hear the answer
+        <SpeakBtn text={exercise.answer.join(" ")} size={14}/> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearAnswer}</span>
       </p>
       <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
-        {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13}}>Tap tiles to answer</span>}
+        {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13,fontFamily:isUrdu?urFont:"inherit"}}>{t.tapToAnswer}</span>}
         {placed.map((tile,i)=>(
           <button key={`${tile}-${i}`} onClick={()=>removeTile(tile,i)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{tile}</button>
         ))}
@@ -1006,23 +1286,34 @@ function PatternTileEx({ exercise, onResult }) {
             {tile}</button>
         ))}
       </div>
-      {!checked&&placed.length>0&&<button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)"}}>Check ✓</button>}
-      {checked&&<div style={{padding:"10px 16px",borderRadius:10,background:correct?"#dcfce7":"#fee2e2",color:correct?"#166534":"#991b1b",fontWeight:700,fontSize:15}}>
-        {correct?"✓ Perfect!":"✗ Correct: "+exercise.answer.join(" ")}
-      </div>}
+      {!checked&&placed.length>0&&<button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)",fontFamily:isUrdu?urFont:"inherit"}}>{t.checkBtn}</button>}
+      {checked&&correct&&<div style={{padding:"10px 16px",borderRadius:10,background:"#dcfce7",color:"#166534",fontWeight:700,fontSize:15,fontFamily:isUrdu?urFont:"inherit"}}>{t.perfectMsg}</div>}
+      {checked&&!correct&&(
+        <div style={{borderRadius:10,overflow:"hidden",border:"1px solid #fca5a5",marginBottom:10}}>
+          <div style={{padding:"10px 16px",background:"#fee2e2",color:"#991b1b",fontWeight:700,fontSize:15}}>
+            {isUrdu ? "✗ صحیح: " : "✗ Correct: "}
+            <span style={{fontFamily:arFont,direction:"rtl",fontSize:18}}>{exercise.answer.join(" ")}</span>
+          </div>
+          <button onClick={()=>onResult(false)} style={{width:"100%",padding:"11px",background:"#ef4444",color:"white",border:"none",fontWeight:700,fontSize:15,cursor:"pointer",fontFamily:isUrdu?urFont:"inherit"}}>
+            {isUrdu ? "اگلا ←" : "Next →"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
 
 // Review tile builder with pre-baked words (tappable to toggle Arabic↔English)
-function ReviewTileEx({ exercise, onResult }) {
+function ReviewTileEx({ exercise, onResult, lang = "en" }) {
   const { w } = useWindowSize();
+  const t = UI_TEXT[lang];
+  const isUrdu = lang === "ur";
   const tileFont = w >= 1024 ? 26 : w >= 640 ? 22 : 20;
   const [placed, setPlaced] = useState([]);
   const [remaining, setRemaining] = useState(()=>shuffle(exercise.tiles.filter(t=>!exercise.prebaked.some(p=>p.ar===t))));
   const [checked, setChecked] = useState(false);
   const [correct, setCorrect] = useState(false);
-  const [toggled, setToggled] = useState({}); // { prebakedAr: true/false } — true = show English
+  const [toggled, setToggled] = useState({}); // { prebakedAr: true/false } — true = show label
 
   const prebakedSet = exercise.prebaked || [];
   const prebakedInAnswer = exercise.answer.filter(t => prebakedSet.some(p=>p.ar===t));
@@ -1058,20 +1349,21 @@ function ReviewTileEx({ exercise, onResult }) {
 
   return (
     <div style={{textAlign:"center"}}>
-      <p style={{color:"#64748b",fontSize:12,marginBottom:4}}>Build the sentence:</p>
-      <p style={{fontSize:16,fontWeight:700,color:"#1e293b",marginBottom:4}}>"{exercise.en}"</p>
+      <p style={{color:"#64748b",fontSize:12,marginBottom:4,fontFamily:isUrdu?urFont:"inherit"}}>{t.buildSentence}</p>
+      <p style={{fontSize:16,fontWeight:700,color:"#1e293b",marginBottom:4,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>"{exercise.en}"</p>
       <p style={{fontSize:12,color:"#94a3b8",marginBottom:prebakedSet.length>0?4:12}}>
-        <SpeakBtn text={exercise.answer.join(" ")} size={15} /> hear the sentence
+        <SpeakBtn text={exercise.answer.join(" ")} size={15} /> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearSentence}</span>
       </p>
-      {prebakedSet.length>0&&<p style={{fontSize:11,color:"#d97706",fontWeight:600,marginBottom:12}}>✨ Gold tiles are pre-placed — tap to see their meaning</p>}
+      {prebakedSet.length>0&&<p style={{fontSize:11,color:"#d97706",fontWeight:600,marginBottom:12,fontFamily:isUrdu?urFont:"inherit"}}>{t.goldTiles}</p>}
       {/* Answer zone */}
       <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
-        {answerZone.length===0&&!prebakedSet.length&&<span style={{color:"#94a3b8",fontSize:13}}>Tap tiles to build</span>}
+        {answerZone.length===0&&!prebakedSet.length&&<span style={{color:"#94a3b8",fontSize:13,fontFamily:isUrdu?urFont:"inherit"}}>{t.tapToBuild}</span>}
         {answerZone.map((item,i)=>{
           if(item.prebaked){
             const showing = toggled[item.tile];
-            return <button key={`pb-${i}`} onClick={()=>togglePrebaked(item.tile)} style={{padding:"8px 12px",background:checked?"#fef3c7":"#fef9c3",border:"2px solid #f59e0b",borderRadius:8,fontSize:showing?13:20,fontFamily:showing?"inherit":arFont,fontWeight:700,cursor:"pointer",color:"#92400e",direction:showing?"ltr":"rtl",minWidth:50}}>
-              {showing?item.en:item.tile}
+            const label = isUrdu ? (getUrHint(item.en)||getUrdu(item.en)||item.en) : item.en;
+            return <button key={`pb-${i}`} onClick={()=>togglePrebaked(item.tile)} style={{padding:"8px 12px",background:checked?"#fef3c7":"#fef9c3",border:"2px solid #f59e0b",borderRadius:8,fontSize:showing?13:20,fontFamily:showing?(isUrdu?urFont:"inherit"):arFont,fontWeight:700,cursor:"pointer",color:"#92400e",direction:showing?(isUrdu?"rtl":"ltr"):"rtl",minWidth:50}}>
+              {showing?label:item.tile}
             </button>;
           } else if(item.tile){
             return <button key={`pl-${i}`} onClick={()=>removeTile(item.tile,item.gapIdx)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{item.tile}</button>;
@@ -1090,19 +1382,33 @@ function ReviewTileEx({ exercise, onResult }) {
         ))}
       </div>
       {!checked&&(placed.length>0||(prebakedSet.length>0&&prebakedSet.length===exercise.answer.length))&&
-        <button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)"}}>Check ✓</button>}
-      {checked&&<div style={{padding:"10px 16px",borderRadius:10,background:correct?"#dcfce7":"#fee2e2",color:correct?"#166534":"#991b1b",fontWeight:700,fontSize:15}}>
-        {correct?"✓ Perfect!":"✗ Correct: "+exercise.answer.filter(t=>!prebakedSet.some(p=>p.ar===t)).join(" ")}
-      </div>}
+        <button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)",fontFamily:isUrdu?urFont:"inherit"}}>{t.checkBtn}</button>}
+      {checked&&correct&&<div style={{padding:"10px 16px",borderRadius:10,background:"#dcfce7",color:"#166534",fontWeight:700,fontSize:15,fontFamily:isUrdu?urFont:"inherit"}}>{t.perfectMsg}</div>}
+      {checked&&!correct&&(
+        <div style={{borderRadius:10,overflow:"hidden",border:"1px solid #fca5a5",marginBottom:10}}>
+          <div style={{padding:"10px 16px",background:"#fee2e2",color:"#991b1b",fontWeight:700,fontSize:14}}>
+            {isUrdu ? "✗ صحیح: " : "✗ Correct: "}
+            <span style={{fontFamily:arFont,direction:"rtl",fontSize:18}}>{exercise.answer.filter(t=>!prebakedSet.some(p=>p.ar===t)).join(" ")}</span>
+          </div>
+          <button onClick={()=>onResult(false)} style={{width:"100%",padding:"11px",background:"#ef4444",color:"white",border:"none",fontWeight:700,fontSize:15,cursor:"pointer",fontFamily:isUrdu?urFont:"inherit"}}>
+            {isUrdu ? "اگلا ←" : "Next →"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
 
 // Grammar intro card (regular sessions)
-function GrammarCard({ session, onStart }) {
+function GrammarCard({ session, onStart, lang = "en" }) {
   const { w } = useWindowSize();
+  const t = UI_TEXT[lang];
   const titleSize = w >= 1024 ? 32 : w >= 640 ? 28 : 24;
   const vocabArSize = w >= 1024 ? 26 : w >= 640 ? 24 : 22;
+  const grammarNote = lang === "ur" && UR_GRAMMAR[session.id]
+    ? UR_GRAMMAR[session.id]
+    : session.grammar;
+  const isUrdu = lang === "ur";
   return (
     <div style={{padding:"16px 16px 24px"}}>
       <div style={{background:"linear-gradient(135deg,#eff6ff,#dbeafe)",border:"1px solid #93c5fd",borderRadius:16,padding:"16px 16px 20px",marginBottom:16,textAlign:"center"}}>
@@ -1111,32 +1417,47 @@ function GrammarCard({ session, onStart }) {
         </div>
         <div style={{fontSize:titleSize,fontWeight:700,color:"#1e40af",fontFamily:arFont,direction:"rtl",marginBottom:4,lineHeight:1.4}}>{session.title}</div>
         <div style={{fontSize:15,fontWeight:600,color:"#1e3a5f",marginBottom:10}}>{session.titleEn}</div>
-        <p style={{color:"#475569",fontSize:13,lineHeight:1.7,margin:0,textAlign:"left"}}>{session.grammar}</p>
+        <p style={{
+          color:"#475569",fontSize:13,lineHeight:1.9,margin:0,
+          textAlign: isUrdu ? "right" : "left",
+          fontFamily: isUrdu ? urFont : "inherit",
+          direction: isUrdu ? "rtl" : "ltr",
+        }}>{grammarNote}</p>
       </div>
-      <h3 style={{fontSize:14,fontWeight:700,color:"#1e293b",margin:"0 0 10px"}}>New Words:</h3>
+      <h3 style={{
+        fontSize:14,fontWeight:700,color:"#1e293b",margin:"0 0 10px",
+        textAlign: isUrdu ? "right" : "left",
+        fontFamily: isUrdu ? urFont : "inherit",
+      }}>{t.newWords}</h3>
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:20}}>
         {session.vocab.map((w,i)=>{
           const em = getEmoji(w.en);
+          const meaning = isUrdu ? (getUrdu(w.en) || w.en) : w.en;
           return (
             <div key={i} style={{background:"#f8fafc",borderRadius:10,padding:"10px",border:"1px solid #e2e8f0",textAlign:"center"}}>
               {em && <div style={{fontSize:28,lineHeight:1.3}}>{em}</div>}
               <div style={{fontSize:vocabArSize,fontWeight:700,color:"#1e293b",fontFamily:arFont,direction:"rtl",lineHeight:1.5}}>{w.ar}</div>
-              <div style={{fontSize:13,color:"#475569",fontWeight:600}}>{w.en}</div>
+              <div style={{
+                fontSize:13,color:"#475569",fontWeight:600,
+                fontFamily: isUrdu ? urFont : "inherit",
+                direction: isUrdu ? "rtl" : "ltr",
+              }}>{meaning}</div>
             </div>
           );
         })}
       </div>
-      <button onClick={onStart} style={{width:"100%",padding:"14px",background:"linear-gradient(135deg,#3b82f6,#2563eb)",color:"white",border:"none",borderRadius:14,fontSize:17,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(59,130,246,0.35)"}}>
-        Start Practice →
+      <button onClick={onStart} style={{width:"100%",padding:"14px",background:"linear-gradient(135deg,#3b82f6,#2563eb)",color:"white",border:"none",borderRadius:14,fontSize:17,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(59,130,246,0.35)",fontFamily:isUrdu?urFont:"inherit"}}>
+        {t.startPractice}
       </button>
     </div>
   );
 }
 
 // Review intro card
-function ReviewIntro({ review, onStart }) {
+function ReviewIntro({ review, onStart, lang = "en" }) {
   const grammarCount = review.grammarExercises.length;
   const tileCount = review.sentenceTiles.length;
+  const isUrdu = lang === "ur";
   return (
     <div style={{padding:"16px 16px 24px"}}>
       <div style={{background:"linear-gradient(135deg,#fef9c3,#fef3c7)",border:"1px solid #f59e0b",borderRadius:16,padding:"16px 16px 20px",marginBottom:16,textAlign:"center"}}>
@@ -1161,8 +1482,8 @@ function ReviewIntro({ review, onStart }) {
           First answer {grammarCount} grammar questions, then build {tileCount} Arabic sentences from English. Gold tiles are pre-placed — tap them to see their meaning!
         </p>
       </div>
-      <button onClick={onStart} style={{width:"100%",padding:"14px",background:"linear-gradient(135deg,#f59e0b,#d97706)",color:"white",border:"none",borderRadius:14,fontSize:17,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(245,158,11,0.4)"}}>
-        Start Review 🏆
+      <button onClick={onStart} style={{width:"100%",padding:"14px",background:"linear-gradient(135deg,#f59e0b,#d97706)",color:"white",border:"none",borderRadius:14,fontSize:17,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(245,158,11,0.4)",fontFamily:isUrdu?urFont:"inherit"}}>
+        {isUrdu ? "دہراؤ شروع کریں 🏆" : "Start Review 🏆"}
       </button>
     </div>
   );
@@ -1202,15 +1523,17 @@ export default function MadinahArabicApp() {
     try { return JSON.parse(localStorage.getItem("ma_completed") || "{}"); } catch { return {}; }
   });
   const [unlockAll, setUnlockAll] = useState(() => localStorage.getItem("ma_unlock") === "1");
+  const [lang, setLang] = useState(() => localStorage.getItem("ma_lang") || "en");
 
-  // Persist completed + unlockAll
+  // Persist completed + unlockAll + lang
   useEffect(() => { localStorage.setItem("ma_completed", JSON.stringify(completed)); }, [completed]);
   useEffect(() => { localStorage.setItem("ma_unlock", unlockAll ? "1" : "0"); }, [unlockAll]);
+  useEffect(() => { localStorage.setItem("ma_lang", lang); }, [lang]);
 
   const numCompleted = Object.keys(completed).length;
 
   const startSession = (s) => {
-    const exs = s.type === "review" ? buildReviewExercises(s) : buildExercises(s);
+    const exs = s.type === "review" ? buildReviewExercises(s) : buildExercises(s, lang);
     setSessionData(s);
     setExercises(exs);
     setExIdx(0); setCorrect(0); setTotal(0); setHearts(5);
@@ -1270,7 +1593,21 @@ export default function MadinahArabicApp() {
             <button onClick={()=>setScreen("settings")} style={{position:"absolute",top:12,right:12,background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 10px",cursor:"pointer",fontSize:18,lineHeight:1}}>⚙️</button>
             <div style={{fontSize:52}}>🕌</div>
             <h1 style={{fontSize:28,fontWeight:800,margin:"8px 0 4px"}}>Madinah Arabic</h1>
-            <p style={{fontSize:14,opacity:0.85,margin:"0 0 16px"}}>Complete course · Books 1–4 · 92 sessions</p>
+            <p style={{fontSize:14,opacity:0.85,margin:"0 0 12px"}}>Complete course · Books 1–4 · 92 sessions</p>
+            {/* Language quick-select */}
+            <div style={{display:"flex",gap:8,justifyContent:"center",marginBottom:14}}>
+              {[["en","🇬🇧","Start Learning","Learning"],["ur","🇵🇰","سیکھنا شروع کریں","جاری رکھیں"]].map(([code,flag,startLabel,contLabel])=>(
+                <button key={code} onClick={()=>setLang(code)} style={{
+                  padding:"7px 14px",borderRadius:20,cursor:"pointer",fontWeight:700,
+                  fontSize:code==="ur"?15:13,
+                  fontFamily:code==="ur"?urFont:"inherit",
+                  background:lang===code?"white":"rgba(255,255,255,0.18)",
+                  color:lang===code?GREEN:"white",
+                  border:lang===code?"2px solid white":"2px solid rgba(255,255,255,0.4)",
+                  transition:"all 0.15s"
+                }}>{flag} {doneCount===0||lang!==code?startLabel:contLabel}</button>
+              ))}
+            </div>
             <div style={{display:"flex",gap:10,justifyContent:"center"}}>
               <div style={{background:"rgba(255,255,255,0.2)",borderRadius:20,padding:"6px 14px",fontWeight:700,fontSize:14}}>⭐ {xp} XP</div>
               <div style={{background:streak>0?"#f97316":"rgba(255,255,255,0.2)",borderRadius:20,padding:"6px 14px",fontWeight:700,fontSize:14}}>🔥 {streak}</div>
@@ -1311,6 +1648,27 @@ export default function MadinahArabicApp() {
             <div style={{width:60}}/>
           </div>
           <div style={{padding:"24px 20px",display:"flex",flexDirection:"column",gap:14}}>
+
+            {/* Language selector */}
+            <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:14,padding:"16px 18px"}}>
+              <div style={{fontWeight:700,fontSize:15,color:"#1e293b",marginBottom:10}}>🌐 Interface Language</div>
+              <div style={{display:"flex",gap:8}}>
+                {[["en","English"],["ur","اردو"]].map(([code,label])=>(
+                  <button key={code} onClick={()=>setLang(code)} style={{
+                    flex:1,padding:"10px 8px",borderRadius:10,cursor:"pointer",
+                    fontWeight:700,fontSize:code==="ur"?17:14,
+                    fontFamily:code==="ur"?urFont:"inherit",
+                    border:lang===code?"2px solid #059669":"2px solid #e2e8f0",
+                    background:lang===code?"#dcfce7":"white",
+                    color:lang===code?"#166534":"#475569",
+                    transition:"all 0.15s"
+                  }}>{label}</button>
+                ))}
+              </div>
+              <div style={{fontSize:11,color:"#94a3b8",marginTop:8}}>
+                Urdu mode shows Urdu translations for vocabulary. Currently covers Book 1 fully — Book 2–4 fall back to English where Urdu isn't available yet.
+              </div>
+            </div>
 
             {/* Unlock all */}
             <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:14,padding:"16px 18px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
@@ -1458,8 +1816,8 @@ export default function MadinahArabicApp() {
           </div>
           <div style={{overflowY:"auto",maxHeight:scrollH}}>
             {isReview
-              ? <ReviewIntro review={sessionData} onStart={()=>setScreen("exercise")}/>
-              : <GrammarCard session={sessionData} onStart={()=>setScreen("exercise")}/>}
+              ? <ReviewIntro review={sessionData} onStart={()=>setScreen("exercise")} lang={lang}/>
+              : <GrammarCard session={sessionData} onStart={()=>setScreen("exercise")} lang={lang}/>}
           </div>
         </div>
       </div>
@@ -1481,14 +1839,14 @@ export default function MadinahArabicApp() {
           </div>}
           <div style={{padding:"16px 16px 24px",overflowY:"auto",maxHeight:scrollH}}>
             {(ex.type==="ar_en"||ex.type==="en_ar"||ex.type==="grammar_mcq"||ex.type==="grammar_err")
-              ? <MCQ key={exIdx} exercise={ex} onResult={handleResult}/>
+              ? <MCQ key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
               : ex.type==="match"
-                ? <MatchEx key={exIdx} exercise={ex} onResult={handleResult}/>
+                ? <MatchEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
                 : ex.type==="review_tile"
-                  ? <ReviewTileEx key={exIdx} exercise={ex} onResult={handleResult}/>
+                  ? <ReviewTileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
                   : ex.type==="pattern_tile"
-                    ? <PatternTileEx key={exIdx} exercise={ex} onResult={handleResult}/>
-                    : <TileEx key={exIdx} exercise={ex} onResult={handleResult}/>}
+                    ? <PatternTileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
+                    : <TileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>}
           </div>
         </div>
       </div>
