@@ -79,6 +79,9 @@ const UI_TEXT = {
     howItWorksRev:  "💡 How this works",
     howItWorksRevText: (g, t) => `First answer ${g} grammar questions, then build ${t} Arabic sentences from English. Gold tiles are pre-placed — tap them to see their meaning!`,
     startReview:    "Start Review 🏆",
+    exitBtn:        "← Exit",
+    sessionOf:      (n, total) => `Session ${n} of ${total}`,
+    bookLessonPart: (b, l, p) => `Book ${b} · Lesson ${l} · Part ${p}`,
   },
   ur: {
     whatMean:       "اس کا کیا مطلب ہے؟",
@@ -135,6 +138,9 @@ const UI_TEXT = {
     howItWorksRev:  "💡 یہ کیسے کام کرتا ہے",
     howItWorksRevText: (g, t) => `پہلے ${g} قواعد کے سوالات حل کریں، پھر ${t} عربی جملے انگریزی سے بنائیں۔ سنہری ٹائلیں پہلے سے رکھی ہیں — مطلب دیکھنے کے لیے دبائیں!`,
     startReview:    "دہراؤ شروع کریں 🏆",
+    exitBtn:        "← باہر",
+    sessionOf:      (n, total) => `سیشن ${n} از ${total}`,
+    bookLessonPart: (b, l, p) => `کتاب ${b} · سبق ${l} · حصہ ${p}`,
   },
 };
 
@@ -1671,11 +1677,11 @@ function GrammarCard({ session, onStart, lang = "en" }) {
   return (
     <div style={{padding:"16px 16px 24px"}}>
       <div style={{background:"linear-gradient(135deg,#eff6ff,#dbeafe)",border:"1px solid #93c5fd",borderRadius:16,padding:"16px 16px 20px",marginBottom:16,textAlign:"center"}}>
-        <div style={{fontSize:11,color:"#3b82f6",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>
-          Book {session.book} · Lesson {session.lessonRef} · Part {session.part}
+        <div style={{fontSize:11,color:"#3b82f6",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:4,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>
+          {t.bookLessonPart(session.book, session.lessonRef, session.part)}
         </div>
         <div style={{fontSize:titleSize,fontWeight:700,color:"#1e40af",fontFamily:arFont,direction:"rtl",marginBottom:4,lineHeight:1.4}}>{session.title}</div>
-        <div style={{fontSize:15,fontWeight:600,color:"#1e3a5f",marginBottom:10}}>{session.titleEn}</div>
+        <div style={{fontSize:15,fontWeight:600,color:"#1e3a5f",marginBottom:10,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>{isUrdu ? getUrSessionTitle(session.titleEn) : session.titleEn}</div>
         <p style={{
           color:"#475569",fontSize:13,lineHeight:2.1,margin:0,
           textAlign: isUrdu ? "right" : "left",
@@ -2058,7 +2064,7 @@ export default function MadinahArabicApp() {
                     onMouseEnter={e=>{if(unlocked)e.currentTarget.style.transform="scale(1.01)"}}
                     onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
                     <div style={{flex:1}}>
-                      <div style={{fontSize:16,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl",lineHeight:1.4}}>{s.title}</div>
+                      <div style={{fontSize:16,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl",lineHeight:1.4}}>{lang==="ur" ? s.title.split(" — ")[0].split(" (")[0].trim() : s.title}</div>
                       <div style={{fontSize:12,color:"#64748b",marginTop:1,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>{lang==="ur" ? getUrSessionTitle(s.titleEn) : s.titleEn}</div>
                       {s.id>=15&&<div style={{fontSize:11,color:"#059669",marginTop:2,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>{lang==="ur"?"🔁 تکراری دہرائی شامل":"🔁 Includes spaced review"}</div>}
                     </div>
@@ -2084,9 +2090,9 @@ export default function MadinahArabicApp() {
       <div style={pageStyle}>
         <div style={cardStyle}>
           <div style={{background:isReview?`linear-gradient(135deg,#f59e0b,#d97706)`:`linear-gradient(135deg,${GREEN},#047857)`,padding:"12px 16px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-            <button onClick={()=>setScreen("map")} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 12px",cursor:"pointer",fontWeight:700,fontSize:13}}>← Exit</button>
-            <span style={{color:"white",fontWeight:600,fontSize:14}}>
-              {isReview?`Review · ${sessionData.coversLessons}`:`Session ${sessionData.id} of 84`}
+            <button onClick={()=>setScreen("map")} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 12px",cursor:"pointer",fontWeight:700,fontSize:13,fontFamily:lang==="ur"?urFont:"inherit"}}>{UI_TEXT[lang].exitBtn}</button>
+            <span style={{color:"white",fontWeight:600,fontSize:14,fontFamily:lang==="ur"?urFont:"inherit"}}>
+              {isReview?`${UI_TEXT[lang].reviewSession} · ${sessionData.coversLessons}`:UI_TEXT[lang].sessionOf(sessionData.id,84)}
             </span>
           </div>
           <div style={{overflowY:"auto",maxHeight:scrollH}}>
