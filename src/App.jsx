@@ -144,9 +144,12 @@ const EMOJI = {
   "man":"👨","woman":"👩","boy":"👦","girl":"👧",
   "father":"👨","mother":"👩","son":"👦","daughter":"👧",
   "brother":"👦","sister":"👧","family":"👨‍👩‍👧‍👦",
-  "teacher":"👨‍🏫","student":"👨‍🎓","friend":"🤝","servant":"🙇",
+  "teacher":"👨‍🏫","teacher (m.)":"👨‍🏫","teacher (f.)":"👩‍🏫",
+  "student":"👨‍🎓","student (m.)":"👨‍🎓","student (f.)":"👩‍🎓",
+  "friend":"🤝","servant":"🙇",
   "king":"👑","prophet":"🕌","messenger":"📨","slave":"🙇",
-  "doctor":"👨‍⚕️","engineer":"👷","worker":"👷",
+  "doctor":"👨‍⚕️","doctor (m.)":"👨‍⚕️","doctor (f.)":"👩‍⚕️",
+  "engineer":"👷","worker":"👷","merchant":"🧑‍💼","farmer":"🧑‍🌾",
   // Animals
   "dog":"🐕","cat":"🐈","horse":"🐴","lion":"🦁","bird":"🐦",
   "cow":"🐄","camel":"🐪","sheep":"🐑","elephant":"🐘","fish":"🐟",
@@ -431,6 +434,48 @@ function shuffle(arr) {
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
+}
+
+// ── Case-form variant generator ────────────────────────────────────────────
+// Given an Arabic word, returns alternative forms with different case endings
+// (nominative / accusative / genitive) and definite/indefinite swaps.
+// Used to generate plausible distractors in tile exercises so students must
+// identify the correct iʿrāb ending, not just the word.
+function makeCaseVariants(ar) {
+  const NOM_I = '\u064C'; // ٌ  indefinite nominative (tanwīn ḍamm)
+  const GEN_I = '\u064D'; // ٍ  indefinite genitive   (tanwīn kasr)
+  const NOM_D = '\u064F'; // ُ  definite nominative   (ḍamm)
+  const ACC_D = '\u064E'; // َ  definite accusative   (fatḥ)
+  const GEN_D = '\u0650'; // ِ  definite genitive     (kasr)
+
+  const last = ar[ar.length - 1];
+  const stem = ar.slice(0, -1);
+  const isDefinite = /^ال/.test(ar);
+  const variants = new Set();
+
+  if (last === NOM_I) {
+    // Indefinite nominative → add indefinite genitive + definite nominative
+    variants.add(stem + GEN_I);
+    if (!isDefinite) variants.add('\u0627\u0644\u0652' + stem + NOM_D); // الْ + stem + ُ
+  } else if (last === GEN_I) {
+    // Indefinite genitive → add indefinite nominative
+    variants.add(stem + NOM_I);
+  } else if (last === NOM_D && isDefinite) {
+    // Definite nominative → add accusative and genitive
+    variants.add(stem + ACC_D);
+    variants.add(stem + GEN_D);
+  } else if (last === ACC_D && isDefinite) {
+    // Definite accusative → add nominative and genitive
+    variants.add(stem + NOM_D);
+    variants.add(stem + GEN_D);
+  } else if (last === GEN_D && isDefinite) {
+    // Definite genitive → add nominative and accusative
+    variants.add(stem + NOM_D);
+    variants.add(stem + ACC_D);
+  }
+
+  // Only return variants that differ from the original and have real length
+  return [...variants].filter(v => v !== ar && v.length > 2);
 }
 
 // ── Audio (Web Speech API) ──────────────────────
@@ -868,11 +913,11 @@ const REVIEWS = [
   { id:"r1", type:"review", coversLessons:"B1 L1–5",
     titleEn:"Review: Demonstratives, الـ, Adjectives & Prepositions",
     grammarExercises:[
-      { type:"grammar_mcq", promptEn:'Which word means "this" for a masculine noun?', correct:"هَذَا", options:["هَذَا","هَذِهِ","ذَلِكَ","تِلْكَ"] },
-      { type:"grammar_mcq", promptEn:'Choose the correct definite form of قَلَمٌ (pen):', correct:"الْقَلَمُ", options:["الْقَلَمُ","الْقَلَمٌ","اَلْقَلَمِ","قَلَمُ"] },
-      { type:"grammar_mcq", promptEn:'Complete: الْبَيْتُ ___ (the big house — definite adjective):', correct:"الْكَبِيرُ", options:["الْكَبِيرُ","كَبِيرٌ","كَبِيرُ","الْكَبِيرٌ"] },
-      { type:"grammar_mcq", promptEn:'Which preposition means "on"?', correct:"عَلَى", options:["عَلَى","فِي","مِنْ","تَحْتَ"] },
-      { type:"grammar_err", promptEn:'Find the error: "هَذِهِ بَيْتٌ كَبِيرٌ" (بَيْتٌ is masculine)', correct:"هَذَا", options:["هَذَا","هَذِهِ","بَيْتٌ","كَبِيرٌ"] },
+      { type:"grammar_mcq", promptEn:'Which word means "this" for a masculine noun?', correct:"هَذَا", options:["هَذَا","هَذِهِ","ذَلِكَ","تِلْكَ"], explanation:'هَذَا is for masculine nouns: هَذَا كِتَابٌ (this is a book). هَذِهِ is feminine: هَذِهِ سَيَّارَةٌ (this is a car). ذَلِكَ / تِلْكَ mean "that" (far away), not "this".' },
+      { type:"grammar_mcq", promptEn:'Choose the correct definite form of قَلَمٌ (pen):', correct:"الْقَلَمُ", options:["الْقَلَمُ","الْقَلَمٌ","اَلْقَلَمِ","قَلَمُ"], explanation:'Adding الـ makes a noun definite and removes tanwīn: قَلَمٌ → الْقَلَمُ. The ـُ stays, only the ـٌ disappears. With sun letters the ل assimilates: النَّجْمُ, الشَّمْسُ.' },
+      { type:"grammar_mcq", promptEn:'Complete: الْبَيْتُ ___ (the big house — definite adjective):', correct:"الْكَبِيرُ", options:["الْكَبِيرُ","كَبِيرٌ","كَبِيرُ","الْكَبِيرٌ"], explanation:'A definite noun needs a definite adjective: الْبَيْتُ الْكَبِيرُ (the big house). كَبِيرٌ alone is a predicate — الْبَيْتُ كَبِيرٌ means "the house IS big", not "the big house".' },
+      { type:"grammar_mcq", promptEn:'Which preposition means "on"?', correct:"عَلَى", options:["عَلَى","فِي","مِنْ","تَحْتَ"], explanation:'عَلَى = on: الْكِتَابُ عَلَى الْمَكْتَبِ (the book is on the desk). فِي = in, مِنْ = from, تَحْتَ = under. All prepositions take genitive: الْمَكْتَبِ not الْمَكْتَبُ.' },
+      { type:"grammar_err", promptEn:'Find the error: "هَذِهِ بَيْتٌ كَبِيرٌ" (بَيْتٌ is masculine)', correct:"هَذَا", options:["هَذَا","هَذِهِ","بَيْتٌ","كَبِيرٌ"], explanation:'بَيْتٌ (house) is masculine, so the demonstrative must also be masculine: هَذَا بَيْتٌ كَبِيرٌ. هَذِهِ is only for feminine nouns — those ending in ةٌ like سَيَّارَةٌ (car) or مَدْرَسَةٌ (school).' },
     ],
     sentenceTiles:[
       { en:"This is a new book.", answer:["هَذَا","كِتَابٌ","جَدِيدٌ"], tiles:["هَذَا","كِتَابٌ","جَدِيدٌ","قَلَمٌ","ذَلِكَ"], prebaked:[] },
@@ -1068,7 +1113,15 @@ function buildExercises(session, lang = "en") {
   if (session.patternTiles) {
     session.patternTiles.forEach(t => {
       const urHint = lang === "ur" && t.en ? (getUrHint(t.en) || t.en) : t.en;
-      exercises.push({ type:"pattern_tile", ...t, en: urHint });
+      // Augment tile pool with case-form variants (nominative/genitive/accusative
+      // alternates and definite↔indefinite swaps) to make students attend to iʿrāb.
+      // Vocabulary distractors in t.tiles are preserved unchanged.
+      const existingSet = new Set(t.tiles);
+      const caseExtras = shuffle(
+        t.answer.flatMap(tok => makeCaseVariants(tok)).filter(v => !existingSet.has(v))
+      ).slice(0, 2);
+      const augTiles = [...t.tiles, ...caseExtras];
+      exercises.push({ type:"pattern_tile", ...t, tiles: augTiles, en: urHint });
     });
   }
   return shuffle(exercises);
@@ -1077,7 +1130,17 @@ function buildExercises(session, lang = "en") {
 function buildReviewExercises(review) {
   const exercises = [];
   review.grammarExercises.forEach(ex => exercises.push({ ...ex }));
-  review.sentenceTiles.forEach(t => exercises.push({ type:"review_tile", ...t }));
+  review.sentenceTiles.forEach(t => {
+    // Add up to 2 case-form variant distractors (keeping existing vocab distractors).
+    // Skip prebaked tokens (already placed — no distractor needed for those).
+    const existingSet = new Set(t.tiles);
+    const nonPrebaked = t.answer.filter(tok => !t.prebaked.some(p => p.ar === tok));
+    const caseExtras = shuffle(
+      nonPrebaked.flatMap(tok => makeCaseVariants(tok)).filter(v => !existingSet.has(v))
+    ).slice(0, 2);
+    const augTiles = [...t.tiles, ...caseExtras];
+    exercises.push({ type:"review_tile", ...t, tiles: augTiles });
+  });
   return exercises; // keep in order: grammar first, then tiles
 }
 
@@ -1248,8 +1311,21 @@ function MatchEx({ exercise, onResult, lang = "en" }) {
   const [selEn, setSelEn] = useState(null);
   const [matched, setMatched] = useState([]);
   const [wrongPair, setWrongPair] = useState(null);
-  const arList = useRef(shuffle(exercise.pairs.map(p=>p.ar))).current;
-  const enList = useRef(shuffle(exercise.pairs.map(p=>p.en))).current;
+  const [[arList, enList]] = useState(() => {
+    const ars = shuffle(exercise.pairs.map(p => p.ar));
+    // correctOrder[i] = the English that matches ars[i]
+    const correctOrder = ars.map(ar => exercise.pairs.find(p => p.ar === ar).en);
+    let ens = shuffle(exercise.pairs.map(p => p.en));
+    // Guarantee a derangement: no pair sits in the same row
+    let attempts = 0;
+    while (ens.some((en, i) => en === correctOrder[i]) && attempts < 30) {
+      const i = Math.floor(Math.random() * ens.length);
+      const j = (i + 1) % ens.length;
+      [ens[i], ens[j]] = [ens[j], ens[i]];
+      attempts++;
+    }
+    return [ars, ens];
+  });
   const doneEns = matched.map(ar=>exercise.pairs.find(p=>p.ar===ar)?.en);
 
   const tryMatch = (ar, en) => {
@@ -1863,7 +1939,7 @@ export default function MadinahArabicApp() {
                 Built by <strong>Muhammad Ibrahim Khan</strong>
               </div>
               <div style={{fontSize:11,color:"#4ade80",marginTop:6}}>
-                Powered by Claude · v1.0
+                Powered by Claude · v1.1
               </div>
             </div>
 
