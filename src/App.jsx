@@ -634,10 +634,15 @@ const UR_HINTS = {
   // Near/far two-sentence prompts with وَ
   "This is a cat and that is a dog.":"یہ ایک بلی ہے اور وہ ایک کتا ہے۔",
   "This is a camel and that is a horse.":"یہ ایک اونٹ ہے اور وہ ایک گھوڑا ہے۔",
+  "This is a donkey and that is a horse.":"یہ ایک گدھا ہے اور وہ ایک گھوڑا ہے۔",
+  "This is a cat and that is a donkey.":"یہ ایک بلی ہے اور وہ ایک گدھا ہے۔",
   "This is a chair and that is a bed.":"یہ ایک کرسی ہے اور وہ ایک بستر ہے۔",
   "This is a desk and that is a wall.":"یہ ایک میز ہے اور وہ ایک دیوار ہے۔",
+  "This is a book and that is a key.":"یہ ایک کتاب ہے اور وہ ایک چابی ہے۔",
+  "This is a wall and that is a door.":"یہ ایک دیوار ہے اور وہ ایک دروازہ ہے۔",
   "This is a boy and that is a teacher.":"یہ ایک لڑکا ہے اور وہ ایک استاد ہے۔",
   "This is a man and that is a student.":"یہ ایک مرد ہے اور وہ ایک طالب علم ہے۔",
+  "This is a teacher and that is a student.":"یہ ایک استاد ہے اور وہ ایک طالب علم ہے۔",
 };
 const getUrHint = (en) => UR_HINTS[en] || null;
 
@@ -876,6 +881,8 @@ const SESSIONS = [
     patternTiles:[
       {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","كِتَابٌ","قَلَمٌ","مِفْتَاحٌ"], answer:["هَذَا","كِتَابٌ"]},
       {emoji:"🔑", question:"مَا هَذَا؟", tiles:["هَذَا","مِفْتَاحٌ","بَابٌ","كِتَابٌ"], answer:["هَذَا","مِفْتَاحٌ"]},
+      {emoji:"✏️", question:"مَا هَذَا؟", tiles:["هَذَا","قَلَمٌ","كِتَابٌ","بَابٌ"], answer:["هَذَا","قَلَمٌ"]},
+      {emoji:"🚪", question:"مَا هَذَا؟", tiles:["هَذَا","بَابٌ","مِفْتَاحٌ","قَلَمٌ"], answer:["هَذَا","بَابٌ"]},
     ]},
   { id:2, book:1, lessonRef:"1.1", part:"B", title:"مَا هَذَا؟", titleEn:"What Is This? (Part 2)",
     grammar:'More هَذَا sentences. Nouns ending in ـٌ are indefinite ("a book"). Every Arabic noun has a gender — masculine or feminine.',
@@ -883,6 +890,8 @@ const SESSIONS = [
     patternTiles:[
       {emoji:"🏠", question:"مَا هَذَا؟", tiles:["هَذَا","بَيْتٌ","مَسْجِدٌ","نَجْمٌ"], answer:["هَذَا","بَيْتٌ"]},
       {emoji:"🕌", question:"مَا هَذَا؟", tiles:["هَذَا","مَسْجِدٌ","بَيْتٌ","حَجَرٌ"], answer:["هَذَا","مَسْجِدٌ"]},
+      {emoji:"⭐", question:"مَا هَذَا؟", tiles:["هَذَا","نَجْمٌ","حَجَرٌ","بَيْتٌ"], answer:["هَذَا","نَجْمٌ"]},
+      {emoji:"🪨", question:"مَا هَذَا؟", tiles:["هَذَا","حَجَرٌ","نَجْمٌ","مَسْجِدٌ"], answer:["هَذَا","حَجَرٌ"]},
     ]},
 
   { id:3, book:1, lessonRef:"1.1", part:"C", title:"الْحَيَوَانَاتُ", titleEn:"Animals",
@@ -895,6 +904,12 @@ const SESSIONS = [
       { en:"This is a camel and that is a horse.",
         tiles:["هَذَا","جَمَلٌ","وَذَلِكَ","حِصَانٌ","قِطٌّ"],
         answer:["هَذَا","جَمَلٌ","وَذَلِكَ","حِصَانٌ"] },
+      { en:"This is a donkey and that is a horse.",
+        tiles:["هَذَا","حِمَارٌ","وَذَلِكَ","حِصَانٌ","كَلْبٌ"],
+        answer:["هَذَا","حِمَارٌ","وَذَلِكَ","حِصَانٌ"] },
+      { en:"This is a cat and that is a donkey.",
+        tiles:["هَذَا","قِطٌّ","وَذَلِكَ","حِمَارٌ","جَمَلٌ"],
+        answer:["هَذَا","قِطٌّ","وَذَلِكَ","حِمَارٌ"] },
     ]},
 
   { id:4, book:1, lessonRef:"1.1", part:"D", title:"الْمِهَنُ وَالْمَلَابِسُ", titleEn:"Professions & Clothing",
@@ -903,6 +918,8 @@ const SESSIONS = [
     patternTiles:[
       {emoji:"👨‍⚕️", question:"مَنْ هَذَا؟", tiles:["هَذَا","طَبِيبٌ","إِمَامٌ","تَاجِرٌ","مُدَرِّسٌ"], answer:["هَذَا","طَبِيبٌ"]},
       {emoji:"👕", question:"مَا هَذَا؟", tiles:["هَذَا","قَمِيصٌ","مِنْدِيلٌ","كِتَابٌ","قَلَمٌ"], answer:["هَذَا","قَمِيصٌ"]},
+      {emoji:"🕌", question:"مَنْ هَذَا؟", tiles:["هَذَا","إِمَامٌ","طَبِيبٌ","تَاجِرٌ"], answer:["هَذَا","إِمَامٌ"]},
+      {emoji:"🤝", question:"مَنْ هَذَا؟", tiles:["هَذَا","تَاجِرٌ","إِمَامٌ","طَبِيبٌ"], answer:["هَذَا","تَاجِرٌ"]},
     ]},
 
   { id:5, book:1, lessonRef:"1.1", part:"E", title:"أَسْئِلَةُ نَعَمْ وَلَا", titleEn:"Yes/No Questions",
@@ -915,6 +932,12 @@ const SESSIONS = [
       { emoji:"🐈", question:"أَهَذَا كَلْبٌ؟",
         tiles:["لَا","هَذَا","قِطٌّ","نَعَمْ","حِمَارٌ"],
         answer:["لَا","هَذَا","قِطٌّ"] },
+      { emoji:"🏠", question:"أَهَذَا بَيْتٌ؟",
+        tiles:["نَعَمْ","هَذَا","بَيْتٌ","لَا","مَسْجِدٌ"],
+        answer:["نَعَمْ","هَذَا","بَيْتٌ"] },
+      { emoji:"🐕", question:"أَهَذَا قِطٌّ؟",
+        tiles:["لَا","هَذَا","كَلْبٌ","نَعَمْ","حِمَارٌ"],
+        answer:["لَا","هَذَا","كَلْبٌ"] },
     ]},
 
   { id:6, book:1, lessonRef:"1.2", part:"A", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 1)",
@@ -927,6 +950,12 @@ const SESSIONS = [
       { en:"This is a desk and that is a wall.",
         tiles:["هَذَا","مَكْتَبٌ","وَذَلِكَ","جِدَارٌ","كُرْسِيٌّ"],
         answer:["هَذَا","مَكْتَبٌ","وَذَلِكَ","جِدَارٌ"] },
+      { en:"This is a book and that is a key.",
+        tiles:["هَذَا","كِتَابٌ","وَذَلِكَ","مِفْتَاحٌ","بَابٌ"],
+        answer:["هَذَا","كِتَابٌ","وَذَلِكَ","مِفْتَاحٌ"] },
+      { en:"This is a wall and that is a door.",
+        tiles:["هَذَا","جِدَارٌ","وَذَلِكَ","بَابٌ","مَكْتَبٌ"],
+        answer:["هَذَا","جِدَارٌ","وَذَلِكَ","بَابٌ"] },
     ]},
   { id:7, book:1, lessonRef:"1.2", part:"B", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 2)",
     grammar:'Practice هَذَا and ذَلِكَ with more nouns. مَنْ هَذَا؟ = Who is this? (used for people). وَ joins two sentences: هَذَا وَلَدٌ وَذَلِكَ رَجُلٌ.',
@@ -938,6 +967,10 @@ const SESSIONS = [
       { en:"This is a man and that is a student.",
         tiles:["هَذَا","رَجُلٌ","وَذَلِكَ","طَالِبٌ","وَلَدٌ"],
         answer:["هَذَا","رَجُلٌ","وَذَلِكَ","طَالِبٌ"] },
+      {emoji:"👦", question:"مَنْ هَذَا؟", tiles:["هَذَا","وَلَدٌ","رَجُلٌ","طَالِبٌ"], answer:["هَذَا","وَلَدٌ"]},
+      { en:"This is a teacher and that is a student.",
+        tiles:["هَذَا","مُدَرِّسٌ","وَذَلِكَ","طَالِبٌ","رَجُلٌ"],
+        answer:["هَذَا","مُدَرِّسٌ","وَذَلِكَ","طَالِبٌ"] },
     ]},
 
   { id:8, book:1, lessonRef:"1.3", part:"A", title:"الـ — The Definite Article (Part 1)", titleEn:"Making Nouns Definite",
@@ -1513,56 +1546,13 @@ function buildExercises(session, lang = "en") {
   const vocab = session.vocab;
   const allPrior = SESSIONS.filter(s => s.id < session.id).flatMap(s => s.vocab);
   const pool = vocab.length >= 4 ? vocab : [...vocab, ...shuffle(allPrior).slice(0, 4 - vocab.length)];
-  const exercises = [];
 
   // Helper: get display label for a vocab word in the active language
   const getLabel = (w) => lang === "ur" ? (getUrdu(w.en) || w.en) : w.en;
 
-  // MCQ: Arabic → label (ar_en)
-  shuffle(vocab).slice(0, 4).forEach(w => {
-    const distractors = shuffle(pool.filter(x => x.en !== w.en)).slice(0, 3).map(x => getLabel(x));
-    const label = getLabel(w);
-    exercises.push({ type:"ar_en", prompt:w.ar, promptEn:w.en, correct:label, options:shuffle([label,...distractors]) });
-  });
-  // MCQ: label → Arabic (en_ar)
-  shuffle(vocab).slice(0, 4).forEach(w => {
-    const distractors = shuffle(pool.filter(x => x.ar !== w.ar)).slice(0, 3).map(x => x.ar);
-    const opts = shuffle([w.ar,...distractors]);
-    const allVocab = [...vocab, ...allPrior];
-    const meanings = {};
-    opts.forEach(ar => { const found = allVocab.find(x => x.ar === ar); if (found) meanings[ar] = getLabel(found); });
-    exercises.push({ type:"en_ar", promptEn:getLabel(w), correct:w.ar, options:opts, meanings });
-  });
-  // Match pairs
-  if (vocab.length >= 4)
-    exercises.push({ type:"match", pairs:shuffle(vocab).slice(0,4).map(w=>({ar:w.ar,en:getLabel(w)})) });
-  // Spaced repetition tiles from session 18+ (was 15 before 3 L1.1 sessions were added)
-  if (session.id >= 18) {
-    const eligibleReviews = REVIEWS.filter((_, i) => session.id > REVIEW_BLOCK_ENDS[i]);
-    const poolTiles = eligibleReviews.flatMap(r => r.sentenceTiles.filter(t => t.prebaked.length === 0));
-    shuffle(poolTiles).slice(0, 2).forEach(t => {
-      const urHint = lang === "ur" ? (getUrHint(t.en) || t.en) : t.en;
-      exercises.push({ type:"tile", ...t, en: urHint });
-    });
-  }
-  // Definiteness transformation exercises (sessions teaching الـ)
-  if (session.alTransformExercises) {
-    session.alTransformExercises.forEach(ex => {
-      exercises.push({ type:"al_transform", ...ex });
-    });
-  }
-  // Sun/moon letter categorisation exercises
-  if (session.sunMoonExercises) {
-    session.sunMoonExercises.forEach(ex => {
-      exercises.push({ type:"sun_moon", ...ex });
-    });
-  }
-  // Near/far demonstrative exercises (هَذَا / ذَلِكَ)
-  if (session.nearFarExercises) {
-    session.nearFarExercises.forEach(ex => {
-      exercises.push({ type:"near_far", ...ex });
-    });
-  }
+  // ── BUCKET 1: Grammar / production exercises (shown first) ──────────────
+  const grammarExs = [];
+
   // Pattern sentence exercises (Book 1 only)
   if (session.patternTiles) {
     session.patternTiles.forEach(t => {
@@ -1575,10 +1565,61 @@ function buildExercises(session, lang = "en") {
         t.answer.flatMap(tok => makeCaseVariants(tok)).filter(v => !existingSet.has(v))
       ).slice(0, 2);
       const augTiles = [...t.tiles, ...caseExtras];
-      exercises.push({ type:"pattern_tile", ...t, tiles: augTiles, en: urHint });
+      grammarExs.push({ type:"pattern_tile", ...t, tiles: augTiles, en: urHint });
     });
   }
-  return shuffle(exercises);
+  // Definiteness transformation exercises (sessions teaching الـ)
+  if (session.alTransformExercises) {
+    session.alTransformExercises.forEach(ex => {
+      grammarExs.push({ type:"al_transform", ...ex });
+    });
+  }
+  // Sun/moon letter categorisation exercises
+  if (session.sunMoonExercises) {
+    session.sunMoonExercises.forEach(ex => {
+      grammarExs.push({ type:"sun_moon", ...ex });
+    });
+  }
+  // Near/far demonstrative exercises (هَذَا / ذَلِكَ)
+  if (session.nearFarExercises) {
+    session.nearFarExercises.forEach(ex => {
+      grammarExs.push({ type:"near_far", ...ex });
+    });
+  }
+  // Spaced repetition tiles from session 18+ (was 15 before 3 L1.1 sessions were added)
+  if (session.id >= 18) {
+    const eligibleReviews = REVIEWS.filter((_, i) => session.id > REVIEW_BLOCK_ENDS[i]);
+    const poolTiles = eligibleReviews.flatMap(r => r.sentenceTiles.filter(t => t.prebaked.length === 0));
+    shuffle(poolTiles).slice(0, 2).forEach(t => {
+      const urHint = lang === "ur" ? (getUrHint(t.en) || t.en) : t.en;
+      grammarExs.push({ type:"tile", ...t, en: urHint });
+    });
+  }
+
+  // ── BUCKET 2: Vocabulary recall MCQs (shown last) ──────────────────────
+  const mcqExs = [];
+
+  // MCQ: Arabic → label (ar_en)
+  shuffle(vocab).slice(0, 4).forEach(w => {
+    const distractors = shuffle(pool.filter(x => x.en !== w.en)).slice(0, 3).map(x => getLabel(x));
+    const label = getLabel(w);
+    mcqExs.push({ type:"ar_en", prompt:w.ar, promptEn:w.en, correct:label, options:shuffle([label,...distractors]) });
+  });
+  // MCQ: label → Arabic (en_ar)
+  shuffle(vocab).slice(0, 4).forEach(w => {
+    const distractors = shuffle(pool.filter(x => x.ar !== w.ar)).slice(0, 3).map(x => x.ar);
+    const opts = shuffle([w.ar,...distractors]);
+    const allVocab = [...vocab, ...allPrior];
+    const meanings = {};
+    opts.forEach(ar => { const found = allVocab.find(x => x.ar === ar); if (found) meanings[ar] = getLabel(found); });
+    mcqExs.push({ type:"en_ar", promptEn:getLabel(w), correct:w.ar, options:opts, meanings });
+  });
+  // Match pairs
+  if (vocab.length >= 4)
+    mcqExs.push({ type:"match", pairs:shuffle(vocab).slice(0,4).map(w=>({ar:w.ar,en:getLabel(w)})) });
+
+  // Grammar exercises first, vocabulary recall last (each bucket internally shuffled)
+  return [...shuffle(grammarExs), ...shuffle(mcqExs)];
 }
 
 function buildReviewExercises(review) {
