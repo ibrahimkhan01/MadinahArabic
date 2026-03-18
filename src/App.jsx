@@ -881,9 +881,13 @@ const SESSIONS = [
   { id:3, book:1, lessonRef:"1.1", part:"C", title:"الْحَيَوَانَاتُ", titleEn:"Animals",
     grammar:'More هَذَا/ذَلِكَ with animals. All these nouns are masculine. مَا هَذَا؟ هَذَا كَلْبٌ. مَا ذَلِكَ؟ ذَلِكَ جَمَلٌ.',
     vocab:[{ar:"كَلْبٌ",en:"dog"},{ar:"قِطٌّ",en:"cat"},{ar:"حِمَارٌ",en:"donkey"},{ar:"جَمَلٌ",en:"camel"},{ar:"حِصَانٌ",en:"horse"}],
-    patternTiles:[
-      {emoji:"🐕", question:"مَا هَذَا؟", tiles:["هَذَا","كَلْبٌ","قِطٌّ","حِمَارٌ","جَمَلٌ"], answer:["هَذَا","كَلْبٌ"]},
-      {emoji:"🐪", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","جَمَلٌ","حِصَانٌ","كَلْبٌ","حِمَارٌ"], answer:["ذَلِكَ","جَمَلٌ"]},
+    nearFarExercises:[
+      { near:{emoji:"🐈",ar:"قِطٌّ",en:"cat"}, far:{emoji:"🐕",ar:"كَلْبٌ",en:"dog"},
+        tiles:["هَذَا","ذَلِكَ","قِطٌّ","كَلْبٌ","حِمَارٌ"],
+        answer:["هَذَا","قِطٌّ","ذَلِكَ","كَلْبٌ"] },
+      { near:{emoji:"🐪",ar:"جَمَلٌ",en:"camel"}, far:{emoji:"🐴",ar:"حِصَانٌ",en:"horse"},
+        tiles:["هَذَا","ذَلِكَ","جَمَلٌ","حِصَانٌ","قِطٌّ"],
+        answer:["هَذَا","جَمَلٌ","ذَلِكَ","حِصَانٌ"] },
     ]},
 
   { id:4, book:1, lessonRef:"1.1", part:"D", title:"الْمِهَنُ وَالْمَلَابِسُ", titleEn:"Professions & Clothing",
@@ -909,16 +913,24 @@ const SESSIONS = [
   { id:6, book:1, lessonRef:"1.2", part:"A", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 1)",
     grammar:'ذَلِكَ = "that" for masculine objects far away. Compare: هَذَا كِتَابٌ (This is a book) vs. ذَلِكَ كِتَابٌ (That is a book).',
     vocab:[{ar:"سَرِيرٌ",en:"bed"},{ar:"كُرْسِيٌّ",en:"chair"},{ar:"مَكْتَبٌ",en:"desk/office"},{ar:"جِدَارٌ",en:"wall"}],
-    patternTiles:[
-      {emoji:"🛏️", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","سَرِيرٌ","كُرْسِيٌّ","مَكْتَبٌ"], answer:["ذَلِكَ","سَرِيرٌ"]},
-      {emoji:"🪑", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","كُرْسِيٌّ","سَرِيرٌ","جِدَارٌ"], answer:["ذَلِكَ","كُرْسِيٌّ"]},
+    nearFarExercises:[
+      { near:{emoji:"🪑",ar:"كُرْسِيٌّ",en:"chair"}, far:{emoji:"🛏️",ar:"سَرِيرٌ",en:"bed"},
+        tiles:["هَذَا","ذَلِكَ","كُرْسِيٌّ","سَرِيرٌ","مَكْتَبٌ"],
+        answer:["هَذَا","كُرْسِيٌّ","ذَلِكَ","سَرِيرٌ"] },
+      { near:{emoji:"🖥️",ar:"مَكْتَبٌ",en:"desk"}, far:{emoji:"🧱",ar:"جِدَارٌ",en:"wall"},
+        tiles:["هَذَا","ذَلِكَ","مَكْتَبٌ","جِدَارٌ","كُرْسِيٌّ"],
+        answer:["هَذَا","مَكْتَبٌ","ذَلِكَ","جِدَارٌ"] },
     ]},
   { id:7, book:1, lessonRef:"1.2", part:"B", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 2)",
     grammar:'Practice هَذَا and ذَلِكَ with more nouns. مَنْ هَذَا؟ = Who is this? (used for people).',
     vocab:[{ar:"وَلَدٌ",en:"boy"},{ar:"رَجُلٌ",en:"man"},{ar:"طَالِبٌ",en:"student (m.)"},{ar:"مُدَرِّسٌ",en:"teacher (m.)"}],
-    patternTiles:[
-      {emoji:"👦", question:"مَنْ هَذَا؟", tiles:["هَذَا","وَلَدٌ","رَجُلٌ","طَالِبٌ"], answer:["هَذَا","وَلَدٌ"]},
-      {emoji:"👨‍🏫", question:"مَنْ هَذَا؟", tiles:["هَذَا","مُدَرِّسٌ","وَلَدٌ","طَالِبٌ"], answer:["هَذَا","مُدَرِّسٌ"]},
+    nearFarExercises:[
+      { near:{emoji:"👦",ar:"وَلَدٌ",en:"boy"}, far:{emoji:"👨‍🏫",ar:"مُدَرِّسٌ",en:"teacher"},
+        tiles:["هَذَا","ذَلِكَ","وَلَدٌ","مُدَرِّسٌ","رَجُلٌ"],
+        answer:["هَذَا","وَلَدٌ","ذَلِكَ","مُدَرِّسٌ"] },
+      { near:{emoji:"👨",ar:"رَجُلٌ",en:"man"}, far:{emoji:"🎓",ar:"طَالِبٌ",en:"student"},
+        tiles:["هَذَا","ذَلِكَ","رَجُلٌ","طَالِبٌ","وَلَدٌ"],
+        answer:["هَذَا","رَجُلٌ","ذَلِكَ","طَالِبٌ"] },
     ]},
 
   { id:8, book:1, lessonRef:"1.3", part:"A", title:"الـ — The Definite Article (Part 1)", titleEn:"Making Nouns Definite",
@@ -1536,6 +1548,12 @@ function buildExercises(session, lang = "en") {
   if (session.sunMoonExercises) {
     session.sunMoonExercises.forEach(ex => {
       exercises.push({ type:"sun_moon", ...ex });
+    });
+  }
+  // Near/far demonstrative exercises (هَذَا / ذَلِكَ)
+  if (session.nearFarExercises) {
+    session.nearFarExercises.forEach(ex => {
+      exercises.push({ type:"near_far", ...ex });
     });
   }
   // Pattern sentence exercises (Book 1 only)
@@ -2386,6 +2404,115 @@ function SunMoonEx({ exercise, onResult, lang = "en" }) {
   );
 }
 
+// ── NearFarEx — هَذَا / ذَلِكَ contrast exercise ─────────────────────────────
+// Shows two images: big (near = هَذَا) and small (far = ذَلِكَ).
+// Learner builds both sentences in one tile pool.
+// exercise: { near:{emoji,ar,en}, far:{emoji,ar,en}, tiles:[...], answer:[...] }
+function NearFarEx({ exercise, onResult, lang = "en" }) {
+  const { w } = useWindowSize();
+  const isUrdu = lang === "ur";
+  const tileFont = w >= 1024 ? 24 : 20;
+  const [placed, setPlaced]     = useState([]);
+  const [remaining, setRemaining] = useState(() => shuffle([...exercise.tiles]));
+  const [checked, setChecked]   = useState(false);
+  const [correct, setCorrect]   = useState(false);
+
+  const addTile    = (tile,idx) => { if(checked)return; setPlaced([...placed,tile]); setRemaining(remaining.filter((_,i)=>i!==idx)); };
+  const removeTile = (tile,idx) => { if(checked)return; setPlaced(placed.filter((_,i)=>i!==idx)); setRemaining([...remaining,tile]); };
+  const check = () => {
+    const ok = JSON.stringify(placed) === JSON.stringify(exercise.answer);
+    setCorrect(ok); setChecked(true);
+    if (ok) { speak(exercise.answer.join(" ")); setTimeout(()=>onResult(true),1400); }
+  };
+  const readyToCheck = placed.length === exercise.answer.length;
+
+  return (
+    <div style={{textAlign:"center"}}>
+      {/* Scene — near (big, right in RTL) + far (small, left in RTL) */}
+      <div style={{display:"flex",justifyContent:"center",alignItems:"flex-end",gap:40,marginBottom:20,direction:"rtl"}}>
+        {/* Near */}
+        <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+          <EmojiImg emoji={exercise.near.emoji} size={88}/>
+          <div style={{marginTop:8,padding:"4px 16px",background:"#dbeafe",borderRadius:20,
+            fontSize:18,fontFamily:arFont,color:"#1d4ed8",fontWeight:700,letterSpacing:1}}>
+            هَذَا
+          </div>
+        </div>
+        {/* Far */}
+        <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+          <EmojiImg emoji={exercise.far.emoji} size={46}/>
+          <div style={{marginTop:8,padding:"4px 14px",background:"#f1f5f9",borderRadius:20,
+            fontSize:18,fontFamily:arFont,color:"#64748b",fontWeight:700,letterSpacing:1}}>
+            ذَلِكَ
+          </div>
+        </div>
+      </div>
+
+      {/* Answer zone */}
+      <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,
+        border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",
+        padding:"10px 12px",marginBottom:8,display:"flex",flexWrap:"wrap",gap:8,
+        justifyContent:"center",alignItems:"center",direction:"rtl"}}>
+        {placed.length===0 && <span style={{color:"#94a3b8",fontSize:13,fontFamily:isUrdu?urFont:"inherit"}}>
+          {isUrdu?"دونوں جملے بنائیں":"Build both sentences"}
+        </span>}
+        {placed.map((tile,i)=>(
+          <button key={`p-${tile}-${i}`}
+            onClick={checked?undefined:()=>removeTile(tile,i)}
+            style={{padding:"8px 12px",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,
+              background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",
+              color:checked?(correct?"#166534":"#991b1b"):"#1e40af",
+              border:"none",cursor:checked?"default":"pointer"}}>
+            {tile}
+          </button>
+        ))}
+      </div>
+
+      {/* Tile bank */}
+      <div style={{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",marginBottom:12,direction:"rtl"}}>
+        {remaining.map((tile,i)=>(
+          <button key={`r-${tile}-${i}`} onClick={()=>addTile(tile,i)} disabled={checked}
+            style={{padding:"8px 14px",borderRadius:10,fontSize:tileFont,fontFamily:arFont,fontWeight:700,
+              background:"white",border:"2px solid #e2e8f0",color:"#0f172a",
+              cursor:checked?"default":"pointer",opacity:checked?0.5:1}}>
+            {tile}
+          </button>
+        ))}
+      </div>
+
+      {!checked && readyToCheck && (
+        <button onClick={check} style={{width:"100%",padding:"13px",
+          background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",
+          border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",
+          fontFamily:isUrdu?urFont:"inherit"}}>
+          {isUrdu?"جانچیں ✓":"Check →"}
+        </button>
+      )}
+      {checked && correct && (
+        <div style={{padding:"10px 16px",borderRadius:10,background:"#dcfce7",
+          color:"#166534",fontWeight:700,fontSize:15,fontFamily:isUrdu?urFont:"inherit"}}>
+          {isUrdu?"شاباش! 🎉":"Perfect! 🎉"}
+        </div>
+      )}
+      {checked && !correct && (
+        <div style={{borderRadius:10,overflow:"hidden",border:"1px solid #fca5a5"}}>
+          <div style={{padding:"10px 16px",background:"#fee2e2",color:"#991b1b",fontWeight:700,fontSize:14}}>
+            {isUrdu?"✗ صحیح: ":"✗ Correct: "}
+            <span style={{fontFamily:arFont,direction:"rtl",fontSize:18,display:"inline"}}>
+              {exercise.answer.join(" ")}
+            </span>
+          </div>
+          <button onClick={()=>onResult(false)} style={{width:"100%",padding:"11px",
+            background:"#ef4444",color:"white",border:"none",fontWeight:700,
+            fontSize:15,cursor:"pointer",fontFamily:isUrdu?urFont:"inherit"}}>
+            {isUrdu?"اگلا ←":"Next →"}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // Grammar intro card (regular sessions)
 function GrammarCard({ session, onStart, lang = "en" }) {
   const { w } = useWindowSize();
@@ -3059,9 +3186,11 @@ export default function MadinahArabicApp() {
                 ? <MatchEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
                 : ex.type==="review_tile"
                   ? <ReviewTileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
-                  : ex.type==="al_transform"
-                    ? <AlTransformEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
-                    : ex.type==="sun_moon"
+                  : ex.type==="near_far"
+                    ? <NearFarEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
+                    : ex.type==="al_transform"
+                      ? <AlTransformEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
+                      : ex.type==="sun_moon"
                       ? <SunMoonEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
                       : ex.type==="pattern_tile"
                         ? <PatternTileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
