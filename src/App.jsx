@@ -185,6 +185,62 @@ const QURAN_CONNECTIONS = {
     ref: 'Al-Baqarah 2:74',
     ref_ur: 'سورۃ البقرہ ۲:۷۴',
   },
+  'فوق': {
+    ar: 'وَهُوَ الْقَاهِرُ فَوْقَ عِبَادِهِ',
+    en: 'He is the Subjugator over His servants',
+    ur: 'اور وہ اپنے بندوں پر غالب ہے',
+    ref: 'Al-Anʿām 6:18',
+    ref_ur: 'سورۃ الانعام ۶:۱۸',
+  },
+  'تحت': {
+    ar: 'تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ',
+    en: 'Beneath it rivers flow',
+    ur: 'جن کے نیچے نہریں بہتی ہیں',
+    ref: 'Al-Baqarah 2:25',
+    ref_ur: 'سورۃ البقرہ ۲:۲۵',
+  },
+  'في': {
+    ar: 'وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْ حَبْلِ الْوَرِيدِ',
+    en: 'We are closer to him than his jugular vein',
+    ur: 'اور ہم اس کی شہ رگ سے بھی زیادہ قریب ہیں',
+    ref: 'Qāf 50:16',
+    ref_ur: 'سورۃ ق ۵۰:۱۶',
+  },
+  'على': {
+    ar: 'وَعَلَى اللَّهِ فَتَوَكَّلُوا',
+    en: 'And upon Allah rely',
+    ur: 'اور اللہ پر بھروسہ کرو',
+    ref: 'Al-Māʾidah 5:23',
+    ref_ur: 'سورۃ المائدہ ۵:۲۳',
+  },
+  'من': {
+    ar: 'إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ',
+    en: 'Indeed, to Allah we belong and to Him we return',
+    ur: 'بے شک ہم اللہ کے ہیں اور اسی کی طرف لوٹنے والے ہیں',
+    ref: 'Al-Baqarah 2:156',
+    ref_ur: 'سورۃ البقرہ ۲:۱۵۶',
+  },
+  'الى': {
+    ar: 'وَإِلَى اللَّهِ تُرْجَعُ الْأُمُورُ',
+    en: 'And to Allah all matters return',
+    ur: 'اور اللہ ہی کی طرف سب معاملات لوٹتے ہیں',
+    ref: 'Al-Baqarah 2:210',
+    ref_ur: 'سورۃ البقرہ ۲:۲۱۰',
+  },
+  'خلف': {
+    ar: 'لَهُ مُعَقِّبَاتٌ مِّن بَيْنِ يَدَيْهِ وَمِنْ خَلْفِهِ يَحْفَظُونَهُ',
+    en: 'For him are angels before and behind him, protecting him',
+    ur: 'اس کے آگے اور پیچھے فرشتے ہیں جو اسے محفوظ رکھتے ہیں',
+    ref: 'Al-Raʿd 13:11',
+    ref_ur: 'سورۃ الرعد ۱۳:۱۱',
+  },
+  'امام': {
+    ar: 'أَمَامَهُمْ جَهَنَّمُ وَلَا يُغْنِي عَنْهُمْ مَا كَسَبُوا شَيْئًا',
+    en: 'Before them is Hell, and what they earned will not avail them at all',
+    ur: 'ان کے آگے جہنم ہے اور جو کچھ انہوں نے کمایا وہ ان کے کچھ کام نہ آئے گا',
+    ref: 'Al-Jāthiyah 45:10',
+    ref_ur: 'سورۃ الجاثیہ ۴۵:۱۰',
+  },
 };
 
 // Returns the QURAN_CONNECTIONS key for the primary word in an exercise, or null.
