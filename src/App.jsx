@@ -36,132 +36,154 @@ const QURAN_CONNECTIONS = {
     en: 'This is the Book; there is no doubt in it',
     ur: 'یہ وہ کتاب ہے جس میں کوئی شک نہیں',
     ref: 'Al-Baqarah 2:2',
+    ref_ur: 'سورۃ البقرہ ۲:۲',
   },
   'قلم': {
     ar: 'وَالْقَلَمِ وَمَا يَسْطُرُونَ',
     en: 'By the pen and what they write',
     ur: 'قلم کی قسم اور جو کچھ وہ لکھتے ہیں',
     ref: 'Al-Qalam 68:1',
+    ref_ur: 'سورۃ القلم ۶۸:۱',
   },
   'كرسي': {
     ar: 'وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ',
     en: 'His Kursī extends over the heavens and the earth',
     ur: 'اس کی کرسی آسمانوں اور زمین پر پھیلی ہوئی ہے',
     ref: 'Al-Baqarah 2:255 (Āyat al-Kursī)',
+    ref_ur: 'سورۃ البقرہ ۲:۲۵۵ (آیت الکرسی)',
   },
   'بيت': {
     ar: 'إِنَّ أَوَّلَ بَيْتٍ وُضِعَ لِلنَّاسِ لَلَّذِي بِبَكَّةَ',
     en: 'The first House set up for mankind is the one at Makkah',
     ur: 'بے شک پہلا گھر جو لوگوں کے لیے بنایا گیا وہ مکہ میں ہے',
     ref: 'Āl ʿImrān 3:96',
+    ref_ur: 'سورۃ آل عمران ۳:۹۶',
   },
   'مسجد': {
     ar: 'وَأَنَّ الْمَسَاجِدَ لِلَّهِ',
     en: 'The masājid belong to Allah',
     ur: 'بے شک مساجد اللہ کے لیے ہیں',
     ref: 'Al-Jinn 72:18',
+    ref_ur: 'سورۃ الجن ۷۲:۱۸',
   },
   'نجم': {
     ar: 'وَالنَّجْمِ إِذَا هَوَىٰ',
     en: 'By the star when it sets',
     ur: 'ستارے کی قسم جب وہ ڈوبے',
     ref: 'Al-Najm 53:1',
+    ref_ur: 'سورۃ النجم ۵۳:۱',
   },
   'مفتاح': {
     ar: 'وَعِندَهُ مَفَاتِحُ الْغَيْبِ لَا يَعْلَمُهَا إِلَّا هُوَ',
     en: 'With Him are the keys of the unseen; none knows them except Him',
     ur: 'اور اسی کے پاس غیب کی کنجیاں ہیں، جنہیں وہی جانتا ہے',
     ref: 'Al-Anʿām 6:59',
+    ref_ur: 'سورۃ الانعام ۶:۵۹',
   },
   'كلب': {
     ar: 'وَكَلْبُهُم بَاسِطٌ ذِرَاعَيْهِ بِالْوَصِيدِ',
     en: 'Their dog stretching its forelegs at the entrance',
     ur: 'اور ان کا کتا دہلیز پر اپنے بازو پھیلائے بیٹھا تھا',
     ref: 'Al-Kahf 18:18',
+    ref_ur: 'سورۃ الکہف ۱۸:۱۸',
   },
   'حمار': {
     ar: 'كَمَثَلِ الْحِمَارِ يَحْمِلُ أَسْفَارًا',
     en: 'Like a donkey carrying volumes of books',
     ur: 'اس گدھے کی مثال جو کتابوں کا بوجھ اٹھائے',
     ref: 'Al-Jumuʿah 62:5',
+    ref_ur: 'سورۃ الجمعہ ۶۲:۵',
   },
   'جمل': {
     ar: 'حَتَّىٰ يَلِجَ الْجَمَلُ فِي سَمِّ الْخِيَاطِ',
     en: 'Until the camel passes through the eye of a needle',
     ur: 'یہاں تک کہ اونٹ سوئی کے ناکے میں داخل ہو جائے',
     ref: 'Al-Aʿrāf 7:40',
+    ref_ur: 'سورۃ الاعراف ۷:۴۰',
   },
   'رجل': {
     ar: 'وَجَاءَ رَجُلٌ مِّنْ أَقْصَى الْمَدِينَةِ يَسْعَىٰ',
     en: 'A man came running from the far end of the city',
     ur: 'اور شہر کے آخری کنارے سے ایک آدمی دوڑتا ہوا آیا',
     ref: 'Yā-Sīn 36:20',
+    ref_ur: 'سورۃ یٰسین ۳۶:۲۰',
   },
   'ولد': {
     ar: 'لَمْ يَلِدْ وَلَمْ يُولَدْ',
     en: 'He neither begets nor is He begotten',
     ur: 'نہ اس کی کوئی اولاد ہے اور نہ وہ کسی سے پیدا ہوا',
     ref: 'Al-Ikhlāṣ 112:3',
+    ref_ur: 'سورۃ الاخلاص ۱۱۲:۳',
   },
   'امام': {
     ar: 'إِنِّي جَاعِلُكَ لِلنَّاسِ إِمَامًا',
     en: 'I will make you a leader for the people',
     ur: 'میں تمہیں لوگوں کا امام بنانے والا ہوں',
     ref: 'Al-Baqarah 2:124',
+    ref_ur: 'سورۃ البقرہ ۲:۱۲۴',
   },
   'شمس': {
     ar: 'وَالشَّمْسُ تَجْرِي لِمُسْتَقَرٍّ لَّهَا',
     en: 'The sun runs to its resting place',
     ur: 'اور سورج اپنے مقررہ ٹھکانے کی طرف چلتا رہتا ہے',
     ref: 'Yā-Sīn 36:38',
+    ref_ur: 'سورۃ یٰسین ۳۶:۳۸',
   },
   'قمر': {
     ar: 'وَالْقَمَرَ قَدَّرْنَاهُ مَنَازِلَ',
     en: 'We have measured out stages for the moon',
     ur: 'اور چاند کے لیے ہم نے منزلیں مقرر کی ہیں',
     ref: 'Yā-Sīn 36:39',
+    ref_ur: 'سورۃ یٰسین ۳۶:۳۹',
   },
   'سرير': {
     ar: 'عَلَىٰ سُرُرٍ مُّتَقَابِلِينَ',
     en: 'On thrones, facing one another (in Paradise)',
     ur: 'تختوں پر آمنے سامنے بیٹھے ہوں گے',
     ref: 'Al-Ḥijr 15:47',
+    ref_ur: 'سورۃ الحجر ۱۵:۴۷',
   },
   'كبير': {
     ar: 'إِنَّ اللَّهَ كَانَ عَلِيًّا كَبِيرًا',
     en: 'Indeed, Allah is ever Most High, Greatest',
     ur: 'بے شک اللہ بلند و عظیم ہے',
     ref: 'Al-Nisāʾ 4:34',
+    ref_ur: 'سورۃ النساء ۴:۳۴',
   },
   'جميل': {
     ar: 'فَاصْبِرْ صَبْرًا جَمِيلًا',
     en: 'So be patient with beautiful patience',
     ur: 'پس خوبصورت صبر اختیار کریں',
     ref: 'Al-Maʿārij 70:5',
+    ref_ur: 'سورۃ المعارج ۷۰:۵',
   },
   'باب': {
     ar: 'وَادْخُلُوا الْبَابَ سُجَّدًا',
     en: 'Enter the gate bowing down',
     ur: 'اور دروازے میں سجدہ کرتے ہوئے داخل ہو',
     ref: 'Al-Baqarah 2:58',
+    ref_ur: 'سورۃ البقرہ ۲:۵۸',
   },
   'صغير': {
     ar: 'وَقُل رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا',
     en: 'Say: My Lord, have mercy on them as they raised me when I was small',
     ur: 'کہو: اے میرے رب! ان پر رحم کر جیسے انہوں نے مجھے بچپن میں پالا',
     ref: 'Al-Isrāʾ 17:24',
+    ref_ur: 'سورۃ الاسراء ۱۷:۲۴',
   },
   'جديد': {
     ar: 'أَإِنَّا لَمَبْعُوثُونَ خَلْقًا جَدِيدًا',
     en: 'Shall we indeed be raised up as a new creation?',
     ur: 'کیا ہم واقعی نئی تخلیق میں اٹھائے جائیں گے؟',
     ref: 'Al-Isrāʾ 17:49',
+    ref_ur: 'سورۃ الاسراء ۱۷:۴۹',
   },
   'حجر': {
     ar: 'وَإِنَّ مِنَ الْحِجَارَةِ لَمَا يَتَفَجَّرُ مِنْهُ الْأَنْهَارُ',
     en: 'And indeed, from some rocks rivers burst forth',
     ur: 'اور بعض پتھروں سے نہریں پھوٹتی ہیں',
     ref: 'Al-Baqarah 2:74',
+    ref_ur: 'سورۃ البقرہ ۲:۷۴',
   },
 };
 
@@ -2177,8 +2199,8 @@ function QuranOverlay({ connection, lang, onContinue }) {
       </div>
 
       {/* Surah reference */}
-      <div style={{color:"#86efac", fontSize:12, fontWeight:600, marginBottom:14}}>
-        — {connection.ref}
+      <div style={{color:"#86efac", fontSize:12, fontWeight:600, marginBottom:14, fontFamily:isUrdu?urFont:"inherit", direction:isUrdu?"rtl":"ltr"}}>
+        — {isUrdu ? (connection.ref_ur || connection.ref) : connection.ref}
       </div>
 
       {/* Translation */}
