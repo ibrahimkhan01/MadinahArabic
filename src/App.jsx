@@ -170,8 +170,9 @@ const EMOJI = {
   "king":"👑","prophet":"🕌","messenger":"📨","slave":"🙇",
   "doctor":"👨‍⚕️","doctor (m.)":"👨‍⚕️","doctor (f.)":"👩‍⚕️",
   "engineer":"👷","worker":"👷","merchant":"🧑‍💼","farmer":"🧑‍🌾",
+  "imam":"👳🏼‍♂️","handkerchief":"🤧","shirt":"👕",
   // Animals
-  "dog":"🐕","cat":"🐈","horse":"🐴","lion":"🦁","bird":"🐦",
+  "dog":"🐕","cat":"🐈","horse":"🐴","donkey":"🫏","lion":"🦁","bird":"🐦",
   "cow":"🐄","camel":"🐪","sheep":"🐑","elephant":"🐘","fish":"🐟",
   // Religion / abstract
   "prayer":"🤲","fasting":"🌙","pilgrimage":"🕌","zakat":"💰",
@@ -1484,6 +1485,30 @@ function MatchEx({ exercise, onResult, lang = "en" }) {
 }
 
 // Tile sentence builder (regular sessions)
+// ── Shared tile grading helpers ──────────────────────────────────────────────
+function tileGradeStyle(grade) {
+  if (grade === 'correct')   return {bg:'#dcfce7', border:'#22c55e', col:'#166534'};
+  if (grade === 'misplaced') return {bg:'#fef3c7', border:'#f59e0b', col:'#92400e'};
+                             return {bg:'#fee2e2', border:'#ef4444', col:'#991b1b'};
+}
+function tileGradeExp(tile, grade, answer, isUrdu) {
+  if (grade === 'correct')
+    return isUrdu ? `✓ "${tile}" صحیح جگہ پر ہے` : `✓ "${tile}" is in the correct position`;
+  if (grade === 'misplaced') {
+    const pos = answer.indexOf(tile) + 1;
+    return isUrdu
+      ? `"${tile}" اس جملے میں ہے — لفظ ${pos} پر ہونا چاہیے`
+      : `"${tile}" belongs in this sentence — should be word ${pos}`;
+  }
+  return isUrdu ? `"${tile}" اس جملے میں نہیں ہے` : `"${tile}" is not part of this sentence`;
+}
+function tileGetGrade(tile, idx, answer) {
+  if (tile === answer[idx]) return 'correct';
+  if (answer.includes(tile)) return 'misplaced';
+  return 'wrong';
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 function TileEx({ exercise, onResult, lang = "en" }) {
   const [placed, setPlaced] = useState([]);
   const [remaining, setRemaining] = useState(()=>shuffle(exercise.tiles));
@@ -1493,9 +1518,10 @@ function TileEx({ exercise, onResult, lang = "en" }) {
   const tileFont = w >= 1024 ? 26 : w >= 640 ? 22 : 20;
   const [checked, setChecked] = useState(false);
   const [correct, setCorrect] = useState(false);
+  const [activeExp, setActiveExp] = useState(null);
 
-  const addTile=(tile,idx)=>{if(checked)return;setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
-  const removeTile=(tile,idx)=>{if(checked)return;setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
+  const addTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
+  const removeTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
   const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);if(ok)setTimeout(()=>onResult(true),1200);};
 
   return (
@@ -1507,19 +1533,46 @@ function TileEx({ exercise, onResult, lang = "en" }) {
           <SpeakBtn text={exercise.answer.join(" ")} size={15} /> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearSentence}</span>
         </p>
       )}
-      <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
+      {/* Answer zone */}
+      <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:8,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
         {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13,fontFamily:isUrdu?urFont:"inherit"}}>{t.tapToBuild}</span>}
-        {placed.map((tile,i)=>(
-          <button key={`${tile}-${i}`} onClick={()=>removeTile(tile,i)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{tile}</button>
-        ))}
+        {placed.map((tile,i)=>{
+          const grade = checked ? tileGetGrade(tile,i,exercise.answer) : null;
+          const s = grade ? tileGradeStyle(grade) : null;
+          return (
+            <button key={`${tile}-${i}`}
+              onClick={checked ? ()=>setActiveExp(tileGradeExp(tile,grade,exercise.answer,isUrdu)) : ()=>removeTile(tile,i)}
+              style={{padding:"8px 12px",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,
+                background:s?s.bg:(checked?"#dcfce7":"#dbeafe"),
+                border:s?`2px solid ${s.border}`:"none",
+                color:s?s.col:"#1e293b",
+                cursor:"pointer"}}>
+              {tile}
+            </button>
+          );
+        })}
       </div>
+      {/* Explanation bar */}
+      {checked&&!correct&&activeExp&&(
+        <div style={{margin:"0 0 8px",padding:"8px 14px",background:"#f0f9ff",border:"1px solid #bae6fd",borderRadius:8,fontSize:13,color:"#0c4a6e",lineHeight:1.5,fontFamily:arFont,direction:"rtl"}}>
+          {activeExp}
+        </div>
+      )}
+      {/* Tile bank */}
       <div style={{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",marginBottom:16,direction:"rtl"}}>
-        {remaining.map((tile,i)=>(
-          <button key={`${tile}-${i}`} onClick={()=>addTile(tile,i)} style={{padding:"8px 12px",background:"white",border:"2px solid #e2e8f0",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:"pointer",color:"#1e293b",transition:"transform 0.1s"}}
-            onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.06)"}}
-            onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
-            {tile}</button>
-        ))}
+        {remaining.map((tile,i)=>{
+          const missing = checked && exercise.answer.includes(tile);
+          const bankExp = isUrdu ? `"${tile}" جملے میں ہونا چاہیے تھا` : `"${tile}" was needed but not placed`;
+          return (
+            <button key={`${tile}-${i}`}
+              onClick={checked?(missing?()=>setActiveExp(bankExp):undefined):()=>addTile(tile,i)}
+              style={{padding:"8px 12px",background:missing?"#fee2e2":"white",border:missing?"2px solid #ef4444":"2px solid #e2e8f0",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,color:missing?"#991b1b":"#1e293b",cursor:checked?(missing?"pointer":"default"):"pointer",transition:"transform 0.1s"}}
+              onMouseEnter={!checked?e=>{e.currentTarget.style.transform="scale(1.06)"}:undefined}
+              onMouseLeave={!checked?e=>{e.currentTarget.style.transform="scale(1)"}:undefined}>
+              {tile}
+            </button>
+          );
+        })}
       </div>
       {!checked&&placed.length>0&&<button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)",fontFamily:isUrdu?urFont:"inherit"}}>{t.checkBtn}</button>}
       {checked&&correct&&<div style={{padding:"10px 16px",borderRadius:10,background:"#dcfce7",color:"#166534",fontWeight:700,fontSize:15,fontFamily:isUrdu?urFont:"inherit"}}>{t.perfectMsg}</div>}
@@ -1548,9 +1601,10 @@ function PatternTileEx({ exercise, onResult, lang = "en" }) {
   const [remaining, setRemaining] = useState(()=>shuffle([...exercise.tiles]));
   const [checked, setChecked] = useState(false);
   const [correct, setCorrect] = useState(false);
+  const [activeExp, setActiveExp] = useState(null);
 
-  const addTile=(tile,idx)=>{if(checked)return;setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
-  const removeTile=(tile,idx)=>{if(checked)return;setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
+  const addTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
+  const removeTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
   const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);if(ok)setTimeout(()=>onResult(true),1200);};
 
   return (
@@ -1566,23 +1620,50 @@ function PatternTileEx({ exercise, onResult, lang = "en" }) {
         </div>
       )}
       {checked && (
-        <p style={{fontSize:12,color:"#94a3b8",marginBottom:14}}>
+        <p style={{fontSize:12,color:"#94a3b8",marginBottom:10}}>
           <SpeakBtn text={exercise.answer.join(" ")} size={14}/> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearAnswer}</span>
         </p>
       )}
-      <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:checked?8:14,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
+      {/* Answer zone */}
+      <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:8,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
         {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13,fontFamily:isUrdu?urFont:"inherit"}}>{t.tapToAnswer}</span>}
-        {placed.map((tile,i)=>(
-          <button key={`${tile}-${i}`} onClick={()=>removeTile(tile,i)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{tile}</button>
-        ))}
+        {placed.map((tile,i)=>{
+          const grade = checked ? tileGetGrade(tile,i,exercise.answer) : null;
+          const s = grade ? tileGradeStyle(grade) : null;
+          return (
+            <button key={`${tile}-${i}`}
+              onClick={checked ? ()=>setActiveExp(tileGradeExp(tile,grade,exercise.answer,isUrdu)) : ()=>removeTile(tile,i)}
+              style={{padding:"8px 12px",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,
+                background:s?s.bg:(checked?"#dcfce7":"#dbeafe"),
+                border:s?`2px solid ${s.border}`:"none",
+                color:s?s.col:"#1e293b",
+                cursor:"pointer"}}>
+              {tile}
+            </button>
+          );
+        })}
       </div>
+      {/* Explanation bar */}
+      {checked&&!correct&&activeExp&&(
+        <div style={{margin:"0 0 8px",padding:"8px 14px",background:"#f0f9ff",border:"1px solid #bae6fd",borderRadius:8,fontSize:13,color:"#0c4a6e",lineHeight:1.5,fontFamily:arFont,direction:"rtl"}}>
+          {activeExp}
+        </div>
+      )}
+      {/* Tile bank */}
       <div style={{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",marginBottom:16,direction:"rtl"}}>
-        {remaining.map((tile,i)=>(
-          <button key={`${tile}-${i}`} onClick={()=>addTile(tile,i)} style={{padding:"8px 12px",background:"white",border:"2px solid #e2e8f0",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:"pointer",color:"#1e293b",transition:"transform 0.1s"}}
-            onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.06)"}}
-            onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
-            {tile}</button>
-        ))}
+        {remaining.map((tile,i)=>{
+          const missing = checked && exercise.answer.includes(tile);
+          const bankExp = isUrdu ? `"${tile}" جملے میں ہونا چاہیے تھا` : `"${tile}" was needed but not placed`;
+          return (
+            <button key={`${tile}-${i}`}
+              onClick={checked?(missing?()=>setActiveExp(bankExp):undefined):()=>addTile(tile,i)}
+              style={{padding:"8px 12px",background:missing?"#fee2e2":"white",border:missing?"2px solid #ef4444":"2px solid #e2e8f0",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,color:missing?"#991b1b":"#1e293b",cursor:checked?(missing?"pointer":"default"):"pointer",transition:"transform 0.1s"}}
+              onMouseEnter={!checked?e=>{e.currentTarget.style.transform="scale(1.06)"}:undefined}
+              onMouseLeave={!checked?e=>{e.currentTarget.style.transform="scale(1)"}:undefined}>
+              {tile}
+            </button>
+          );
+        })}
       </div>
       {!checked&&placed.length>0&&<button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)",fontFamily:isUrdu?urFont:"inherit"}}>{t.checkBtn}</button>}
       {checked&&correct&&<div style={{padding:"10px 16px",borderRadius:10,background:"#dcfce7",color:"#166534",fontWeight:700,fontSize:15,fontFamily:isUrdu?urFont:"inherit"}}>{t.perfectMsg}</div>}
@@ -1612,12 +1693,14 @@ function ReviewTileEx({ exercise, onResult, lang = "en" }) {
   const [checked, setChecked] = useState(false);
   const [correct, setCorrect] = useState(false);
   const [toggled, setToggled] = useState({}); // { prebakedAr: true/false } — true = show label
+  const [activeExp, setActiveExp] = useState(null);
 
   const prebakedSet = exercise.prebaked || [];
   const prebakedInAnswer = exercise.answer.filter(t => prebakedSet.some(p=>p.ar===t));
+  const nonPrebakedAnswer = exercise.answer.filter(t => !prebakedSet.some(p=>p.ar===t));
 
-  const addTile=(tile,idx)=>{if(checked)return;setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
-  const removeTile=(tile,idx)=>{if(checked)return;setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
+  const addTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
+  const removeTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
   const togglePrebaked=(ar)=>setToggled(t=>({...t,[ar]:!t[ar]}));
 
   const check=()=>{
@@ -1666,20 +1749,40 @@ function ReviewTileEx({ exercise, onResult, lang = "en" }) {
               {showing?label:item.tile}
             </button>;
           } else if(item.tile){
-            return <button key={`pl-${i}`} onClick={()=>removeTile(item.tile,item.gapIdx)} style={{padding:"8px 12px",background:checked?(correct?"#dcfce7":"#fee2e2"):"#dbeafe",border:"none",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:checked?"default":"pointer",color:"#1e293b"}}>{item.tile}</button>;
+            const grade = checked ? tileGetGrade(item.tile, item.gapIdx, nonPrebakedAnswer) : null;
+            const s = grade ? tileGradeStyle(grade) : null;
+            return <button key={`pl-${i}`}
+              onClick={checked ? ()=>setActiveExp(tileGradeExp(item.tile,grade,nonPrebakedAnswer,isUrdu)) : ()=>removeTile(item.tile,item.gapIdx)}
+              style={{padding:"8px 12px",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,
+                background:s?s.bg:(checked?"#dcfce7":"#dbeafe"),
+                border:s?`2px solid ${s.border}`:"none",
+                color:s?s.col:"#1e293b",cursor:"pointer"}}>{item.tile}</button>;
           } else {
             return <span key={`gap-${i}`} style={{width:60,height:40,border:"2px dashed #cbd5e1",borderRadius:8,display:"inline-block"}}/>;
           }
         })}
       </div>
+      {/* Explanation bar */}
+      {checked&&!correct&&activeExp&&(
+        <div style={{margin:"0 0 8px",padding:"8px 14px",background:"#f0f9ff",border:"1px solid #bae6fd",borderRadius:8,fontSize:13,color:"#0c4a6e",lineHeight:1.5,fontFamily:arFont,direction:"rtl"}}>
+          {activeExp}
+        </div>
+      )}
       {/* Tile bank */}
       <div style={{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",marginBottom:16,direction:"rtl"}}>
-        {remaining.map((tile,i)=>(
-          <button key={`${tile}-${i}`} onClick={()=>addTile(tile,i)} style={{padding:"8px 12px",background:"white",border:"2px solid #e2e8f0",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,cursor:"pointer",color:"#1e293b",transition:"transform 0.1s"}}
-            onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.06)"}}
-            onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
-            {tile}</button>
-        ))}
+        {remaining.map((tile,i)=>{
+          const missing = checked && nonPrebakedAnswer.includes(tile);
+          const bankExp = isUrdu ? `"${tile}" جملے میں ہونا چاہیے تھا` : `"${tile}" was needed but not placed`;
+          return (
+            <button key={`${tile}-${i}`}
+              onClick={checked?(missing?()=>setActiveExp(bankExp):undefined):()=>addTile(tile,i)}
+              style={{padding:"8px 12px",background:missing?"#fee2e2":"white",border:missing?"2px solid #ef4444":"2px solid #e2e8f0",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,color:missing?"#991b1b":"#1e293b",cursor:checked?(missing?"pointer":"default"):"pointer",transition:"transform 0.1s"}}
+              onMouseEnter={!checked?e=>{e.currentTarget.style.transform="scale(1.06)"}:undefined}
+              onMouseLeave={!checked?e=>{e.currentTarget.style.transform="scale(1)"}:undefined}>
+              {tile}
+            </button>
+          );
+        })}
       </div>
       {!checked&&(placed.length>0||(prebakedSet.length>0&&prebakedSet.length===exercise.answer.length))&&
         <button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)",fontFamily:isUrdu?urFont:"inherit"}}>{t.checkBtn}</button>}
