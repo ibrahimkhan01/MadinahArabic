@@ -22,6 +22,162 @@ const isAr = (s) => /[\u0600-\u06FF]/.test(s);
 const arFont = "'Noto Naskh Arabic', 'Scheherazade New', 'Amiri', serif";
 const urFont = "'Noto Nastaliq Urdu', serif";
 
+// ── QURAN CONNECTIONS ─────────────────────────────────────────────────────────
+// Keyed by stripped Arabic (no diacritics, no definite article, alif normalised).
+// Show after correct answers: 1st time in session, then every 3rd (1, 4, 7, 10…)
+const stripQ = s =>
+  s.replace(/[\u064B-\u065F\u0670\u0640]/g, '') // strip all diacritics
+   .replace(/^ال/, '')                           // strip definite article
+   .replace(/[أإآ]/g, 'ا');                      // normalise alif
+
+const QURAN_CONNECTIONS = {
+  'كتاب': {
+    ar: 'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ',
+    en: 'This is the Book; there is no doubt in it',
+    ur: 'یہ وہ کتاب ہے جس میں کوئی شک نہیں',
+    ref: 'Al-Baqarah 2:2',
+  },
+  'قلم': {
+    ar: 'وَالْقَلَمِ وَمَا يَسْطُرُونَ',
+    en: 'By the pen and what they write',
+    ur: 'قلم کی قسم اور جو کچھ وہ لکھتے ہیں',
+    ref: 'Al-Qalam 68:1',
+  },
+  'كرسي': {
+    ar: 'وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ',
+    en: 'His Kursī extends over the heavens and the earth',
+    ur: 'اس کی کرسی آسمانوں اور زمین پر پھیلی ہوئی ہے',
+    ref: 'Al-Baqarah 2:255 (Āyat al-Kursī)',
+  },
+  'بيت': {
+    ar: 'إِنَّ أَوَّلَ بَيْتٍ وُضِعَ لِلنَّاسِ لَلَّذِي بِبَكَّةَ',
+    en: 'The first House set up for mankind is the one at Makkah',
+    ur: 'بے شک پہلا گھر جو لوگوں کے لیے بنایا گیا وہ مکہ میں ہے',
+    ref: 'Āl ʿImrān 3:96',
+  },
+  'مسجد': {
+    ar: 'وَأَنَّ الْمَسَاجِدَ لِلَّهِ',
+    en: 'The masājid belong to Allah',
+    ur: 'بے شک مساجد اللہ کے لیے ہیں',
+    ref: 'Al-Jinn 72:18',
+  },
+  'نجم': {
+    ar: 'وَالنَّجْمِ إِذَا هَوَىٰ',
+    en: 'By the star when it sets',
+    ur: 'ستارے کی قسم جب وہ ڈوبے',
+    ref: 'Al-Najm 53:1',
+  },
+  'مفتاح': {
+    ar: 'وَعِندَهُ مَفَاتِحُ الْغَيْبِ لَا يَعْلَمُهَا إِلَّا هُوَ',
+    en: 'With Him are the keys of the unseen; none knows them except Him',
+    ur: 'اور اسی کے پاس غیب کی کنجیاں ہیں، جنہیں وہی جانتا ہے',
+    ref: 'Al-Anʿām 6:59',
+  },
+  'كلب': {
+    ar: 'وَكَلْبُهُم بَاسِطٌ ذِرَاعَيْهِ بِالْوَصِيدِ',
+    en: 'Their dog stretching its forelegs at the entrance',
+    ur: 'اور ان کا کتا دہلیز پر اپنے بازو پھیلائے بیٹھا تھا',
+    ref: 'Al-Kahf 18:18',
+  },
+  'حمار': {
+    ar: 'كَمَثَلِ الْحِمَارِ يَحْمِلُ أَسْفَارًا',
+    en: 'Like a donkey carrying volumes of books',
+    ur: 'اس گدھے کی مثال جو کتابوں کا بوجھ اٹھائے',
+    ref: 'Al-Jumuʿah 62:5',
+  },
+  'جمل': {
+    ar: 'حَتَّىٰ يَلِجَ الْجَمَلُ فِي سَمِّ الْخِيَاطِ',
+    en: 'Until the camel passes through the eye of a needle',
+    ur: 'یہاں تک کہ اونٹ سوئی کے ناکے میں داخل ہو جائے',
+    ref: 'Al-Aʿrāf 7:40',
+  },
+  'رجل': {
+    ar: 'وَجَاءَ رَجُلٌ مِّنْ أَقْصَى الْمَدِينَةِ يَسْعَىٰ',
+    en: 'A man came running from the far end of the city',
+    ur: 'اور شہر کے آخری کنارے سے ایک آدمی دوڑتا ہوا آیا',
+    ref: 'Yā-Sīn 36:20',
+  },
+  'ولد': {
+    ar: 'لَمْ يَلِدْ وَلَمْ يُولَدْ',
+    en: 'He neither begets nor is He begotten',
+    ur: 'نہ اس کی کوئی اولاد ہے اور نہ وہ کسی سے پیدا ہوا',
+    ref: 'Al-Ikhlāṣ 112:3',
+  },
+  'امام': {
+    ar: 'إِنِّي جَاعِلُكَ لِلنَّاسِ إِمَامًا',
+    en: 'I will make you a leader for the people',
+    ur: 'میں تمہیں لوگوں کا امام بنانے والا ہوں',
+    ref: 'Al-Baqarah 2:124',
+  },
+  'شمس': {
+    ar: 'وَالشَّمْسُ تَجْرِي لِمُسْتَقَرٍّ لَّهَا',
+    en: 'The sun runs to its resting place',
+    ur: 'اور سورج اپنے مقررہ ٹھکانے کی طرف چلتا رہتا ہے',
+    ref: 'Yā-Sīn 36:38',
+  },
+  'قمر': {
+    ar: 'وَالْقَمَرَ قَدَّرْنَاهُ مَنَازِلَ',
+    en: 'We have measured out stages for the moon',
+    ur: 'اور چاند کے لیے ہم نے منزلیں مقرر کی ہیں',
+    ref: 'Yā-Sīn 36:39',
+  },
+  'سرير': {
+    ar: 'عَلَىٰ سُرُرٍ مُّتَقَابِلِينَ',
+    en: 'On thrones, facing one another (in Paradise)',
+    ur: 'تختوں پر آمنے سامنے بیٹھے ہوں گے',
+    ref: 'Al-Ḥijr 15:47',
+  },
+  'كبير': {
+    ar: 'إِنَّ اللَّهَ كَانَ عَلِيًّا كَبِيرًا',
+    en: 'Indeed, Allah is ever Most High, Greatest',
+    ur: 'بے شک اللہ بلند و عظیم ہے',
+    ref: 'Al-Nisāʾ 4:34',
+  },
+  'جميل': {
+    ar: 'فَاصْبِرْ صَبْرًا جَمِيلًا',
+    en: 'So be patient with beautiful patience',
+    ur: 'پس خوبصورت صبر اختیار کریں',
+    ref: 'Al-Maʿārij 70:5',
+  },
+  'باب': {
+    ar: 'وَادْخُلُوا الْبَابَ سُجَّدًا',
+    en: 'Enter the gate bowing down',
+    ur: 'اور دروازے میں سجدہ کرتے ہوئے داخل ہو',
+    ref: 'Al-Baqarah 2:58',
+  },
+  'صغير': {
+    ar: 'وَقُل رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا',
+    en: 'Say: My Lord, have mercy on them as they raised me when I was small',
+    ur: 'کہو: اے میرے رب! ان پر رحم کر جیسے انہوں نے مجھے بچپن میں پالا',
+    ref: 'Al-Isrāʾ 17:24',
+  },
+  'جديد': {
+    ar: 'أَإِنَّا لَمَبْعُوثُونَ خَلْقًا جَدِيدًا',
+    en: 'Shall we indeed be raised up as a new creation?',
+    ur: 'کیا ہم واقعی نئی تخلیق میں اٹھائے جائیں گے؟',
+    ref: 'Al-Isrāʾ 17:49',
+  },
+  'حجر': {
+    ar: 'وَإِنَّ مِنَ الْحِجَارَةِ لَمَا يَتَفَجَّرُ مِنْهُ الْأَنْهَارُ',
+    en: 'And indeed, from some rocks rivers burst forth',
+    ur: 'اور بعض پتھروں سے نہریں پھوٹتی ہیں',
+    ref: 'Al-Baqarah 2:74',
+  },
+};
+
+// Returns the QURAN_CONNECTIONS key for the primary word in an exercise, or null.
+function getQuranWord(exercise) {
+  const candidates =
+    exercise.type === 'ar_en' ? [exercise.prompt] :
+    exercise.type === 'en_ar' ? [exercise.correct] :
+    exercise.answer ? exercise.answer : [];
+  for (const w of candidates) {
+    const key = stripQ(w);
+    if (QURAN_CONNECTIONS[key]) return key;
+  }
+  return null;
+}
+
 // ── UI strings (English + Urdu) ──────────────────
 const UI_TEXT = {
   en: {
@@ -1987,6 +2143,68 @@ function CompleteScreen({ xp, accuracy, isReview, onContinue }) {
 }
 
 
+// ── QURAN CONNECTION OVERLAY ─────────────────────────────────────────────────
+function QuranOverlay({ connection, lang, onContinue }) {
+  const isUrdu = lang === "ur";
+  return (
+    <div style={{
+      position:"absolute", inset:0, zIndex:100,
+      background:"linear-gradient(160deg,#1a3a2a 0%,#0d2218 100%)",
+      display:"flex", flexDirection:"column", alignItems:"center",
+      justifyContent:"center", padding:"28px 24px", textAlign:"center",
+    }}>
+      {/* Crescent + star motif */}
+      <div style={{fontSize:36, marginBottom:10}}>🌙✨</div>
+
+      {/* Header */}
+      <div style={{
+        color:"#fbbf24", fontSize:12, fontWeight:700,
+        letterSpacing:1.5, textTransform:"uppercase", marginBottom:18,
+        fontFamily:isUrdu?urFont:"inherit",
+      }}>
+        {isUrdu ? "یہ لفظ قرآن کریم میں ہے" : "This word appears in the Holy Quran"}
+      </div>
+
+      {/* Arabic verse */}
+      <div style={{
+        color:"white", fontSize:26, fontFamily:arFont,
+        direction:"rtl", lineHeight:1.9, marginBottom:14,
+        background:"rgba(255,255,255,0.07)", borderRadius:14,
+        padding:"16px 20px", width:"100%", maxWidth:420,
+        boxShadow:"inset 0 1px 0 rgba(255,255,255,0.1)",
+      }}>
+        {connection.ar}
+      </div>
+
+      {/* Surah reference */}
+      <div style={{color:"#86efac", fontSize:12, fontWeight:600, marginBottom:14}}>
+        — {connection.ref}
+      </div>
+
+      {/* Translation */}
+      <div style={{
+        color:"#d1fae5", fontSize:15, lineHeight:1.7,
+        fontFamily:isUrdu?urFont:"inherit",
+        direction:isUrdu?"rtl":"ltr",
+        maxWidth:380, marginBottom:28,
+      }}>
+        "{isUrdu ? connection.ur : connection.en}"
+      </div>
+
+      {/* Continue button */}
+      <button onClick={onContinue} style={{
+        background:GREEN, color:"white", border:"none",
+        borderRadius:12, padding:"13px 44px",
+        fontSize:16, fontWeight:700, cursor:"pointer",
+        fontFamily:isUrdu?urFont:"inherit",
+        boxShadow:"0 4px 14px rgba(5,150,105,0.45)",
+      }}>
+        {isUrdu ? "جاری رکھیں ←" : "Continue →"}
+      </button>
+    </div>
+  );
+}
+
 // ──────────────────────────────────────────────
 // MAIN APP
 // ──────────────────────────────────────────────
@@ -1999,6 +2217,9 @@ export default function MadinahArabicApp() {
   const [total, setTotal] = useState(0);
   const [hearts, setHearts] = useState(5);
   const [streak, setStreak] = useState(0);
+  const [quranOverlay, setQuranOverlay] = useState(null); // {ar,en,ur,ref} or null
+  const quranCounts = useRef({});   // word key → correct-answer count this session
+  const pendingAdvance = useRef(null); // fn to call after overlay dismissed
   const [xp, setXp] = useState(0);
   const [completed, setCompleted] = useState(() => {
     try { return JSON.parse(localStorage.getItem("ma_completed") || "{}"); } catch { return {}; }
@@ -2019,6 +2240,7 @@ export default function MadinahArabicApp() {
     setSessionData(s);
     setExercises(exs);
     setExIdx(0); setCorrect(0); setTotal(0); setHearts(5);
+    setQuranOverlay(null); quranCounts.current = {}; pendingAdvance.current = null;
     setScreen("intro");
     track("session_start", {
       session_id: s.id,
@@ -2029,13 +2251,40 @@ export default function MadinahArabicApp() {
     });
   };
 
+  // Advance to next exercise or complete session. Captured values prevent stale closure.
+  const doAdvance = (nt, nc, capturedExIdx, capturedHearts, capturedSession) => {
+    setTimeout(() => {
+      const last = capturedExIdx + 1 >= exercises.length || capturedHearts <= 1;
+      if (last) {
+        const acc = nt > 0 ? Math.round((nc / nt) * 100) : 0;
+        const earned = Math.max(5, Math.round(acc / 10) * 5);
+        setXp(p => p + earned);
+        setCompleted(prev => ({ ...prev, [capturedSession.id]: acc }));
+        track("session_complete", {
+          session_id: capturedSession?.id,
+          session_title: capturedSession?.titleEn || capturedSession?.title,
+          book: capturedSession?.book || "review",
+          accuracy: acc, xp_earned: earned, language: lang,
+        });
+        setScreen("complete");
+      } else { setExIdx(p => p + 1); }
+    }, 400);
+  };
+
+  const dismissQuranOverlay = () => {
+    setQuranOverlay(null);
+    const fn = pendingAdvance.current;
+    pendingAdvance.current = null;
+    if (fn) fn();
+  };
+
   const handleResult = (wasCorrect) => {
     const newTotal = total + 1;
     const newCorrect = correct + (wasCorrect ? 1 : 0);
     setTotal(newTotal); setCorrect(newCorrect);
-    if(wasCorrect) { setStreak(p=>p+1); }
+    if (wasCorrect) { setStreak(p => p + 1); }
     else {
-      setHearts(p=>Math.max(0,p-1)); setStreak(0);
+      setHearts(p => Math.max(0, p - 1)); setStreak(0);
       track("exercise_wrong", {
         session_id: sessionData?.id,
         exercise_type: exercises[exIdx]?.type,
@@ -2043,24 +2292,24 @@ export default function MadinahArabicApp() {
         language: lang,
       });
     }
-    setTimeout(()=>{
-      const last = exIdx+1 >= exercises.length || hearts<=1;
-      if(last){
-        const acc = newTotal>0 ? Math.round((newCorrect/newTotal)*100) : 0;
-        const earned = Math.max(5, Math.round(acc/10)*5);
-        setXp(p=>p+earned);
-        setCompleted(prev=>({...prev,[sessionData.id]:acc}));
-        track("session_complete", {
-          session_id: sessionData?.id,
-          session_title: sessionData?.titleEn || sessionData?.title,
-          book: sessionData?.book || "review",
-          accuracy: acc,
-          xp_earned: earned,
-          language: lang,
-        });
-        setScreen("complete");
-      } else { setExIdx(p=>p+1); }
-    },400);
+
+    // Check for Quran connection on correct answers
+    if (wasCorrect) {
+      const qKey = getQuranWord(exercises[exIdx]);
+      if (qKey) {
+        const counts = quranCounts.current;
+        counts[qKey] = (counts[qKey] || 0) + 1;
+        // Show on 1st, 4th, 7th, 10th… correct answer for this word (formula: (n-1) % 3 === 0)
+        if ((counts[qKey] - 1) % 3 === 0) {
+          const capturedExIdx = exIdx, capturedHearts = hearts, capturedSession = sessionData;
+          pendingAdvance.current = () => doAdvance(newTotal, newCorrect, capturedExIdx, capturedHearts, capturedSession);
+          setQuranOverlay(QURAN_CONNECTIONS[qKey]);
+          return; // don't advance yet — overlay requires tap to continue
+        }
+      }
+    }
+
+    doAdvance(newTotal, newCorrect, exIdx, hearts, sessionData);
   };
 
   const { w, h } = useWindowSize();
@@ -2077,6 +2326,7 @@ export default function MadinahArabicApp() {
     minHeight: isSm ? "100vh" : "auto",
     boxShadow: isSm ? "none" : "0 8px 30px rgba(0,0,0,0.10)",
     overflow: "hidden",
+    position: "relative",
     fontFamily: "'Inter','Segoe UI',sans-serif",
   };
   const pageStyle = {
@@ -2416,6 +2666,13 @@ export default function MadinahArabicApp() {
                     ? <PatternTileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
                     : <TileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>}
           </div>
+          {quranOverlay && (
+            <QuranOverlay
+              connection={quranOverlay}
+              lang={lang}
+              onContinue={dismissQuranOverlay}
+            />
+          )}
         </div>
       </div>
     );
