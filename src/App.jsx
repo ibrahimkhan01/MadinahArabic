@@ -172,7 +172,7 @@ const EMOJI = {
   "engineer":"👷","worker":"👷","merchant":"🧑‍💼","farmer":"🧑‍🌾",
   "imam":"👳🏼‍♂️","handkerchief":"🤧","shirt":"👕",
   // Animals
-  "dog":"🐕","cat":"🐈","horse":"🐴","donkey":"🫏","lion":"🦁","bird":"🐦",
+  "dog":"🐕","cat":"🐈","horse":"🐴","lion":"🦁","bird":"🐦",
   "cow":"🐄","camel":"🐪","sheep":"🐑","elephant":"🐘","fish":"🐟",
   // Religion / abstract
   "prayer":"🤲","fasting":"🌙","pilgrimage":"🕌","zakat":"💰",
@@ -1302,7 +1302,7 @@ function MCQ({ exercise, onResult, lang = "en" }) {
         <>
           <p style={{color:"#64748b",fontSize:13,marginBottom:10,fontFamily:isUrdu?urFont:"inherit"}}>{t.selectArabic}</p>
           {getEmoji(exercise.promptEn) && (
-            <div style={{fontSize:48,marginBottom:8,lineHeight:1}}>{getEmoji(exercise.promptEn)}</div>
+            <div style={{marginBottom:8,lineHeight:1}}><EmojiImg emoji={getEmoji(exercise.promptEn)} size={48}/></div>
           )}
           <div style={{
             fontSize:enPromptSize,fontWeight:700,color:"#0f172a",marginBottom:24,
@@ -1484,6 +1484,32 @@ function MatchEx({ exercise, onResult, lang = "en" }) {
   );
 }
 
+// ── Twemoji helpers — consistent cross-platform emoji rendering ───────────────
+function emojiToUrl(emoji) {
+  // Spread into Unicode code points, strip variation selector (U+FE0F), join with '-'
+  const cps = [...emoji]
+    .map(c => c.codePointAt(0))
+    .filter(cp => cp !== 0xFE0F)
+    .map(cp => cp.toString(16))
+    .join('-');
+  return `https://cdn.jsdelivr.net/npm/twemoji@15.0.3/assets/72x72/${cps}.png`;
+}
+function EmojiImg({ emoji, size = 28 }) {
+  const [failed, setFailed] = useState(false);
+  if (!emoji) return null;
+  if (failed) return <span style={{fontSize: Math.round(size * 0.75)}}>{emoji}</span>;
+  return (
+    <img
+      src={emojiToUrl(emoji)}
+      alt={emoji}
+      width={size}
+      height={size}
+      style={{display:'inline-block',verticalAlign:'middle',imageRendering:'auto',lineHeight:1}}
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 // Tile sentence builder (regular sessions)
 // ── Shared tile grading helpers ──────────────────────────────────────────────
 function tileGradeStyle(grade) {
@@ -1610,7 +1636,7 @@ function PatternTileEx({ exercise, onResult, lang = "en" }) {
   return (
     <div style={{textAlign:"center"}}>
       {exercise.emoji
-        ? <div style={{fontSize:72,lineHeight:1,marginBottom:8}}>{exercise.emoji}</div>
+        ? <div style={{lineHeight:1,marginBottom:8}}><EmojiImg emoji={exercise.emoji} size={72}/></div>
         : exercise.en && <p style={{fontSize:15,fontWeight:700,color:"#1e293b",marginBottom:8,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>"{exercise.en}"</p>
       }
       {exercise.question && (
@@ -1839,7 +1865,7 @@ function GrammarCard({ session, onStart, lang = "en" }) {
           const meaning = isUrdu ? (getUrdu(w.en) || w.en) : w.en;
           return (
             <div key={i} style={{background:"#f8fafc",borderRadius:10,padding:"10px",border:"1px solid #e2e8f0",textAlign:"center"}}>
-              {em && <div style={{fontSize:28,lineHeight:1.3}}>{em}</div>}
+              {em && <div style={{lineHeight:1.3,marginBottom:2}}><EmojiImg emoji={em} size={32}/></div>}
               <div style={{fontSize:vocabArSize,fontWeight:700,color:"#1e293b",fontFamily:arFont,direction:"rtl",lineHeight:1.5}}>{w.ar}</div>
               <div style={{
                 fontSize:13,color:"#475569",fontWeight:600,
