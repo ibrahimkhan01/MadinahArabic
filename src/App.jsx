@@ -128,7 +128,7 @@ const QURAN_CONNECTIONS = {
   'في': [
     { ar: 'لِلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ', en: 'To Allah belongs all that is in the heavens and all that is on earth', ur: 'اللہ ہی کا ہے جو کچھ آسمانوں میں ہے اور جو کچھ زمین میں ہے', ref: 'Al-Baqarah 2:284', ref_ur: 'سورۃ البقرہ ۲:۲۸۴' },
     { ar: 'فِي بُيُوتٍ أَذِنَ اللَّهُ أَن تُرْفَعَ وَيُذْكَرَ فِيهَا اسْمُهُ', en: 'In houses Allah has permitted to be raised and in which His name is mentioned', ur: 'ان گھروں میں جنہیں اللہ نے بلند کرنے کی اجازت دی اور جن میں اس کا نام لیا جاتا ہے', ref: 'Al-Nūr 24:36', ref_ur: 'سورۃ النور ۲۴:۳۶' },
-    { ar: 'وَهُوَ الَّذِي فِي السَّمَاءِ إِلَٰهٌ وَفِي الْأَرْضِ إِلَٰهٌ', en: 'And He is God in the heaven and God on earth', ur: 'اور وہی آسمان میں بھی معبود ہے اور زمین میں بھی', ref: 'Al-Zukhruf 43:84', ref_ur: 'سورۃ الزخرف ۴۳:۸۴' },
+    { ar: 'فِي جَنَّاتِ النَّعِيمِ', en: 'In gardens of delight', ur: 'نعمت کے باغوں میں', ref: 'Al-Wāqiʿah 56:12', ref_ur: 'سورۃ الواقعہ ۵۶:۱۲' },
   ],
   'على': [
     { ar: 'وَعَلَى اللَّهِ فَتَوَكَّلُوا', en: 'And upon Allah rely', ur: 'اور اللہ پر بھروسہ کرو', ref: 'Al-Māʾidah 5:23', ref_ur: 'سورۃ المائدہ ۵:۲۳' },
