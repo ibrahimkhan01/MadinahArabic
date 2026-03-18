@@ -76,8 +76,8 @@ const QURAN_CONNECTIONS = {
     { ar: 'وَجَاءَ مِنْ أَقْصَى الْمَدِينَةِ رَجُلٌ يَسْعَىٰ', en: 'And from the far end of the city a man came running', ur: 'اور شہر کے کنارے سے ایک آدمی دوڑتا آیا', ref: 'Al-Qaṣaṣ 28:20', ref_ur: 'سورۃ القصص ۲۸:۲۰' },
   ],
   'ولد': [
-    { ar: 'وَالْوَالِدَاتُ يُرْضِعْنَ أَوْلَادَهُنَّ حَوْلَيْنِ كَامِلَيْنِ', en: 'Mothers shall suckle their children for two complete years', ur: 'اور مائیں اپنے بچوں کو پورے دو سال دودھ پلائیں', ref: 'Al-Baqarah 2:233', ref_ur: 'سورۃ البقرہ ۲:۲۳۳' },
-    { ar: 'لَا يَجْزِي وَالِدٌ عَن وَلَدِهِ', en: 'No parent will avail his child anything', ur: 'کوئی باپ اپنے بیٹے کی طرف سے کچھ کام نہ آئے گا', ref: 'Luqmān 31:33', ref_ur: 'سورۃ لقمان ۳۱:۳۳' },
+    { ar: 'يَطُوفُ عَلَيْهِمْ وِلْدَانٌ مُخَلَّدُونَ', en: 'There will circulate among them young boys of perpetual youth', ur: 'ان کے درمیان ہمیشہ جوان رہنے والے لڑکے گردش کریں گے', ref: 'Al-Wāqiʿah 56:17', ref_ur: 'سورۃ الواقعہ ۵۶:۱۷' },
+    { ar: 'وَيَطُوفُ عَلَيْهِمْ وِلْدَانٌ مُخَلَّدُونَ إِذَا رَأَيْتَهُمْ حَسِبْتَهُمْ لُؤْلُؤًا مَّنثُورًا', en: 'And there will circulate among them young boys of perpetual youth — when you see them, you would think them scattered pearls', ur: 'اور ان کے درمیان ہمیشہ جوان لڑکے گردش کریں گے — جب تم انہیں دیکھو تو بکھرے موتی سمجھو', ref: 'Al-Insān 76:19', ref_ur: 'سورۃ الانسان ۷۶:۱۹' },
   ],
   'امام': [
     { ar: 'إِنِّي جَاعِلُكَ لِلنَّاسِ إِمَامًا', en: 'I will make you a leader for the people', ur: 'میں تمہیں لوگوں کا امام بنانے والا ہوں', ref: 'Al-Baqarah 2:124', ref_ur: 'سورۃ البقرہ ۲:۱۲۴' },
