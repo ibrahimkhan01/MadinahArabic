@@ -76,8 +76,8 @@ const QURAN_CONNECTIONS = {
     { ar: 'وَجَاءَ مِنْ أَقْصَى الْمَدِينَةِ رَجُلٌ يَسْعَىٰ', en: 'And from the far end of the city a man came running', ur: 'اور شہر کے کنارے سے ایک آدمی دوڑتا آیا', ref: 'Al-Qaṣaṣ 28:20', ref_ur: 'سورۃ القصص ۲۸:۲۰' },
   ],
   'ولد': [
-    { ar: 'لَمْ يَلِدْ وَلَمْ يُولَدْ', en: 'He neither begets nor is He begotten', ur: 'نہ اس کی کوئی اولاد ہے اور نہ وہ کسی سے پیدا ہوا', ref: 'Al-Ikhlāṣ 112:3', ref_ur: 'سورۃ الاخلاص ۱۱۲:۳' },
-    { ar: 'وَقَالُوا اتَّخَذَ الرَّحْمَٰنُ وَلَدًا', en: 'They say: The Most Merciful has taken a son', ur: 'انہوں نے کہا: رحمٰن نے اولاد اختیار کی ہے', ref: 'Maryam 19:88', ref_ur: 'سورۃ مریم ۱۹:۸۸' },
+    { ar: 'وَالْوَالِدَاتُ يُرْضِعْنَ أَوْلَادَهُنَّ حَوْلَيْنِ كَامِلَيْنِ', en: 'Mothers shall suckle their children for two complete years', ur: 'اور مائیں اپنے بچوں کو پورے دو سال دودھ پلائیں', ref: 'Al-Baqarah 2:233', ref_ur: 'سورۃ البقرہ ۲:۲۳۳' },
+    { ar: 'لَا يَجْزِي وَالِدٌ عَن وَلَدِهِ', en: 'No parent will avail his child anything', ur: 'کوئی باپ اپنے بیٹے کی طرف سے کچھ کام نہ آئے گا', ref: 'Luqmān 31:33', ref_ur: 'سورۃ لقمان ۳۱:۳۳' },
   ],
   'امام': [
     { ar: 'إِنِّي جَاعِلُكَ لِلنَّاسِ إِمَامًا', en: 'I will make you a leader for the people', ur: 'میں تمہیں لوگوں کا امام بنانے والا ہوں', ref: 'Al-Baqarah 2:124', ref_ur: 'سورۃ البقرہ ۲:۱۲۴' },
