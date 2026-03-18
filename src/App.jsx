@@ -1511,6 +1511,51 @@ function EmojiImg({ emoji, size = 28 }) {
 }
 
 // Tile sentence builder (regular sessions)
+// ── Case-ending (إعراب) error detector ───────────────────────────────────────
+const CASE_STRIP = /[\u064B\u064C\u064D\u064E\u064F\u0650]+$/; // strip final case diacritics
+function arBase(w) { return w.replace(CASE_STRIP, ''); }
+function arCaseKey(w) {
+  const c = w.slice(-1);
+  if (c === '\u064C') return 'nom_indef'; // ـٌ nominative indefinite
+  if (c === '\u064B') return 'acc_indef'; // ـً accusative indefinite
+  if (c === '\u064D') return 'gen_indef'; // ـٍ genitive indefinite
+  if (c === '\u064F') return 'nom_def';   // ـُ nominative definite
+  if (c === '\u064E') return 'acc_def';   // ـَ accusative definite
+  if (c === '\u0650') return 'gen_def';   // ـِ genitive definite
+  return null;
+}
+function caseLabel(k, ur) {
+  return ur
+    ? { nom_indef:'مرفوع ـٌ (-un)', acc_indef:'منصوب ـً (-an)', gen_indef:'مجرور ـٍ (-in)',
+        nom_def:'مرفوع ـُ (-u)',   acc_def:'منصوب ـَ (-a)',   gen_def:'مجرور ـِ (-i)' }[k] || k
+    : { nom_indef:'nominative ـٌ (-un)', acc_indef:'accusative ـً (-an)', gen_indef:'genitive ـٍ (-in)',
+        nom_def:'nominative ـُ (-u)',    acc_def:'accusative ـَ (-a)',    gen_def:'genitive ـِ (-i)' }[k] || k;
+}
+function caseUse(k, ur) {
+  return ur
+    ? { nom_indef:'مبتدأ اور خبر', acc_indef:'مفعول / بعض حروف', gen_indef:'حروفِ جر کے بعد',
+        nom_def:'مبتدأ اور خبر',   acc_def:'مفعول / بعض حروف',  gen_def:'حروفِ جر کے بعد' }[k] || ''
+    : { nom_indef:'subject & predicate', acc_indef:'object & some particles', gen_indef:'after prepositions',
+        nom_def:'subject & predicate',   acc_def:'object & some particles',   gen_def:'after prepositions' }[k] || '';
+}
+function detectCaseError(tile, answer, isUrdu) {
+  const base = arBase(tile);
+  const wrongKey = arCaseKey(tile);
+  if (!wrongKey || base.length < 2) return null;
+  for (const correct of answer) {
+    const cb = arBase(correct);
+    const ck = arCaseKey(correct);
+    if (cb === base && ck && ck !== wrongKey) {
+      const wl = caseLabel(wrongKey, isUrdu), cl = caseLabel(ck, isUrdu);
+      const wu = caseUse(wrongKey, isUrdu), cu = caseUse(ck, isUrdu);
+      return isUrdu
+        ? `اعراب کی غلطی: "${tile}" ${wl} ہے (${wu}) — یہاں ${cl} (${cu}) چاہیے → "${correct}"`
+        : `Case error: "${tile}" is ${wl} (${wu}) — here you need ${cl} (${cu}) → "${correct}"`;
+    }
+  }
+  return null;
+}
+
 // ── Shared tile grading helpers ──────────────────────────────────────────────
 function tileGradeStyle(grade) {
   if (grade === 'correct')   return {bg:'#dcfce7', border:'#22c55e', col:'#166534'};
@@ -1526,6 +1571,9 @@ function tileGradeExp(tile, grade, answer, isUrdu) {
       ? `"${tile}" اس جملے میں ہے — لفظ ${pos} پر ہونا چاہیے`
       : `"${tile}" belongs in this sentence — should be word ${pos}`;
   }
+  // Check for case ending error before falling back to generic message
+  const caseErr = detectCaseError(tile, answer, isUrdu);
+  if (caseErr) return caseErr;
   return isUrdu ? `"${tile}" اس جملے میں نہیں ہے` : `"${tile}" is not part of this sentence`;
 }
 function tileGetGrade(tile, idx, answer) {
