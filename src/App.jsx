@@ -898,8 +898,12 @@ const SESSIONS = [
     grammar:'أَهَذَا كِتَابٌ؟ = Is this a book? The hamza (أَ) prefix turns a statement into a yes/no question. Answer: نَعَمْ، هَذَا كِتَابٌ (Yes, this is a book) or لَا، هَذَا قَلَمٌ (No, this is a pen). هَلْ هَذَا ____؟ is an alternative form with the same meaning.',
     vocab:[{ar:"نَعَمْ",en:"yes"},{ar:"لَا",en:"no"},{ar:"أَهَذَا",en:"Is this...? (m.)"},{ar:"هَلْ",en:"is/are (question word)"}],
     patternTiles:[
-      {en:"Is this a book? Yes, this is a book.", tiles:["أَهَذَا","كِتَابٌ؟","نَعَمْ","هَذَا","كِتَابٌ","لَا","قَلَمٌ"], answer:["أَهَذَا","كِتَابٌ؟","نَعَمْ","هَذَا","كِتَابٌ"]},
-      {en:"Is this a dog? No, this is a cat.", tiles:["أَهَذَا","كَلْبٌ؟","لَا","هَذَا","قِطٌّ","نَعَمْ","حِمَارٌ"], answer:["أَهَذَا","كَلْبٌ؟","لَا","هَذَا","قِطٌّ"]},
+      { emoji:"📖", question:"أَهَذَا كِتَابٌ؟",
+        tiles:["نَعَمْ","هَذَا","كِتَابٌ","لَا","قَلَمٌ"],
+        answer:["نَعَمْ","هَذَا","كِتَابٌ"] },
+      { emoji:"🐈", question:"أَهَذَا كَلْبٌ؟",
+        tiles:["لَا","هَذَا","قِطٌّ","نَعَمْ","حِمَارٌ"],
+        answer:["لَا","هَذَا","قِطٌّ"] },
     ]},
 
   { id:6, book:1, lessonRef:"1.2", part:"A", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 1)",
