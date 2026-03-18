@@ -2024,12 +2024,18 @@ export default function MadinahArabicApp() {
 
             {/* Credits */}
             <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:14,padding:"16px 18px",textAlign:"center"}}>
-              <div style={{fontSize:13,color:"#166534",fontWeight:700,marginBottom:4}}>🕌 Madinah Arabic</div>
+              <div style={{fontSize:13,color:"#166534",fontWeight:700,marginBottom:6}}>🕌 Madinah Arabic</div>
+              <div style={{fontSize:12,color:"#15803d",lineHeight:1.8}}>
+                Based on the <strong>Madinah Arabic Reader</strong> series<br/>
+                by <strong>Dr. V. Abdur Rahim</strong><br/>
+                (Islamic University of Madinah)
+              </div>
+              <div style={{height:1,background:"#bbf7d0",margin:"10px 0"}}/>
               <div style={{fontSize:12,color:"#15803d",lineHeight:1.7}}>
                 Built by <strong>Muhammad Ibrahim Khan</strong>
               </div>
               <div style={{fontSize:11,color:"#4ade80",marginTop:6}}>
-                Powered by Claude · v1.1
+                Powered by Claude · v1.3
               </div>
             </div>
 
