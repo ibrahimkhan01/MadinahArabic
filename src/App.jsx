@@ -190,10 +190,16 @@ const getEmoji = (en) => EMOJI[en.toLowerCase()] || EMOJI[en] || null;
 
 // ── Urdu vocabulary translations (English → Urdu) ──────────────
 const UR_VOCAB = {
-  // Book 1 — Lesson 1
+  // Book 1 — Lesson 1.1A-B
   "book":"کتاب","pen":"قلم","key":"چابی","door":"دروازہ",
   "house":"گھر","mosque":"مسجد","star":"ستارہ","stone":"پتھر",
-  // L2
+  // L1.1C — animals
+  "dog":"کتا","cat":"بلی","donkey":"گدھا","camel":"اونٹ","horse":"گھوڑا",
+  // L1.1D — professions & clothing
+  "imam":"امام","doctor":"ڈاکٹر","merchant":"تاجر","handkerchief":"رومال","shirt":"قمیص",
+  // L1.1E — yes/no
+  "yes":"ہاں","no":"نہیں","Is this...? (m.)":"کیا یہ ____؟","is/are (question word)":"کیا",
+  // L1.2
   "bed":"بستر","chair":"کرسی","desk/office":"ڈیسک / دفتر","wall":"دیوار",
   "boy":"لڑکا","man":"مرد","student (m.)":"طالب علم","teacher (m.)":"استاد",
   // L3 — definite forms
@@ -245,7 +251,7 @@ const UR_VOCAB = {
   // Numbers
   "one":"ایک","two":"دو","three":"تین","four":"چار","five":"پانچ",
   "six":"چھ","seven":"سات","eight":"آٹھ","nine":"نو","ten":"دس",
-  "yes":"ہاں","no":"نہیں","yes! (contradicting negative)":"بلکہ",
+  "yes! (contradicting negative)":"بلکہ",
   // Family (extended)
   "how?":"کیسے؟","why?":"کیوں؟",
 };
@@ -320,6 +326,9 @@ const getUrHint = (en) => UR_HINTS[en] || null;
 const UR_SESSION_TITLES = {
   "What Is This? (Part 1)":"یہ کیا ہے؟ (حصہ اول)",
   "What Is This? (Part 2)":"یہ کیا ہے؟ (حصہ دوم)",
+  "Animals":"جانور",
+  "Professions & Clothing":"پیشے اور لباس",
+  "Yes/No Questions":"ہاں یا نہیں کے سوالات",
   "Far Demonstratives (Part 1)":"بعید اشارہ (حصہ اول)",
   "Far Demonstratives (Part 2)":"بعید اشارہ (حصہ دوم)",
   "Making Nouns Definite":"الف لام تعریف",
@@ -557,14 +566,38 @@ const SESSIONS = [
       {emoji:"🕌", question:"مَا هَذَا؟", tiles:["هَذَا","مَسْجِدٌ","بَيْتٌ","حَجَرٌ"], answer:["هَذَا","مَسْجِدٌ"]},
     ]},
 
-  { id:3, book:1, lessonRef:"1.2", part:"A", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 1)",
+  { id:3, book:1, lessonRef:"1.1", part:"C", title:"الْحَيَوَانَاتُ", titleEn:"Animals",
+    grammar:'More هَذَا/ذَلِكَ with animals. All these nouns are masculine. مَا هَذَا؟ هَذَا كَلْبٌ. مَا ذَلِكَ؟ ذَلِكَ جَمَلٌ.',
+    vocab:[{ar:"كَلْبٌ",en:"dog"},{ar:"قِطٌّ",en:"cat"},{ar:"حِمَارٌ",en:"donkey"},{ar:"جَمَلٌ",en:"camel"},{ar:"حِصَانٌ",en:"horse"}],
+    patternTiles:[
+      {emoji:"🐕", question:"مَا هَذَا؟", tiles:["هَذَا","كَلْبٌ","قِطٌّ","حِمَارٌ","جَمَلٌ"], answer:["هَذَا","كَلْبٌ"]},
+      {emoji:"🐪", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","جَمَلٌ","حِصَانٌ","كَلْبٌ","حِمَارٌ"], answer:["ذَلِكَ","جَمَلٌ"]},
+    ]},
+
+  { id:4, book:1, lessonRef:"1.1", part:"D", title:"الْمِهَنُ وَالْمَلَابِسُ", titleEn:"Professions & Clothing",
+    grammar:'مَنْ هَذَا؟ = Who is this? Used for people: مَنْ هَذَا؟ هَذَا إِمَامٌ. مَا هَذَا؟ هَذَا قَمِيصٌ.',
+    vocab:[{ar:"إِمَامٌ",en:"imam"},{ar:"طَبِيبٌ",en:"doctor"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"مِنْدِيلٌ",en:"handkerchief"},{ar:"قَمِيصٌ",en:"shirt"}],
+    patternTiles:[
+      {emoji:"👨‍⚕️", question:"مَنْ هَذَا؟", tiles:["هَذَا","طَبِيبٌ","إِمَامٌ","تَاجِرٌ","مُدَرِّسٌ"], answer:["هَذَا","طَبِيبٌ"]},
+      {emoji:"👕", question:"مَا هَذَا؟", tiles:["هَذَا","قَمِيصٌ","مِنْدِيلٌ","كِتَابٌ","قَلَمٌ"], answer:["هَذَا","قَمِيصٌ"]},
+    ]},
+
+  { id:5, book:1, lessonRef:"1.1", part:"E", title:"أَسْئِلَةُ نَعَمْ وَلَا", titleEn:"Yes/No Questions",
+    grammar:'أَهَذَا كِتَابٌ؟ = Is this a book? The hamza (أَ) prefix turns a statement into a yes/no question. Answer: نَعَمْ، هَذَا كِتَابٌ (Yes, this is a book) or لَا، هَذَا قَلَمٌ (No, this is a pen). هَلْ هَذَا ____؟ is an alternative form with the same meaning.',
+    vocab:[{ar:"نَعَمْ",en:"yes"},{ar:"لَا",en:"no"},{ar:"أَهَذَا",en:"Is this...? (m.)"},{ar:"هَلْ",en:"is/are (question word)"}],
+    patternTiles:[
+      {en:"Is this a book? Yes, this is a book.", tiles:["أَهَذَا","كِتَابٌ؟","نَعَمْ","هَذَا","كِتَابٌ","لَا","قَلَمٌ"], answer:["أَهَذَا","كِتَابٌ؟","نَعَمْ","هَذَا","كِتَابٌ"]},
+      {en:"Is this a dog? No, this is a cat.", tiles:["أَهَذَا","كَلْبٌ؟","لَا","هَذَا","قِطٌّ","نَعَمْ","حِمَارٌ"], answer:["أَهَذَا","كَلْبٌ؟","لَا","هَذَا","قِطٌّ"]},
+    ]},
+
+  { id:6, book:1, lessonRef:"1.2", part:"A", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 1)",
     grammar:'ذَلِكَ = "that" for masculine objects far away. Compare: هَذَا كِتَابٌ (This is a book) vs. ذَلِكَ كِتَابٌ (That is a book).',
     vocab:[{ar:"سَرِيرٌ",en:"bed"},{ar:"كُرْسِيٌّ",en:"chair"},{ar:"مَكْتَبٌ",en:"desk/office"},{ar:"جِدَارٌ",en:"wall"}],
     patternTiles:[
       {emoji:"🛏️", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","سَرِيرٌ","كُرْسِيٌّ","مَكْتَبٌ"], answer:["ذَلِكَ","سَرِيرٌ"]},
       {emoji:"🪑", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","كُرْسِيٌّ","سَرِيرٌ","جِدَارٌ"], answer:["ذَلِكَ","كُرْسِيٌّ"]},
     ]},
-  { id:4, book:1, lessonRef:"1.2", part:"B", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 2)",
+  { id:7, book:1, lessonRef:"1.2", part:"B", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 2)",
     grammar:'Practice هَذَا and ذَلِكَ with more nouns. مَنْ هَذَا؟ = Who is this? (used for people).',
     vocab:[{ar:"وَلَدٌ",en:"boy"},{ar:"رَجُلٌ",en:"man"},{ar:"طَالِبٌ",en:"student (m.)"},{ar:"مُدَرِّسٌ",en:"teacher (m.)"}],
     patternTiles:[
@@ -572,14 +605,14 @@ const SESSIONS = [
       {emoji:"👨‍🏫", question:"مَنْ هَذَا؟", tiles:["هَذَا","مُدَرِّسٌ","وَلَدٌ","طَالِبٌ"], answer:["هَذَا","مُدَرِّسٌ"]},
     ]},
 
-  { id:5, book:1, lessonRef:"1.3", part:"A", title:"الـ — The Definite Article (Part 1)", titleEn:"Making Nouns Definite",
+  { id:8, book:1, lessonRef:"1.3", part:"A", title:"الـ — The Definite Article (Part 1)", titleEn:"Making Nouns Definite",
     grammar:'الـ makes a noun definite: كِتَابٌ → الْكِتَابُ. The ـٌ disappears, replaced by ـُ. With "moon letters" الـ is fully pronounced: الْبَيْتُ.',
     vocab:[{ar:"الْكِتَابُ",en:"the book"},{ar:"الْقَلَمُ",en:"the pen"},{ar:"الْبَيْتُ",en:"the house"},{ar:"الْبَابُ",en:"the door"}],
     patternTiles:[
       {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","الْكِتَابُ","الْقَلَمُ","الْبَابُ"], answer:["هَذَا","الْكِتَابُ"]},
       {emoji:"🚪", question:"مَا هَذَا؟", tiles:["هَذَا","الْبَابُ","الْبَيْتُ","الْكِتَابُ"], answer:["هَذَا","الْبَابُ"]},
     ]},
-  { id:6, book:1, lessonRef:"1.3", part:"B", title:"الـ — Sun & Moon Letters", titleEn:"Sun Letters (Part 2)",
+  { id:9, book:1, lessonRef:"1.3", part:"B", title:"الـ — Sun & Moon Letters", titleEn:"Sun Letters (Part 2)",
     grammar:'With "sun letters" (ت،ث،د،ذ،ر،ز،س،ش،ص،ض،ط،ظ،ل،ن) the ل of الـ assimilates: الشَّمْسُ (ash-shams), الرَّجُلُ (ar-rajul). Written but not pronounced separately.',
     vocab:[{ar:"الشَّمْسُ",en:"the sun"},{ar:"الرَّجُلُ",en:"the man"},{ar:"النَّجْمُ",en:"the star"},{ar:"الطَّالِبُ",en:"the student"}],
     patternTiles:[
@@ -587,14 +620,14 @@ const SESSIONS = [
       {emoji:"👨", question:"مَنْ هَذَا؟", tiles:["هَذَا","الرَّجُلُ","الطَّالِبُ","الْوَلَدُ"], answer:["هَذَا","الرَّجُلُ"]},
     ]},
 
-  { id:7, book:1, lessonRef:"1.4", part:"A", title:"الصِّفَاتُ — Adjectives (Part 1)", titleEn:"Describing with Adjectives",
+  { id:10, book:1, lessonRef:"1.4", part:"A", title:"الصِّفَاتُ — Adjectives (Part 1)", titleEn:"Describing with Adjectives",
     grammar:'Adjectives come AFTER the noun. Definite noun + definite adjective: الْبَيْتُ الْكَبِيرُ. Indefinite noun + indefinite adjective: بَيْتٌ كَبِيرٌ.',
     vocab:[{ar:"كَبِيرٌ",en:"big"},{ar:"صَغِيرٌ",en:"small"},{ar:"جَدِيدٌ",en:"new"},{ar:"قَدِيمٌ",en:"old"}],
     patternTiles:[
       {en:"This is a big house.", tiles:["هَذَا","بَيْتٌ","كَبِيرٌ","صَغِيرٌ","قَدِيمٌ"], answer:["هَذَا","بَيْتٌ","كَبِيرٌ"]},
       {en:"That is a new book.", tiles:["ذَلِكَ","كِتَابٌ","جَدِيدٌ","قَدِيمٌ","قَلَمٌ"], answer:["ذَلِكَ","كِتَابٌ","جَدِيدٌ"]},
     ]},
-  { id:8, book:1, lessonRef:"1.4", part:"B", title:"الصِّفَاتُ — More Adjectives (Part 2)", titleEn:"More Adjectives",
+  { id:11, book:1, lessonRef:"1.4", part:"B", title:"الصِّفَاتُ — More Adjectives (Part 2)", titleEn:"More Adjectives",
     grammar:'More masculine adjectives. هَذَا طَالِبٌ جَدِيدٌ = This is a new student (noun + adjective forms descriptive phrase).',
     vocab:[{ar:"جَمِيلٌ",en:"beautiful"},{ar:"طَوِيلٌ",en:"tall/long"},{ar:"قَصِيرٌ",en:"short"},{ar:"رَخِيصٌ",en:"cheap"}],
     patternTiles:[
@@ -602,14 +635,14 @@ const SESSIONS = [
       {en:"That is a short pen.", tiles:["ذَلِكَ","قَلَمٌ","قَصِيرٌ","طَوِيلٌ","كِتَابٌ"], answer:["ذَلِكَ","قَلَمٌ","قَصِيرٌ"]},
     ]},
 
-  { id:9, book:1, lessonRef:"1.5", part:"A", title:"حُرُوفُ الْجَرِّ (Part 1)", titleEn:"Prepositions: في، عَلَى، مِنْ، إِلَى",
+  { id:12, book:1, lessonRef:"1.5", part:"A", title:"حُرُوفُ الْجَرِّ (Part 1)", titleEn:"Prepositions: في، عَلَى، مِنْ، إِلَى",
     grammar:'Prepositions put the following noun into genitive (ـِ or ـٍ): فِي الْبَيْتِ (in the house), عَلَى الْمَكْتَبِ (on the desk), مِنَ الْمَسْجِدِ (from the mosque), إِلَى الْمَدْرَسَةِ (to the school).',
     vocab:[{ar:"فِي",en:"in"},{ar:"عَلَى",en:"on"},{ar:"مِنْ",en:"from"},{ar:"إِلَى",en:"to"}],
     patternTiles:[
       {en:"The book is on the desk.", tiles:["الْكِتَابُ","عَلَى","الْمَكْتَبِ","فِي","الْبَيْتِ","الْمَكْتَبُ"], answer:["الْكِتَابُ","عَلَى","الْمَكْتَبِ"]},
       {en:"The key is in the house.", tiles:["الْمِفْتَاحُ","فِي","الْبَيْتِ","عَلَى","الْبَابِ","الْبَيْتُ"], answer:["الْمِفْتَاحُ","فِي","الْبَيْتِ"]},
     ]},
-  { id:10, book:1, lessonRef:"1.5", part:"B", title:"حُرُوفُ الْجَرِّ (Part 2)", titleEn:"Prepositions: تَحْتَ، فَوْقَ، أَمَامَ",
+  { id:13, book:1, lessonRef:"1.5", part:"B", title:"حُرُوفُ الْجَرِّ (Part 2)", titleEn:"Prepositions: تَحْتَ، فَوْقَ، أَمَامَ",
     grammar:'More location prepositions. أَيْنَ؟ = where? The answer: الْكِتَابُ عَلَى الْمَكْتَبِ. After a preposition, the noun loses ـٌ and takes ـٍ.',
     vocab:[{ar:"تَحْتَ",en:"under"},{ar:"فَوْقَ",en:"above"},{ar:"أَمَامَ",en:"in front of"},{ar:"خَلْفَ",en:"behind"}],
     patternTiles:[
@@ -617,14 +650,14 @@ const SESSIONS = [
       {en:"The door is in front of the house.", tiles:["الْبَابُ","أَمَامَ","الْبَيْتِ","خَلْفَ","الْمَسْجِدِ"], answer:["الْبَابُ","أَمَامَ","الْبَيْتِ"]},
     ]},
 
-  { id:11, book:1, lessonRef:"1.6", part:"A", title:"الضَّمَائِرُ (Part 1)", titleEn:"Personal Pronouns",
+  { id:14, book:1, lessonRef:"1.6", part:"A", title:"الضَّمَائِرُ (Part 1)", titleEn:"Personal Pronouns",
     grammar:'هُوَ (he), هِيَ (she), أَنَا (I), أَنْتَ (you m.). In equational sentences: هُوَ طَبِيبٌ = He is a doctor. Arabic has no verb "to be" in present tense.',
     vocab:[{ar:"هُوَ",en:"he"},{ar:"هِيَ",en:"she"},{ar:"أَنَا",en:"I"},{ar:"أَنْتَ",en:"you (m.)"}],
     patternTiles:[
       {en:"He is a student.", tiles:["هُوَ","طَالِبٌ","أَنَا","مُدَرِّسٌ"], answer:["هُوَ","طَالِبٌ"]},
       {en:"I am a teacher.", tiles:["أَنَا","مُدَرِّسٌ","هُوَ","طَالِبٌ"], answer:["أَنَا","مُدَرِّسٌ"]},
     ]},
-  { id:12, book:1, lessonRef:"1.6", part:"B", title:"الضَّمَائِرُ (Part 2)", titleEn:"Pronouns with Professions",
+  { id:15, book:1, lessonRef:"1.6", part:"B", title:"الضَّمَائِرُ (Part 2)", titleEn:"Pronouns with Professions",
     grammar:'مَنْ أَنْتَ؟ = Who are you? أَنَا طَالِبٌ = I am a student. هُوَ مُدَرِّسٌ = He is a teacher.',
     vocab:[{ar:"طَبِيبٌ",en:"doctor (m.)"},{ar:"مُهَنْدِسٌ",en:"engineer"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"فَلَّاحٌ",en:"farmer"}],
     patternTiles:[
@@ -632,14 +665,14 @@ const SESSIONS = [
       {en:"I am a merchant.", tiles:["أَنَا","تَاجِرٌ","هُوَ","فَلَّاحٌ"], answer:["أَنَا","تَاجِرٌ"]},
     ]},
 
-  { id:13, book:1, lessonRef:"1.7", part:"A", title:"الْمُؤَنَّثُ (Part 1)", titleEn:"Feminine Nouns & هَذِهِ",
+  { id:16, book:1, lessonRef:"1.7", part:"A", title:"الْمُؤَنَّثُ (Part 1)", titleEn:"Feminine Nouns & هَذِهِ",
     grammar:'Feminine nouns end in ةٌ. Use هَذِهِ (this, f.) and تِلْكَ (that, f.): هَذِهِ سَيَّارَةٌ. Adjectives must match: هَذِهِ سَيَّارَةٌ جَمِيلَةٌ.',
     vocab:[{ar:"سَيَّارَةٌ",en:"car"},{ar:"مَدْرَسَةٌ",en:"school"},{ar:"غُرْفَةٌ",en:"room"},{ar:"حَدِيقَةٌ",en:"garden"}],
     patternTiles:[
       {emoji:"🚗", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","سَيَّارَةٌ","مَدْرَسَةٌ","غُرْفَةٌ"], answer:["هَذِهِ","سَيَّارَةٌ"]},
       {emoji:"🏫", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","مَدْرَسَةٌ","سَيَّارَةٌ","حَدِيقَةٌ"], answer:["هَذِهِ","مَدْرَسَةٌ"]},
     ]},
-  { id:14, book:1, lessonRef:"1.7", part:"B", title:"الْمُؤَنَّثُ (Part 2)", titleEn:"Feminine Adjectives & Professions",
+  { id:17, book:1, lessonRef:"1.7", part:"B", title:"الْمُؤَنَّثُ (Part 2)", titleEn:"Feminine Adjectives & Professions",
     grammar:'Feminine adjectives add ةٌ: كَبِيرٌ → كَبِيرَةٌ. Professions too: مُدَرِّسٌ → مُدَرِّسَةٌ. هِيَ مُدَرِّسَةٌ = She is a teacher.',
     vocab:[{ar:"مُدَرِّسَةٌ",en:"teacher (f.)"},{ar:"طَالِبَةٌ",en:"student (f.)"},{ar:"طَبِيبَةٌ",en:"doctor (f.)"},{ar:"جَمِيلَةٌ",en:"beautiful (f.)"}],
     patternTiles:[
@@ -647,14 +680,14 @@ const SESSIONS = [
       {emoji:"👩‍🎓", question:"مَنْ هِيَ؟", en:"She is a student.", tiles:["هِيَ","طَالِبَةٌ","مُدَرِّسَةٌ","طَبِيبَةٌ"], answer:["هِيَ","طَالِبَةٌ"]},
     ]},
 
-  { id:15, book:1, lessonRef:"1.8", part:"A", title:"الْإِضَافَةُ (Part 1)", titleEn:"Possessive Constructions",
+  { id:18, book:1, lessonRef:"1.8", part:"A", title:"الْإِضَافَةُ (Part 1)", titleEn:"Possessive Constructions",
     grammar:'Iḍāfa (possessive construction): كِتَابُ الطَّالِبِ (the student\'s book). The first noun (mudāf) loses tanwīn and CANNOT take الـ. The second noun (mudāf ilayhi) takes genitive ـِ. Key rule: the first noun becomes definite automatically through the construction — بَابُ الْبَيْتِ means THE door of the house, not "a door", because the second noun (الْبَيْتِ) is definite. You cannot say الْبَابُ الْبَيْتِ — that breaks the iḍāfa.',
     vocab:[{ar:"بَابُ الْبَيْتِ",en:"the door of the house"},{ar:"كِتَابُ الطَّالِبِ",en:"the student's book"},{ar:"مَكْتَبُ الْمُدِيرِ",en:"the director's office"},{ar:"غُرْفَةُ الْوَلَدِ",en:"the boy's room"}],
     patternTiles:[
       {en:"The student's book is on the desk.", tiles:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ","فِي","الْبَيْتِ"], answer:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ"]},
       {en:"The door of the house is big.", tiles:["بَابُ","الْبَيْتِ","كَبِيرٌ","صَغِيرٌ","الْمَسْجِدِ"], answer:["بَابُ","الْبَيْتِ","كَبِيرٌ"]},
     ]},
-  { id:16, book:1, lessonRef:"1.8", part:"B", title:"الْإِضَافَةُ (Part 2)", titleEn:"Possessive Pronouns",
+  { id:19, book:1, lessonRef:"1.8", part:"B", title:"الْإِضَافَةُ (Part 2)", titleEn:"Possessive Pronouns",
     grammar:'Attached pronouns: بَيْتِي (my house), بَيْتُكَ (your house), بَيْتُهُ (his house), بَيْتُهَا (her house). Pronoun attaches directly to noun.',
     vocab:[{ar:"بَيْتِي",en:"my house"},{ar:"كِتَابُكَ",en:"your book"},{ar:"قَلَمُهُ",en:"his pen"},{ar:"غُرْفَتُهَا",en:"her room"}],
     patternTiles:[
@@ -662,14 +695,14 @@ const SESSIONS = [
       {en:"His pen is on the desk.", tiles:["قَلَمُهُ","عَلَى","الْمَكْتَبِ","فِي","كِتَابُكَ"], answer:["قَلَمُهُ","عَلَى","الْمَكْتَبِ"]},
     ]},
 
-  { id:17, book:1, lessonRef:"1.9", part:"A", title:"الْعَائِلَةُ (Part 1)", titleEn:"Family Vocabulary",
+  { id:20, book:1, lessonRef:"1.9", part:"A", title:"الْعَائِلَةُ (Part 1)", titleEn:"Family Vocabulary",
     grammar:'أَبٌ (father) and أَخٌ (brother) are irregular: أَبِي (my father), أَخِي (my brother). These are الْأَسْمَاءُ الْخَمْسَةُ — special nouns.',
     vocab:[{ar:"أَبٌ",en:"father"},{ar:"أُمٌّ",en:"mother"},{ar:"أَخٌ",en:"brother"},{ar:"أُخْتٌ",en:"sister"}],
     patternTiles:[
       {emoji:"👨", question:"كَيْفَ أَبُوكَ؟", en:"My father is generous.", tiles:["أَبِي","كَرِيمٌ","أُمِّي","أَخِي"], answer:["أَبِي","كَرِيمٌ"]},
       {en:"I have a brother and a sister.", tiles:["عِنْدِي","أَخٌ","وَأُخْتٌ","أَبٌ","وَأُمٌّ"], answer:["عِنْدِي","أَخٌ","وَأُخْتٌ"]},
     ]},
-  { id:18, book:1, lessonRef:"1.9", part:"B", title:"الْعَائِلَةُ (Part 2)", titleEn:"Extended Family",
+  { id:21, book:1, lessonRef:"1.9", part:"B", title:"الْعَائِلَةُ (Part 2)", titleEn:"Extended Family",
     grammar:'عِنْدِي أَخٌ وَأُخْتٌ = I have a brother and a sister. لِي أَبٌ كَرِيمٌ = I have a generous father.',
     vocab:[{ar:"زَوْجٌ",en:"husband"},{ar:"زَوْجَةٌ",en:"wife"},{ar:"اِبْنٌ",en:"son"},{ar:"بِنْتٌ",en:"daughter"}],
     patternTiles:[
@@ -677,14 +710,14 @@ const SESSIONS = [
       {en:"His wife is a teacher.", tiles:["زَوْجَتُهُ","مُدَرِّسَةٌ","زَوْجُهُ","طَالِبَةٌ"], answer:["زَوْجَتُهُ","مُدَرِّسَةٌ"]},
     ]},
 
-  { id:19, book:1, lessonRef:"1.10", part:"A", title:"الَّذِي — The One Who / Which", titleEn:"Relative Pronoun (Part 1)",
+  { id:22, book:1, lessonRef:"1.10", part:"A", title:"الَّذِي — The One Who / Which", titleEn:"Relative Pronoun (Part 1)",
     grammar:'الَّذِي (who/which) for masculine singular. الَّتِي for feminine. الطَّالِبُ الَّذِي فِي الْفَصْلِ = The student who is in the class.',
     vocab:[{ar:"الَّذِي",en:"who/which (m.)"},{ar:"الَّتِي",en:"who/which (f.)"},{ar:"الَّذِينَ",en:"who/which (m.pl.)"},{ar:"الْفَصْلُ",en:"classroom"}],
     patternTiles:[
       {en:"The student who is in the classroom.", tiles:["الطَّالِبُ","الَّذِي","فِي","الْفَصْلِ","الَّتِي","الْبَيْتِ"], answer:["الطَّالِبُ","الَّذِي","فِي","الْفَصْلِ"]},
       {en:"The book which is on the desk.", tiles:["الْكِتَابُ","الَّذِي","عَلَى","الْمَكْتَبِ","الَّتِي","تَحْتَ"], answer:["الْكِتَابُ","الَّذِي","عَلَى","الْمَكْتَبِ"]},
     ]},
-  { id:20, book:1, lessonRef:"1.10", part:"B", title:"مُرَاجَعَةٌ — Book 1 Review", titleEn:"Book 1 Revision",
+  { id:23, book:1, lessonRef:"1.10", part:"B", title:"مُرَاجَعَةٌ — Book 1 Review", titleEn:"Book 1 Revision",
     grammar:'Review all Book 1 patterns: هَذَا/ذَلِكَ/هَذِهِ/تِلْكَ, الـ, adjective agreement, prepositions, pronouns, iḍāfa, الَّذِي.',
     vocab:[{ar:"أَيْنَ",en:"where?"},{ar:"مَنْ",en:"who?"},{ar:"مَا",en:"what?"},{ar:"أَيْضًا",en:"also"}],
     patternTiles:[
@@ -694,231 +727,231 @@ const SESSIONS = [
 
 // ═══ BOOK 2 · Lessons 1–12 · Sessions 21–44 ═══
 
-  { id:21, book:2, lessonRef:"2.1", part:"A", title:"الْمُضَارِعُ — هُوَ (Part 1)", titleEn:"Present Tense: He",
+  { id:24, book:2, lessonRef:"2.1", part:"A", title:"الْمُضَارِعُ — هُوَ (Part 1)", titleEn:"Present Tense: He",
     grammar:'Present tense (الْمُضَارِعُ) for "he": prefix يَـ + root. يَكْتُبُ (he writes), يَقْرَأُ (he reads), يَذْهَبُ (he goes). Ending ـُ signals present tense.',
     vocab:[{ar:"يَكْتُبُ",en:"he writes"},{ar:"يَقْرَأُ",en:"he reads"},{ar:"يَذْهَبُ",en:"he goes"},{ar:"يَجْلِسُ",en:"he sits"}]},
-  { id:22, book:2, lessonRef:"2.1", part:"B", title:"الْمُضَارِعُ — هُوَ (Part 2)", titleEn:"Present Tense: More Verbs",
+  { id:25, book:2, lessonRef:"2.1", part:"B", title:"الْمُضَارِعُ — هُوَ (Part 2)", titleEn:"Present Tense: More Verbs",
     grammar:'More present tense verbs. Subject can come after verb: يَدْخُلُ الطَّالِبُ = The student enters.',
     vocab:[{ar:"يَفْتَحُ",en:"he opens"},{ar:"يَخْرُجُ",en:"he goes out"},{ar:"يَدْخُلُ",en:"he enters"},{ar:"يَأْكُلُ",en:"he eats"}]},
 
-  { id:23, book:2, lessonRef:"2.2", part:"A", title:"الْمُضَارِعُ — أَنَا وَأَنْتَ (Part 1)", titleEn:"Present Tense: I & You",
+  { id:26, book:2, lessonRef:"2.2", part:"A", title:"الْمُضَارِعُ — أَنَا وَأَنْتَ (Part 1)", titleEn:"Present Tense: I & You",
     grammar:'أَنَا: prefix أَـ → أَكْتُبُ (I write). أَنْتَ: prefix تَـ → تَكْتُبُ (you write). أَنْتِ (f.): تَكْتُبِينَ.',
     vocab:[{ar:"أَكْتُبُ",en:"I write"},{ar:"تَكْتُبُ",en:"you write (m.)"},{ar:"أَذْهَبُ",en:"I go"},{ar:"تَذْهَبُ",en:"you go (m.)"}]},
-  { id:24, book:2, lessonRef:"2.2", part:"B", title:"الْمُضَارِعُ — نَحْنُ وَهُمْ (Part 2)", titleEn:"Present Tense: We & They",
+  { id:27, book:2, lessonRef:"2.2", part:"B", title:"الْمُضَارِعُ — نَحْنُ وَهُمْ (Part 2)", titleEn:"Present Tense: We & They",
     grammar:'نَحْنُ: prefix نَـ → نَكْتُبُ. هُمْ: يَكْتُبُونَ. هُنَّ: يَكْتُبْنَ. هُمَا: يَكْتُبَانِ.',
     vocab:[{ar:"نَكْتُبُ",en:"we write"},{ar:"يَكْتُبُونَ",en:"they write (m.)"},{ar:"نَذْهَبُ",en:"we go"},{ar:"يَذْهَبُونَ",en:"they go (m.)"}]},
 
-  { id:25, book:2, lessonRef:"2.3", part:"A", title:"الْأَمْرُ (Part 1)", titleEn:"Commands",
+  { id:28, book:2, lessonRef:"2.3", part:"A", title:"الْأَمْرُ (Part 1)", titleEn:"Commands",
     grammar:'Imperative (الْأَمْرُ) from present tense: يَكْتُبُ → اُكْتُبْ (Write!). For feminine: اُكْتُبِي. For plural: اُكْتُبُوا. Note the hamzat al-waṣl (اُ) at the start.',
     vocab:[{ar:"اُكْتُبْ",en:"Write! (m.)"},{ar:"اقْرَأْ",en:"Read! (m.)"},{ar:"اِجْلِسْ",en:"Sit! (m.)"},{ar:"اُخْرُجْ",en:"Go out! (m.)"}]},
-  { id:26, book:2, lessonRef:"2.3", part:"B", title:"الْأَمْرُ (Part 2)", titleEn:"Commands: Feminine & Plural",
+  { id:29, book:2, lessonRef:"2.3", part:"B", title:"الْأَمْرُ (Part 2)", titleEn:"Commands: Feminine & Plural",
     grammar:'Feminine imperative adds ـِي: اُكْتُبِي. Plural masculine adds وا: اُكْتُبُوا. Used in classroom instructions daily.',
     vocab:[{ar:"اُكْتُبِي",en:"Write! (f.)"},{ar:"اُكْتُبُوا",en:"Write! (pl.)"},{ar:"اِفْتَحُوا",en:"Open! (pl.)"},{ar:"اِسْمَعُوا",en:"Listen! (pl.)"}]},
 
-  { id:27, book:2, lessonRef:"2.4", part:"A", title:"أَيَّامُ الْأُسْبُوعِ (Part 1)", titleEn:"Days of the Week (Part 1)",
+  { id:30, book:2, lessonRef:"2.4", part:"A", title:"أَيَّامُ الْأُسْبُوعِ (Part 1)", titleEn:"Days of the Week (Part 1)",
     grammar:'Days begin with يَوْمُ (the day of...). Sunday=الْأَحَد, Monday=الِاثْنَيْن, Tuesday=الثُّلَاثَاء, Wednesday=الْأَرْبِعَاء.',
     vocab:[{ar:"يَوْمُ الْأَحَدِ",en:"Sunday"},{ar:"يَوْمُ الِاثْنَيْنِ",en:"Monday"},{ar:"يَوْمُ الثُّلَاثَاءِ",en:"Tuesday"},{ar:"يَوْمُ الْأَرْبِعَاءِ",en:"Wednesday"}]},
-  { id:28, book:2, lessonRef:"2.4", part:"B", title:"أَيَّامُ الْأُسْبُوعِ (Part 2)", titleEn:"Days of the Week (Part 2)",
+  { id:31, book:2, lessonRef:"2.4", part:"B", title:"أَيَّامُ الْأُسْبُوعِ (Part 2)", titleEn:"Days of the Week (Part 2)",
     grammar:'Remaining days: الْخَمِيس (Thursday), الْجُمُعَة (Friday — holy day), السَّبْت (Saturday). مَتَى؟ = When?',
     vocab:[{ar:"يَوْمُ الْخَمِيسِ",en:"Thursday"},{ar:"يَوْمُ الْجُمُعَةِ",en:"Friday"},{ar:"يَوْمُ السَّبْتِ",en:"Saturday"},{ar:"مَتَى؟",en:"When?"}]},
 
-  { id:29, book:2, lessonRef:"2.5", part:"A", title:"ضَمَائِرُ الْجَمْعِ (Part 1)", titleEn:"Plural Pronouns",
+  { id:32, book:2, lessonRef:"2.5", part:"A", title:"ضَمَائِرُ الْجَمْعِ (Part 1)", titleEn:"Plural Pronouns",
     grammar:'أَنْتُمْ (you m.pl.), أَنْتُنَّ (you f.pl.), هُمْ (they m.), هُنَّ (they f.), نَحْنُ (we). هَؤُلَاءِ (these people), أُولَئِكَ (those people).',
     vocab:[{ar:"أَنْتُمْ",en:"you (m. plural)"},{ar:"أَنْتُنَّ",en:"you (f. plural)"},{ar:"هُمْ",en:"they (m.)"},{ar:"هَؤُلَاءِ",en:"these (people)"}]},
-  { id:30, book:2, lessonRef:"2.5", part:"B", title:"الْمُثَنَّى (Part 2)", titleEn:"Dual Form",
+  { id:33, book:2, lessonRef:"2.5", part:"B", title:"الْمُثَنَّى (Part 2)", titleEn:"Dual Form",
     grammar:'Dual: add ـَانِ (nom.) or ـَيْنِ (acc./gen.): كِتَابٌ → كِتَابَانِ. Dual pronoun: هُمَا. Demonstratives: هَذَانِ (these two m.), هَاتَانِ (these two f.).',
     vocab:[{ar:"كِتَابَانِ",en:"two books"},{ar:"طَالِبَانِ",en:"two students (m.)"},{ar:"هُمَا",en:"the two of them"},{ar:"هَذَانِ",en:"these two (m.)"}]},
 
-  { id:31, book:2, lessonRef:"2.6", part:"A", title:"الْأَعْدَادُ ١–٥", titleEn:"Numbers 1–5",
+  { id:34, book:2, lessonRef:"2.6", part:"A", title:"الْأَعْدَادُ ١–٥", titleEn:"Numbers 1–5",
     grammar:'Numbers 3–10 come before noun, use opposite gender: ثَلَاثَةُ كُتُبٍ (3 books — masc. noun, so number has ةٌ). Noun is plural genitive.',
     vocab:[{ar:"وَاحِدٌ",en:"one"},{ar:"اثْنَانِ",en:"two"},{ar:"ثَلَاثَةٌ",en:"three"},{ar:"أَرْبَعَةٌ",en:"four"},{ar:"خَمْسَةٌ",en:"five"}]},
-  { id:32, book:2, lessonRef:"2.6", part:"B", title:"الْأَعْدَادُ ٦–١٠", titleEn:"Numbers 6–10",
+  { id:35, book:2, lessonRef:"2.6", part:"B", title:"الْأَعْدَادُ ٦–١٠", titleEn:"Numbers 6–10",
     grammar:'كَمْ (how many?) takes singular accusative: كَمْ كِتَابًا؟ Numbers 6–10 follow opposite-gender rule. عَشَرَةٌ = ten.',
     vocab:[{ar:"سِتَّةٌ",en:"six"},{ar:"سَبْعَةٌ",en:"seven"},{ar:"ثَمَانِيَةٌ",en:"eight"},{ar:"تِسْعَةٌ",en:"nine"},{ar:"عَشَرَةٌ",en:"ten"}]},
 
-  { id:33, book:2, lessonRef:"2.7", part:"A", title:"الْمَاضِي — هُوَ وَهِيَ (Part 1)", titleEn:"Past Tense: He & She",
+  { id:36, book:2, lessonRef:"2.7", part:"A", title:"الْمَاضِي — هُوَ وَهِيَ (Part 1)", titleEn:"Past Tense: He & She",
     grammar:'Past tense base = 3rd person masculine singular: ذَهَبَ (he went), كَتَبَ (he wrote). Feminine adds تْ: ذَهَبَتْ, كَتَبَتْ.',
     vocab:[{ar:"ذَهَبَ",en:"he went"},{ar:"ذَهَبَتْ",en:"she went"},{ar:"كَتَبَ",en:"he wrote"},{ar:"كَتَبَتْ",en:"she wrote"}]},
-  { id:34, book:2, lessonRef:"2.7", part:"B", title:"الْمَاضِي — كُلُّ الضَّمَائِرِ (Part 2)", titleEn:"Past Tense: All Pronouns",
+  { id:37, book:2, lessonRef:"2.7", part:"B", title:"الْمَاضِي — كُلُّ الضَّمَائِرِ (Part 2)", titleEn:"Past Tense: All Pronouns",
     grammar:'Full past tense: أَنَا ذَهَبْتُ، أَنْتَ ذَهَبْتَ، هُوَ ذَهَبَ، هِيَ ذَهَبَتْ، نَحْنُ ذَهَبْنَا، هُمْ ذَهَبُوا.',
     vocab:[{ar:"ذَهَبْتُ",en:"I went"},{ar:"ذَهَبْتَ",en:"you went (m.)"},{ar:"ذَهَبْنَا",en:"we went"},{ar:"ذَهَبُوا",en:"they went (m.)"}]},
 
-  { id:35, book:2, lessonRef:"2.8", part:"A", title:"النَّفْيُ (Part 1)", titleEn:"Negation: لَا، مَا، لَيْسَ",
+  { id:38, book:2, lessonRef:"2.8", part:"A", title:"النَّفْيُ (Part 1)", titleEn:"Negation: لَا، مَا، لَيْسَ",
     grammar:'لَا negates present habits: لَا يَذْهَبُ. مَا negates past: مَا ذَهَبَ. لَيْسَ negates nominal sentences: لَيْسَ طَالِبًا (accusative after لَيْسَ). لَمْ + jussive: لَمْ يَذْهَبْ.',
     vocab:[{ar:"لَا يَذْهَبُ",en:"he does not go"},{ar:"مَا ذَهَبَ",en:"he did not go"},{ar:"لَيْسَ",en:"is not"},{ar:"لَمْ يَذْهَبْ",en:"he did not go (لَمْ)"}]},
-  { id:36, book:2, lessonRef:"2.8", part:"B", title:"نَعَمْ وَبَلَى (Part 2)", titleEn:"Yes, No, and Prohibition",
+  { id:39, book:2, lessonRef:"2.8", part:"B", title:"نَعَمْ وَبَلَى (Part 2)", titleEn:"Yes, No, and Prohibition",
     grammar:'نَعَمْ = yes. لَا = no. بَلَى = yes! (contradicts a negative question). Prohibition: لَا + jussive: لَا تَكْتُبْ هُنَا (Don\'t write here).',
     vocab:[{ar:"نَعَمْ",en:"yes"},{ar:"لَا",en:"no"},{ar:"بَلَى",en:"yes! (contradicting negative)"},{ar:"لَا تَكْتُبْ",en:"do not write (prohibition)"}]},
 
-  { id:37, book:2, lessonRef:"2.9", part:"A", title:"أَسْمَاءُ الِاسْتِفْهَامِ (Part 1)", titleEn:"Question Words",
+  { id:40, book:2, lessonRef:"2.9", part:"A", title:"أَسْمَاءُ الِاسْتِفْهَامِ (Part 1)", titleEn:"Question Words",
     grammar:'Complete question words: مَاذَا (what thing?), كَيْفَ (how?), لِمَاذَا (why?), مَنْ (who?), أَيْنَ (where?), مَتَى (when?), كَمْ (how many?). كَيْفَ حَالُكَ؟ = How are you?',
     vocab:[{ar:"مَاذَا",en:"what? (what thing?)"},{ar:"كَيْفَ",en:"how?"},{ar:"لِمَاذَا",en:"why?"},{ar:"كَيْفَ حَالُكَ؟",en:"How are you?"}]},
-  { id:38, book:2, lessonRef:"2.9", part:"B", title:"أَسْمَاءُ الِاسْتِفْهَامِ (Part 2)", titleEn:"Question Words Practice",
+  { id:41, book:2, lessonRef:"2.9", part:"B", title:"أَسْمَاءُ الِاسْتِفْهَامِ (Part 2)", titleEn:"Question Words Practice",
     grammar:'Practice building questions: لِمَاذَا تَذْهَبُ؟ = Why are you going? مَاذَا تَكْتُبُ؟ = What are you writing? أَيُّ (which?) used with nouns: أَيُّ كِتَابٍ؟',
     vocab:[{ar:"أَيُّ",en:"which?"},{ar:"مَاذَا تَكْتُبُ؟",en:"What are you writing?"},{ar:"لِمَاذَا تَذْهَبُ؟",en:"Why are you going?"},{ar:"كَمْ طَالِبًا",en:"how many students?"}]},
 
-  { id:39, book:2, lessonRef:"2.10", part:"A", title:"الْأَفْعَالُ الْمُتَعَدِّيَةُ (Part 1)", titleEn:"Transitive Verbs & Objects",
+  { id:42, book:2, lessonRef:"2.10", part:"A", title:"الْأَفْعَالُ الْمُتَعَدِّيَةُ (Part 1)", titleEn:"Transitive Verbs & Objects",
     grammar:'Transitive verbs take a direct object in the accusative (ـَ): كَتَبَ الطَّالِبُ الدَّرْسَ (The student wrote the lesson). The verb أَعْطَى (gave) can take two objects: أَعْطَيْتُكَ الْكِتَابَ (I gave you the book).',
     vocab:[{ar:"أَعْطَى",en:"he gave"},{ar:"أَخَذَ",en:"he took"},{ar:"فَهِمَ",en:"he understood"},{ar:"سَأَلَ",en:"he asked"}]},
-  { id:40, book:2, lessonRef:"2.10", part:"B", title:"الْأَفْعَالُ الْمُتَعَدِّيَةُ (Part 2)", titleEn:"Verb + Object Practice",
+  { id:43, book:2, lessonRef:"2.10", part:"B", title:"الْأَفْعَالُ الْمُتَعَدِّيَةُ (Part 2)", titleEn:"Verb + Object Practice",
     grammar:'More transitive verbs. Object pronouns attach to verbs: أَعْطَيْتُهُ (I gave him), سَأَلَنِي (he asked me — nūn protects ي). Same suffixes attach to prepositions: فِيهِ, عَلَيْهِ.',
     vocab:[{ar:"أَعْطَيْتُهُ",en:"I gave him/it"},{ar:"سَأَلَنِي",en:"he asked me"},{ar:"فَهِمُوهُ",en:"they understood it"},{ar:"أَخَذْتُهَا",en:"I took it (f.)"}]},
 
-  { id:41, book:2, lessonRef:"2.11", part:"A", title:"اللَّامُ وَالْإِعْطَاءُ (Part 1)", titleEn:"Indirect Objects with لِـ",
+  { id:44, book:2, lessonRef:"2.11", part:"A", title:"اللَّامُ وَالْإِعْطَاءُ (Part 1)", titleEn:"Indirect Objects with لِـ",
     grammar:'Indirect objects use لِـ (for/to): أَعْطَيْتُ الْكِتَابَ لِلطَّالِبِ (I gave the book to the student). لِـ + pronoun suffix: لَهُ (for him), لَهَا (for her), لِي (for me), لَكَ (for you).',
     vocab:[{ar:"لَهُ",en:"for him / his"},{ar:"لَهَا",en:"for her / hers"},{ar:"لَنَا",en:"for us / ours"},{ar:"لَكُمْ",en:"for you all"}]},
-  { id:42, book:2, lessonRef:"2.11", part:"B", title:"عِنْدَ وَلَدَى (Part 2)", titleEn:"Having: عِنْدَ & لَدَى",
+  { id:45, book:2, lessonRef:"2.11", part:"B", title:"عِنْدَ وَلَدَى (Part 2)", titleEn:"Having: عِنْدَ & لَدَى",
     grammar:'عِنْدَ + pronoun = to have: عِنْدِي كِتَابٌ (I have a book), عِنْدَهُ سَيَّارَةٌ (He has a car). لَدَى is similar but more formal. كَانَ عِنْدَهُ = He had (past tense of having).',
     vocab:[{ar:"عِنْدِي",en:"I have / at me"},{ar:"عِنْدَهُ",en:"he has / at him"},{ar:"لَدَيْهِ",en:"he has (formal)"},{ar:"كَانَ عِنْدَهُ",en:"he had"}]},
 
-  { id:43, book:2, lessonRef:"2.12", part:"A", title:"مُرَاجَعَةُ كِتَابٍ ٢ (Part 1)", titleEn:"Book 2 Review (Part 1)",
+  { id:46, book:2, lessonRef:"2.12", part:"A", title:"مُرَاجَعَةُ كِتَابٍ ٢ (Part 1)", titleEn:"Book 2 Review (Part 1)",
     grammar:'Review all verb tenses: present (يَكْتُبُ), imperative (اُكْتُبْ), past (كَتَبَ). Review negation: لَا، مَا، لَمْ، لَيْسَ. Review question words.',
     vocab:[{ar:"يَدْرُسُ",en:"he studies"},{ar:"دَرَسَ",en:"he studied"},{ar:"اُدْرُسْ",en:"Study! (m.)"},{ar:"لَمْ يَدْرُسْ",en:"he did not study"}]},
-  { id:44, book:2, lessonRef:"2.12", part:"B", title:"مُرَاجَعَةُ كِتَابٍ ٢ (Part 2)", titleEn:"Book 2 Review (Part 2)",
+  { id:47, book:2, lessonRef:"2.12", part:"B", title:"مُرَاجَعَةُ كِتَابٍ ٢ (Part 2)", titleEn:"Book 2 Review (Part 2)",
     grammar:'Review: days of week, numbers 1-10, dual form, plural pronouns, possessive لِـ, عِنْدَ. Comprehensive sentence building.',
     vocab:[{ar:"يَوْمِيًّا",en:"daily"},{ar:"أَحْيَانًا",en:"sometimes"},{ar:"دَائِمًا",en:"always"},{ar:"أَبَدًا",en:"never"}]},
 
 // ═══ BOOK 3 · Lessons 1–10 · Sessions 45–64 ═══
 
-  { id:45, book:3, lessonRef:"3.1", part:"A", title:"إِنَّ وَأَخَوَاتُهَا (Part 1)", titleEn:"inna & Sisters",
+  { id:48, book:3, lessonRef:"3.1", part:"A", title:"إِنَّ وَأَخَوَاتُهَا (Part 1)", titleEn:"inna & Sisters",
     grammar:'إِنَّ (indeed), أَنَّ (that), لَكِنَّ (but), لَعَلَّ (perhaps). These cause their subject (اسم إِنَّ) to become accusative: إِنَّ الطَّالِبَ مُجْتَهِدٌ.',
     vocab:[{ar:"إِنَّ",en:"indeed/verily"},{ar:"أَنَّ",en:"that (conjunction)"},{ar:"لَكِنَّ",en:"but/however"},{ar:"لَعَلَّ",en:"perhaps/I hope"}]},
-  { id:46, book:3, lessonRef:"3.1", part:"B", title:"إِنَّ — Practice (Part 2)", titleEn:"Using inna in Sentences",
+  { id:49, book:3, lessonRef:"3.1", part:"B", title:"إِنَّ — Practice (Part 2)", titleEn:"Using inna in Sentences",
     grammar:'إِنَّ: noun after it takes accusative (ـَ), but predicate keeps nominative (ـُ): إِنَّ الْبَيْتَ كَبِيرٌ. Very common in Qur\'anic Arabic.',
     vocab:[{ar:"مُجْتَهِدٌ",en:"hardworking"},{ar:"كَرِيمٌ",en:"generous"},{ar:"صَادِقٌ",en:"truthful"},{ar:"صَعْبٌ",en:"difficult"}]},
 
-  { id:47, book:3, lessonRef:"3.2", part:"A", title:"أَفْعَلُ التَّفْضِيلِ (Part 1)", titleEn:"Comparative & Superlative",
+  { id:50, book:3, lessonRef:"3.2", part:"A", title:"أَفْعَلُ التَّفْضِيلِ (Part 1)", titleEn:"Comparative & Superlative",
     grammar:'Comparative on أَفْعَلُ pattern: كَبِيرٌ → أَكْبَرُ (bigger), صَغِيرٌ → أَصْغَرُ. With مِنْ = comparative: أَكْبَرُ مِنَ الْقَلَمِ. With الـ = superlative: الْأَكْبَرُ.',
     vocab:[{ar:"أَكْبَرُ",en:"bigger/biggest"},{ar:"أَصْغَرُ",en:"smaller/smallest"},{ar:"أَطْوَلُ",en:"taller/tallest"},{ar:"أَقْصَرُ",en:"shorter/shortest"}]},
-  { id:48, book:3, lessonRef:"3.2", part:"B", title:"أَفْعَلُ التَّفْضِيلِ (Part 2)", titleEn:"More Comparatives",
+  { id:51, book:3, lessonRef:"3.2", part:"B", title:"أَفْعَلُ التَّفْضِيلِ (Part 2)", titleEn:"More Comparatives",
     grammar:'أَفْعَلُ does NOT change for gender: هُوَ أَكْبَرُ, هِيَ أَكْبَرُ. The form is the same for masculine and feminine.',
     vocab:[{ar:"أَجْمَلُ",en:"more/most beautiful"},{ar:"أَحْسَنُ",en:"better/best"},{ar:"أَسْرَعُ",en:"faster/fastest"},{ar:"أَبْعَدُ",en:"farther/farthest"}]},
 
-  { id:49, book:3, lessonRef:"3.3", part:"A", title:"الْأَلْوَانُ (Part 1)", titleEn:"Colors",
+  { id:52, book:3, lessonRef:"3.3", part:"A", title:"الْأَلْوَانُ (Part 1)", titleEn:"Colors",
     grammar:'Colors follow أَفْعَلُ/فَعْلَاءُ pattern: أَحْمَرُ (red m.), حَمْرَاءُ (red f.). These are diptotes (مَمْنُوعٌ مِنَ الصَّرْفِ): no tanwīn in indefinite.',
     vocab:[{ar:"أَحْمَرُ / حَمْرَاءُ",en:"red (m./f.)"},{ar:"أَزْرَقُ / زَرْقَاءُ",en:"blue (m./f.)"},{ar:"أَخْضَرُ / خَضْرَاءُ",en:"green (m./f.)"},{ar:"أَصْفَرُ / صَفْرَاءُ",en:"yellow (m./f.)"}]},
-  { id:50, book:3, lessonRef:"3.3", part:"B", title:"الْأَلْوَانُ (Part 2)", titleEn:"More Colors",
+  { id:53, book:3, lessonRef:"3.3", part:"B", title:"الْأَلْوَانُ (Part 2)", titleEn:"More Colors",
     grammar:'أَبْيَضُ (white), أَسْوَدُ (black). Plural of colors: فُعْلٌ: حُمْرٌ (reds), بِيضٌ (whites), سُودٌ (blacks), خُضْرٌ (greens).',
     vocab:[{ar:"أَبْيَضُ / بَيْضَاءُ",en:"white (m./f.)"},{ar:"أَسْوَدُ / سَوْدَاءُ",en:"black (m./f.)"},{ar:"بُنِّيٌّ",en:"brown"},{ar:"رَمَادِيٌّ",en:"grey"}]},
 
-  { id:51, book:3, lessonRef:"3.4", part:"A", title:"الْأَعْدَادُ ١١–١٥", titleEn:"Numbers 11–15",
+  { id:54, book:3, lessonRef:"3.4", part:"A", title:"الْأَعْدَادُ ١١–١٥", titleEn:"Numbers 11–15",
     grammar:'Numbers 11–19 are compound. Both parts fixed for 13–19: أَحَدَ عَشَرَ (11), اثْنَا عَشَرَ (12), ثَلَاثَةَ عَشَرَ (13). Counted noun is SINGULAR accusative.',
     vocab:[{ar:"أَحَدَ عَشَرَ",en:"eleven"},{ar:"اثْنَا عَشَرَ",en:"twelve"},{ar:"ثَلَاثَةَ عَشَرَ",en:"thirteen"},{ar:"أَرْبَعَةَ عَشَرَ",en:"fourteen"},{ar:"خَمْسَةَ عَشَرَ",en:"fifteen"}]},
-  { id:52, book:3, lessonRef:"3.4", part:"B", title:"الْأَعْدَادُ ١٦–٢٠", titleEn:"Numbers 16–20",
+  { id:55, book:3, lessonRef:"3.4", part:"B", title:"الْأَعْدَادُ ١٦–٢٠", titleEn:"Numbers 16–20",
     grammar:'عِشْرُونَ (20) is sound masculine plural form. 21+ = number + وَ + عِشْرُونَ: وَاحِدٌ وَعِشْرُونَ. Counted noun stays singular accusative.',
     vocab:[{ar:"سِتَّةَ عَشَرَ",en:"sixteen"},{ar:"سَبْعَةَ عَشَرَ",en:"seventeen"},{ar:"ثَمَانِيَةَ عَشَرَ",en:"eighteen"},{ar:"تِسْعَةَ عَشَرَ",en:"nineteen"},{ar:"عِشْرُونَ",en:"twenty"}]},
 
-  { id:53, book:3, lessonRef:"3.5", part:"A", title:"كَانَ (Part 1)", titleEn:"The Verb كَانَ",
+  { id:56, book:3, lessonRef:"3.5", part:"A", title:"كَانَ (Part 1)", titleEn:"The Verb كَانَ",
     grammar:'كَانَ (he was) makes the predicate accusative: كَانَ الطَّالِبُ مُجْتَهِدًا. Conjugation: كَانَ، كَانَتْ، كُنْتُ، كُنْتَ، كُنَّا، كَانُوا.',
     vocab:[{ar:"كَانَ",en:"he was"},{ar:"كَانَتْ",en:"she was"},{ar:"كُنْتُ",en:"I was"},{ar:"كُنَّا",en:"we were"}]},
-  { id:54, book:3, lessonRef:"3.5", part:"B", title:"الْوَقْتُ — Telling Time", titleEn:"Telling the Time",
+  { id:57, book:3, lessonRef:"3.5", part:"B", title:"الْوَقْتُ — Telling Time", titleEn:"Telling the Time",
     grammar:'السَّاعَةُ الثَّالِثَةُ (3 o\'clock), السَّاعَةُ الثَّالِثَةُ وَالنِّصْفُ (3:30), إِلَّا رُبْعًا (quarter to). فِي أَيِّ سَاعَةٍ؟ = At what time?',
     vocab:[{ar:"السَّاعَةُ",en:"the hour/o'clock"},{ar:"النِّصْفُ",en:"the half"},{ar:"الرُّبْعُ",en:"the quarter"},{ar:"دَقِيقَةٌ",en:"minute"}]},
 
-  { id:55, book:3, lessonRef:"3.6", part:"A", title:"الْمَجْزُومُ — لَمْ (Part 1)", titleEn:"Jussive Mood with لَمْ",
+  { id:58, book:3, lessonRef:"3.6", part:"A", title:"الْمَجْزُومُ — لَمْ (Part 1)", titleEn:"Jussive Mood with لَمْ",
     grammar:'لَمْ + jussive (الْمَجْزُومُ) negates past: لَمْ يَذْهَبْ (he did not go). Jussive: final ـُ becomes sukūn (ـْ). يَكْتُبُونَ → لَمْ يَكْتُبُوا (ن drops). Very common in Qur\'an and speech.',
     vocab:[{ar:"لَمْ يَذْهَبْ",en:"he did not go"},{ar:"لَمْ يَكْتُبْ",en:"he did not write"},{ar:"لَمْ نَذْهَبْ",en:"we did not go"},{ar:"لَمْ يَكْتُبُوا",en:"they did not write"}]},
-  { id:56, book:3, lessonRef:"3.6", part:"B", title:"الْمَجْزُومُ — لَا النَّاهِيَةُ (Part 2)", titleEn:"Prohibition with لَا",
+  { id:59, book:3, lessonRef:"3.6", part:"B", title:"الْمَجْزُومُ — لَا النَّاهِيَةُ (Part 2)", titleEn:"Prohibition with لَا",
     grammar:'لَا النَّاهِيَةُ (prohibitive لَا) + jussive = don\'t!: لَا تَذْهَبْ (Don\'t go!). لَا تَكْذِبْ (Don\'t lie!). Compare: لَا تَكْتُبُ (habitual negation) vs لَا تَكْتُبْ (command: don\'t write!).',
     vocab:[{ar:"لَا تَذْهَبْ",en:"Don't go! (m.)"},{ar:"لَا تَكْذِبْ",en:"Don't lie!"},{ar:"لَا تَنْسَ",en:"Don't forget!"},{ar:"لَا تَيْأَسْ",en:"Don't despair!"}]},
 
-  { id:57, book:3, lessonRef:"3.7", part:"A", title:"الشَّرْطُ — إِذَا (Part 1)", titleEn:"Conditional Sentences with إِذَا",
+  { id:60, book:3, lessonRef:"3.7", part:"A", title:"الشَّرْطُ — إِذَا (Part 1)", titleEn:"Conditional Sentences with إِذَا",
     grammar:'إِذَا (if/when) introduces a condition: إِذَا ذَهَبْتَ جِئْتُ (If you go, I will come). Both verbs can be past tense for future meaning. The response clause often begins with فَـ: إِذَا جَاءَ فَأَخْبِرْنِي.',
     vocab:[{ar:"إِذَا",en:"if / when"},{ar:"فَإِنَّ",en:"then indeed"},{ar:"إِذَا جَاءَ",en:"if/when he comes"},{ar:"إِذَا شِئْتَ",en:"if you wish"}]},
-  { id:58, book:3, lessonRef:"3.7", part:"B", title:"الشَّرْطُ — إِنْ (Part 2)", titleEn:"Conditional with إِنْ",
+  { id:61, book:3, lessonRef:"3.7", part:"B", title:"الشَّرْطُ — إِنْ (Part 2)", titleEn:"Conditional with إِنْ",
     grammar:'إِنْ (if) is used with jussive verbs: إِنْ تَذْهَبْ أَذْهَبْ (If you go, I go). Both verbs take jussive. إِذَا is more common in everyday speech; إِنْ in formal/Qur\'anic Arabic.',
     vocab:[{ar:"إِنْ شَاءَ اللهُ",en:"If Allah wills (God willing)"},{ar:"إِنْ تَفْعَلْ",en:"if you do"},{ar:"إِنْ كَانَ",en:"if it was/is"},{ar:"حِينَئِذٍ",en:"at that time / then"}]},
 
-  { id:59, book:3, lessonRef:"3.8", part:"A", title:"الْمَجْهُولُ (Part 1)", titleEn:"Passive Voice",
+  { id:62, book:3, lessonRef:"3.8", part:"A", title:"الْمَجْهُولُ (Part 1)", titleEn:"Passive Voice",
     grammar:'Passive voice (الْمَجْهُولُ): pattern changes for present—يُفْعَلُ: يُكْتَبُ (it is written). For past—فُعِلَ: كُتِبَ (it was written). The subject becomes unknown (مَجْهُول). Object becomes subject in nominative.',
     vocab:[{ar:"كُتِبَ",en:"it was written"},{ar:"يُكْتَبُ",en:"it is written"},{ar:"قُرِئَ",en:"it was read"},{ar:"يُعْطَى",en:"it is given"}]},
-  { id:60, book:3, lessonRef:"3.8", part:"B", title:"الْمَجْهُولُ (Part 2)", titleEn:"Passive Voice Practice",
+  { id:63, book:3, lessonRef:"3.8", part:"B", title:"الْمَجْهُولُ (Part 2)", titleEn:"Passive Voice Practice",
     grammar:'More passive forms. The passive subject (النَّائِبُ عَنِ الْفَاعِلِ) takes nominative: الْكِتَابُ كُتِبَ (The book was written). Preposition phrases can also be promoted: ضُرِبَ بِهِ (He was hit with it).',
     vocab:[{ar:"فُتِحَ",en:"it was opened"},{ar:"يُفْتَحُ",en:"it is opened"},{ar:"بُنِيَ",en:"it was built"},{ar:"يُبْنَى",en:"it is built"}]},
 
-  { id:61, book:3, lessonRef:"3.9", part:"A", title:"الْمَصْدَرُ (Part 1)", titleEn:"Verbal Nouns",
+  { id:64, book:3, lessonRef:"3.9", part:"A", title:"الْمَصْدَرُ (Part 1)", titleEn:"Verbal Nouns",
     grammar:'The verbal noun (الْمَصْدَرُ) is derived from a verb root. Form I pattern varies: كَتَبَ → كِتَابَةٌ (writing), ذَهَبَ → ذَهَابٌ (going), قَرَأَ → قِرَاءَةٌ (reading). Masdar used like a noun or verb.',
     vocab:[{ar:"كِتَابَةٌ",en:"writing (n.)"},{ar:"قِرَاءَةٌ",en:"reading (n.)"},{ar:"ذَهَابٌ",en:"going (n.)"},{ar:"دِرَاسَةٌ",en:"studying (n.)"}]},
-  { id:62, book:3, lessonRef:"3.9", part:"B", title:"الْمَصْدَرُ (Part 2)", titleEn:"Using Verbal Nouns",
+  { id:65, book:3, lessonRef:"3.9", part:"B", title:"الْمَصْدَرُ (Part 2)", titleEn:"Using Verbal Nouns",
     grammar:'Maṣdar used with prepositions: بَعْدَ الْكِتَابَةِ (after writing), قَبْلَ الذَّهَابِ (before going). With بِدُونِ (without): بِدُونِ دِرَاسَةٍ (without studying). Forms a key structure in Arabic.',
     vocab:[{ar:"بَعْدَ",en:"after"},{ar:"قَبْلَ",en:"before"},{ar:"بِدُونِ",en:"without"},{ar:"عِنْدَ الْوُصُولِ",en:"upon arrival"}]},
 
-  { id:63, book:3, lessonRef:"3.10", part:"A", title:"مُرَاجَعَةُ كِتَابٍ ٣ (Part 1)", titleEn:"Book 3 Review (Part 1)",
+  { id:66, book:3, lessonRef:"3.10", part:"A", title:"مُرَاجَعَةُ كِتَابٍ ٣ (Part 1)", titleEn:"Book 3 Review (Part 1)",
     grammar:'Review: إِنَّ sisters, أَفْعَلُ comparative, colors (diptotes), numbers 11-20, كَانَ, jussive (لَمْ + لَا النَّاهِيَةُ), conditional (إِذَا / إِنْ).',
     vocab:[{ar:"إِنَّ الدَّرْسَ سَهْلٌ",en:"Indeed the lesson is easy"},{ar:"لَمْ يَفْهَمْ",en:"he did not understand"},{ar:"إِذَا دَرَسْتَ",en:"if you studied"},{ar:"أَحْسَنُ مِنْ",en:"better than"}]},
-  { id:64, book:3, lessonRef:"3.10", part:"B", title:"مُرَاجَعَةُ كِتَابٍ ٣ (Part 2)", titleEn:"Book 3 Review (Part 2)",
+  { id:67, book:3, lessonRef:"3.10", part:"B", title:"مُرَاجَعَةُ كِتَابٍ ٣ (Part 2)", titleEn:"Book 3 Review (Part 2)",
     grammar:'Review: passive voice, verbal nouns (maṣdar), telling time. Full sentence building combining Book 3 structures with earlier vocabulary.',
     vocab:[{ar:"يُقْرَأُ",en:"it is read"},{ar:"دِرَاسَةٌ",en:"studying"},{ar:"السَّاعَةُ الْعَاشِرَةُ",en:"ten o'clock"},{ar:"بَعْدَ الدِّرَاسَةِ",en:"after studying"}]},
 
 // ═══ BOOK 4 · Lessons 1–10 · Sessions 65–84 ═══
 
-  { id:65, book:4, lessonRef:"4.1", part:"A", title:"جَمْعُ الْمُذَكَّرِ السَّالِمِ", titleEn:"Sound Masculine Plural (ـُونَ / ـِينَ)",
+  { id:68, book:4, lessonRef:"4.1", part:"A", title:"جَمْعُ الْمُذَكَّرِ السَّالِمِ", titleEn:"Sound Masculine Plural (ـُونَ / ـِينَ)",
     grammar:'Sound masculine plural: add ـُونَ (nom.) or ـِينَ (acc./gen.): مُدَرِّسٌ → مُدَرِّسُونَ. Only for rational masculine beings. The tanwīn and ـٌ of singular are removed.',
     vocab:[{ar:"مُدَرِّسُونَ",en:"teachers (m.)"},{ar:"طَالِبُونَ",en:"students (m.)"},{ar:"مُهَنْدِسُونَ",en:"engineers"},{ar:"مُسْلِمُونَ",en:"Muslims (m.)"}]},
-  { id:66, book:4, lessonRef:"4.1", part:"B", title:"جَمْعُ الْمُؤَنَّثِ السَّالِمِ", titleEn:"Sound Feminine Plural (ـَاتٌ)",
+  { id:69, book:4, lessonRef:"4.1", part:"B", title:"جَمْعُ الْمُؤَنَّثِ السَّالِمِ", titleEn:"Sound Feminine Plural (ـَاتٌ)",
     grammar:'Sound feminine plural: replace ةٌ with ـَاتٌ: مُدَرِّسَةٌ → مُدَرِّسَاتٌ. In acc./gen.: ـَاتٍ (kasra, NOT fatḥa — special rule!): رَأَيْتُ الطَّالِبَاتِ.',
     vocab:[{ar:"مُدَرِّسَاتٌ",en:"teachers (f.)"},{ar:"طَالِبَاتٌ",en:"students (f.)"},{ar:"سَيَّارَاتٌ",en:"cars"},{ar:"مَدَارِسُ",en:"schools (broken pl.)"}]},
 
-  { id:67, book:4, lessonRef:"4.2", part:"A", title:"جَمْعُ التَّكْسِيرِ (Part 1)", titleEn:"Broken Plurals (Part 1)",
+  { id:70, book:4, lessonRef:"4.2", part:"A", title:"جَمْعُ التَّكْسِيرِ (Part 1)", titleEn:"Broken Plurals (Part 1)",
     grammar:'Broken plurals change internal structure. فُعُولٌ: كِتَابٌ → كُتُبٌ, دَرْسٌ → دُرُوسٌ. أَفْعَالٌ: قَلَمٌ → أَقْلَامٌ, بَابٌ → أَبْوَابٌ. Must be memorised.',
     vocab:[{ar:"كُتُبٌ",en:"books"},{ar:"دُرُوسٌ",en:"lessons"},{ar:"أَقْلَامٌ",en:"pens"},{ar:"أَبْوَابٌ",en:"doors"}]},
-  { id:68, book:4, lessonRef:"4.2", part:"B", title:"جَمْعُ التَّكْسِيرِ (Part 2)", titleEn:"Broken Plurals (Part 2)",
+  { id:71, book:4, lessonRef:"4.2", part:"B", title:"جَمْعُ التَّكْسِيرِ (Part 2)", titleEn:"Broken Plurals (Part 2)",
     grammar:'More patterns: فِعَالٌ: رَجُلٌ → رِجَالٌ. فُعَلَاءُ: طَبِيبٌ → أَطِبَّاءُ. مَفَاعِلُ: مَسْجِدٌ → مَسَاجِدُ (diptote). Non-human plurals take feminine singular agreement!',
     vocab:[{ar:"رِجَالٌ",en:"men"},{ar:"أَطِبَّاءُ",en:"doctors"},{ar:"مَسَاجِدُ",en:"mosques"},{ar:"أَنْبِيَاءُ",en:"prophets"}]},
 
-  { id:69, book:4, lessonRef:"4.3", part:"A", title:"الْجُمْلَةُ الْفِعْلِيَّةُ (Part 1)", titleEn:"Verbal Sentences & Accusative",
+  { id:72, book:4, lessonRef:"4.3", part:"A", title:"الْجُمْلَةُ الْفِعْلِيَّةُ (Part 1)", titleEn:"Verbal Sentences & Accusative",
     grammar:'Verbal sentences start with verb: ذَهَبَ الطَّالِبُ. Subject (الْفَاعِلُ) is nominative (ـُ). Object (الْمَفْعُولُ بِهِ) is accusative (ـَ): كَتَبَ الطَّالِبُ الدَّرْسَ.',
     vocab:[{ar:"الْفَاعِلُ",en:"subject (doer)"},{ar:"الْمَفْعُولُ بِهِ",en:"direct object"},{ar:"كَتَبَ الدَّرْسَ",en:"wrote the lesson (acc.)"},{ar:"فَتَحَ الْبَابَ",en:"opened the door (acc.)"}]},
-  { id:70, book:4, lessonRef:"4.3", part:"B", title:"الْجُمْلَةُ الْفِعْلِيَّةُ (Part 2)", titleEn:"Object Pronoun Suffixes",
+  { id:73, book:4, lessonRef:"4.3", part:"B", title:"الْجُمْلَةُ الْفِعْلِيَّةُ (Part 2)", titleEn:"Object Pronoun Suffixes",
     grammar:'Object pronouns attach to verbs: ضَرَبَهُ (he hit him), كَتَبَهَا (he wrote it f.), سَأَلَنِي (he asked me). Same suffixes on prepositions: فِيهِ, عَلَيْهِ.',
     vocab:[{ar:"ضَرَبَهُ",en:"he hit him/it"},{ar:"كَتَبَهَا",en:"he wrote it (f.)"},{ar:"سَأَلَنِي",en:"he asked me"},{ar:"فَهِمُوهُ",en:"they understood it"}]},
 
-  { id:71, book:4, lessonRef:"4.4", part:"A", title:"أُرِيدُ أَنْ... (Part 1)", titleEn:"I Want To... (Subjunctive)",
+  { id:74, book:4, lessonRef:"4.4", part:"A", title:"أُرِيدُ أَنْ... (Part 1)", titleEn:"I Want To... (Subjunctive)",
     grammar:'After أَنْ (to), present tense takes subjunctive (الْمَنْصُوبُ): final ـُ → ـَ, يَفْعَلُونَ loses ن: أُرِيدُ أَنْ أَكْتُبَ (I want to write).',
     vocab:[{ar:"أُرِيدُ أَنْ أَكْتُبَ",en:"I want to write"},{ar:"أُرِيدُ أَنْ أَذْهَبَ",en:"I want to go"},{ar:"يُمْكِنُ أَنْ",en:"it is possible to"},{ar:"لَنْ يَذْهَبَ",en:"he will not go"}]},
-  { id:72, book:4, lessonRef:"4.4", part:"B", title:"لِأَنَّ وَلِـ (Part 2)", titleEn:"Because & Purpose",
+  { id:75, book:4, lessonRef:"4.4", part:"B", title:"لِأَنَّ وَلِـ (Part 2)", titleEn:"Because & Purpose",
     grammar:'لِأَنَّ (because): ذَهَبْتُ لِأَنَّ الْجَوَّ جَمِيلٌ. لِـ of purpose + subjunctive: جِئْتُ لِأَكْتُبَ (I came to write). This lām causes subjunctive in following verb.',
     vocab:[{ar:"لِأَنَّ",en:"because"},{ar:"جِئْتُ لِأَكْتُبَ",en:"I came to write"},{ar:"مُنْذُ",en:"since/for (time)"},{ar:"مُنْذُ أُسْبُوعٍ",en:"for a week"}]},
 
-  { id:73, book:4, lessonRef:"4.5", part:"A", title:"الْفُصُولُ وَالطَّقْسُ (Part 1)", titleEn:"Seasons & Weather",
+  { id:76, book:4, lessonRef:"4.5", part:"A", title:"الْفُصُولُ وَالطَّقْسُ (Part 1)", titleEn:"Seasons & Weather",
     grammar:'Four seasons: الرَّبِيعُ (spring), الصَّيْفُ (summer), الْخَرِيفُ (autumn), الشِّتَاءُ (winter). Weather adjectives: حَارٌّ (hot), بَارِدٌ (cold), مُشْمِسٌ (sunny), مَاطِرٌ (rainy).',
     vocab:[{ar:"الرَّبِيعُ",en:"spring"},{ar:"الصَّيْفُ",en:"summer"},{ar:"الْخَرِيفُ",en:"autumn"},{ar:"الشِّتَاءُ",en:"winter"}]},
-  { id:74, book:4, lessonRef:"4.5", part:"B", title:"الطَّقْسُ (Part 2)", titleEn:"Weather Expressions",
+  { id:77, book:4, lessonRef:"4.5", part:"B", title:"الطَّقْسُ (Part 2)", titleEn:"Weather Expressions",
     grammar:'Weather sentences: الْجَوُّ حَارٌّ (the weather is hot). تَمْطُرُ السَّمَاءُ (it is raining). Review كَانَ with weather: كَانَ الطَّقْسُ بَارِدًا (The weather was cold).',
     vocab:[{ar:"الْجَوُّ حَارٌّ",en:"the weather is hot"},{ar:"الْجَوُّ بَارِدٌ",en:"the weather is cold"},{ar:"تَمْطُرُ",en:"it rains"},{ar:"ثَلْجٌ",en:"snow"}]},
 
-  { id:75, book:4, lessonRef:"4.6", part:"A", title:"الْفِعْلُ الثُّلَاثِيُّ الْمَزِيدُ — بَابُ فَعَّلَ", titleEn:"Verb Form II (فَعَّلَ)",
+  { id:78, book:4, lessonRef:"4.6", part:"A", title:"الْفِعْلُ الثُّلَاثِيُّ الْمَزِيدُ — بَابُ فَعَّلَ", titleEn:"Verb Form II (فَعَّلَ)",
     grammar:'Form II doubles the middle radical: كَتَبَ → كَتَّبَ (to make write/dictate). Meanings: intensive, causative, or denominative. Present tense: يُفَعِّلُ. Masdar: تَفْعِيلٌ.',
     vocab:[{ar:"دَرَّسَ",en:"he taught (caused to study)"},{ar:"عَلَّمَ",en:"he taught/trained"},{ar:"كَبَّرَ",en:"he enlarged/said Allahu Akbar"},{ar:"قَدَّمَ",en:"he presented/offered"}]},
-  { id:76, book:4, lessonRef:"4.6", part:"B", title:"بَابُ فَعَّلَ — Practice (Part 2)", titleEn:"Form II in Sentences",
+  { id:79, book:4, lessonRef:"4.6", part:"B", title:"بَابُ فَعَّلَ — Practice (Part 2)", titleEn:"Form II in Sentences",
     grammar:'Form II passive: فُعِّلَ, present يُفَعَّلُ. Common Form II verbs: سَمَّى (named), رَتَّبَ (arranged), حَسَّنَ (improved). Maṣdar تَفْعِيلٌ: تَدْرِيسٌ (teaching), تَعْلِيمٌ (education).',
     vocab:[{ar:"تَدْرِيسٌ",en:"teaching (n.)"},{ar:"تَعْلِيمٌ",en:"education"},{ar:"تَرْتِيبٌ",en:"arrangement"},{ar:"تَقْدِيمٌ",en:"presentation"}]},
 
-  { id:77, book:4, lessonRef:"4.7", part:"A", title:"بَابُ أَفْعَلَ — Form IV (Part 1)", titleEn:"Verb Form IV (أَفْعَلَ)",
+  { id:80, book:4, lessonRef:"4.7", part:"A", title:"بَابُ أَفْعَلَ — Form IV (Part 1)", titleEn:"Verb Form IV (أَفْعَلَ)",
     grammar:'Form IV adds أَ- prefix: ذَهَبَ → أَذْهَبَ (to cause to go). Often causative. Present: يُفْعِلُ. Masdar: إِفْعَالٌ. Very common: أَسْلَمَ (he submitted/became Muslim), أَعْطَى (he gave).',
     vocab:[{ar:"أَسْلَمَ",en:"he submitted (became Muslim)"},{ar:"أَرْسَلَ",en:"he sent"},{ar:"أَخْرَجَ",en:"he brought out"},{ar:"أَنْزَلَ",en:"he sent down/revealed"}]},
-  { id:78, book:4, lessonRef:"4.7", part:"B", title:"بَابُ أَفْعَلَ — Practice (Part 2)", titleEn:"Form IV in Sentences",
+  { id:81, book:4, lessonRef:"4.7", part:"B", title:"بَابُ أَفْعَلَ — Practice (Part 2)", titleEn:"Form IV in Sentences",
     grammar:'Form IV masdar: إِفْعَالٌ: إِسْلَامٌ (submission/Islam), إِرْسَالٌ (sending), إِخْرَاجٌ (bringing out). Present passive: يُفْعَلُ. These forms appear heavily in Qur\'anic vocabulary.',
     vocab:[{ar:"إِسْلَامٌ",en:"submission/Islam"},{ar:"إِيمَانٌ",en:"faith/belief"},{ar:"إِنْزَالٌ",en:"sending down"},{ar:"إِعْطَاءٌ",en:"giving"}]},
 
-  { id:79, book:4, lessonRef:"4.8", part:"A", title:"اسْمُ الْفَاعِلِ (Part 1)", titleEn:"Active Participle",
+  { id:82, book:4, lessonRef:"4.8", part:"A", title:"اسْمُ الْفَاعِلِ (Part 1)", titleEn:"Active Participle",
     grammar:'Active participle (اسْمُ الْفَاعِلِ): Form I → فَاعِلٌ: كَتَبَ → كَاتِبٌ (writer). Used as noun or adjective. Feminine: كَاتِبَةٌ. Plural: كُتَّابٌ (broken) or كَاتِبُونَ (sound).',
     vocab:[{ar:"كَاتِبٌ",en:"writer/writing (m.)"},{ar:"طَالِبٌ",en:"seeker/student"},{ar:"مُؤْمِنٌ",en:"believer (Form IV)"},{ar:"مُسْلِمٌ",en:"Muslim/submitting"}]},
-  { id:80, book:4, lessonRef:"4.8", part:"B", title:"اسْمُ الْمَفْعُولِ (Part 2)", titleEn:"Passive Participle",
+  { id:83, book:4, lessonRef:"4.8", part:"B", title:"اسْمُ الْمَفْعُولِ (Part 2)", titleEn:"Passive Participle",
     grammar:'Passive participle (اسْمُ الْمَفْعُولِ): Form I → مَفْعُولٌ: كَتَبَ → مَكْتُوبٌ (written). Form II/IV: prefix مُـ + verb with fatḥa on penultimate: مُدَرِّسٌ → مُدَرَّسٌ (taught).',
     vocab:[{ar:"مَكْتُوبٌ",en:"written"},{ar:"مَفْهُومٌ",en:"understood"},{ar:"مَعْرُوفٌ",en:"known/recognised"},{ar:"مَحْبُوبٌ",en:"beloved/liked"}]},
 
-  { id:81, book:4, lessonRef:"4.9", part:"A", title:"لَوْ وَلَوْلَا (Part 1)", titleEn:"Hypothetical Conditionals",
+  { id:84, book:4, lessonRef:"4.9", part:"A", title:"لَوْ وَلَوْلَا (Part 1)", titleEn:"Hypothetical Conditionals",
     grammar:'لَوْ (if — contrary to fact): لَوْ دَرَسْتَ لَنَجَحْتَ (If you had studied, you would have passed). Both verbs in past tense. Response has لَـ prefix. لَوْلَا (if not for): لَوْلَا اللهُ مَا هُدِينَا.',
     vocab:[{ar:"لَوْ",en:"if (hypothetical)"},{ar:"لَوْلَا",en:"if not for / but for"},{ar:"لَنَجَحْتَ",en:"you would have passed"},{ar:"لَمَا",en:"then...not (response)"}]},
-  { id:82, book:4, lessonRef:"4.9", part:"B", title:"لَوْ — Practice (Part 2)", titleEn:"Hypothetical Conditionals Practice",
+  { id:85, book:4, lessonRef:"4.9", part:"B", title:"لَوْ — Practice (Part 2)", titleEn:"Hypothetical Conditionals Practice",
     grammar:'More لَوْ sentences. لَوْ كَانَ عِنْدِي مَالٌ لَاشْتَرَيْتُ (If I had money I would have bought). Contrast with إِذَا (real condition) vs لَوْ (imagined/impossible condition).',
     vocab:[{ar:"لَوْ كَانَ",en:"if it were/had been"},{ar:"لَاشْتَرَيْتُ",en:"I would have bought"},{ar:"لَوْ شِئْتُ",en:"if I had wanted"},{ar:"لَوْ أَرَدْتَ",en:"if you had wanted"}]},
 
-  { id:83, book:4, lessonRef:"4.10", part:"A", title:"مُرَاجَعَةٌ نِهَائِيَّةٌ (Part 1)", titleEn:"Final Review (Part 1)",
+  { id:86, book:4, lessonRef:"4.10", part:"A", title:"مُرَاجَعَةٌ نِهَائِيَّةٌ (Part 1)", titleEn:"Final Review (Part 1)",
     grammar:'Review: sound plurals (ـُونَ / ـَاتٌ), broken plurals, verbal sentence cases, object pronouns, subjunctive (أَنْ), Form II (فَعَّلَ), Form IV (أَفْعَلَ), active/passive participles.',
     vocab:[{ar:"مُعَلِّمٌ",en:"teacher (Form II active participle)"},{ar:"مُتَعَلِّمٌ",en:"learner (Form V)"},{ar:"مُرْسَلٌ",en:"sent/messenger (Form IV passive)"},{ar:"مَحْبُوبٌ",en:"beloved"}]},
-  { id:84, book:4, lessonRef:"4.10", part:"B", title:"مُرَاجَعَةٌ نِهَائِيَّةٌ (Part 2)", titleEn:"Final Review (Part 2)",
+  { id:87, book:4, lessonRef:"4.10", part:"B", title:"مُرَاجَعَةٌ نِهَائِيَّةٌ (Part 2)", titleEn:"Final Review (Part 2)",
     grammar:'Comprehensive review of all 4 books. From basic هَذَا sentences to complex verbal sentences with moods, plurals, and derived verb forms. You have covered the complete Madinah Arabic Reader curriculum!',
     vocab:[{ar:"الْحَمْدُ لِلَّهِ",en:"All praise is for Allah"},{ar:"بَارَكَ اللهُ فِيكَ",en:"May Allah bless you"},{ar:"جَزَاكَ اللهُ خَيْرًا",en:"May Allah reward you with good"},{ar:"إِنْ شَاءَ اللهُ",en:"God willing"}]},
 ];
@@ -1075,18 +1108,20 @@ const REVIEWS = [
 ];
 
 // ── ALL_SESSIONS: interleaved regular + review sessions in curriculum order ──
-// Reviews after sessions 10, 20, 30, 40, 50, 60, 70, 80 (every 5 lessons = 10 sessions)
+// Reviews after each block of ~10 sessions (5 lessons). First block is 13 due to 3 new L1.1 sessions.
+// Block boundaries: 1-13, 14-23, 24-33, 34-43, 44-53, 54-63, 64-73, 74-83, 84-87
+const REVIEW_BLOCK_ENDS = [13, 23, 33, 43, 53, 63, 73, 83];
 const sid = (id) => SESSIONS.find(s => s.id === id);
 const ALL_SESSIONS = [
-  ...SESSIONS.filter(s=>s.id>=1&&s.id<=10),   REVIEWS[0],
-  ...SESSIONS.filter(s=>s.id>=11&&s.id<=20),  REVIEWS[1],
-  ...SESSIONS.filter(s=>s.id>=21&&s.id<=30),  REVIEWS[2],
-  ...SESSIONS.filter(s=>s.id>=31&&s.id<=40),  REVIEWS[3],
-  ...SESSIONS.filter(s=>s.id>=41&&s.id<=50),  REVIEWS[4],
-  ...SESSIONS.filter(s=>s.id>=51&&s.id<=60),  REVIEWS[5],
-  ...SESSIONS.filter(s=>s.id>=61&&s.id<=70),  REVIEWS[6],
-  ...SESSIONS.filter(s=>s.id>=71&&s.id<=80),  REVIEWS[7],
-  ...SESSIONS.filter(s=>s.id>=81&&s.id<=84),
+  ...SESSIONS.filter(s=>s.id>=1 &&s.id<=13),  REVIEWS[0],
+  ...SESSIONS.filter(s=>s.id>=14&&s.id<=23),  REVIEWS[1],
+  ...SESSIONS.filter(s=>s.id>=24&&s.id<=33),  REVIEWS[2],
+  ...SESSIONS.filter(s=>s.id>=34&&s.id<=43),  REVIEWS[3],
+  ...SESSIONS.filter(s=>s.id>=44&&s.id<=53),  REVIEWS[4],
+  ...SESSIONS.filter(s=>s.id>=54&&s.id<=63),  REVIEWS[5],
+  ...SESSIONS.filter(s=>s.id>=64&&s.id<=73),  REVIEWS[6],
+  ...SESSIONS.filter(s=>s.id>=74&&s.id<=83),  REVIEWS[7],
+  ...SESSIONS.filter(s=>s.id>=84&&s.id<=87),
 ];
 
 
@@ -1120,9 +1155,9 @@ function buildExercises(session, lang = "en") {
   // Match pairs
   if (vocab.length >= 4)
     exercises.push({ type:"match", pairs:shuffle(vocab).slice(0,4).map(w=>({ar:w.ar,en:getLabel(w)})) });
-  // Spaced repetition tiles from session 15+
-  if (session.id >= 15) {
-    const eligibleReviews = REVIEWS.filter((_, i) => i < Math.floor((session.id - 1) / 10));
+  // Spaced repetition tiles from session 18+ (was 15 before 3 L1.1 sessions were added)
+  if (session.id >= 18) {
+    const eligibleReviews = REVIEWS.filter((_, i) => session.id > REVIEW_BLOCK_ENDS[i]);
     const poolTiles = eligibleReviews.flatMap(r => r.sentenceTiles.filter(t => t.prebaked.length === 0));
     shuffle(poolTiles).slice(0, 2).forEach(t => {
       const urHint = lang === "ur" ? (getUrHint(t.en) || t.en) : t.en;
@@ -1792,6 +1827,7 @@ export default function MadinahArabicApp() {
   });
   const [unlockAll, setUnlockAll] = useState(() => localStorage.getItem("ma_unlock") === "1");
   const [lang, setLang] = useState(() => localStorage.getItem("ma_lang") || "en");
+  const [openBooks, setOpenBooks] = useState(() => new Set([1]));
 
   // Persist completed + unlockAll + lang
   useEffect(() => { localStorage.setItem("ma_completed", JSON.stringify(completed)); }, [completed]);
@@ -2006,7 +2042,27 @@ export default function MadinahArabicApp() {
   // ── SESSION MAP ──
   if(screen==="map"){
     const bookColors = {1:["#059669","#047857"],2:["#2563eb","#1d4ed8"],3:["#7c3aed","#6d28d9"],4:["#dc2626","#b91c1c"]};
-    // Group by sections, showing reviews between book sections
+    const bookMeta = {
+      1:{ar:"الْكِتَابُ الْأَوَّلُ", en:"Core Grammar",       ur:"بنیادی قواعد"},
+      2:{ar:"الْكِتَابُ الثَّانِي", en:"Verbs & Tense",      ur:"افعال اور زمانہ"},
+      3:{ar:"الْكِتَابُ الثَّالِثُ",en:"Advanced Sentences", ur:"جملہ سازی"},
+      4:{ar:"الْكِتَابُ الرَّابِعُ",en:"Rhetoric & Morphology",ur:"بلاغت و صرف"},
+    };
+
+    // Group ALL_SESSIONS by book (reviews inherit the current book context)
+    let curBook = 1;
+    const grouped = {1:[],2:[],3:[],4:[]};
+    ALL_SESSIONS.forEach((s,idx) => {
+      if(s.book) curBook = s.book;
+      grouped[curBook].push({s,idx});
+    });
+
+    const toggleBook = (b) => setOpenBooks(prev => {
+      const next = new Set(prev);
+      next.has(b) ? next.delete(b) : next.add(b);
+      return next;
+    });
+
     return (
       <div style={pageStyle}>
         <div style={cardStyle}>
@@ -2015,65 +2071,112 @@ export default function MadinahArabicApp() {
             <span style={{color:"white",fontWeight:700,fontSize:16,fontFamily:lang==="ur"?urFont:"inherit"}}>{UI_TEXT[lang].allSessions}</span>
             <button onClick={()=>setScreen("settings")} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 10px",cursor:"pointer",fontSize:16,lineHeight:1}}>⚙️</button>
           </div>
-          <div style={{overflowY:"auto",maxHeight:scrollH,padding:"14px 14px 20px"}}>
-            {ALL_SESSIONS.map((s,idx)=>{
-              const unlocked = unlockAll || idx <= numCompleted;
-              const acc = completed[s.id];
-              const done = acc !== undefined;
-              const isReview = s.type==="review";
-              const colors = isReview ? ["#f59e0b","#d97706"] : bookColors[s.book]||["#059669","#047857"];
 
-              if(isReview) return (
-                <button key={s.id} onClick={()=>unlocked&&startSession(s)} disabled={!unlocked} style={{
-                  width:"100%",textAlign:"left",padding:"12px 14px",borderRadius:12,marginBottom:7,
-                  border:done?`2px solid #f59e0b44`:"1px solid #fde68a",
-                  background:done?"#fffbeb":"#fefce8",
-                  cursor:unlocked?"pointer":"default",opacity:unlocked?1:0.4,
-                  display:"flex",alignItems:"center",justifyContent:"space-between",transition:"transform 0.15s"}}
-                  onMouseEnter={e=>{if(unlocked)e.currentTarget.style.transform="scale(1.01)"}}
-                  onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
-                  <div style={{flex:1}}>
-                    <div style={{fontSize:12,fontWeight:800,color:"#d97706",marginBottom:2,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>🏆 {lang==="ur"?"دہرائی":"REVIEW"} · {s.coversLessons}</div>
-                    <div style={{fontSize:13,color:"#92400e",fontWeight:600,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>{lang==="ur" ? getUrSessionTitle(s.titleEn) : s.titleEn}</div>
-                    <div style={{fontSize:11,color:"#d97706",marginTop:2,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>{lang==="ur" ? `${s.grammarExercises.length} گرامر + ${s.sentenceTiles.length} جملہ ٹائلز` : `${s.grammarExercises.length} grammar + ${s.sentenceTiles.length} sentence tiles`}</div>
-                  </div>
-                  <div style={{marginLeft:10,textAlign:"center"}}>
-                    {!unlocked?<span style={{fontSize:18}}>🔒</span>:done?(
-                      <div><div style={{fontSize:18}}>✅</div><div style={{fontSize:10,color:"#d97706",fontWeight:700}}>{acc}%</div></div>
-                    ):<span style={{fontSize:18}}>🏆</span>}
-                  </div>
-                </button>
-              );
+          <div style={{overflowY:"auto",maxHeight:scrollH,padding:"12px 12px 24px"}}>
+            {[1,2,3,4].map(bookNum => {
+              const colors   = bookColors[bookNum];
+              const meta     = bookMeta[bookNum];
+              const entries  = grouped[bookNum];
+              const bookSess = SESSIONS.filter(s=>s.book===bookNum);
+              const bookDone = bookSess.filter(s=>completed[s.id]).length;
+              const bookTotal= bookSess.length;
+              const pct      = bookTotal>0 ? Math.round(bookDone/bookTotal*100) : 0;
+              const isOpen   = openBooks.has(bookNum);
+              // Book unlocked if its first session is reachable
+              const firstIdx = entries[0]?.idx ?? Infinity;
+              const bookUnlocked = unlockAll || firstIdx <= numCompleted;
 
-              // Show book header before first session of each book
-              const isFirstInBook = s.part==="A" && s.lessonRef.endsWith(".1");
               return (
-                <div key={s.id}>
-                  {isFirstInBook&&(
-                    <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8,marginTop:idx>0?8:0}}>
-                      <div style={{padding:"4px 12px",background:`linear-gradient(135deg,${colors[0]},${colors[1]})`,borderRadius:20,color:"white",fontWeight:700,fontSize:13,fontFamily:lang==="ur"?urFont:"inherit"}}>{lang==="ur"?`کتاب ${s.book}`:`Book ${s.book}`}</div>
-                      <span style={{fontSize:12,color:"#64748b",fontFamily:lang==="ur"?urFont:"inherit"}}>{SESSIONS.filter(x=>x.book===s.book&&completed[x.id]).length}/{SESSIONS.filter(x=>x.book===s.book).length} {lang==="ur"?"مکمل":"done"}</span>
-                    </div>
-                  )}
-                  <button onClick={()=>unlocked&&startSession(s)} disabled={!unlocked} style={{
-                    width:"100%",textAlign:"left",padding:"12px 14px",borderRadius:12,marginBottom:7,
-                    border:done?`2px solid ${colors[0]}33`:"1px solid #e2e8f0",
-                    background:done?`${colors[0]}08`:"white",
-                    cursor:unlocked?"pointer":"default",opacity:unlocked?1:0.4,
-                    display:"flex",alignItems:"center",justifyContent:"space-between",transition:"transform 0.15s"}}
-                    onMouseEnter={e=>{if(unlocked)e.currentTarget.style.transform="scale(1.01)"}}
-                    onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)"}}>
+                <div key={bookNum} style={{marginBottom:10}}>
+                  {/* ── Book header ── */}
+                  <button
+                    onClick={()=>bookUnlocked&&toggleBook(bookNum)}
+                    style={{
+                      width:"100%",textAlign:"left",padding:"14px 16px",
+                      background:bookUnlocked?`linear-gradient(135deg,${colors[0]},${colors[1]})`:"#f1f5f9",
+                      border:bookUnlocked?"none":"1px solid #e2e8f0",
+                      borderRadius:isOpen&&bookUnlocked?"14px 14px 0 0":14,
+                      cursor:bookUnlocked?"pointer":"default",
+                      opacity:bookUnlocked?1:0.55,
+                      display:"flex",alignItems:"center",justifyContent:"space-between",
+                    }}>
                     <div style={{flex:1}}>
-                      <div style={{fontSize:16,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl",lineHeight:1.4}}>{lang==="ur" ? s.title.split(" — ")[0].split(" (")[0].trim() : s.title}</div>
-                      <div style={{fontSize:12,color:"#64748b",marginTop:1,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>{lang==="ur" ? getUrSessionTitle(s.titleEn) : s.titleEn}</div>
-                      {s.id>=15&&<div style={{fontSize:11,color:"#059669",marginTop:2,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>{lang==="ur"?"🔁 تکراری دہرائی شامل":"🔁 Includes spaced review"}</div>}
+                      <div style={{fontSize:10,color:bookUnlocked?"rgba(255,255,255,0.75)":"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:0.8,fontFamily:lang==="ur"?urFont:"inherit"}}>
+                        {lang==="ur"?`کتاب ${bookNum}`:`BOOK ${bookNum}`}
+                      </div>
+                      <div style={{fontSize:18,fontWeight:800,color:bookUnlocked?"white":"#475569",fontFamily:arFont,direction:"rtl",lineHeight:1.3,marginTop:2}}>
+                        {meta.ar}
+                      </div>
+                      <div style={{fontSize:12,color:bookUnlocked?"rgba(255,255,255,0.85)":"#64748b",marginTop:1,fontFamily:lang==="ur"?urFont:"inherit"}}>
+                        {lang==="ur"?meta.ur:meta.en}
+                      </div>
+                      {bookUnlocked&&(
+                        <div style={{marginTop:8,display:"flex",alignItems:"center",gap:8}}>
+                          <div style={{flex:1,background:"rgba(255,255,255,0.25)",borderRadius:6,height:5,overflow:"hidden"}}>
+                            <div style={{height:"100%",width:`${pct}%`,background:"white",borderRadius:6,transition:"width 0.4s"}}/>
+                          </div>
+                          <span style={{fontSize:11,color:"rgba(255,255,255,0.9)",fontWeight:700,whiteSpace:"nowrap"}}>{bookDone}/{bookTotal}</span>
+                        </div>
+                      )}
                     </div>
-                    <div style={{marginLeft:10,textAlign:"center"}}>
-                      {!unlocked?<span style={{fontSize:18}}>🔒</span>:done?(
-                        <div><div style={{fontSize:18}}>✅</div><div style={{fontSize:10,color:colors[0],fontWeight:700}}>{acc}%</div></div>
-                      ):<span style={{fontSize:18}}>▶️</span>}
+                    <div style={{marginLeft:12,fontSize:20,color:bookUnlocked?"white":"#94a3b8"}}>
+                      {!bookUnlocked?"🔒":isOpen?"▲":"▼"}
                     </div>
                   </button>
+
+                  {/* ── Session list ── */}
+                  {isOpen&&bookUnlocked&&(
+                    <div style={{background:"#f8fafc",border:`1px solid ${colors[0]}33`,borderTop:"none",borderRadius:"0 0 14px 14px",overflow:"hidden"}}>
+                      {entries.map(({s,idx})=>{
+                        const unlocked = unlockAll || idx <= numCompleted;
+                        const acc = completed[s.id];
+                        const done = acc !== undefined;
+                        const isRev = s.type==="review";
+
+                        if(isRev) return (
+                          <button key={s.id} onClick={()=>unlocked&&startSession(s)} disabled={!unlocked}
+                            style={{width:"100%",textAlign:"left",padding:"10px 14px",
+                              background:done?"#fffbeb":unlocked?"#fefce8":"transparent",
+                              border:"none",borderBottom:"1px solid #fde68a",
+                              cursor:unlocked?"pointer":"default",opacity:unlocked?1:0.4,
+                              display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                            <div style={{flex:1}}>
+                              <div style={{fontSize:10,fontWeight:800,color:"#d97706",fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>🏆 {lang==="ur"?"دہرائی":"REVIEW"} · {s.coversLessons}</div>
+                              <div style={{fontSize:12,color:"#92400e",fontWeight:600,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>{lang==="ur"?getUrSessionTitle(s.titleEn):s.titleEn}</div>
+                              <div style={{fontSize:10,color:"#b45309",marginTop:1,fontFamily:lang==="ur"?urFont:"inherit"}}>{lang==="ur"?`${s.grammarExercises.length} قواعد + ${s.sentenceTiles.length} ٹائلیں`:`${s.grammarExercises.length} grammar · ${s.sentenceTiles.length} tiles`}</div>
+                            </div>
+                            <span style={{fontSize:18,marginLeft:8}}>{!unlocked?"🔒":done?"✅":"🏆"}{done&&<div style={{fontSize:10,color:"#d97706",fontWeight:700}}>{acc}%</div>}</span>
+                          </button>
+                        );
+
+                        return (
+                          <button key={s.id} onClick={()=>unlocked&&startSession(s)} disabled={!unlocked}
+                            style={{width:"100%",textAlign:"left",padding:"10px 14px",
+                              background:done?`${colors[0]}08`:unlocked?"white":"transparent",
+                              border:"none",borderBottom:"1px solid #e2e8f0",
+                              cursor:unlocked?"pointer":"default",opacity:unlocked?1:0.4,
+                              display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                            <div style={{flex:1}}>
+                              <div style={{fontSize:10,color:"#94a3b8",fontWeight:600,marginBottom:1,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>
+                                {lang==="ur"?`سبق ${s.lessonRef} · حصہ ${s.part}`:`L${s.lessonRef} · Part ${s.part}`}
+                              </div>
+                              <div style={{fontSize:15,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl",lineHeight:1.3}}>
+                                {lang==="ur"?s.title.split(" — ")[0].split(" (")[0].trim():s.title}
+                              </div>
+                              <div style={{fontSize:11,color:"#64748b",marginTop:1,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>
+                                {lang==="ur"?getUrSessionTitle(s.titleEn):s.titleEn}
+                              </div>
+                            </div>
+                            <div style={{marginLeft:8,textAlign:"center",minWidth:32}}>
+                              {!unlocked?<span style={{fontSize:18}}>🔒</span>:done?(
+                                <div><span style={{fontSize:16}}>✅</span><div style={{fontSize:10,color:colors[0],fontWeight:700}}>{acc}%</div></div>
+                              ):<span style={{fontSize:18}}>▶️</span>}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -2092,7 +2195,7 @@ export default function MadinahArabicApp() {
           <div style={{background:isReview?`linear-gradient(135deg,#f59e0b,#d97706)`:`linear-gradient(135deg,${GREEN},#047857)`,padding:"12px 16px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
             <button onClick={()=>setScreen("map")} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 12px",cursor:"pointer",fontWeight:700,fontSize:13,fontFamily:lang==="ur"?urFont:"inherit"}}>{UI_TEXT[lang].exitBtn}</button>
             <span style={{color:"white",fontWeight:600,fontSize:14,fontFamily:lang==="ur"?urFont:"inherit"}}>
-              {isReview?`${UI_TEXT[lang].reviewSession} · ${sessionData.coversLessons}`:UI_TEXT[lang].sessionOf(sessionData.id,84)}
+              {isReview?`${UI_TEXT[lang].reviewSession} · ${sessionData.coversLessons}`:UI_TEXT[lang].sessionOf(sessionData.id, SESSIONS.length)}
             </span>
           </div>
           <div style={{overflowY:"auto",maxHeight:scrollH}}>
