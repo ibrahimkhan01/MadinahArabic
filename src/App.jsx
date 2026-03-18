@@ -631,13 +631,13 @@ const UR_HINTS = {
   "My father is in the house.":"میرے والد گھر میں ہیں۔",
   "The student who is in the classroom is new.":"وہ طالب علم جو کلاس میں ہے نیا ہے۔",
   "He is a generous merchant.":"وہ ایک سخی تاجر ہے۔",
-  // Near/far two-sentence prompts
-  "This is a cat. That is a dog.":"یہ ایک بلی ہے۔ وہ ایک کتا ہے۔",
-  "This is a camel. That is a horse.":"یہ ایک اونٹ ہے۔ وہ ایک گھوڑا ہے۔",
-  "This is a chair. That is a bed.":"یہ ایک کرسی ہے۔ وہ ایک بستر ہے۔",
-  "This is a desk. That is a wall.":"یہ ایک میز ہے۔ وہ ایک دیوار ہے۔",
-  "This is a boy. That is a teacher.":"یہ ایک لڑکا ہے۔ وہ ایک استاد ہے۔",
-  "This is a man. That is a student.":"یہ ایک مرد ہے۔ وہ ایک طالب علم ہے۔",
+  // Near/far two-sentence prompts with وَ
+  "This is a cat and that is a dog.":"یہ ایک بلی ہے اور وہ ایک کتا ہے۔",
+  "This is a camel and that is a horse.":"یہ ایک اونٹ ہے اور وہ ایک گھوڑا ہے۔",
+  "This is a chair and that is a bed.":"یہ ایک کرسی ہے اور وہ ایک بستر ہے۔",
+  "This is a desk and that is a wall.":"یہ ایک میز ہے اور وہ ایک دیوار ہے۔",
+  "This is a boy and that is a teacher.":"یہ ایک لڑکا ہے اور وہ ایک استاد ہے۔",
+  "This is a man and that is a student.":"یہ ایک مرد ہے اور وہ ایک طالب علم ہے۔",
 };
 const getUrHint = (en) => UR_HINTS[en] || null;
 
@@ -886,15 +886,15 @@ const SESSIONS = [
     ]},
 
   { id:3, book:1, lessonRef:"1.1", part:"C", title:"الْحَيَوَانَاتُ", titleEn:"Animals",
-    grammar:'More هَذَا/ذَلِكَ with animals. All these nouns are masculine. مَا هَذَا؟ هَذَا كَلْبٌ. مَا ذَلِكَ؟ ذَلِكَ جَمَلٌ.',
-    vocab:[{ar:"كَلْبٌ",en:"dog"},{ar:"قِطٌّ",en:"cat"},{ar:"حِمَارٌ",en:"donkey"},{ar:"جَمَلٌ",en:"camel"},{ar:"حِصَانٌ",en:"horse"}],
+    grammar:'More هَذَا/ذَلِكَ with animals. All these nouns are masculine. وَ means "and" — it attaches directly to the next word: هَذَا قِطٌّ وَذَلِكَ كَلْبٌ.',
+    vocab:[{ar:"كَلْبٌ",en:"dog"},{ar:"قِطٌّ",en:"cat"},{ar:"حِمَارٌ",en:"donkey"},{ar:"جَمَلٌ",en:"camel"},{ar:"حِصَانٌ",en:"horse"},{ar:"وَ",en:"and"}],
     patternTiles:[
-      { en:"This is a cat. That is a dog.",
-        tiles:["هَذَا","قِطٌّ","ذَلِكَ","كَلْبٌ","حِمَارٌ"],
-        answer:["هَذَا","قِطٌّ","ذَلِكَ","كَلْبٌ"] },
-      { en:"This is a camel. That is a horse.",
-        tiles:["هَذَا","جَمَلٌ","ذَلِكَ","حِصَانٌ","قِطٌّ"],
-        answer:["هَذَا","جَمَلٌ","ذَلِكَ","حِصَانٌ"] },
+      { en:"This is a cat and that is a dog.",
+        tiles:["هَذَا","قِطٌّ","وَذَلِكَ","كَلْبٌ","حِمَارٌ"],
+        answer:["هَذَا","قِطٌّ","وَذَلِكَ","كَلْبٌ"] },
+      { en:"This is a camel and that is a horse.",
+        tiles:["هَذَا","جَمَلٌ","وَذَلِكَ","حِصَانٌ","قِطٌّ"],
+        answer:["هَذَا","جَمَلٌ","وَذَلِكَ","حِصَانٌ"] },
     ]},
 
   { id:4, book:1, lessonRef:"1.1", part:"D", title:"الْمِهَنُ وَالْمَلَابِسُ", titleEn:"Professions & Clothing",
@@ -918,26 +918,26 @@ const SESSIONS = [
     ]},
 
   { id:6, book:1, lessonRef:"1.2", part:"A", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 1)",
-    grammar:'ذَلِكَ = "that" for masculine objects far away. Compare: هَذَا كِتَابٌ (This is a book) vs. ذَلِكَ كِتَابٌ (That is a book).',
+    grammar:'ذَلِكَ = "that" for masculine objects far away. وَ ("and") joins the two sentences: هَذَا كِتَابٌ وَذَلِكَ قَلَمٌ.',
     vocab:[{ar:"سَرِيرٌ",en:"bed"},{ar:"كُرْسِيٌّ",en:"chair"},{ar:"مَكْتَبٌ",en:"desk/office"},{ar:"جِدَارٌ",en:"wall"}],
     patternTiles:[
-      { en:"This is a chair. That is a bed.",
-        tiles:["هَذَا","كُرْسِيٌّ","ذَلِكَ","سَرِيرٌ","مَكْتَبٌ"],
-        answer:["هَذَا","كُرْسِيٌّ","ذَلِكَ","سَرِيرٌ"] },
-      { en:"This is a desk. That is a wall.",
-        tiles:["هَذَا","مَكْتَبٌ","ذَلِكَ","جِدَارٌ","كُرْسِيٌّ"],
-        answer:["هَذَا","مَكْتَبٌ","ذَلِكَ","جِدَارٌ"] },
+      { en:"This is a chair and that is a bed.",
+        tiles:["هَذَا","كُرْسِيٌّ","وَذَلِكَ","سَرِيرٌ","مَكْتَبٌ"],
+        answer:["هَذَا","كُرْسِيٌّ","وَذَلِكَ","سَرِيرٌ"] },
+      { en:"This is a desk and that is a wall.",
+        tiles:["هَذَا","مَكْتَبٌ","وَذَلِكَ","جِدَارٌ","كُرْسِيٌّ"],
+        answer:["هَذَا","مَكْتَبٌ","وَذَلِكَ","جِدَارٌ"] },
     ]},
   { id:7, book:1, lessonRef:"1.2", part:"B", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 2)",
-    grammar:'Practice هَذَا and ذَلِكَ with more nouns. مَنْ هَذَا؟ = Who is this? (used for people).',
+    grammar:'Practice هَذَا and ذَلِكَ with more nouns. مَنْ هَذَا؟ = Who is this? (used for people). وَ joins two sentences: هَذَا وَلَدٌ وَذَلِكَ رَجُلٌ.',
     vocab:[{ar:"وَلَدٌ",en:"boy"},{ar:"رَجُلٌ",en:"man"},{ar:"طَالِبٌ",en:"student (m.)"},{ar:"مُدَرِّسٌ",en:"teacher (m.)"}],
     patternTiles:[
-      { en:"This is a boy. That is a teacher.",
-        tiles:["هَذَا","وَلَدٌ","ذَلِكَ","مُدَرِّسٌ","رَجُلٌ"],
-        answer:["هَذَا","وَلَدٌ","ذَلِكَ","مُدَرِّسٌ"] },
-      { en:"This is a man. That is a student.",
-        tiles:["هَذَا","رَجُلٌ","ذَلِكَ","طَالِبٌ","وَلَدٌ"],
-        answer:["هَذَا","رَجُلٌ","ذَلِكَ","طَالِبٌ"] },
+      { en:"This is a boy and that is a teacher.",
+        tiles:["هَذَا","وَلَدٌ","وَذَلِكَ","مُدَرِّسٌ","رَجُلٌ"],
+        answer:["هَذَا","وَلَدٌ","وَذَلِكَ","مُدَرِّسٌ"] },
+      { en:"This is a man and that is a student.",
+        tiles:["هَذَا","رَجُلٌ","وَذَلِكَ","طَالِبٌ","وَلَدٌ"],
+        answer:["هَذَا","رَجُلٌ","وَذَلِكَ","طَالِبٌ"] },
     ]},
 
   { id:8, book:1, lessonRef:"1.3", part:"A", title:"الـ — The Definite Article (Part 1)", titleEn:"Making Nouns Definite",
@@ -1668,7 +1668,9 @@ function MCQ({ exercise, onResult, lang = "en" }) {
   const optEnSize = w >= 1024 ? 16 : 14;
   const cols = w >= 1024 ? "1fr 1fr 1fr 1fr" : "1fr 1fr";
 
-  const handleSelect = (opt) => { if (!done) { setSel(opt); if (isAr(opt)) speak(opt); } };
+  // Only speak when the option is genuine Arabic (en_ar / grammar exercises) —
+  // ar_en options are English or Urdu labels and should never be read aloud.
+  const handleSelect = (opt) => { if (!done) { setSel(opt); if (!isArEn && isAr(opt)) speak(opt); } };
   const handleConfirm = () => {
     if (!sel || done) return;
     const ok = sel === exercise.correct;
