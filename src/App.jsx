@@ -919,10 +919,20 @@ const SESSIONS = [
 
   { id:8, book:1, lessonRef:"1.3", part:"A", title:"الـ — The Definite Article (Part 1)", titleEn:"Making Nouns Definite",
     grammar:'الـ makes a noun definite: كِتَابٌ → الْكِتَابُ. The ـٌ disappears, replaced by ـُ. With "moon letters" الـ is fully pronounced: الْبَيْتُ.',
+    grammarExamples:[
+      { ar:"كِتَابٌ ← الْكِتَابُ", en:"a book → the book (tanwīn drops, ـُ stays)", ur:"کتاب ← الکتاب (تنوین گرتی ہے، ـُ رہتی ہے)" },
+      { ar:"بَيْتٌ ← الْبَيْتُ", en:"a house → the house (moon letter: ل is heard)", ur:"گھر ← البیت (قمری حرف: ل ادا ہوتا ہے)" },
+    ],
     vocab:[{ar:"الْكِتَابُ",en:"the book"},{ar:"الْقَلَمُ",en:"the pen"},{ar:"الْبَيْتُ",en:"the house"},{ar:"الْبَابُ",en:"the door"}],
-    patternTiles:[
-      {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","الْكِتَابُ","الْقَلَمُ","الْبَابُ"], answer:["هَذَا","الْكِتَابُ"]},
-      {emoji:"🚪", question:"مَا هَذَا؟", tiles:["هَذَا","الْبَابُ","الْبَيْتُ","الْكِتَابُ"], answer:["هَذَا","الْبَابُ"]},
+    alTransformExercises:[
+      { word:"كِتَابٌ", wordEn:"book", correct:"الْكِتَابُ",
+        options:["الْكِتَابُ","الْكِتَابِ","كِتَابُ","الْكِتَابَ"] },
+      { word:"قَلَمٌ", wordEn:"pen", correct:"الْقَلَمُ",
+        options:["الْقَلَمُ","الْقَلَمِ","قَلَمُ","الْقَلَمَ"] },
+      { word:"بَيْتٌ", wordEn:"house", correct:"الْبَيْتُ",
+        options:["الْبَيْتُ","الْبَيْتِ","بَيْتُ","الْبَيْتَ"] },
+      { word:"بَابٌ", wordEn:"door", correct:"الْبَابُ",
+        options:["الْبَابُ","الْبَابِ","بَابُ","الْبَابَ"] },
     ]},
   { id:9, book:1, lessonRef:"1.3", part:"B", title:"الـ — Sun & Moon Letters", titleEn:"Sun Letters (Part 2)",
     grammar:'With "sun letters" (ت،ث،د،ذ،ر،ز،س،ش،ص،ض،ط،ظ،ل،ن) the ل of الـ assimilates. Written but not pronounced — the first letter doubles instead.',
@@ -932,9 +942,16 @@ const SESSIONS = [
       { ar:"الرَّجُلُ", en:"Sun letter ر → ar-rajul (ل silent, ر doubles)", ur:"شمسی حرف: ر — ل خاموش، ر دوگنا" },
     ],
     vocab:[{ar:"الشَّمْسُ",en:"the sun"},{ar:"الرَّجُلُ",en:"the man"},{ar:"النَّجْمُ",en:"the star"},{ar:"الطَّالِبُ",en:"the student"}],
-    patternTiles:[
-      {emoji:"⭐", question:"مَا هَذَا؟", tiles:["هَذَا","النَّجْمُ","الشَّمْسُ","الطَّالِبُ"], answer:["هَذَا","النَّجْمُ"]},
-      {emoji:"👨", question:"مَنْ هَذَا؟", tiles:["هَذَا","الرَّجُلُ","الطَّالِبُ","الْوَلَدُ"], answer:["هَذَا","الرَّجُلُ"]},
+    sunMoonExercises:[
+      { words:[
+          {ar:"الشَّمْسُ",  en:"the sun",     isSun:true },
+          {ar:"الْقَمَرُ", en:"the moon",    isSun:false},
+          {ar:"الرَّجُلُ", en:"the man",     isSun:true },
+          {ar:"الطَّالِبُ",en:"the student", isSun:true },
+          {ar:"الْبَيْتُ", en:"the house",   isSun:false},
+          {ar:"النَّجْمُ", en:"the star",    isSun:true },
+        ]
+      },
     ]},
 
   { id:10, book:1, lessonRef:"1.4", part:"A", title:"الصِّفَاتُ — Adjectives (Part 1)", titleEn:"Describing with Adjectives",
@@ -1503,6 +1520,18 @@ function buildExercises(session, lang = "en") {
     shuffle(poolTiles).slice(0, 2).forEach(t => {
       const urHint = lang === "ur" ? (getUrHint(t.en) || t.en) : t.en;
       exercises.push({ type:"tile", ...t, en: urHint });
+    });
+  }
+  // Definiteness transformation exercises (sessions teaching الـ)
+  if (session.alTransformExercises) {
+    session.alTransformExercises.forEach(ex => {
+      exercises.push({ type:"al_transform", ...ex });
+    });
+  }
+  // Sun/moon letter categorisation exercises
+  if (session.sunMoonExercises) {
+    session.sunMoonExercises.forEach(ex => {
+      exercises.push({ type:"sun_moon", ...ex });
     });
   }
   // Pattern sentence exercises (Book 1 only)
@@ -2217,6 +2246,142 @@ function ReviewTileEx({ exercise, onResult, lang = "en" }) {
   );
 }
 
+// ── AlTransformEx — definiteness transformation exercise ──────────────────────
+// Shows an indefinite noun; learner picks the correct definite (nominative) form.
+function AlTransformEx({ exercise, onResult, lang = "en" }) {
+  const [selected, setSelected] = useState(null);
+  const [checked, setChecked]   = useState(false);
+  const isUrdu = lang === "ur";
+  const correct = exercise.correct;
+
+  const choose = (opt) => {
+    if (checked) return;
+    setSelected(opt);
+    setChecked(true);
+    const wasCorrect = opt === correct;
+    setTimeout(() => onResult(wasCorrect), wasCorrect ? 900 : 1400);
+  };
+
+  return (
+    <div style={{textAlign:"center", padding:"8px 0"}}>
+      <div style={{fontSize:13, color:"#64748b", marginBottom:18, fontFamily:isUrdu?urFont:"inherit", direction:isUrdu?"rtl":"ltr"}}>
+        {isUrdu ? "الـ لگا کر معرفہ بنائیں" : "Add الـ to make this noun definite"}
+      </div>
+      {/* Indefinite word */}
+      <div style={{fontSize:52, fontFamily:arFont, color:"#1e293b", direction:"rtl", lineHeight:1.4, marginBottom:4}}>
+        {exercise.word}
+      </div>
+      <div style={{fontSize:14, color:"#64748b", marginBottom:28, fontFamily:isUrdu?urFont:"inherit"}}>
+        {isUrdu ? (getUrdu(exercise.wordEn)||exercise.wordEn) : exercise.wordEn}
+      </div>
+      {/* 2×2 option grid */}
+      <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, maxWidth:340, margin:"0 auto"}}>
+        {exercise.options.map((opt,i) => {
+          const isCorrect = opt === correct;
+          const isSel     = selected === opt;
+          let bg="#f8fafc", border="2px solid #e2e8f0", color="#1e293b";
+          if (checked && isSel && isCorrect)  { bg="#dcfce7"; border="2px solid #22c55e"; }
+          else if (checked && isSel && !isCorrect) { bg="#fee2e2"; border="2px solid #ef4444"; }
+          else if (checked && isCorrect)       { bg="#dcfce7"; border="2px solid #22c55e"; }
+          return (
+            <button key={i} onClick={()=>choose(opt)} style={{
+              padding:"14px 8px", background:bg, border, borderRadius:12,
+              fontSize:22, fontFamily:arFont, color, direction:"rtl",
+              cursor:checked?"default":"pointer", fontWeight:700,
+              boxShadow:"0 1px 4px rgba(0,0,0,0.06)", lineHeight:1.6,
+            }}>
+              {opt}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── SunMoonEx — sun/moon letter categorisation exercise ───────────────────────
+// Shows a grid of words with الـ; learner taps ☀️ Sun or 🌙 Moon for each,
+// then checks all at once.
+function SunMoonEx({ exercise, onResult, lang = "en" }) {
+  const [selections, setSelections] = useState({}); // ar → true (sun) | false (moon)
+  const [checked, setChecked]       = useState(false);
+  const isUrdu = lang === "ur";
+  const words = exercise.words;
+  const allDone = words.every(w => selections[w.ar] !== undefined);
+
+  const select = (ar, isSun) => {
+    if (checked) return;
+    setSelections(prev => ({...prev, [ar]: isSun}));
+  };
+
+  const check = () => {
+    setChecked(true);
+    const allCorrect = words.every(w => selections[w.ar] === w.isSun);
+    setTimeout(() => onResult(allCorrect), 1800);
+  };
+
+  return (
+    <div style={{padding:"4px 0"}}>
+      <div style={{fontSize:13, color:"#64748b", textAlign:"center", marginBottom:16, fontFamily:isUrdu?urFont:"inherit", direction:isUrdu?"rtl":"ltr"}}>
+        {isUrdu ? "ہر لفظ میں: کیا ل خاموش ہے (☀️) یا ادا ہوتا ہے (🌙)؟"
+                : "In each word: is the ل silent ☀️ or pronounced 🌙?"}
+      </div>
+      <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:10}}>
+        {words.map((w,i) => {
+          const sel = selections[w.ar];
+          const isCorrect = checked ? sel === w.isSun : null;
+          return (
+            <div key={i} style={{
+              background: checked ? (isCorrect?"#dcfce7":"#fee2e2") : "#f8fafc",
+              border: checked ? `2px solid ${isCorrect?"#22c55e":"#ef4444"}` : "1px solid #e2e8f0",
+              borderRadius:12, padding:"12px 8px", textAlign:"center", transition:"background 0.2s",
+            }}>
+              <div style={{fontSize:22, fontFamily:arFont, direction:"rtl", marginBottom:10, color:"#1e293b", lineHeight:1.7}}>
+                {w.ar}
+              </div>
+              <div style={{display:"flex", gap:6, justifyContent:"center"}}>
+                {[{label:"☀️ Sun", ur:"☀️ شمسی", val:true, selBg:"#fef3c7", selBorder:"#f59e0b", selColor:"#92400e"},
+                  {label:"🌙 Moon", ur:"🌙 قمری", val:false, selBg:"#ede9fe", selBorder:"#7c3aed", selColor:"#4c1d95"}
+                ].map(btn => (
+                  <button key={btn.label} onClick={()=>select(w.ar, btn.val)} style={{
+                    padding:"5px 10px", borderRadius:8, fontSize:12, fontWeight:700,
+                    cursor:checked?"default":"pointer",
+                    background: sel===btn.val ? btn.selBg : "white",
+                    border: sel===btn.val ? `2px solid ${btn.selBorder}` : "1.5px solid #e2e8f0",
+                    color: sel===btn.val ? btn.selColor : "#64748b",
+                    fontFamily: isUrdu?urFont:"inherit",
+                  }}>
+                    {isUrdu ? btn.ur : btn.label}
+                  </button>
+                ))}
+              </div>
+              {checked && (
+                <div style={{fontSize:11, marginTop:6, fontWeight:700,
+                  color: isCorrect?"#166534":"#991b1b", fontFamily:isUrdu?urFont:"inherit"}}>
+                  {w.isSun
+                    ? (isUrdu?"☀️ شمسی حرف":"☀️ Sun letter — ل is silent")
+                    : (isUrdu?"🌙 قمری حرف":"🌙 Moon letter — ل is pronounced")}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      {!checked && allDone && (
+        <button onClick={check} style={{
+          width:"100%", marginTop:16, padding:"13px",
+          background:`linear-gradient(135deg,${GREEN},#047857)`, color:"white",
+          border:"none", borderRadius:12, fontSize:16, fontWeight:700,
+          cursor:"pointer", boxShadow:"0 4px 12px rgba(5,150,105,0.3)",
+          fontFamily:isUrdu?urFont:"inherit",
+        }}>
+          {isUrdu ? "جانچیں ✓" : "Check →"}
+        </button>
+      )}
+    </div>
+  );
+}
+
 // Grammar intro card (regular sessions)
 function GrammarCard({ session, onStart, lang = "en" }) {
   const { w } = useWindowSize();
@@ -2890,9 +3055,13 @@ export default function MadinahArabicApp() {
                 ? <MatchEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
                 : ex.type==="review_tile"
                   ? <ReviewTileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
-                  : ex.type==="pattern_tile"
-                    ? <PatternTileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
-                    : <TileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>}
+                  : ex.type==="al_transform"
+                    ? <AlTransformEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
+                    : ex.type==="sun_moon"
+                      ? <SunMoonEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
+                      : ex.type==="pattern_tile"
+                        ? <PatternTileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>
+                        : <TileEx key={exIdx} exercise={ex} onResult={handleResult} lang={lang}/>}
           </div>
           {quranOverlay && (
             <QuranOverlay
