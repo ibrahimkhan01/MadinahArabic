@@ -30,217 +30,203 @@ const stripQ = s =>
    .replace(/^ال/, '')                           // strip definite article
    .replace(/[أإآ]/g, 'ا');                      // normalise alif
 
+// Each key maps to an ARRAY of up to 3 verse examples.
+// On the 1st show (count=1) → index 0; 4th show (count=4) → index 1; 7th → index 2; then wraps.
+// All verses verified to contain the target word (stripped form matches the key).
 const QURAN_CONNECTIONS = {
-  'كتاب': {
-    ar: 'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ',
-    en: 'This is the Book; there is no doubt in it',
-    ur: 'یہ وہ کتاب ہے جس میں کوئی شک نہیں',
-    ref: 'Al-Baqarah 2:2',
-    ref_ur: 'سورۃ البقرہ ۲:۲',
-  },
-  'قلم': {
-    ar: 'وَالْقَلَمِ وَمَا يَسْطُرُونَ',
-    en: 'By the pen and what they write',
-    ur: 'قلم کی قسم اور جو کچھ وہ لکھتے ہیں',
-    ref: 'Al-Qalam 68:1',
-    ref_ur: 'سورۃ القلم ۶۸:۱',
-  },
-  'كرسي': {
-    ar: 'وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ',
-    en: 'His Kursī extends over the heavens and the earth',
-    ur: 'اس کی کرسی آسمانوں اور زمین پر پھیلی ہوئی ہے',
-    ref: 'Al-Baqarah 2:255 (Āyat al-Kursī)',
-    ref_ur: 'سورۃ البقرہ ۲:۲۵۵ (آیت الکرسی)',
-  },
-  'بيت': {
-    ar: 'إِنَّ أَوَّلَ بَيْتٍ وُضِعَ لِلنَّاسِ لَلَّذِي بِبَكَّةَ',
-    en: 'The first House set up for mankind is the one at Makkah',
-    ur: 'بے شک پہلا گھر جو لوگوں کے لیے بنایا گیا وہ مکہ میں ہے',
-    ref: 'Āl ʿImrān 3:96',
-    ref_ur: 'سورۃ آل عمران ۳:۹۶',
-  },
-  'مسجد': {
-    ar: 'وَأَنَّ الْمَسَاجِدَ لِلَّهِ',
-    en: 'The masājid belong to Allah',
-    ur: 'بے شک مساجد اللہ کے لیے ہیں',
-    ref: 'Al-Jinn 72:18',
-    ref_ur: 'سورۃ الجن ۷۲:۱۸',
-  },
-  'نجم': {
-    ar: 'وَالنَّجْمِ إِذَا هَوَىٰ',
-    en: 'By the star when it sets',
-    ur: 'ستارے کی قسم جب وہ ڈوبے',
-    ref: 'Al-Najm 53:1',
-    ref_ur: 'سورۃ النجم ۵۳:۱',
-  },
-  'مفتاح': {
-    ar: 'وَعِندَهُ مَفَاتِحُ الْغَيْبِ لَا يَعْلَمُهَا إِلَّا هُوَ',
-    en: 'With Him are the keys of the unseen; none knows them except Him',
-    ur: 'اور اسی کے پاس غیب کی کنجیاں ہیں، جنہیں وہی جانتا ہے',
-    ref: 'Al-Anʿām 6:59',
-    ref_ur: 'سورۃ الانعام ۶:۵۹',
-  },
-  'كلب': {
-    ar: 'وَكَلْبُهُم بَاسِطٌ ذِرَاعَيْهِ بِالْوَصِيدِ',
-    en: 'Their dog stretching its forelegs at the entrance',
-    ur: 'اور ان کا کتا دہلیز پر اپنے بازو پھیلائے بیٹھا تھا',
-    ref: 'Al-Kahf 18:18',
-    ref_ur: 'سورۃ الکہف ۱۸:۱۸',
-  },
-  'حمار': {
-    ar: 'كَمَثَلِ الْحِمَارِ يَحْمِلُ أَسْفَارًا',
-    en: 'Like a donkey carrying volumes of books',
-    ur: 'اس گدھے کی مثال جو کتابوں کا بوجھ اٹھائے',
-    ref: 'Al-Jumuʿah 62:5',
-    ref_ur: 'سورۃ الجمعہ ۶۲:۵',
-  },
-  'جمل': {
-    ar: 'حَتَّىٰ يَلِجَ الْجَمَلُ فِي سَمِّ الْخِيَاطِ',
-    en: 'Until the camel passes through the eye of a needle',
-    ur: 'یہاں تک کہ اونٹ سوئی کے ناکے میں داخل ہو جائے',
-    ref: 'Al-Aʿrāf 7:40',
-    ref_ur: 'سورۃ الاعراف ۷:۴۰',
-  },
-  'رجل': {
-    ar: 'وَجَاءَ رَجُلٌ مِّنْ أَقْصَى الْمَدِينَةِ يَسْعَىٰ',
-    en: 'A man came running from the far end of the city',
-    ur: 'اور شہر کے آخری کنارے سے ایک آدمی دوڑتا ہوا آیا',
-    ref: 'Yā-Sīn 36:20',
-    ref_ur: 'سورۃ یٰسین ۳۶:۲۰',
-  },
-  'ولد': {
-    ar: 'لَمْ يَلِدْ وَلَمْ يُولَدْ',
-    en: 'He neither begets nor is He begotten',
-    ur: 'نہ اس کی کوئی اولاد ہے اور نہ وہ کسی سے پیدا ہوا',
-    ref: 'Al-Ikhlāṣ 112:3',
-    ref_ur: 'سورۃ الاخلاص ۱۱۲:۳',
-  },
-  'امام': {
-    ar: 'إِنِّي جَاعِلُكَ لِلنَّاسِ إِمَامًا',
-    en: 'I will make you a leader for the people',
-    ur: 'میں تمہیں لوگوں کا امام بنانے والا ہوں',
-    ref: 'Al-Baqarah 2:124',
-    ref_ur: 'سورۃ البقرہ ۲:۱۲۴',
-  },
-  'شمس': {
-    ar: 'وَالشَّمْسُ تَجْرِي لِمُسْتَقَرٍّ لَّهَا',
-    en: 'The sun runs to its resting place',
-    ur: 'اور سورج اپنے مقررہ ٹھکانے کی طرف چلتا رہتا ہے',
-    ref: 'Yā-Sīn 36:38',
-    ref_ur: 'سورۃ یٰسین ۳۶:۳۸',
-  },
-  'قمر': {
-    ar: 'وَالْقَمَرَ قَدَّرْنَاهُ مَنَازِلَ',
-    en: 'We have measured out stages for the moon',
-    ur: 'اور چاند کے لیے ہم نے منزلیں مقرر کی ہیں',
-    ref: 'Yā-Sīn 36:39',
-    ref_ur: 'سورۃ یٰسین ۳۶:۳۹',
-  },
-  'سرير': {
-    ar: 'عَلَىٰ سُرُرٍ مُّتَقَابِلِينَ',
-    en: 'On thrones, facing one another (in Paradise)',
-    ur: 'تختوں پر آمنے سامنے بیٹھے ہوں گے',
-    ref: 'Al-Ḥijr 15:47',
-    ref_ur: 'سورۃ الحجر ۱۵:۴۷',
-  },
-  'كبير': {
-    ar: 'إِنَّ اللَّهَ كَانَ عَلِيًّا كَبِيرًا',
-    en: 'Indeed, Allah is ever Most High, Greatest',
-    ur: 'بے شک اللہ بلند و عظیم ہے',
-    ref: 'Al-Nisāʾ 4:34',
-    ref_ur: 'سورۃ النساء ۴:۳۴',
-  },
-  'جميل': {
-    ar: 'فَاصْبِرْ صَبْرًا جَمِيلًا',
-    en: 'So be patient with beautiful patience',
-    ur: 'پس خوبصورت صبر اختیار کریں',
-    ref: 'Al-Maʿārij 70:5',
-    ref_ur: 'سورۃ المعارج ۷۰:۵',
-  },
-  'باب': {
-    ar: 'وَادْخُلُوا الْبَابَ سُجَّدًا',
-    en: 'Enter the gate bowing down',
-    ur: 'اور دروازے میں سجدہ کرتے ہوئے داخل ہو',
-    ref: 'Al-Baqarah 2:58',
-    ref_ur: 'سورۃ البقرہ ۲:۵۸',
-  },
-  'صغير': {
-    ar: 'وَقُل رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا',
-    en: 'Say: My Lord, have mercy on them as they raised me when I was small',
-    ur: 'کہو: اے میرے رب! ان پر رحم کر جیسے انہوں نے مجھے بچپن میں پالا',
-    ref: 'Al-Isrāʾ 17:24',
-    ref_ur: 'سورۃ الاسراء ۱۷:۲۴',
-  },
-  'جديد': {
-    ar: 'أَإِنَّا لَمَبْعُوثُونَ خَلْقًا جَدِيدًا',
-    en: 'Shall we indeed be raised up as a new creation?',
-    ur: 'کیا ہم واقعی نئی تخلیق میں اٹھائے جائیں گے؟',
-    ref: 'Al-Isrāʾ 17:49',
-    ref_ur: 'سورۃ الاسراء ۱۷:۴۹',
-  },
-  'حجر': {
-    ar: 'وَإِنَّ مِنَ الْحِجَارَةِ لَمَا يَتَفَجَّرُ مِنْهُ الْأَنْهَارُ',
-    en: 'And indeed, from some rocks rivers burst forth',
-    ur: 'اور بعض پتھروں سے نہریں پھوٹتی ہیں',
-    ref: 'Al-Baqarah 2:74',
-    ref_ur: 'سورۃ البقرہ ۲:۷۴',
-  },
-  'فوق': {
-    ar: 'وَهُوَ الْقَاهِرُ فَوْقَ عِبَادِهِ',
-    en: 'He is the Subjugator over His servants',
-    ur: 'اور وہ اپنے بندوں پر غالب ہے',
-    ref: 'Al-Anʿām 6:18',
-    ref_ur: 'سورۃ الانعام ۶:۱۸',
-  },
-  'تحت': {
-    ar: 'تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ',
-    en: 'Beneath it rivers flow',
-    ur: 'جن کے نیچے نہریں بہتی ہیں',
-    ref: 'Al-Baqarah 2:25',
-    ref_ur: 'سورۃ البقرہ ۲:۲۵',
-  },
-  'في': {
-    ar: 'وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْ حَبْلِ الْوَرِيدِ',
-    en: 'We are closer to him than his jugular vein',
-    ur: 'اور ہم اس کی شہ رگ سے بھی زیادہ قریب ہیں',
-    ref: 'Qāf 50:16',
-    ref_ur: 'سورۃ ق ۵۰:۱۶',
-  },
-  'على': {
-    ar: 'وَعَلَى اللَّهِ فَتَوَكَّلُوا',
-    en: 'And upon Allah rely',
-    ur: 'اور اللہ پر بھروسہ کرو',
-    ref: 'Al-Māʾidah 5:23',
-    ref_ur: 'سورۃ المائدہ ۵:۲۳',
-  },
-  'من': {
-    ar: 'إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ',
-    en: 'Indeed, to Allah we belong and to Him we return',
-    ur: 'بے شک ہم اللہ کے ہیں اور اسی کی طرف لوٹنے والے ہیں',
-    ref: 'Al-Baqarah 2:156',
-    ref_ur: 'سورۃ البقرہ ۲:۱۵۶',
-  },
-  'الى': {
-    ar: 'وَإِلَى اللَّهِ تُرْجَعُ الْأُمُورُ',
-    en: 'And to Allah all matters return',
-    ur: 'اور اللہ ہی کی طرف سب معاملات لوٹتے ہیں',
-    ref: 'Al-Baqarah 2:210',
-    ref_ur: 'سورۃ البقرہ ۲:۲۱۰',
-  },
-  'خلف': {
-    ar: 'لَهُ مُعَقِّبَاتٌ مِّن بَيْنِ يَدَيْهِ وَمِنْ خَلْفِهِ يَحْفَظُونَهُ',
-    en: 'For him are angels before and behind him, protecting him',
-    ur: 'اس کے آگے اور پیچھے فرشتے ہیں جو اسے محفوظ رکھتے ہیں',
-    ref: 'Al-Raʿd 13:11',
-    ref_ur: 'سورۃ الرعد ۱۳:۱۱',
-  },
-  'امام': {
-    ar: 'أَمَامَهُمْ جَهَنَّمُ وَلَا يُغْنِي عَنْهُمْ مَا كَسَبُوا شَيْئًا',
-    en: 'Before them is Hell, and what they earned will not avail them at all',
-    ur: 'ان کے آگے جہنم ہے اور جو کچھ انہوں نے کمایا وہ ان کے کچھ کام نہ آئے گا',
-    ref: 'Al-Jāthiyah 45:10',
-    ref_ur: 'سورۃ الجاثیہ ۴۵:۱۰',
-  },
+  'كتاب': [
+    { ar: 'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِّلْمُتَّقِينَ', en: 'This is the Book; there is no doubt in it — a guide for the righteous', ur: 'یہ وہ کتاب ہے جس میں کوئی شک نہیں — پرہیزگاروں کے لیے ہدایت', ref: 'Al-Baqarah 2:2', ref_ur: 'سورۃ البقرہ ۲:۲' },
+    { ar: 'إِنَّا أَنزَلْنَا إِلَيْكَ الْكِتَابَ بِالْحَقِّ', en: 'Indeed, We have sent down to you the Book with the truth', ur: 'بے شک ہم نے آپ کی طرف سچائی کے ساتھ کتاب نازل کی', ref: 'Al-Zumar 39:2', ref_ur: 'سورۃ الزمر ۳۹:۲' },
+    { ar: 'كِتَابٌ أَنزَلْنَاهُ إِلَيْكَ مُبَارَكٌ', en: 'A blessed Book We have revealed to you', ur: 'ایک بابرکت کتاب ہے جو ہم نے آپ کی طرف نازل کی', ref: 'Ṣād 38:29', ref_ur: 'سورۃ ص ۳۸:۲۹' },
+  ],
+  'قلم': [
+    { ar: 'وَالْقَلَمِ وَمَا يَسْطُرُونَ', en: 'By the pen and what they write', ur: 'قلم کی قسم اور جو کچھ وہ لکھتے ہیں', ref: 'Al-Qalam 68:1', ref_ur: 'سورۃ القلم ۶۸:۱' },
+    { ar: 'عَلَّمَ بِالْقَلَمِ', en: 'He taught by the pen', ur: 'اس نے قلم کے ذریعے سکھایا', ref: 'Al-ʿAlaq 96:4', ref_ur: 'سورۃ العلق ۹۶:۴' },
+  ],
+  'كرسي': [
+    { ar: 'وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ', en: 'His Kursī extends over the heavens and the earth', ur: 'اس کی کرسی آسمانوں اور زمین پر پھیلی ہوئی ہے', ref: 'Al-Baqarah 2:255 (Āyat al-Kursī)', ref_ur: 'سورۃ البقرہ ۲:۲۵۵ (آیت الکرسی)' },
+  ],
+  'بيت': [
+    { ar: 'إِنَّ أَوَّلَ بَيْتٍ وُضِعَ لِلنَّاسِ لَلَّذِي بِبَكَّةَ', en: 'The first House established for mankind was that at Makkah', ur: 'بے شک پہلا گھر جو لوگوں کے لیے بنایا گیا وہ مکہ میں ہے', ref: 'Āl ʿImrān 3:96', ref_ur: 'سورۃ آل عمران ۳:۹۶' },
+    { ar: 'وَإِذْ جَعَلْنَا الْبَيْتَ مَثَابَةً لِّلنَّاسِ وَأَمْنًا', en: 'And when We made the House a place of return for mankind and a sanctuary', ur: 'اور جب ہم نے اس گھر کو لوگوں کی واپسی کی جگہ اور امن کا مقام بنایا', ref: 'Al-Baqarah 2:125', ref_ur: 'سورۃ البقرہ ۲:۱۲۵' },
+    { ar: 'أَن طَهِّرَا بَيْتِيَ لِلطَّائِفِينَ وَالْعَاكِفِينَ', en: 'Purify My House for those who circle it and those who stay there', ur: 'میرے گھر کو طواف کرنے والوں اور اعتکاف والوں کے لیے پاک کرو', ref: 'Al-Baqarah 2:125', ref_ur: 'سورۃ البقرہ ۲:۱۲۵' },
+  ],
+  'مسجد': [
+    { ar: 'وَأَنَّ الْمَسَاجِدَ لِلَّهِ', en: 'The masājid belong to Allah', ur: 'بے شک مساجد اللہ کے لیے ہیں', ref: 'Al-Jinn 72:18', ref_ur: 'سورۃ الجن ۷۲:۱۸' },
+    { ar: 'سُبْحَانَ الَّذِي أَسْرَى بِعَبْدِهِ لَيْلًا مِّنَ الْمَسْجِدِ الْحَرَامِ إِلَى الْمَسْجِدِ الْأَقْصَى', en: 'Glory be to Him who took His servant by night from Al-Masjid Al-Ḥarām to Al-Masjid Al-Aqṣā', ur: 'پاک ہے وہ جو اپنے بندے کو رات میں مسجد حرام سے مسجد اقصیٰ تک لے گیا', ref: 'Al-Isrāʾ 17:1', ref_ur: 'سورۃ الاسراء ۱۷:۱' },
+  ],
+  'نجم': [
+    { ar: 'وَالنَّجْمِ إِذَا هَوَىٰ', en: 'By the star when it sets', ur: 'ستارے کی قسم جب وہ ڈوبے', ref: 'Al-Najm 53:1', ref_ur: 'سورۃ النجم ۵۳:۱' },
+    { ar: 'وَالنُّجُومَ مُسَخَّرَاتٍ بِأَمْرِهِ', en: 'And the stars, subjected by His command', ur: 'اور ستارے اس کے حکم سے مسخر ہیں', ref: 'Al-Naḥl 16:12', ref_ur: 'سورۃ النحل ۱۶:۱۲' },
+  ],
+  'مفتاح': [
+    { ar: 'وَعِندَهُ مَفَاتِحُ الْغَيْبِ لَا يَعْلَمُهَا إِلَّا هُوَ', en: 'With Him are the keys of the unseen; none knows them except Him', ur: 'اور اسی کے پاس غیب کی کنجیاں ہیں، جنہیں وہی جانتا ہے', ref: 'Al-Anʿām 6:59', ref_ur: 'سورۃ الانعام ۶:۵۹' },
+  ],
+  'كلب': [
+    { ar: 'وَكَلْبُهُم بَاسِطٌ ذِرَاعَيْهِ بِالْوَصِيدِ', en: 'Their dog stretching its forelegs at the entrance', ur: 'اور ان کا کتا دہلیز پر اپنے بازو پھیلائے بیٹھا تھا', ref: 'Al-Kahf 18:18', ref_ur: 'سورۃ الکہف ۱۸:۱۸' },
+  ],
+  'حمار': [
+    { ar: 'كَمَثَلِ الْحِمَارِ يَحْمِلُ أَسْفَارًا', en: 'Like a donkey carrying volumes of books', ur: 'اس گدھے کی مثال جو کتابوں کا بوجھ اٹھائے', ref: 'Al-Jumuʿah 62:5', ref_ur: 'سورۃ الجمعہ ۶۲:۵' },
+  ],
+  'جمل': [
+    { ar: 'حَتَّىٰ يَلِجَ الْجَمَلُ فِي سَمِّ الْخِيَاطِ', en: 'Until the camel passes through the eye of a needle', ur: 'یہاں تک کہ اونٹ سوئی کے ناکے میں داخل ہو جائے', ref: 'Al-Aʿrāf 7:40', ref_ur: 'سورۃ الاعراف ۷:۴۰' },
+  ],
+  'رجل': [
+    { ar: 'وَجَاءَ رَجُلٌ مِّنْ أَقْصَى الْمَدِينَةِ يَسْعَىٰ', en: 'A man came running from the far end of the city', ur: 'اور شہر کے آخری کنارے سے ایک آدمی دوڑتا ہوا آیا', ref: 'Yā-Sīn 36:20', ref_ur: 'سورۃ یٰسین ۳۶:۲۰' },
+    { ar: 'وَجَاءَ مِنْ أَقْصَى الْمَدِينَةِ رَجُلٌ يَسْعَىٰ', en: 'And from the far end of the city a man came running', ur: 'اور شہر کے کنارے سے ایک آدمی دوڑتا آیا', ref: 'Al-Qaṣaṣ 28:20', ref_ur: 'سورۃ القصص ۲۸:۲۰' },
+  ],
+  'ولد': [
+    { ar: 'لَمْ يَلِدْ وَلَمْ يُولَدْ', en: 'He neither begets nor is He begotten', ur: 'نہ اس کی کوئی اولاد ہے اور نہ وہ کسی سے پیدا ہوا', ref: 'Al-Ikhlāṣ 112:3', ref_ur: 'سورۃ الاخلاص ۱۱۲:۳' },
+    { ar: 'وَقَالُوا اتَّخَذَ الرَّحْمَٰنُ وَلَدًا', en: 'They say: The Most Merciful has taken a son', ur: 'انہوں نے کہا: رحمٰن نے اولاد اختیار کی ہے', ref: 'Maryam 19:88', ref_ur: 'سورۃ مریم ۱۹:۸۸' },
+  ],
+  'امام': [
+    { ar: 'إِنِّي جَاعِلُكَ لِلنَّاسِ إِمَامًا', en: 'I will make you a leader for the people', ur: 'میں تمہیں لوگوں کا امام بنانے والا ہوں', ref: 'Al-Baqarah 2:124', ref_ur: 'سورۃ البقرہ ۲:۱۲۴' },
+    { ar: 'أَمَامَهُمْ جَهَنَّمُ وَلَا يُغْنِي عَنْهُمْ مَا كَسَبُوا شَيْئًا', en: 'Before them is Hell, and what they earned will not avail them at all', ur: 'ان کے آگے جہنم ہے اور جو کچھ انہوں نے کمایا وہ ان کے کچھ کام نہ آئے گا', ref: 'Al-Jāthiyah 45:10', ref_ur: 'سورۃ الجاثیہ ۴۵:۱۰' },
+  ],
+  'شمس': [
+    { ar: 'وَالشَّمْسُ تَجْرِي لِمُسْتَقَرٍّ لَّهَا', en: 'The sun runs to its resting place', ur: 'اور سورج اپنے مقررہ ٹھکانے کی طرف چلتا رہتا ہے', ref: 'Yā-Sīn 36:38', ref_ur: 'سورۃ یٰسین ۳۶:۳۸' },
+    { ar: 'وَالشَّمْسِ وَضُحَاهَا', en: 'By the sun and its brightness', ur: 'سورج کی قسم اور اس کی روشنی کی', ref: 'Al-Shams 91:1', ref_ur: 'سورۃ الشمس ۹۱:۱' },
+  ],
+  'قمر': [
+    { ar: 'وَالْقَمَرَ قَدَّرْنَاهُ مَنَازِلَ', en: 'We have measured out stages for the moon', ur: 'اور چاند کے لیے ہم نے منزلیں مقرر کی ہیں', ref: 'Yā-Sīn 36:39', ref_ur: 'سورۃ یٰسین ۳۶:۳۹' },
+    { ar: 'وَالْقَمَرِ إِذَا تَلَاهَا', en: 'And the moon when it follows it', ur: 'اور چاند کی قسم جب وہ سورج کے پیچھے آئے', ref: 'Al-Shams 91:2', ref_ur: 'سورۃ الشمس ۹۱:۲' },
+  ],
+  'سرير': [
+    { ar: 'عَلَىٰ سُرُرٍ مُّتَقَابِلِينَ', en: 'On thrones, facing one another (in Paradise)', ur: 'تختوں پر آمنے سامنے بیٹھے ہوں گے', ref: 'Al-Ḥijr 15:47', ref_ur: 'سورۃ الحجر ۱۵:۴۷' },
+    { ar: 'عَلَى سُرُرٍ مَّوْضُونَةٍ', en: 'On thrones woven with gold', ur: 'سونے کے تاروں سے بنے تختوں پر', ref: 'Al-Wāqiʿah 56:15', ref_ur: 'سورۃ الواقعہ ۵۶:۱۵' },
+  ],
+  'كبير': [
+    { ar: 'إِنَّ اللَّهَ كَانَ عَلِيًّا كَبِيرًا', en: 'Indeed, Allah is ever Most High, Greatest', ur: 'بے شک اللہ بلند و عظیم ہے', ref: 'Al-Nisāʾ 4:34', ref_ur: 'سورۃ النساء ۴:۳۴' },
+    { ar: 'وَهُوَ الْعَلِيُّ الْكَبِيرُ', en: 'He is the Most High, the Most Great', ur: 'وہی سب سے بلند اور سب سے بڑا ہے', ref: 'Sabaʾ 34:23', ref_ur: 'سورۃ سبا ۳۴:۲۳' },
+  ],
+  'جميل': [
+    { ar: 'فَاصْبِرْ صَبْرًا جَمِيلًا', en: 'So be patient with beautiful patience', ur: 'پس خوبصورت صبر اختیار کریں', ref: 'Al-Maʿārij 70:5', ref_ur: 'سورۃ المعارج ۷۰:۵' },
+    { ar: 'فَصَبْرٌ جَمِيلٌ وَاللَّهُ الْمُسْتَعَانُ', en: 'Beautiful patience — and Allah is the one sought for help', ur: 'صبر خوبصورت ہے، اور اللہ ہی مدد کا سہارا ہے', ref: 'Yūsuf 12:18', ref_ur: 'سورۃ یوسف ۱۲:۱۸' },
+  ],
+  'باب': [
+    { ar: 'وَادْخُلُوا الْبَابَ سُجَّدًا', en: 'Enter the gate bowing down', ur: 'اور دروازے میں سجدہ کرتے ہوئے داخل ہو', ref: 'Al-Baqarah 2:58', ref_ur: 'سورۃ البقرہ ۲:۵۸' },
+    { ar: 'وَلَوْ فَتَحْنَا عَلَيْهِم بَابًا مِّنَ السَّمَاءِ', en: 'And if We had opened for them a door from the sky', ur: 'اور اگر ہم ان کے لیے آسمان کا دروازہ کھول دیتے', ref: 'Al-Ḥijr 15:14', ref_ur: 'سورۃ الحجر ۱۵:۱۴' },
+  ],
+  'صغير': [
+    { ar: 'وَقُل رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا', en: 'Say: My Lord, have mercy on them as they raised me when I was small', ur: 'کہو: اے میرے رب! ان پر رحم کر جیسے انہوں نے مجھے بچپن میں پالا', ref: 'Al-Isrāʾ 17:24', ref_ur: 'سورۃ الاسراء ۱۷:۲۴' },
+  ],
+  'جديد': [
+    { ar: 'أَإِنَّا لَمَبْعُوثُونَ خَلْقًا جَدِيدًا', en: 'Shall we indeed be raised up as a new creation?', ur: 'کیا ہم واقعی نئی تخلیق میں اٹھائے جائیں گے؟', ref: 'Al-Isrāʾ 17:49', ref_ur: 'سورۃ الاسراء ۱۷:۴۹' },
+  ],
+  'حجر': [
+    { ar: 'وَإِنَّ مِنَ الْحِجَارَةِ لَمَا يَتَفَجَّرُ مِنْهُ الْأَنْهَارُ', en: 'And indeed, from some rocks rivers burst forth', ur: 'اور بعض پتھروں سے نہریں پھوٹتی ہیں', ref: 'Al-Baqarah 2:74', ref_ur: 'سورۃ البقرہ ۲:۷۴' },
+    { ar: 'فَقُلْنَا اضْرِب بِّعَصَاكَ الْحَجَرَ', en: 'So We said: Strike the rock with your staff', ur: 'پس ہم نے کہا: اپنا عصا پتھر پر مارو', ref: 'Al-Baqarah 2:60', ref_ur: 'سورۃ البقرہ ۲:۶۰' },
+  ],
+  'فوق': [
+    { ar: 'وَهُوَ الْقَاهِرُ فَوْقَ عِبَادِهِ', en: 'He is the Subjugator above His servants', ur: 'اور وہ اپنے بندوں پر غالب ہے', ref: 'Al-Anʿām 6:18', ref_ur: 'سورۃ الانعام ۶:۱۸' },
+    { ar: 'وَرَفَعْنَا فَوْقَكُمُ الطُّورَ', en: 'And We raised the mountain above you', ur: 'اور ہم نے تمہارے اوپر طور پہاڑ اٹھایا', ref: 'Al-Baqarah 2:63', ref_ur: 'سورۃ البقرہ ۲:۶۳' },
+  ],
+  'تحت': [
+    { ar: 'تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ', en: 'Beneath it rivers flow', ur: 'جن کے نیچے نہریں بہتی ہیں', ref: 'Al-Baqarah 2:25', ref_ur: 'سورۃ البقرہ ۲:۲۵' },
+    { ar: 'فِي جَنَّاتٍ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ', en: 'In gardens beneath which rivers flow', ur: 'ان باغوں میں جن کے نیچے نہریں بہتی ہیں', ref: 'Āl ʿImrān 3:15', ref_ur: 'سورۃ آل عمران ۳:۱۵' },
+  ],
+  'في': [
+    { ar: 'لِلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ', en: 'To Allah belongs all that is in the heavens and all that is on earth', ur: 'اللہ ہی کا ہے جو کچھ آسمانوں میں ہے اور جو کچھ زمین میں ہے', ref: 'Al-Baqarah 2:284', ref_ur: 'سورۃ البقرہ ۲:۲۸۴' },
+    { ar: 'فِي بُيُوتٍ أَذِنَ اللَّهُ أَن تُرْفَعَ وَيُذْكَرَ فِيهَا اسْمُهُ', en: 'In houses Allah has permitted to be raised and in which His name is mentioned', ur: 'ان گھروں میں جنہیں اللہ نے بلند کرنے کی اجازت دی اور جن میں اس کا نام لیا جاتا ہے', ref: 'Al-Nūr 24:36', ref_ur: 'سورۃ النور ۲۴:۳۶' },
+    { ar: 'وَهُوَ الَّذِي فِي السَّمَاءِ إِلَٰهٌ وَفِي الْأَرْضِ إِلَٰهٌ', en: 'And He is God in the heaven and God on earth', ur: 'اور وہی آسمان میں بھی معبود ہے اور زمین میں بھی', ref: 'Al-Zukhruf 43:84', ref_ur: 'سورۃ الزخرف ۴۳:۸۴' },
+  ],
+  'على': [
+    { ar: 'وَعَلَى اللَّهِ فَتَوَكَّلُوا', en: 'And upon Allah rely', ur: 'اور اللہ پر بھروسہ کرو', ref: 'Al-Māʾidah 5:23', ref_ur: 'سورۃ المائدہ ۵:۲۳' },
+    { ar: 'إِنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ', en: 'Indeed, Allah is over all things competent', ur: 'بے شک اللہ ہر چیز پر قادر ہے', ref: 'Al-Baqarah 2:20', ref_ur: 'سورۃ البقرہ ۲:۲۰' },
+    { ar: 'وَعَلَيْهِ تَوَكَّلُوا إِن كُنتُم مُّؤْمِنِينَ', en: 'And upon Him rely, if you are believers', ur: 'اور اسی پر بھروسہ کرو اگر تم مومن ہو', ref: 'Al-Māʾidah 5:23', ref_ur: 'سورۃ المائدہ ۵:۲۳' },
+  ],
+  'من': [
+    { ar: 'وَأَنزَلْنَا مِنَ السَّمَاءِ مَاءً طَهُورًا', en: 'And We sent down from the sky pure water', ur: 'اور ہم نے آسمان سے پاک پانی اتارا', ref: 'Al-Furqān 25:48', ref_ur: 'سورۃ الفرقان ۲۵:۴۸' },
+    { ar: 'خَلَقَكُم مِّن تُرَابٍ', en: 'He created you from dust', ur: 'اس نے تمہیں مٹی سے پیدا کیا', ref: 'Fāṭir 35:11', ref_ur: 'سورۃ فاطر ۳۵:۱۱' },
+    { ar: 'مِن نُّطْفَةٍ خَلَقَهُ فَقَدَّرَهُ', en: 'From a drop He created him and then determined his nature', ur: 'ایک نطفے سے اسے پیدا کیا، پھر اسے اندازے پر رکھا', ref: 'ʿAbasa 80:19', ref_ur: 'سورۃ عبس ۸۰:۱۹' },
+  ],
+  'الى': [
+    { ar: 'وَإِلَى اللَّهِ تُرْجَعُ الْأُمُورُ', en: 'And to Allah all matters return', ur: 'اور اللہ ہی کی طرف سب معاملات لوٹتے ہیں', ref: 'Al-Baqarah 2:210', ref_ur: 'سورۃ البقرہ ۲:۲۱۰' },
+    { ar: 'وَإِلَيْهِ الْمَصِيرُ', en: 'And to Him is the final return', ur: 'اور اسی کی طرف لوٹنا ہے', ref: 'Al-Māʾidah 5:18', ref_ur: 'سورۃ المائدہ ۵:۱۸' },
+  ],
+  'خلف': [
+    { ar: 'لَهُ مُعَقِّبَاتٌ مِّن بَيْنِ يَدَيْهِ وَمِنْ خَلْفِهِ يَحْفَظُونَهُ', en: 'For him are angels before and behind him, protecting him', ur: 'اس کے آگے اور پیچھے فرشتے ہیں جو اسے محفوظ رکھتے ہیں', ref: 'Al-Raʿd 13:11', ref_ur: 'سورۃ الرعد ۱۳:۱۱' },
+  ],
+  'امام': [
+    { ar: 'أَمَامَهُمْ جَهَنَّمُ وَلَا يُغْنِي عَنْهُمْ مَا كَسَبُوا شَيْئًا', en: 'Before them is Hell, and what they earned will not avail them at all', ur: 'ان کے آگے جہنم ہے اور جو کچھ انہوں نے کمایا وہ ان کے کچھ کام نہ آئے گا', ref: 'Al-Jāthiyah 45:10', ref_ur: 'سورۃ الجاثیہ ۴۵:۱۰' },
+  ],
+  // ── New entries ─────────────────────────────────────────────────────────────
+  'قميص': [
+    { ar: 'وَجَاءُوا عَلَى قَمِيصِهِ بِدَمٍ كَذِبٍ', en: 'They brought his shirt with false blood on it', ur: 'اور وہ اس کی قمیص پر جھوٹا خون لگا کر لائے', ref: 'Yūsuf 12:18', ref_ur: 'سورۃ یوسف ۱۲:۱۸' },
+    { ar: 'اذْهَبُوا بِقَمِيصِي هَٰذَا فَأَلْقُوهُ عَلَى وَجْهِ أَبِي يَأْتِ بَصِيرًا', en: 'Take this shirt of mine and cast it over my father\'s face; he will regain his sight', ur: 'میری یہ قمیص لے جاؤ اور اسے میرے باپ کے چہرے پر ڈال دو، وہ بینا ہو جائیں گے', ref: 'Yūsuf 12:93', ref_ur: 'سورۃ یوسف ۱۲:۹۳' },
+  ],
+  'جدار': [
+    { ar: 'أَمَّا الْجِدَارُ فَكَانَ لِغُلَامَيْنِ يَتِيمَيْنِ فِي الْمَدِينَةِ', en: 'As for the wall, it belonged to two orphan boys in the city', ur: 'جہاں تک دیوار کا تعلق ہے تو وہ شہر کے دو یتیم بچوں کی تھی', ref: 'Al-Kahf 18:82', ref_ur: 'سورۃ الکہف ۱۸:۸۲' },
+  ],
+  'غرفة': [
+    { ar: 'أُولَٰئِكَ يُجْزَوْنَ الْغُرْفَةَ بِمَا صَبَرُوا', en: 'Those will be rewarded with the highest chamber for their patience', ur: 'انہیں ان کے صبر کے بدلے جنت کے بالاخانے ملیں گے', ref: 'Al-Furqān 25:75', ref_ur: 'سورۃ الفرقان ۲۵:۷۵' },
+    { ar: 'وَهُمْ فِي الْغُرُفَاتِ آمِنُونَ', en: 'And they are in the chambers, secure', ur: 'اور وہ بالاخانوں میں محفوظ ہوں گے', ref: 'Sabaʾ 34:37', ref_ur: 'سورۃ سبا ۳۴:۳۷' },
+  ],
+  'حديقة': [
+    { ar: 'وَحَدَائِقَ غُلْبًا', en: 'And dense gardens', ur: 'اور گھنے باغ', ref: 'Al-Nabaʾ 78:16', ref_ur: 'سورۃ النبا ۷۸:۱۶' },
+    { ar: 'فَأَنبَتْنَا بِهِ حَدَائِقَ ذَاتَ بَهْجَةٍ', en: 'And We caused gardens of joyful beauty to grow by it', ur: 'اور اس سے ہم نے رونق والے باغات اگائے', ref: 'Al-Naml 27:60', ref_ur: 'سورۃ النمل ۲۷:۶۰' },
+  ],
+  'اب': [
+    { ar: 'وَكَانَ أَبُوهُمَا صَالِحًا', en: 'Their father was a righteous man', ur: 'اور ان کا باپ نیک آدمی تھا', ref: 'Al-Kahf 18:82', ref_ur: 'سورۃ الکہف ۱۸:۸۲' },
+    { ar: 'وَإِذْ قَالَ إِبْرَاهِيمُ لِأَبِيهِ آزَرَ', en: 'And when Ibrahim said to his father Azar', ur: 'اور جب ابراہیم نے اپنے باپ آزر سے کہا', ref: 'Al-Anʿām 6:74', ref_ur: 'سورۃ الانعام ۶:۷۴' },
+  ],
+  'ام': [
+    { ar: 'وَأَوْحَيْنَا إِلَى أُمِّ مُوسَى أَنْ أَرْضِعِيهِ', en: 'And We inspired the mother of Mūsā: nurse him', ur: 'اور ہم نے موسیٰ کی ماں کو وحی کی: اسے دودھ پلاؤ', ref: 'Al-Qaṣaṣ 28:7', ref_ur: 'سورۃ القصص ۲۸:۷' },
+    { ar: 'حَمَلَتْهُ أُمُّهُ كُرْهًا وَوَضَعَتْهُ كُرْهًا', en: 'His mother carried him with hardship and gave birth to him with hardship', ur: 'اس کی ماں نے اسے تکلیف سے اٹھایا اور تکلیف سے جنا', ref: 'Al-Aḥqāf 46:15', ref_ur: 'سورۃ الاحقاف ۴۶:۱۵' },
+  ],
+  'اخ': [
+    { ar: 'وَلَمَّا دَخَلُوا عَلَى يُوسُفَ آوَى إِلَيْهِ أَخَاهُ', en: 'When they entered upon Yūsuf, he took his brother to himself', ur: 'جب وہ یوسف کے پاس آئے تو اس نے اپنے بھائی کو اپنے پاس رکھ لیا', ref: 'Yūsuf 12:69', ref_ur: 'سورۃ یوسف ۱۲:۶۹' },
+    { ar: 'وَاجْعَل لِّي وَزِيرًا مِّنْ أَهْلِي هَارُونَ أَخِي', en: 'Appoint for me a minister from my family — Hārūn, my brother', ur: 'اور میرے اہل میں سے ایک وزیر مقرر کر، ہارون میرا بھائی', ref: 'Ṭā-Hā 20:29–30', ref_ur: 'سورۃ طٰہٰ ۲۰:۲۹–۳۰' },
+  ],
+  'اخت': [
+    { ar: 'وَقَالَتْ لِأُخْتِهِ قُصِّيهِ', en: 'And she said to his sister: Follow him', ur: 'اور اس نے اس کی بہن سے کہا: اس کا پیچھا کرو', ref: 'Al-Qaṣaṣ 28:11', ref_ur: 'سورۃ القصص ۲۸:۱۱' },
+  ],
+  'ابن': [
+    { ar: 'وَإِذْ قَالَ عِيسَى ابْنُ مَرْيَمَ يَا بَنِي إِسْرَائِيلَ إِنِّي رَسُولُ اللَّهِ إِلَيْكُمْ', en: 'And when ʿĪsā son of Maryam said: O Children of Israel, I am the messenger of Allah to you', ur: 'اور جب عیسیٰ ابن مریم نے کہا: اے بنی اسرائیل! میں تمہاری طرف اللہ کا رسول ہوں', ref: 'Al-Ṣaff 61:6', ref_ur: 'سورۃ الصف ۶۱:۶' },
+    { ar: 'يَا بُنَيَّ لَا تُشْرِكْ بِاللَّهِ إِنَّ الشِّرْكَ لَظُلْمٌ عَظِيمٌ', en: 'O my dear son, do not associate partners with Allah — indeed, shirk is a great injustice', ur: 'اے میرے پیارے بیٹے! اللہ کے ساتھ شریک نہ ٹھہراؤ — بے شک شرک بہت بڑا ظلم ہے', ref: 'Luqmān 31:13', ref_ur: 'سورۃ لقمان ۳۱:۱۳' },
+  ],
+  'زوج': [
+    { ar: 'وَخَلَقَ مِنْهَا زَوْجَهَا', en: 'And created from it its mate', ur: 'اور اسی سے اس کا جوڑا بنایا', ref: 'Al-Nisāʾ 4:1', ref_ur: 'سورۃ النساء ۴:۱' },
+    { ar: 'وَمِن كُلِّ شَيْءٍ خَلَقْنَا زَوْجَيْنِ', en: 'And of all things We created pairs', ur: 'اور ہر چیز کے ہم نے جوڑے بنائے', ref: 'Al-Dhāriyāt 51:49', ref_ur: 'سورۃ الذاریات ۵۱:۴۹' },
+  ],
+  'قديم': [
+    { ar: 'حَتَّى عَادَ كَالْعُرْجُونِ الْقَدِيمِ', en: 'Until it returns like an old palm-stalk', ur: 'یہاں تک کہ وہ پرانی ٹہنی جیسا ہو جاتا ہے', ref: 'Yā-Sīn 36:39', ref_ur: 'سورۃ یٰسین ۳۶:۳۹' },
+  ],
+  'مسلم': [
+    { ar: 'وَأَنَا أَوَّلُ الْمُسْلِمِينَ', en: 'And I am the first of those who submit', ur: 'اور میں سب سے پہلا مسلم ہوں', ref: 'Al-Anʿām 6:163', ref_ur: 'سورۃ الانعام ۶:۱۶۳' },
+    { ar: 'إِنَّ الْمُسْلِمِينَ وَالْمُسْلِمَاتِ وَالْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ', en: 'Indeed, the Muslim men and Muslim women, the believing men and believing women…', ur: 'بے شک مسلمان مرد اور مسلمان عورتیں، مومن مرد اور مومن عورتیں…', ref: 'Al-Aḥzāb 33:35', ref_ur: 'سورۃ الاحزاب ۳۳:۳۵' },
+  ],
+  'اكبر': [
+    { ar: 'وَلَذِكْرُ اللَّهِ أَكْبَرُ', en: 'And the remembrance of Allah is greater', ur: 'اور اللہ کا ذکر سب سے بڑا ہے', ref: 'Al-ʿAnkabūt 29:45', ref_ur: 'سورۃ العنکبوت ۲۹:۴۵' },
+    { ar: 'وَالْفِتْنَةُ أَكْبَرُ مِنَ الْقَتْلِ', en: 'And persecution is greater than killing', ur: 'اور فتنہ قتل سے بھی بڑا ہے', ref: 'Al-Baqarah 2:217', ref_ur: 'سورۃ البقرہ ۲:۲۱۷' },
+  ],
+  'احسن': [
+    { ar: 'الَّذِي أَحْسَنَ كُلَّ شَيْءٍ خَلَقَهُ', en: 'Who perfected everything He created', ur: 'جس نے ہر چیز کو اچھا بنایا جو اس نے پیدا کی', ref: 'Al-Sajdah 32:7', ref_ur: 'سورۃ السجدہ ۳۲:۷' },
+    { ar: 'وَمَنْ أَحْسَنُ قَوْلًا مِّمَّن دَعَا إِلَى اللَّهِ', en: 'Who is better in speech than one who calls to Allah', ur: 'اور اس سے اچھی بات کس کی جو اللہ کی طرف بلائے', ref: 'Fuṣṣilat 41:33', ref_ur: 'سورۃ فصلت ۴۱:۳۳' },
+  ],
+  'ارسل': [
+    { ar: 'وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِّلْعَالَمِينَ', en: 'We have not sent you except as a mercy to all worlds', ur: 'اور ہم نے آپ کو تمام جہانوں کے لیے رحمت بنا کر بھیجا', ref: 'Al-Anbiyāʾ 21:107', ref_ur: 'سورۃ الانبیاء ۲۱:۱۰۷' },
+    { ar: 'إِنَّا أَرْسَلْنَاكَ شَاهِدًا وَمُبَشِّرًا وَنَذِيرًا', en: 'Indeed We have sent you as a witness, a bringer of good tidings, and a warner', ur: 'بے شک ہم نے آپ کو گواہ، خوشخبری دینے والا اور خبردار کرنے والا بنا کر بھیجا', ref: 'Al-Fatḥ 48:8', ref_ur: 'سورۃ الفتح ۴۸:۸' },
+  ],
+  'انزل': [
+    { ar: 'إِنَّا أَنزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ', en: 'Indeed We sent it down during the Night of Decree', ur: 'بے شک ہم نے اسے شبِ قدر میں نازل کیا', ref: 'Al-Qadr 97:1', ref_ur: 'سورۃ القدر ۹۷:۱' },
+    { ar: 'وَأَنزَلَ اللَّهُ عَلَيْكَ الْكِتَابَ وَالْحِكْمَةَ', en: 'And Allah has sent down to you the Book and wisdom', ur: 'اور اللہ نے آپ پر کتاب اور حکمت نازل کی', ref: 'Al-Nisāʾ 4:113', ref_ur: 'سورۃ النساء ۴:۱۱۳' },
+  ],
+  'مومن': [
+    { ar: 'قَدْ أَفْلَحَ الْمُؤْمِنُونَ', en: 'Certainly will the believers have succeeded', ur: 'یقیناً مومن کامیاب ہو گئے', ref: 'Al-Muʾminūn 23:1', ref_ur: 'سورۃ المومنون ۲۳:۱' },
+    { ar: 'إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ', en: 'The believers are but brothers', ur: 'مومن تو آپس میں بھائی بھائی ہیں', ref: 'Al-Ḥujurāt 49:10', ref_ur: 'سورۃ الحجرات ۴۹:۱۰' },
+  ],
+  'كان': [
+    { ar: 'وَكَانَ اللَّهُ غَفُورًا رَّحِيمًا', en: 'And Allah is ever Forgiving and Merciful', ur: 'اور اللہ بخشنے والا مہربان ہے', ref: 'Al-Nisāʾ 4:96', ref_ur: 'سورۃ النساء ۴:۹۶' },
+    { ar: 'إِنَّهُ كَانَ صَادِقَ الْوَعْدِ وَكَانَ رَسُولًا نَّبِيًّا', en: 'Indeed, he was true to his promise and was a messenger and a prophet', ur: 'بے شک وہ وعدے کا سچا تھا اور رسول اور نبی تھا', ref: 'Maryam 19:54', ref_ur: 'سورۃ مریم ۱۹:۵۴' },
+  ],
+  'لا': [
+    { ar: 'لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ', en: 'There is no god except Him — the Ever-Living, the Sustainer of all existence', ur: 'کوئی معبود نہیں سوائے اس کے — وہ زندہ ہے، قائم ہے', ref: 'Al-Baqarah 2:255', ref_ur: 'سورۃ البقرہ ۲:۲۵۵' },
+    { ar: 'لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا', en: 'Do not grieve — indeed, Allah is with us', ur: 'غم نہ کرو، اللہ ہمارے ساتھ ہے', ref: 'Al-Tawbah 9:40', ref_ur: 'سورۃ التوبہ ۹:۴۰' },
+  ],
+  'اين': [
+    { ar: 'أَيْنَمَا تَكُونُوا يُدْرِككُّمُ الْمَوْتُ', en: 'Wherever you may be, death will overtake you', ur: 'تم جہاں بھی ہو موت تمہیں آ پکڑے گی', ref: 'Al-Nisāʾ 4:78', ref_ur: 'سورۃ النساء ۴:۷۸' },
+  ],
 };
 
 // Returns the QURAN_CONNECTIONS key for the primary word in an exercise, or null.
@@ -2381,7 +2367,10 @@ export default function MadinahArabicApp() {
         if ((counts[qKey] - 1) % 3 === 0) {
           const capturedExIdx = exIdx, capturedHearts = hearts, capturedSession = sessionData;
           pendingAdvance.current = () => doAdvance(newTotal, newCorrect, capturedExIdx, capturedHearts, capturedSession);
-          setQuranOverlay(QURAN_CONNECTIONS[qKey]);
+          const qExamples = QURAN_CONNECTIONS[qKey];
+          const qArr = Array.isArray(qExamples) ? qExamples : [qExamples];
+          const showIdx = Math.floor((counts[qKey] - 1) / 3) % qArr.length;
+          setQuranOverlay(qArr[showIdx]);
           return; // don't advance yet — overlay requires tap to continue
         }
       }
