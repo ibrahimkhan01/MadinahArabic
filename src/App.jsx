@@ -147,9 +147,6 @@ const QURAN_CONNECTIONS = {
   'خلف': [
     { ar: 'لَهُ مُعَقِّبَاتٌ مِّن بَيْنِ يَدَيْهِ وَمِنْ خَلْفِهِ يَحْفَظُونَهُ', en: 'For him are angels before and behind him, protecting him', ur: 'اس کے آگے اور پیچھے فرشتے ہیں جو اسے محفوظ رکھتے ہیں', ref: 'Al-Raʿd 13:11', ref_ur: 'سورۃ الرعد ۱۳:۱۱' },
   ],
-  'امام': [
-    { ar: 'أَمَامَهُمْ جَهَنَّمُ وَلَا يُغْنِي عَنْهُمْ مَا كَسَبُوا شَيْئًا', en: 'Before them is Hell, and what they earned will not avail them at all', ur: 'ان کے آگے جہنم ہے اور جو کچھ انہوں نے کمایا وہ ان کے کچھ کام نہ آئے گا', ref: 'Al-Jāthiyah 45:10', ref_ur: 'سورۃ الجاثیہ ۴۵:۱۰' },
-  ],
   // ── New entries ─────────────────────────────────────────────────────────────
   'قميص': [
     { ar: 'وَجَاءُوا عَلَى قَمِيصِهِ بِدَمٍ كَذِبٍ', en: 'They brought his shirt with false blood on it', ur: 'اور وہ اس کی قمیص پر جھوٹا خون لگا کر لائے', ref: 'Yūsuf 12:18', ref_ur: 'سورۃ یوسف ۱۲:۱۸' },
