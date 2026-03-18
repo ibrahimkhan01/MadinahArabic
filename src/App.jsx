@@ -1548,15 +1548,15 @@ function TileEx({ exercise, onResult, lang = "en" }) {
 
   const addTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
   const removeTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
-  const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);if(ok)setTimeout(()=>onResult(true),1200);};
+  const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);if(ok){speak(exercise.answer.join(" "));setTimeout(()=>onResult(true),1400);}};
 
   return (
     <div style={{textAlign:"center"}}>
       <p style={{color:"#64748b",fontSize:13,marginBottom:6,fontFamily:isUrdu?urFont:"inherit"}}>{t.buildSentence}</p>
       <p style={{fontSize:17,fontWeight:700,color:"#1e293b",marginBottom:4,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>"{exercise.en}"</p>
-      {checked && (
+      {checked && !correct && (
         <p style={{fontSize:12,color:"#94a3b8",marginBottom:12}}>
-          <SpeakBtn text={exercise.answer.join(" ")} size={15} /> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearSentence}</span>
+          <SpeakBtn text={exercise.answer.join(" ")} size={15} /> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearAnswer}</span>
         </p>
       )}
       {/* Answer zone */}
@@ -1631,7 +1631,7 @@ function PatternTileEx({ exercise, onResult, lang = "en" }) {
 
   const addTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
   const removeTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
-  const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);if(ok)setTimeout(()=>onResult(true),1200);};
+  const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);if(ok){speak(exercise.answer.join(" "));setTimeout(()=>onResult(true),1400);}};
 
   return (
     <div style={{textAlign:"center"}}>
@@ -1645,7 +1645,7 @@ function PatternTileEx({ exercise, onResult, lang = "en" }) {
           <SpeakBtn text={exercise.question} size={18}/>
         </div>
       )}
-      {checked && (
+      {checked && !correct && (
         <p style={{fontSize:12,color:"#94a3b8",marginBottom:10}}>
           <SpeakBtn text={exercise.answer.join(" ")} size={14}/> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearAnswer}</span>
         </p>
@@ -1739,7 +1739,8 @@ function ReviewTileEx({ exercise, onResult, lang = "en" }) {
       else userAnswer.push(placed[ri++]||"");
     }
     const ok = JSON.stringify(placed)===JSON.stringify(exercise.answer.filter(t=>!prebakedSet.some(p=>p.ar===t)));
-    setCorrect(ok); setChecked(true); setTimeout(()=>onResult(ok),1200);
+    if(ok) speak(exercise.answer.join(" "));
+    setCorrect(ok); setChecked(true); setTimeout(()=>onResult(ok),1400);
   };
 
   // Reconstruct full answer zone: prebaked tiles at their positions + placed tiles in gaps
@@ -1758,9 +1759,9 @@ function ReviewTileEx({ exercise, onResult, lang = "en" }) {
     <div style={{textAlign:"center"}}>
       <p style={{color:"#64748b",fontSize:12,marginBottom:4,fontFamily:isUrdu?urFont:"inherit"}}>{t.buildSentence}</p>
       <p style={{fontSize:16,fontWeight:700,color:"#1e293b",marginBottom:4,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>"{exercise.en}"</p>
-      {checked && (
+      {checked && !correct && (
         <p style={{fontSize:12,color:"#94a3b8",marginBottom:prebakedSet.length>0?4:12}}>
-          <SpeakBtn text={exercise.answer.join(" ")} size={15} /> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearSentence}</span>
+          <SpeakBtn text={exercise.answer.join(" ")} size={15} /> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearAnswer}</span>
         </p>
       )}
       {prebakedSet.length>0&&<p style={{fontSize:11,color:"#d97706",fontWeight:600,marginBottom:12,fontFamily:isUrdu?urFont:"inherit"}}>{t.goldTiles}</p>}
