@@ -224,6 +224,100 @@ const QURAN_CONNECTIONS = {
   'اين': [
     { ar: 'أَيْنَمَا تَكُونُوا يُدْرِككُّمُ الْمَوْتُ', en: 'Wherever you may be, death will overtake you', ur: 'تم جہاں بھی ہو موت تمہیں آ پکڑے گی', ref: 'Al-Nisāʾ 4:78', ref_ur: 'سورۃ النساء ۴:۷۸' },
   ],
+  // ── Pronouns ──────────────────────────────────────────────────────────────
+  'هو': [
+    { ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ', en: 'Say: He is Allah, the One', ur: 'کہو: وہ اللہ ایک ہے', ref: 'Al-Ikhlāṣ 112:1', ref_ur: 'سورۃ الاخلاص ۱۱۲:۱' },
+    { ar: 'وَهُوَ بِكُلِّ شَيْءٍ عَلِيمٌ', en: 'And He has knowledge of all things', ur: 'اور وہ ہر چیز کو جانتا ہے', ref: 'Al-Baqarah 2:29', ref_ur: 'سورۃ البقرہ ۲:۲۹' },
+  ],
+  'هي': [
+    { ar: 'قَالَ هِيَ عَصَايَ أَتَوَكَّأُ عَلَيْهَا', en: 'He said: It is my staff — I lean upon it', ur: 'اس نے کہا: یہ میری لاٹھی ہے، میں اس پر ٹیک لگاتا ہوں', ref: 'Ṭāhā 20:18', ref_ur: 'سورۃ طہ ۲۰:۱۸' },
+  ],
+  'هم': [
+    { ar: 'أُولَٰئِكَ هُمُ الْمُفْلِحُونَ', en: 'Those are the ones who will succeed', ur: 'یہی لوگ کامیاب ہیں', ref: 'Al-Baqarah 2:5', ref_ur: 'سورۃ البقرہ ۲:۵' },
+    { ar: 'إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ', en: 'The believers are but brothers', ur: 'مومن تو آپس میں بھائی بھائی ہیں', ref: 'Al-Ḥujurāt 49:10', ref_ur: 'سورۃ الحجرات ۴۹:۱۰' },
+  ],
+  'انا': [
+    { ar: 'إِنَّنِي أَنَا اللَّهُ لَا إِلَٰهَ إِلَّا أَنَا فَاعْبُدْنِي', en: 'Indeed, I am Allah — there is no god except Me, so worship Me', ur: 'بے شک میں ہی اللہ ہوں، میرے سوا کوئی معبود نہیں، پس میری عبادت کرو', ref: 'Ṭāhā 20:14', ref_ur: 'سورۃ طہ ۲۰:۱۴' },
+  ],
+  'انت': [
+    { ar: 'إِنَّكَ أَنتَ الْعَلِيمُ الْحَكِيمُ', en: 'Indeed You are the All-Knowing, the All-Wise', ur: 'بے شک تو ہی علم والا حکمت والا ہے', ref: 'Al-Baqarah 2:32', ref_ur: 'سورۃ البقرہ ۲:۳۲' },
+  ],
+  // ── Core verbs ────────────────────────────────────────────────────────────
+  'قرا': [
+    { ar: 'اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ', en: 'Read in the name of your Lord who created', ur: 'پڑھو اپنے رب کے نام سے جس نے پیدا کیا', ref: 'Al-ʿAlaq 96:1', ref_ur: 'سورۃ العلق ۹۶:۱' },
+    { ar: 'فَإِذَا قَرَأْتَ الْقُرْآنَ فَاسْتَعِذْ بِاللَّهِ', en: 'When you recite the Quran, seek refuge in Allah', ur: 'جب آپ قرآن پڑھیں تو اللہ کی پناہ مانگیں', ref: 'Al-Naḥl 16:98', ref_ur: 'سورۃ النحل ۱۶:۹۸' },
+  ],
+  'كتب': [
+    { ar: 'كَتَبَ رَبُّكُمْ عَلَىٰ نَفْسِهِ الرَّحْمَةَ', en: 'Your Lord has decreed upon Himself mercy', ur: 'آپ کے رب نے اپنے اوپر رحمت لازم کر لی ہے', ref: 'Al-Anʿām 6:12', ref_ur: 'سورۃ الانعام ۶:۱۲' },
+    { ar: 'كَتَبَ اللَّهُ لَأَغْلِبَنَّ أَنَا وَرُسُلِي', en: 'Allah has decreed: I and My messengers will surely prevail', ur: 'اللہ نے لکھ دیا ہے کہ میں اور میرے رسول ضرور غالب رہیں گے', ref: 'Al-Mujādilah 58:21', ref_ur: 'سورۃ المجادلہ ۵۸:۲۱' },
+  ],
+  'فتح': [
+    { ar: 'إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا', en: 'Indeed We have given you a clear triumph', ur: 'بے شک ہم نے آپ کو کھلی فتح عطا کی', ref: 'Al-Fatḥ 48:1', ref_ur: 'سورۃ الفتح ۴۸:۱' },
+    { ar: 'وَهُوَ الْفَتَّاحُ الْعَلِيمُ', en: 'And He is the Opener, the All-Knowing', ur: 'اور وہی ہر مشکل کھولنے والا، جاننے والا ہے', ref: 'Sabaʾ 34:26', ref_ur: 'سورۃ سبا ۳۴:۲۶' },
+  ],
+  'ذهب': [
+    { ar: 'إِنِّي ذَاهِبٌ إِلَىٰ رَبِّي سَيَهْدِينِ', en: 'Indeed I am going to my Lord — He will guide me', ur: 'میں اپنے رب کی طرف جا رہا ہوں، وہ مجھے ہدایت دے گا', ref: 'Al-Ṣāffāt 37:99', ref_ur: 'سورۃ الصافات ۳۷:۹۹' },
+  ],
+  'دخل': [
+    { ar: 'ادْخُلُوهَا بِسَلَامٍ آمِنِينَ', en: 'Enter it in peace, secure', ur: 'امن اور سلامتی کے ساتھ اس میں داخل ہو جاؤ', ref: 'Al-Ḥijr 15:46', ref_ur: 'سورۃ الحجر ۱۵:۴۶' },
+    { ar: 'وَقِيلَ لَهُمُ ادْخُلُوا الْجَنَّةَ', en: 'And it is said to them: Enter Paradise', ur: 'اور ان سے کہا جائے گا: جنت میں داخل ہو جاؤ', ref: 'Al-Zumar 39:73', ref_ur: 'سورۃ الزمر ۳۹:۷۳' },
+  ],
+  'خرج': [
+    { ar: 'يُخْرِجُهُم مِّنَ الظُّلُمَاتِ إِلَى النُّورِ', en: 'He brings them out from darkness into light', ur: 'وہ انہیں اندھیروں سے نور کی طرف نکالتا ہے', ref: 'Al-Baqarah 2:257', ref_ur: 'سورۃ البقرہ ۲:۲۵۷' },
+  ],
+  'فهم': [
+    { ar: 'فَفَهَّمْنَاهَا سُلَيْمَانَ وَكُلًّا آتَيْنَا حُكْمًا وَعِلْمًا', en: 'We gave Sulaymān its understanding, and to each We gave wisdom and knowledge', ur: 'ہم نے اس کا فہم سلیمان کو دیا اور ہر ایک کو حکم اور علم دیا', ref: 'Al-Anbiyāʾ 21:79', ref_ur: 'سورۃ الانبیاء ۲۱:۷۹' },
+  ],
+  'درس': [
+    { ar: 'وَدَرَسُوا مَا فِيهِ', en: 'And they studied what was in it', ur: 'اور انہوں نے اس میں جو کچھ تھا وہ پڑھا', ref: 'Al-Aʿrāf 7:169', ref_ur: 'سورۃ الاعراف ۷:۱۶۹' },
+  ],
+  // ── Question words ────────────────────────────────────────────────────────
+  'كيف': [
+    { ar: 'أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَابِ الْفِيلِ', en: 'Have you not seen how your Lord dealt with the companions of the elephant?', ur: 'کیا آپ نے نہیں دیکھا کہ آپ کے رب نے ہاتھی والوں کے ساتھ کیا کیا؟', ref: 'Al-Fīl 105:1', ref_ur: 'سورۃ الفیل ۱۰۵:۱' },
+    { ar: 'كَيْفَ تَكْفُرُونَ بِاللَّهِ وَكُنتُمْ أَمْوَاتًا فَأَحْيَاكُمْ', en: 'How can you deny Allah when you were lifeless and He gave you life?', ur: 'تم اللہ کا کیسے انکار کرتے ہو جبکہ تم بے جان تھے اور اس نے تمہیں زندہ کیا', ref: 'Al-Baqarah 2:28', ref_ur: 'سورۃ البقرہ ۲:۲۸' },
+  ],
+  'متى': [
+    { ar: 'مَتَىٰ نَصْرُ اللَّهِ أَلَا إِنَّ نَصْرَ اللَّهِ قَرِيبٌ', en: 'When is the help of Allah? Unquestionably, the help of Allah is near', ur: 'اللہ کی مدد کب آئے گی؟ سنو! اللہ کی مدد یقیناً قریب ہے', ref: 'Al-Baqarah 2:214', ref_ur: 'سورۃ البقرہ ۲:۲۱۴' },
+  ],
+  // ── Prepositions ─────────────────────────────────────────────────────────
+  'قبل': [
+    { ar: 'لِلَّهِ الْأَمْرُ مِن قَبْلُ وَمِن بَعْدُ', en: 'The command belongs to Allah — before and after', ur: 'اللہ ہی کا حکم ہے پہلے بھی اور بعد میں بھی', ref: 'Al-Rūm 30:4', ref_ur: 'سورۃ الروم ۳۰:۴' },
+  ],
+  'بعد': [
+    { ar: 'لِلَّهِ الْأَمْرُ مِن قَبْلُ وَمِن بَعْدُ', en: 'The command belongs to Allah — before and after', ur: 'اللہ ہی کا حکم ہے پہلے بھی اور بعد میں بھی', ref: 'Al-Rūm 30:4', ref_ur: 'سورۃ الروم ۳۰:۴' },
+  ],
+  // ── Numbers ───────────────────────────────────────────────────────────────
+  'واحد': [
+    { ar: 'وَإِلَٰهُكُمْ إِلَٰهٌ وَاحِدٌ لَّا إِلَٰهَ إِلَّا هُوَ الرَّحْمَٰنُ الرَّحِيمُ', en: 'Your God is One God — there is no god except Him, the Most Compassionate, the Most Merciful', ur: 'تمہارا معبود ایک معبود ہے، اس کے سوا کوئی معبود نہیں، بڑا مہربان، نہایت رحم والا', ref: 'Al-Baqarah 2:163', ref_ur: 'سورۃ البقرہ ۲:۱۶۳' },
+  ],
+  // ── Adjectives ────────────────────────────────────────────────────────────
+  'كريم': [
+    { ar: 'إِنَّهُ لَقُرْآنٌ كَرِيمٌ', en: 'Indeed it is a noble Quran', ur: 'بے شک یہ بہت بزرگ قرآن ہے', ref: 'Al-Wāqiʿah 56:77', ref_ur: 'سورۃ الواقعہ ۵۶:۷۷' },
+    { ar: 'إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ', en: 'Indeed the most noble of you in the sight of Allah is the most righteous', ur: 'اللہ کے نزدیک تم میں سب سے عزت والا وہ ہے جو سب سے زیادہ پرہیزگار ہو', ref: 'Al-Ḥujurāt 49:13', ref_ur: 'سورۃ الحجرات ۴۹:۱۳' },
+  ],
+  'صادق': [
+    { ar: 'وَكُونُوا مَعَ الصَّادِقِينَ', en: 'And be with the truthful', ur: 'اور سچوں کے ساتھ ہو جاؤ', ref: 'Al-Tawbah 9:119', ref_ur: 'سورۃ التوبہ ۹:۱۱۹' },
+  ],
+  // ── Colours ───────────────────────────────────────────────────────────────
+  'ابيض': [
+    { ar: 'يَوْمَ تَبْيَضُّ وُجُوهٌ وَتَسْوَدُّ وُجُوهٌ', en: 'The Day when faces will be brightened and faces will be darkened', ur: 'اس دن بعض چہرے روشن ہوں گے اور بعض تاریک', ref: 'Āl ʿImrān 3:106', ref_ur: 'سورۃ آل عمران ۳:۱۰۶' },
+  ],
+  'اسود': [
+    { ar: 'يَوْمَ تَبْيَضُّ وُجُوهٌ وَتَسْوَدُّ وُجُوهٌ', en: 'The Day when faces will be brightened and faces will be darkened', ur: 'اس دن بعض چہرے روشن ہوں گے اور بعض تاریک', ref: 'Āl ʿImrān 3:106', ref_ur: 'سورۃ آل عمران ۳:۱۰۶' },
+  ],
+  'احمر': [
+    { ar: 'جُدَدٌ بِيضٌ وَحُمْرٌ مُّخْتَلِفٌ أَلْوَانُهَا وَغَرَابِيبُ سُودٌ', en: 'White and red streaks of varying colours, and intensely black ones', ur: 'سفید اور سرخ رنگ کی لکیریں جن کے رنگ مختلف ہیں اور گہری سیاہ بھی', ref: 'Fāṭir 35:27', ref_ur: 'سورۃ فاطر ۳۵:۲۷' },
+  ],
+  'اخضر': [
+    { ar: 'وَيَلْبَسُونَ ثِيَابًا خُضْرًا مِّن سُنْدُسٍ وَإِسْتَبْرَقٍ', en: 'They will wear green garments of fine silk and brocade', ur: 'اور وہ ریشم اور دیباج کے سبز کپڑے پہنیں گے', ref: 'Al-Kahf 18:31', ref_ur: 'سورۃ الکہف ۱۸:۳۱' },
+  ],
+  'اصفر': [
+    { ar: 'بَقَرَةٌ صَفْرَاءُ فَاقِعٌ لَّوْنُهَا تَسُرُّ النَّاظِرِينَ', en: 'A cow intensely yellow — its colour pleasing to those who behold it', ur: 'ایک گائے جس کا رنگ چمکیلا پیلا ہو جو دیکھنے والوں کو خوش کرے', ref: 'Al-Baqarah 2:69', ref_ur: 'سورۃ البقرہ ۲:۶۹' },
+  ],
+  // ── Nouns ─────────────────────────────────────────────────────────────────
+  'رجال': [
+    { ar: 'رِجَالٌ صَدَقُوا مَا عَاهَدُوا اللَّهَ عَلَيْهِ', en: 'Men who were true to what they pledged to Allah', ur: 'وہ مرد جنہوں نے اللہ سے کیے ہوئے عہد کو سچا کر دکھایا', ref: 'Al-Aḥzāb 33:23', ref_ur: 'سورۃ الاحزاب ۳۳:۲۳' },
+  ],
 };
 
 // Returns the QURAN_CONNECTIONS key for the primary word in an exercise, or null.
@@ -831,7 +925,12 @@ const SESSIONS = [
       {emoji:"🚪", question:"مَا هَذَا؟", tiles:["هَذَا","الْبَابُ","الْبَيْتُ","الْكِتَابُ"], answer:["هَذَا","الْبَابُ"]},
     ]},
   { id:9, book:1, lessonRef:"1.3", part:"B", title:"الـ — Sun & Moon Letters", titleEn:"Sun Letters (Part 2)",
-    grammar:'With "sun letters" (ت،ث،د،ذ،ر،ز،س،ش،ص،ض،ط،ظ،ل،ن) the ل of الـ assimilates: الشَّمْسُ (ash-shams), الرَّجُلُ (ar-rajul). Written but not pronounced separately.',
+    grammar:'With "sun letters" (ت،ث،د،ذ،ر،ز،س،ش،ص،ض،ط،ظ،ل،ن) the ل of الـ assimilates. Written but not pronounced — the first letter doubles instead.',
+    grammarExamples:[
+      { ar:"الْقَمَرُ", en:"Moon letter ق → al-qamar (ل is heard)", ur:"قمری حرف: ق — ل ادا ہوتا ہے" },
+      { ar:"الشَّمْسُ", en:"Sun letter ش → ash-shams (ل silent, ش doubles)", ur:"شمسی حرف: ش — ل خاموش، ش دوگنا" },
+      { ar:"الرَّجُلُ", en:"Sun letter ر → ar-rajul (ل silent, ر doubles)", ur:"شمسی حرف: ر — ل خاموش، ر دوگنا" },
+    ],
     vocab:[{ar:"الشَّمْسُ",en:"the sun"},{ar:"الرَّجُلُ",en:"the man"},{ar:"النَّجْمُ",en:"the star"},{ar:"الطَّالِبُ",en:"the student"}],
     patternTiles:[
       {emoji:"⭐", question:"مَا هَذَا؟", tiles:["هَذَا","النَّجْمُ","الشَّمْسُ","الطَّالِبُ"], answer:["هَذَا","النَّجْمُ"]},
@@ -839,14 +938,23 @@ const SESSIONS = [
     ]},
 
   { id:10, book:1, lessonRef:"1.4", part:"A", title:"الصِّفَاتُ — Adjectives (Part 1)", titleEn:"Describing with Adjectives",
-    grammar:'Adjectives come AFTER the noun. Definite noun + definite adjective: الْبَيْتُ الْكَبِيرُ. Indefinite noun + indefinite adjective: بَيْتٌ كَبِيرٌ.',
+    grammar:'Adjectives come AFTER the noun and must match it. Definite noun → definite adjective. Indefinite noun → indefinite adjective.',
+    grammarExamples:[
+      { ar:"بَيْتٌ كَبِيرٌ", en:"a big house (both indefinite — ـٌ)", ur:"ایک بڑا گھر (دونوں نکرہ)" },
+      { ar:"الْبَيْتُ الْكَبِيرُ", en:"the big house (both definite — الـ)", ur:"وہ بڑا گھر (دونوں معرفہ)" },
+    ],
     vocab:[{ar:"كَبِيرٌ",en:"big"},{ar:"صَغِيرٌ",en:"small"},{ar:"جَدِيدٌ",en:"new"},{ar:"قَدِيمٌ",en:"old"}],
     patternTiles:[
       {en:"This is a big house.", tiles:["هَذَا","بَيْتٌ","كَبِيرٌ","صَغِيرٌ","قَدِيمٌ"], answer:["هَذَا","بَيْتٌ","كَبِيرٌ"]},
       {en:"That is a new book.", tiles:["ذَلِكَ","كِتَابٌ","جَدِيدٌ","قَدِيمٌ","قَلَمٌ"], answer:["ذَلِكَ","كِتَابٌ","جَدِيدٌ"]},
     ]},
   { id:11, book:1, lessonRef:"1.4", part:"B", title:"الصِّفَاتُ — More Adjectives (Part 2)", titleEn:"More Adjectives",
-    grammar:'More masculine adjectives. هَذَا طَالِبٌ جَدِيدٌ = This is a new student (noun + adjective forms descriptive phrase).',
+    grammar:'More masculine adjectives. The adjective follows the noun and takes the same tanwīn.',
+    grammarExamples:[
+      { ar:"هَذَا طَالِبٌ جَدِيدٌ", en:"This is a new student", ur:"یہ ایک نیا طالب علم ہے" },
+      { ar:"ذَلِكَ رَجُلٌ طَوِيلٌ", en:"That is a tall man", ur:"وہ ایک لمبا آدمی ہے" },
+      { ar:"هَذَا كِتَابٌ جَمِيلٌ", en:"This is a beautiful book", ur:"یہ ایک خوبصورت کتاب ہے" },
+    ],
     vocab:[{ar:"جَمِيلٌ",en:"beautiful"},{ar:"طَوِيلٌ",en:"tall/long"},{ar:"قَصِيرٌ",en:"short"},{ar:"رَخِيصٌ",en:"cheap"}],
     patternTiles:[
       {en:"This is a tall man.", tiles:["هَذَا","رَجُلٌ","طَوِيلٌ","قَصِيرٌ","وَلَدٌ"], answer:["هَذَا","رَجُلٌ","طَوِيلٌ"]},
@@ -854,14 +962,24 @@ const SESSIONS = [
     ]},
 
   { id:12, book:1, lessonRef:"1.5", part:"A", title:"حُرُوفُ الْجَرِّ (Part 1)", titleEn:"Prepositions: في، عَلَى، مِنْ، إِلَى",
-    grammar:'Prepositions put the following noun into genitive (ـِ or ـٍ): فِي الْبَيْتِ (in the house), عَلَى الْمَكْتَبِ (on the desk), مِنَ الْمَسْجِدِ (from the mosque), إِلَى الْمَدْرَسَةِ (to the school).',
+    grammar:'After a preposition, the noun takes genitive case — it loses ـٌ and takes ـٍ (or ـِ if definite).',
+    grammarExamples:[
+      { ar:"الْكِتَابُ فِي الْبَيْتِ", en:"The book is in the house", ur:"کتاب گھر میں ہے" },
+      { ar:"الْقَلَمُ عَلَى الْمَكْتَبِ", en:"The pen is on the desk", ur:"قلم میز پر ہے" },
+      { ar:"جَاءَ مِنَ الْمَسْجِدِ", en:"He came from the mosque", ur:"وہ مسجد سے آیا" },
+    ],
     vocab:[{ar:"فِي",en:"in"},{ar:"عَلَى",en:"on"},{ar:"مِنْ",en:"from"},{ar:"إِلَى",en:"to"}],
     patternTiles:[
       {en:"The book is on the desk.", tiles:["الْكِتَابُ","عَلَى","الْمَكْتَبِ","فِي","الْبَيْتِ","الْمَكْتَبُ"], answer:["الْكِتَابُ","عَلَى","الْمَكْتَبِ"]},
       {en:"The key is in the house.", tiles:["الْمِفْتَاحُ","فِي","الْبَيْتِ","عَلَى","الْبَابِ","الْبَيْتُ"], answer:["الْمِفْتَاحُ","فِي","الْبَيْتِ"]},
     ]},
   { id:13, book:1, lessonRef:"1.5", part:"B", title:"حُرُوفُ الْجَرِّ (Part 2)", titleEn:"Prepositions: تَحْتَ، فَوْقَ، أَمَامَ",
-    grammar:'More location prepositions. أَيْنَ؟ = where? The answer: الْكِتَابُ عَلَى الْمَكْتَبِ. After a preposition, the noun loses ـٌ and takes ـٍ.',
+    grammar:'Location prepositions answer أَيْنَ؟ (where?). The noun after them is genitive — it loses ـٌ and takes ـٍ.',
+    grammarExamples:[
+      { ar:"أَيْنَ الْكِتَابُ؟", en:"Where is the book?", ur:"کتاب کہاں ہے؟" },
+      { ar:"الْكِتَابُ عَلَى الْمَكْتَبِ", en:"The book is on the desk", ur:"کتاب میز پر ہے" },
+      { ar:"الْقَلَمُ تَحْتَ الْكِتَابِ", en:"The pen is under the book", ur:"قلم کتاب کے نیچے ہے" },
+    ],
     vocab:[{ar:"تَحْتَ",en:"under"},{ar:"فَوْقَ",en:"above"},{ar:"أَمَامَ",en:"in front of"},{ar:"خَلْفَ",en:"behind"}],
     patternTiles:[
       {en:"The pen is under the book.", tiles:["الْقَلَمُ","تَحْتَ","الْكِتَابِ","فَوْقَ","الْمَكْتَبِ"], answer:["الْقَلَمُ","تَحْتَ","الْكِتَابِ"]},
@@ -869,7 +987,12 @@ const SESSIONS = [
     ]},
 
   { id:14, book:1, lessonRef:"1.6", part:"A", title:"الضَّمَائِرُ (Part 1)", titleEn:"Personal Pronouns",
-    grammar:'هُوَ (he), هِيَ (she), أَنَا (I), أَنْتَ (you m.). In equational sentences: هُوَ طَبِيبٌ = He is a doctor. Arabic has no verb "to be" in present tense.',
+    grammar:'Arabic has no verb "to be" in the present tense. The pronoun + noun alone forms a complete sentence.',
+    grammarExamples:[
+      { ar:"هُوَ طَبِيبٌ", en:"He is a doctor", ur:"وہ ڈاکٹر ہے" },
+      { ar:"هِيَ مُدَرِّسَةٌ", en:"She is a teacher", ur:"وہ استانی ہے" },
+      { ar:"أَنَا طَالِبٌ", en:"I am a student", ur:"میں طالب علم ہوں" },
+    ],
     vocab:[{ar:"هُوَ",en:"he"},{ar:"هِيَ",en:"she"},{ar:"أَنَا",en:"I"},{ar:"أَنْتَ",en:"you (m.)"}],
     patternTiles:[
       {en:"He is a student.", tiles:["هُوَ","طَالِبٌ","أَنَا","مُدَرِّسٌ"], answer:["هُوَ","طَالِبٌ"]},
@@ -2098,50 +2221,91 @@ function ReviewTileEx({ exercise, onResult, lang = "en" }) {
 function GrammarCard({ session, onStart, lang = "en" }) {
   const { w } = useWindowSize();
   const t = UI_TEXT[lang];
+  const isSm = w < 640;
   const titleSize = w >= 1024 ? 32 : w >= 640 ? 28 : 24;
-  const vocabArSize = w >= 1024 ? 26 : w >= 640 ? 24 : 22;
+  const vocabArSize = 28; // was 22-26 — bumped for harakat legibility
   const grammarNote = lang === "ur" && UR_GRAMMAR[session.id]
     ? UR_GRAMMAR[session.id]
     : session.grammar;
   const isUrdu = lang === "ur";
+  const examples = session.grammarExamples || [];
+
   return (
     <div style={{padding:"16px 16px 24px"}}>
-      <div style={{background:"linear-gradient(135deg,#eff6ff,#dbeafe)",border:"1px solid #93c5fd",borderRadius:16,padding:"16px 16px 20px",marginBottom:16,textAlign:"center"}}>
+
+      {/* ── Session header ─────────────────────────────────────── */}
+      <div style={{background:"linear-gradient(135deg,#eff6ff,#dbeafe)",border:"1px solid #93c5fd",borderRadius:16,padding:"16px 16px 14px",marginBottom:12,textAlign:"center"}}>
         <div style={{fontSize:11,color:"#3b82f6",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:4,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>
           {t.bookLessonPart(session.book, session.lessonRef, session.part)}
         </div>
-        <div style={{fontSize:titleSize,fontWeight:700,color:"#1e40af",fontFamily:arFont,direction:"rtl",marginBottom:4,lineHeight:1.4}}>{isUrdu ? session.title.split(" — ")[0].split(" (")[0].trim() : session.title}</div>
-        <div style={{fontSize:15,fontWeight:600,color:"#1e3a5f",marginBottom:10,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>{isUrdu ? getUrSessionTitle(session.titleEn) : session.titleEn}</div>
-        <p style={{
-          color:"#475569",fontSize:13,lineHeight:2.1,margin:0,
-          textAlign: isUrdu ? "right" : "left",
-          direction: isUrdu ? "rtl" : "ltr",
-        }}>
-          {isUrdu ? <MixedText text={grammarNote} /> : grammarNote}
-        </p>
+        <div style={{fontSize:titleSize,fontWeight:700,color:"#1e40af",fontFamily:arFont,direction:"rtl",marginBottom:4,lineHeight:1.4}}>
+          {isUrdu ? session.title.split(" — ")[0].split(" (")[0].trim() : session.title}
+        </div>
+        <div style={{fontSize:15,fontWeight:600,color:"#1e3a5f",fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>
+          {isUrdu ? getUrSessionTitle(session.titleEn) : session.titleEn}
+        </div>
       </div>
+
+      {/* ── Grammar section ────────────────────────────────────── */}
+      {grammarNote && (
+        <div style={{background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:14,padding:"14px 16px",marginBottom:14}}>
+          {/* Label */}
+          <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:10,flexDirection:isUrdu?"row-reverse":"row"}}>
+            <span style={{fontSize:16}}>📖</span>
+            <span style={{fontSize:11,fontWeight:800,color:"#b45309",textTransform:"uppercase",letterSpacing:1.2,fontFamily:isUrdu?urFont:"inherit"}}>
+              {isUrdu ? "قاعدہ" : "Grammar"}
+            </span>
+          </div>
+          {/* Rule statement */}
+          <div style={{
+            fontSize:14,color:"#78350f",lineHeight:1.9,marginBottom:examples.length?14:0,
+            textAlign:isUrdu?"right":"left",direction:isUrdu?"rtl":"ltr",
+            fontFamily:isUrdu?urFont:"inherit",
+          }}>
+            {isUrdu ? <MixedText text={grammarNote} /> : grammarNote}
+          </div>
+          {/* Example phrase cards */}
+          {examples.length > 0 && (
+            <div style={{display:"flex",flexDirection:"column",gap:8}}>
+              {examples.map((ex, i) => (
+                <div key={i} style={{background:"white",border:"1px solid #fde68a",borderRadius:10,padding:"10px 14px",display:"flex",justifyContent:"space-between",alignItems:"center",gap:12,flexDirection:isUrdu?"row-reverse":"row"}}>
+                  <div style={{fontSize:isSm?20:22,fontFamily:arFont,fontWeight:700,color:"#1e293b",direction:"rtl",lineHeight:1.6,flex:1,textAlign:"right"}}>
+                    {ex.ar}
+                  </div>
+                  <div style={{fontSize:13,color:"#92400e",fontWeight:600,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr",flex:1,textAlign:isUrdu?"right":"left"}}>
+                    {isUrdu ? (ex.ur || ex.en) : ex.en}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ── Vocabulary section ─────────────────────────────────── */}
       <h3 style={{
         fontSize:14,fontWeight:700,color:"#1e293b",margin:"0 0 10px",
-        textAlign: isUrdu ? "right" : "left",
-        fontFamily: isUrdu ? urFont : "inherit",
+        textAlign:isUrdu?"right":"left",
+        fontFamily:isUrdu?urFont:"inherit",
       }}>{t.newWords}</h3>
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:20}}>
-        {session.vocab.map((w,i)=>{
-          const em = getEmoji(w.en);
-          const meaning = isUrdu ? (getUrdu(w.en) || w.en) : w.en;
+        {session.vocab.map((word,i)=>{
+          const em = getEmoji(word.en);
+          const meaning = isUrdu ? (getUrdu(word.en) || word.en) : word.en;
           return (
-            <div key={i} style={{background:"#f8fafc",borderRadius:10,padding:"10px",border:"1px solid #e2e8f0",textAlign:"center"}}>
-              {em && <div style={{lineHeight:1.3,marginBottom:2}}><EmojiImg emoji={em} size={32}/></div>}
-              <div style={{fontSize:vocabArSize,fontWeight:700,color:"#1e293b",fontFamily:arFont,direction:"rtl",lineHeight:1.5}}>{w.ar}</div>
+            <div key={i} style={{background:"#f8fafc",borderRadius:10,padding:"12px 10px",border:"1px solid #e2e8f0",textAlign:"center"}}>
+              {em && <div style={{lineHeight:1.3,marginBottom:4}}><EmojiImg emoji={em} size={32}/></div>}
+              <div style={{fontSize:vocabArSize,fontWeight:700,color:"#1e293b",fontFamily:arFont,direction:"rtl",lineHeight:1.6}}>{word.ar}</div>
               <div style={{
                 fontSize:13,color:"#475569",fontWeight:600,
-                fontFamily: isUrdu ? urFont : "inherit",
-                direction: isUrdu ? "rtl" : "ltr",
+                fontFamily:isUrdu?urFont:"inherit",
+                direction:isUrdu?"rtl":"ltr",
               }}>{meaning}</div>
             </div>
           );
         })}
       </div>
+
       <button onClick={onStart} style={{width:"100%",padding:"14px",background:"linear-gradient(135deg,#3b82f6,#2563eb)",color:"white",border:"none",borderRadius:14,fontSize:17,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(59,130,246,0.35)",fontFamily:isUrdu?urFont:"inherit"}}>
         {t.startPractice}
       </button>
