@@ -2738,53 +2738,86 @@ function ReviewTileEx({ exercise, onResult, lang = "en" }) {
 
 // ── AlTransformEx — definiteness transformation exercise ──────────────────────
 // Shows an indefinite noun; learner picks the correct definite (nominative) form.
+// Two-step: tap to select (blue highlight), then press Check to submit.
 function AlTransformEx({ exercise, onResult, lang = "en" }) {
   const [selected, setSelected] = useState(null);
   const [checked, setChecked]   = useState(false);
   const isUrdu = lang === "ur";
   const correct = exercise.correct;
+  const t = UI_TEXT[lang];
 
-  const choose = (opt) => {
-    if (checked) return;
-    setSelected(opt);
+  const select = (opt) => { if (checked) return; setSelected(opt); };
+
+  const check = () => {
+    if (!selected || checked) return;
     setChecked(true);
-    const wasCorrect = opt === correct;
-    setTimeout(() => onResult(wasCorrect), wasCorrect ? 900 : 1400);
+    if (selected === correct) setTimeout(() => onResult(true), 900);
   };
+
+  // Transformation hint: "book → the book" / "کتاب ← معرفہ"
+  const wordLabel = isUrdu ? (getUrdu(exercise.wordEn) || exercise.wordEn) : exercise.wordEn;
+  const hint = isUrdu
+    ? `${wordLabel} ← معرفہ`
+    : `${exercise.wordEn} → the ${exercise.wordEn}`;
 
   return (
     <div style={{textAlign:"center", padding:"8px 0"}}>
-      <div style={{fontSize:13, color:"#64748b", marginBottom:18, fontFamily:isUrdu?urFont:"inherit", direction:isUrdu?"rtl":"ltr"}}>
+      <div style={{fontSize:13, color:"#64748b", marginBottom:14, fontFamily:isUrdu?urFont:"inherit", direction:isUrdu?"rtl":"ltr"}}>
         {isUrdu ? "الـ لگا کر معرفہ بنائیں" : "Add الـ to make this noun definite"}
       </div>
       {/* Indefinite word */}
       <div style={{fontSize:52, fontFamily:arFont, color:"#1e293b", direction:"rtl", lineHeight:1.4, marginBottom:4}}>
         {exercise.word}
       </div>
-      <div style={{fontSize:14, color:"#64748b", marginBottom:28, fontFamily:isUrdu?urFont:"inherit"}}>
-        {isUrdu ? (getUrdu(exercise.wordEn)||exercise.wordEn) : exercise.wordEn}
+      {/* Transformation hint */}
+      <div style={{fontSize:13, color:"#94a3b8", marginBottom:24, fontFamily:isUrdu?urFont:"inherit", direction:isUrdu?"rtl":"ltr"}}>
+        {hint}
       </div>
       {/* 2×2 option grid */}
-      <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, maxWidth:340, margin:"0 auto"}}>
-        {exercise.options.map((opt,i) => {
+      <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, maxWidth:340, margin:"0 auto 20px"}}>
+        {exercise.options.map((opt, i) => {
           const isCorrect = opt === correct;
           const isSel     = selected === opt;
-          let bg="#f8fafc", border="2px solid #e2e8f0", color="#1e293b";
-          if (checked && isSel && isCorrect)  { bg="#dcfce7"; border="2px solid #22c55e"; }
-          else if (checked && isSel && !isCorrect) { bg="#fee2e2"; border="2px solid #ef4444"; }
-          else if (checked && isCorrect)       { bg="#dcfce7"; border="2px solid #22c55e"; }
+          let bg = "#f8fafc", border = "2px solid #e2e8f0", color = "#1e293b";
+          if (!checked && isSel)                   { bg = "#dbeafe"; border = "2px solid #3b82f6"; }
+          else if (checked && isSel && isCorrect)  { bg = "#dcfce7"; border = "2px solid #22c55e"; }
+          else if (checked && isSel && !isCorrect) { bg = "#fee2e2"; border = "2px solid #ef4444"; }
+          else if (checked && isCorrect)           { bg = "#dcfce7"; border = "2px solid #22c55e"; }
           return (
-            <button key={i} onClick={()=>choose(opt)} style={{
+            <button key={i} onClick={() => select(opt)} style={{
               padding:"14px 8px", background:bg, border, borderRadius:12,
               fontSize:22, fontFamily:arFont, color, direction:"rtl",
               cursor:checked?"default":"pointer", fontWeight:700,
               boxShadow:"0 1px 4px rgba(0,0,0,0.06)", lineHeight:1.6,
+              transition:"background 0.12s, border 0.12s",
             }}>
               {opt}
             </button>
           );
         })}
       </div>
+      {/* Check button — only visible after a selection has been made */}
+      {!checked && selected && (
+        <button onClick={check} style={{padding:"12px 32px", background:`linear-gradient(135deg,${GREEN},#047857)`, color:"white", border:"none", borderRadius:12, fontSize:16, fontWeight:700, cursor:"pointer", boxShadow:"0 4px 12px rgba(5,150,105,0.3)", fontFamily:isUrdu?urFont:"inherit"}}>
+          {t.checkBtn}
+        </button>
+      )}
+      {checked && selected === correct && (
+        <div style={{padding:"10px 16px", borderRadius:10, background:"#dcfce7", color:"#166534", fontWeight:700, fontSize:15, fontFamily:isUrdu?urFont:"inherit"}}>
+          {t.perfectMsg}
+        </div>
+      )}
+      {checked && selected !== correct && (
+        <div style={{borderRadius:10, overflow:"hidden", border:"1px solid #fca5a5"}}>
+          <div style={{padding:"10px 16px", background:"#fee2e2", color:"#991b1b", fontWeight:700, fontSize:14}}>
+            {isUrdu ? "✗ صحیح: " : "✗ Correct: "}
+            <span style={{fontFamily:arFont, direction:"rtl", fontSize:20}}>{correct}</span>
+          </div>
+          <button onClick={() => onResult(false)} style={{width:"100%", padding:"11px", background:"#ef4444", color:"white", border:"none", fontWeight:700, fontSize:15, cursor:"pointer", fontFamily:isUrdu?urFont:"inherit"}}>
+            {isUrdu ? "اگلا ←" : "Next →"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
