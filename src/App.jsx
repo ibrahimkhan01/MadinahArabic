@@ -293,6 +293,7 @@ const QURAN_CONNECTIONS = {
   ],
   'كتب': [
     { ar: 'كَتَبَ رَبُّكُمْ عَلَىٰ نَفْسِهِ الرَّحْمَةَ', en: 'Your Lord has decreed upon Himself mercy', ur: 'آپ کے رب نے اپنے اوپر رحمت لازم کر لی ہے', ref: 'Al-Anʿām 6:12', ref_ur: 'سورۃ الانعام ۶:۱۲' },
+    { ar: 'كُتِبَ عَلَيْكُمُ الصِّيَامُ', en: 'Fasting has been prescribed for you', ur: 'تم پر روزہ فرض کیا گیا ہے', ref: 'Al-Baqarah 2:183', ref_ur: 'سورۃ البقرہ ۲:۱۸۳' },
     { ar: 'كَتَبَ اللَّهُ لَأَغْلِبَنَّ أَنَا وَرُسُلِي', en: 'Allah has decreed: I and My messengers will surely prevail', ur: 'اللہ نے لکھ دیا ہے کہ میں اور میرے رسول ضرور غالب رہیں گے', ref: 'Al-Mujādilah 58:21', ref_ur: 'سورۃ المجادلہ ۵۸:۲۱' },
   ],
   'فتح': [
@@ -301,6 +302,7 @@ const QURAN_CONNECTIONS = {
   ],
   'ذهب': [
     { ar: 'إِنِّي ذَاهِبٌ إِلَىٰ رَبِّي سَيَهْدِينِ', en: 'Indeed I am going to my Lord — He will guide me', ur: 'میں اپنے رب کی طرف جا رہا ہوں، وہ مجھے ہدایت دے گا', ref: 'Al-Ṣāffāt 37:99', ref_ur: 'سورۃ الصافات ۳۷:۹۹' },
+    { ar: 'وَلَوْ شَاءَ اللَّهُ لَذَهَبَ بِسَمْعِهِمْ وَأَبْصَارِهِمْ', en: 'If Allah willed, He could take away their hearing and their sight', ur: 'اور اگر اللہ چاہتا تو ان کی سماعت اور بصارت لے لیتا', ref: 'Al-Baqarah 2:20', ref_ur: 'سورۃ البقرہ ۲:۲۰' },
   ],
   'دخل': [
     { ar: 'ادْخُلُوهَا بِسَلَامٍ آمِنِينَ', en: 'Enter it in peace, secure', ur: 'امن اور سلامتی کے ساتھ اس میں داخل ہو جاؤ', ref: 'Al-Ḥijr 15:46', ref_ur: 'سورۃ الحجر ۱۵:۴۶' },
@@ -361,6 +363,30 @@ const QURAN_CONNECTIONS = {
   // ── Nouns ─────────────────────────────────────────────────────────────────
   'رجال': [
     { ar: 'رِجَالٌ صَدَقُوا مَا عَاهَدُوا اللَّهَ عَلَيْهِ', en: 'Men who were true to what they pledged to Allah', ur: 'وہ مرد جنہوں نے اللہ سے کیے ہوئے عہد کو سچا کر دکھایا', ref: 'Al-Aḥzāb 33:23', ref_ur: 'سورۃ الاحزاب ۳۳:۲۳' },
+  ],
+  // ── Book 2 verbs ──────────────────────────────────────────────────────────
+  // present-tense يَـ forms (stripQ of يَقْرَأُ → يقرا, يَفْتَحُ → يفتح, etc.)
+  'يقرا': [
+    { ar: 'اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ', en: 'Read in the name of your Lord who created', ur: 'اپنے رب کے نام سے پڑھو جس نے پیدا کیا', ref: 'Al-ʿAlaq 96:1', ref_ur: 'سورۃ العلق ۹۶:۱' },
+  ],
+  'يفتح': [
+    { ar: 'مَا يَفْتَحِ اللَّهُ لِلنَّاسِ مِن رَّحْمَةٍ فَلَا مُمْسِكَ لَهَا', en: 'Whatever Allah opens for people of mercy, none can withhold it', ur: 'اللہ لوگوں کے لیے جو رحمت کا دروازہ کھولے اسے کوئی روکنے والا نہیں', ref: 'Fāṭir 35:2', ref_ur: 'سورۃ فاطر ۳۵:۲' },
+  ],
+  'يدخل': [
+    { ar: 'ادْخُلُوا الْجَنَّةَ بِمَا كُنتُمْ تَعْمَلُونَ', en: 'Enter Paradise for what you used to do', ur: 'جنت میں داخل ہو جاؤ اپنے اعمال کے بدلے', ref: 'Al-Naḥl 16:32', ref_ur: 'سورۃ النحل ۱۶:۳۲' },
+  ],
+  'ياكل': [
+    { ar: 'كُلُوا مِن طَيِّبَاتِ مَا رَزَقْنَاكُمْ', en: 'Eat from the wholesome things We have provided you', ur: 'جو ہم نے تمہیں رزق دیا ہے اس میں سے پاکیزہ چیزیں کھاؤ', ref: 'Al-Baqarah 2:172', ref_ur: 'سورۃ البقرہ ۲:۱۷۲' },
+  ],
+  'اعطى': [
+    { ar: 'إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ', en: 'Indeed We have granted you abundance', ur: 'بے شک ہم نے آپ کو کوثر عطا کی', ref: 'Al-Kawthar 108:1', ref_ur: 'سورۃ الکوثر ۱۰۸:۱' },
+  ],
+  'اخذ': [
+    { ar: 'لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ', en: 'Neither slumber overtakes Him nor sleep', ur: 'نہ اسے اونگھ آتی ہے نہ نیند', ref: 'Al-Baqarah 2:255 (Āyat al-Kursī)', ref_ur: 'سورۃ البقرہ ۲:۲۵۵ (آیت الکرسی)' },
+    { ar: 'وَأَخَذَ رَبُّكَ بَنِي آدَمَ مِن ظُهُورِهِمْ ذُرِّيَّتَهُمْ', en: 'And when your Lord took from the children of Adam — from their loins — their descendants', ur: 'اور جب تمہارے رب نے بنی آدم کی پشت سے ان کی اولاد نکالی', ref: 'Al-Aʿrāf 7:172', ref_ur: 'سورۃ الاعراف ۷:۱۷۲' },
+  ],
+  'سال': [
+    { ar: 'وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ', en: 'When My servants ask you about Me — I am near', ur: 'جب میرے بندے آپ سے میرے بارے میں پوچھیں تو بے شک میں قریب ہوں', ref: 'Al-Baqarah 2:186', ref_ur: 'سورۃ البقرہ ۲:۱۸۶' },
   ],
 };
 
@@ -647,7 +673,7 @@ const EMOJI = {
   "king":"👑","slave":"🙇",
   "doctor":"👨‍⚕️","doctor (m.)":"👨‍⚕️","doctor (f.)":"👩‍⚕️",
   "engineer":"👷","worker":"👷","merchant":"🧑‍💼","farmer":"🧑‍🌾",
-  "imam":"👳🏼‍♂️","handkerchief":"🤧","shirt":"👕",
+  "imam":"👳🏼‍♂️","handkerchief":"🤧",
   // Animals
   "dog":"🐕","cat":"🐈","horse":"🐴","lion":"🦁","bird":"🐦",
   "cow":"🐄","camel":"🐪","sheep":"🐑","elephant":"🐘","fish":"🐟",
@@ -663,6 +689,47 @@ const EMOJI = {
   "right":"➡️","left":"⬅️","near":"📍","far":"🔭",
   "big":"🔼","small":"🔽","new":"✨","old":"📜",
   "east":"🌅","west":"🌇","north":"⬆️","south":"⬇️",
+  // Verbs — present tense (he)
+  "he writes":"✍️","he reads":"📖","he goes":"🚶","he sits":"🪑",
+  "he opens":"🔓","he goes out":"🚪","he enters":"🏠","he eats":"🍽️",
+  // Verbs — I / you
+  "i write":"✍️","you write (m.)":"✍️","i go":"🚶","you go (m.)":"🚶",
+  // Verbs — we / they
+  "we write":"✍️","they write (m.)":"✍️","we go":"🚶","they go (m.)":"🚶",
+  // Commands
+  "write! (m.)":"✍️","read! (m.)":"📖","sit! (m.)":"🪑","go out! (m.)":"🚪",
+  "write! (f.)":"✍️","write! (pl.)":"✍️","open! (pl.)":"🔓","listen! (pl.)":"👂",
+  // Days
+  "sunday":"🌅","monday":"📅","tuesday":"📅","wednesday":"📅",
+  "thursday":"📅","friday":"🕌","saturday":"🌙",
+  "when?":"❓",
+  // Numbers
+  "one":"1️⃣","two":"2️⃣","three":"3️⃣","four":"4️⃣","five":"5️⃣",
+  "six":"6️⃣","seven":"7️⃣","eight":"8️⃣","nine":"9️⃣","ten":"🔟",
+  // Past tense
+  "he went":"🚶","she went":"🚶‍♀️","he wrote":"✍️","she wrote":"✍️",
+  "i went":"🚶","you went (m.)":"🚶","we went":"🚶","they went (m.)":"🚶",
+  // Negation
+  "is not":"❌","he does not go":"🚫","he did not go":"🚫",
+  "he did not go (لَمْ)":"🚫","do not write (prohibition)":"✋",
+  "don't go! (m.)":"✋","don't lie!":"✋","don't forget!":"✋","don't despair!":"🌟",
+  // Question words
+  "what? (what thing?)":"❓","how?":"❓","why?":"❓","which?":"❓",
+  "how are you?":"💬",
+  // Transitive verbs
+  "he gave":"🤲","he took":"✋","he understood":"💡","he asked":"❓",
+  "i gave him/it":"🤲","he asked me":"❓","they understood it":"💡","i took it (f.)":"✋",
+  // Indirect object / possession
+  "for him / his":"🔑","for her / hers":"🔑","for us / ours":"🔑","for you all":"🔑",
+  "i have / at me":"🤲","he has / at him":"🤲","he has (formal)":"🤲","he had":"🤲",
+  // Review verbs
+  "he studies":"📖","he studied":"📖","study! (m.)":"📖","he did not study":"📖",
+  // Adverbs
+  "daily":"📅","sometimes":"🔄","always":"♾️","never":"🚫",
+  // Plural pronouns
+  "you (m. plural)":"👥","you (f. plural)":"👥","they (m.)":"👥","these (people)":"👥",
+  // Dual
+  "two books":"📚","two students (m.)":"👨‍🎓","the two of them":"👫","these two (m.)":"👉",
 };
 const getEmoji = (en) => {
   const key = en.toLowerCase();
@@ -696,7 +763,7 @@ const UR_VOCAB = {
   "under":"نیچے","above":"اوپر","in front of":"سامنے","behind":"پیچھے",
   // L6 — pronouns
   "he":"وہ (مذکر)","she":"وہ (مؤنث)","I":"میں","you (m.)":"تم (مذکر)",
-  "doctor (m.)":"ڈاکٹر","engineer":"انجینئر","merchant":"تاجر","farmer":"کسان",
+  "doctor (m.)":"ڈاکٹر","engineer":"انجینئر","farmer":"کسان",
   // L7 — feminine
   "car":"گاڑی","school":"اسکول","room":"کمرہ","garden":"باغ",
   "teacher (f.)":"استانی","student (f.)":"طالبہ","doctor (f.)":"ڈاکٹر",
@@ -737,6 +804,36 @@ const UR_VOCAB = {
   "yes! (contradicting negative)":"بلکہ",
   // Family (extended)
   "how?":"کیسے؟","why?":"کیوں؟",
+  // S30 — commands feminine/plural
+  "Open! (pl.)":"کھولو!","Listen! (pl.)":"سنو!",
+  // S33 — plural pronouns
+  "you (m. plural)":"تم سب","you (f. plural)":"تم سب (مؤنث)","they (m.)":"وہ (مذکر جمع)","these (people)":"یہ لوگ",
+  // S34 — dual
+  "two books":"دو کتابیں","two students (m.)":"دو طالب علم","the two of them":"وہ دونوں","these two (m.)":"یہ دونوں (مذکر)",
+  // S37 — past tense he/she
+  "he went":"وہ گیا","she went":"وہ گئی","he wrote":"اس نے لکھا","she wrote":"اس نے لکھا",
+  // S38 — past tense all pronouns
+  "I went":"میں گیا","you went (m.)":"تم گئے","we went":"ہم گئے","they went (m.)":"وہ گئے",
+  // S39 — negation
+  "he does not go":"وہ نہیں جاتا","he did not go":"وہ نہیں گیا","is not":"نہیں ہے","he did not go (لَمْ)":"وہ نہیں گیا",
+  // S40 — prohibition
+  "do not write (prohibition)":"مت لکھو",
+  // S41 — question words
+  "what? (what thing?)":"کیا چیز؟","How are you?":"آپ کیسے ہیں؟",
+  // S42 — question words practice
+  "which?":"کون سا؟","What are you writing?":"تم کیا لکھ رہے ہو؟","Why are you going?":"تم کیوں جا رہے ہو؟","how many students?":"کتنے طالب علم؟",
+  // S43 — transitive verbs
+  "he gave":"اس نے دیا","he took":"اس نے لیا","he understood":"اس نے سمجھا","he asked":"اس نے پوچھا",
+  // S44 — verb + object pronouns
+  "I gave him/it":"میں نے اسے دیا","he asked me":"اس نے مجھ سے پوچھا","they understood it":"انہوں نے اسے سمجھا","I took it (f.)":"میں نے اسے لیا",
+  // S45 — indirect objects لِـ
+  "for him / his":"اس کے لیے","for her / hers":"اس کے لیے (مؤنث)","for us / ours":"ہمارے لیے","for you all":"آپ سب کے لیے",
+  // S46 — عِنْدَ / possession
+  "I have / at me":"میرے پاس","he has / at him":"اس کے پاس","he has (formal)":"اس کے پاس (رسمی)","he had":"اس کے پاس تھا",
+  // S47 — review verbs
+  "he studies":"وہ پڑھتا ہے","he studied":"اس نے پڑھا","Study! (m.)":"پڑھو!","he did not study":"اس نے نہیں پڑھا",
+  // S48 — adverbs of frequency
+  "daily":"روزانہ","sometimes":"کبھی کبھی","always":"ہمیشہ","never":"کبھی نہیں",
 };
 const getUrdu = (en) => UR_VOCAB[en] || null;
 
@@ -764,6 +861,31 @@ const UR_GRAMMAR = {
   22: 'عِنْدِي أَخٌ وَأُخْتٌ = میرے ایک بھائی اور ایک بہن ہیں۔ لِي أَبٌ كَرِيمٌ = میرے ایک سخی والد ہیں۔',
   23: 'الَّذِي (جو) مذکر واحد کے لیے۔ الَّتِي مؤنث کے لیے۔ الطَّالِبُ الَّذِي فِي الْفَصْلِ = وہ طالب علم جو کلاس میں ہے۔',
   24: 'کتاب ۱ کا مکمل دہراؤ: هَذَا/ذَلِكَ/هَذِهِ/تِلْكَ، الـ، صفات، حروف جر، ضمائر، اضافت، الَّذِي۔',
+  // ── Book 2 ──────────────────────────────────────────────────────
+  25: 'مضارع (حال) فعل "وہ" (هُوَ) کے لیے: یَـ سابقہ + جڑ۔ يَكْتُبُ = وہ لکھتا ہے۔ آخری ـُ حال کی علامت ہے۔',
+  26: 'مزید مضارع افعال۔ فاعل فعل کے بعد بھی آ سکتا ہے: يَدْخُلُ الطَّالِبُ = طالب علم داخل ہوتا ہے۔',
+  27: 'أَنَا: سابقہ أَـ → أَكْتُبُ (میں لکھتا ہوں)۔ أَنْتَ: سابقہ تَـ → تَكْتُبُ (تم لکھتے ہو)۔ أَنْتِ (ف.): تَكْتُبِينَ۔',
+  28: 'نَحْنُ: سابقہ نَـ → نَكْتُبُ۔ هُمْ: يَكْتُبُونَ۔ هُنَّ: يَكْتُبْنَ۔ هُمَا: يَكْتُبَانِ۔',
+  29: 'امر (حکم) مضارع سے: يَكْتُبُ → اُكْتُبْ (لکھو!)۔ مؤنث: اُكْتُبِي۔ جمع: اُكْتُبُوا۔ شروع میں ہمزۃ الوصل (اُ)۔',
+  30: 'مؤنث امر میں ـِي کا اضافہ: اُكْتُبِي۔ جمع مذکر میں وا کا اضافہ: اُكْتُبُوا۔ یہ روزمرہ کلاسی ہدایات میں کثرت سے ملتے ہیں۔',
+  31: 'دنوں کے نام يَوْمُ سے شروع ہوتے ہیں (اس دن کا)۔ اتوار = الأَحَد، پیر = الاثنين، منگل = الثُّلَاثَاء، بدھ = الأَرْبِعَاء۔',
+  32: 'باقی دن: الخَمِيس (جمعرات)، الجُمُعَة (جمعہ — مبارک دن)، السَّبْت (ہفتہ)۔ مَتَى؟ = کب؟',
+  33: 'جمع ضمائر: أَنْتُمْ (تم جمع مذکر)، أَنْتُنَّ (تم جمع مؤنث)، هُمْ (وہ مذکر)، هُنَّ (وہ مؤنث)، نَحْنُ (ہم)۔ هَؤُلَاءِ = یہ لوگ، أُولَئِكَ = وہ لوگ۔',
+  34: 'تثنیہ (دوہرا): ـَانِ (مرفوع) یا ـَيْنِ (منصوب/مجرور) کا اضافہ: كِتَابٌ → كِتَابَانِ۔ دوہرا ضمیر: هُمَا۔ اشارہ: هَذَانِ (یہ دو مذکر)، هَاتَانِ (یہ دو مؤنث)۔',
+  35: 'اعداد ۳-۱۰ اسم کے مخالف جنس میں آتے ہیں: ثَلَاثَةُ كُتُبٍ (تین کتابیں — مذکر اسم، عدد پر ةٌ)۔ معدود جمع مجرور ہوتا ہے۔',
+  36: 'كَمْ (کتنے؟) واحد منصوب لیتا ہے: كَمْ كِتَابًا؟ اعداد ۶-۱۰ بھی مخالف جنس کا اصول مانتے ہیں۔ عَشَرَةٌ = دس۔',
+  37: 'ماضی فعل کی اصل تیسرا شخص مذکر واحد ہے: ذَهَبَ (وہ گیا)، كَتَبَ (اس نے لکھا)۔ مؤنث میں تْ کا اضافہ: ذَهَبَتْ، كَتَبَتْ۔',
+  38: 'مکمل ماضی: أَنَا ذَهَبْتُ، أَنْتَ ذَهَبْتَ، هُوَ ذَهَبَ، هِيَ ذَهَبَتْ، نَحْنُ ذَهَبْنَا، هُمْ ذَهَبُوا۔',
+  39: 'نفی: لَا مضارع کو (عادت) نفی کرتا ہے۔ مَا ماضی کو: مَا ذَهَبَ۔ لَيْسَ اسمیہ جملے کو: لَيْسَ طَالِبًا (منصوب)۔ لَمْ + مجزوم: لَمْ يَذْهَبْ۔',
+  40: 'نَعَمْ = ہاں۔ لَا = نہیں۔ بَلَى = ہاں بالکل! (منفی سوال کی تردید کے لیے)۔ نہی: لَا + مجزوم: لَا تَكْتُبْ هُنَا (یہاں مت لکھو)۔',
+  41: 'مکمل سوالیہ الفاظ: مَاذَا (کیا چیز؟)، كَيْفَ (کیسے؟)، لِمَاذَا (کیوں؟)، مَنْ (کون؟)، أَيْنَ (کہاں؟)، مَتَى (کب؟)، كَمْ (کتنے؟)۔ كَيْفَ حَالُكَ؟ = آپ کیسے ہیں؟',
+  42: 'سوالیہ جملے بنانا: لِمَاذَا تَذْهَبُ؟ = کیوں جا رہے ہو؟ مَاذَا تَكْتُبُ؟ = کیا لکھ رہے ہو؟ أَيُّ (کون سا؟) اسم کے ساتھ: أَيُّ كِتَابٍ؟',
+  43: 'متعدی افعال مفعول بہ منصوب (ـَ) لیتے ہیں: كَتَبَ الطَّالِبُ الدَّرْسَ۔ أَعْطَى دو مفعول لے سکتا ہے: أَعْطَيْتُكَ الْكِتَابَ (میں نے تمہیں کتاب دی)۔',
+  44: 'ضمائر فعل سے متصل ہوتے ہیں: أَعْطَيْتُهُ (میں نے اسے دیا)، سَأَلَنِي (اس نے مجھ سے پوچھا — نون محافظ)۔ وہی لاحقے حروف جر پر: فِيهِ، عَلَيْهِ۔',
+  45: 'بالواسطہ مفعول لِـ سے: أَعْطَيْتُ الْكِتَابَ لِلطَّالِبِ (میں نے کتاب طالب علم کو دی)۔ لِـ + ضمیر: لَهُ، لَهَا، لِي، لَكَ۔',
+  46: 'عِنْدَ + ضمیر = رکھنا/ہونا: عِنْدِي كِتَابٌ (میرے پاس کتاب ہے)۔ لَدَى اسی معنی میں مگر رسمی۔ كَانَ عِنْدَهُ = اس کے پاس تھا۔',
+  47: 'دہراؤ: تینوں زمانے: يَكْتُبُ (حال)، اُكْتُبْ (امر)، كَتَبَ (ماضی)۔ نفی: لَا، مَا، لَمْ، لَيْسَ۔ سوالیہ الفاظ کا دہراؤ۔',
+  48: 'دہراؤ: ایام، اعداد ۱-۱۰، تثنیہ، جمع ضمائر، لِـ کا استعمال، عِنْدَ۔ جامع جملہ سازی کی مشق۔',
 };
 
 // ── Urdu translations for English hint sentences (patternTiles & reviewTiles) ──
@@ -819,6 +941,12 @@ const UR_HINTS = {
   "That is a noble messenger.":"وہ ایک شریف رسول ہے۔",
   "He is a messenger.":"وہ رسول ہے۔",
   "She is a believer.":"وہ مومنہ ہے۔",
+  // Book 2 patternTile hints
+  "He writes.":"وہ لکھتا ہے۔","He reads.":"وہ پڑھتا ہے۔","He goes.":"وہ جاتا ہے۔","The student sits.":"طالب علم بیٹھتا ہے۔",
+  "I write.":"میں لکھتا ہوں۔","You write.":"تم لکھتے ہو۔","I go.":"میں جاتا ہوں۔","You go.":"تم جاتے ہو۔",
+  "Write the lesson!":"سبق لکھو!","Read the book!":"کتاب پڑھو!","Sit on the chair!":"کرسی پر بیٹھو!","Go out of the house!":"گھر سے نکلو!",
+  "He went.":"وہ گیا۔","She went.":"وہ گئی۔","He wrote.":"اس نے لکھا۔","She wrote.":"اس نے لکھا۔",
+  "He does not go.":"وہ نہیں جاتا۔","He did not go.":"وہ نہیں گیا۔","He is not a student.":"وہ طالب علم نہیں ہے۔","He did not go (with لَمْ).":"وہ نہیں گیا (لَمْ کے ساتھ)۔",
 };
 const getUrHint = (en) => UR_HINTS[en] || null;
 
@@ -1460,21 +1588,39 @@ const SESSIONS = [
 
   { id:25, book:2, lessonRef:"2.1", part:"A", title:"الْمُضَارِعُ — هُوَ (Part 1)", titleEn:"Present Tense: He",
     grammar:'Present tense (الْمُضَارِعُ) for "he": prefix يَـ + root. يَكْتُبُ (he writes), يَقْرَأُ (he reads), يَذْهَبُ (he goes). Ending ـُ signals present tense.',
-    vocab:[{ar:"يَكْتُبُ",en:"he writes"},{ar:"يَقْرَأُ",en:"he reads"},{ar:"يَذْهَبُ",en:"he goes"},{ar:"يَجْلِسُ",en:"he sits"}]},
+    vocab:[{ar:"يَكْتُبُ",en:"he writes"},{ar:"يَقْرَأُ",en:"he reads"},{ar:"يَذْهَبُ",en:"he goes"},{ar:"يَجْلِسُ",en:"he sits"}],
+    patternTiles:[
+      { emoji:"✍️", en:"He writes.", tiles:["هُوَ","يَكْتُبُ","يَقْرَأُ","يَذْهَبُ"], answer:["هُوَ","يَكْتُبُ"] },
+      { emoji:"📖", en:"He reads.", tiles:["هُوَ","يَقْرَأُ","يَكْتُبُ","يَجْلِسُ"], answer:["هُوَ","يَقْرَأُ"] },
+      { emoji:"🚶", en:"He goes.", tiles:["هُوَ","يَذْهَبُ","يَجْلِسُ","يَكْتُبُ"], answer:["هُوَ","يَذْهَبُ"] },
+      { emoji:"🪑", en:"The student sits.", tiles:["الطَّالِبُ","يَجْلِسُ","يَذْهَبُ","يَكْتُبُ"], answer:["الطَّالِبُ","يَجْلِسُ"] },
+    ]},
   { id:26, book:2, lessonRef:"2.1", part:"B", title:"الْمُضَارِعُ — هُوَ (Part 2)", titleEn:"Present Tense: More Verbs",
     grammar:'More present tense verbs. Subject can come after verb: يَدْخُلُ الطَّالِبُ = The student enters.',
     vocab:[{ar:"يَفْتَحُ",en:"he opens"},{ar:"يَخْرُجُ",en:"he goes out"},{ar:"يَدْخُلُ",en:"he enters"},{ar:"يَأْكُلُ",en:"he eats"}]},
 
   { id:27, book:2, lessonRef:"2.2", part:"A", title:"الْمُضَارِعُ — أَنَا وَأَنْتَ (Part 1)", titleEn:"Present Tense: I & You",
     grammar:'أَنَا: prefix أَـ → أَكْتُبُ (I write). أَنْتَ: prefix تَـ → تَكْتُبُ (you write). أَنْتِ (f.): تَكْتُبِينَ.',
-    vocab:[{ar:"أَكْتُبُ",en:"I write"},{ar:"تَكْتُبُ",en:"you write (m.)"},{ar:"أَذْهَبُ",en:"I go"},{ar:"تَذْهَبُ",en:"you go (m.)"}]},
+    vocab:[{ar:"أَكْتُبُ",en:"I write"},{ar:"تَكْتُبُ",en:"you write (m.)"},{ar:"أَذْهَبُ",en:"I go"},{ar:"تَذْهَبُ",en:"you go (m.)"}],
+    patternTiles:[
+      { emoji:"✍️", en:"I write.", tiles:["أَنَا","أَكْتُبُ","تَكْتُبُ","أَذْهَبُ"], answer:["أَنَا","أَكْتُبُ"] },
+      { emoji:"✍️", en:"You write.", tiles:["أَنْتَ","تَكْتُبُ","أَكْتُبُ","تَذْهَبُ"], answer:["أَنْتَ","تَكْتُبُ"] },
+      { emoji:"🚶", en:"I go.", tiles:["أَنَا","أَذْهَبُ","تَذْهَبُ","أَكْتُبُ"], answer:["أَنَا","أَذْهَبُ"] },
+      { emoji:"🚶", en:"You go.", tiles:["أَنْتَ","تَذْهَبُ","أَذْهَبُ","تَكْتُبُ"], answer:["أَنْتَ","تَذْهَبُ"] },
+    ]},
   { id:28, book:2, lessonRef:"2.2", part:"B", title:"الْمُضَارِعُ — نَحْنُ وَهُمْ (Part 2)", titleEn:"Present Tense: We & They",
     grammar:'نَحْنُ: prefix نَـ → نَكْتُبُ. هُمْ: يَكْتُبُونَ. هُنَّ: يَكْتُبْنَ. هُمَا: يَكْتُبَانِ.',
     vocab:[{ar:"نَكْتُبُ",en:"we write"},{ar:"يَكْتُبُونَ",en:"they write (m.)"},{ar:"نَذْهَبُ",en:"we go"},{ar:"يَذْهَبُونَ",en:"they go (m.)"}]},
 
   { id:29, book:2, lessonRef:"2.3", part:"A", title:"الْأَمْرُ (Part 1)", titleEn:"Commands",
     grammar:'Imperative (الْأَمْرُ) from present tense: يَكْتُبُ → اُكْتُبْ (Write!). For feminine: اُكْتُبِي. For plural: اُكْتُبُوا. Note the hamzat al-waṣl (اُ) at the start.',
-    vocab:[{ar:"اُكْتُبْ",en:"Write! (m.)"},{ar:"اقْرَأْ",en:"Read! (m.)"},{ar:"اِجْلِسْ",en:"Sit! (m.)"},{ar:"اُخْرُجْ",en:"Go out! (m.)"}]},
+    vocab:[{ar:"اُكْتُبْ",en:"Write! (m.)"},{ar:"اقْرَأْ",en:"Read! (m.)"},{ar:"اِجْلِسْ",en:"Sit! (m.)"},{ar:"اُخْرُجْ",en:"Go out! (m.)"}],
+    patternTiles:[
+      { emoji:"✍️", en:"Write the lesson!", tiles:["اُكْتُبِ","الدَّرْسَ","الْكِتَابَ","اقْرَأْ"], answer:["اُكْتُبِ","الدَّرْسَ"] },
+      { emoji:"📖", en:"Read the book!", tiles:["اقْرَأِ","الْكِتَابَ","الدَّرْسَ","اُكْتُبِ"], answer:["اقْرَأِ","الْكِتَابَ"] },
+      { emoji:"🪑", en:"Sit on the chair!", tiles:["اِجْلِسْ","عَلَى","الْكُرْسِيِّ","الطَّاوِلَةِ","اُكْتُبْ"], answer:["اِجْلِسْ","عَلَى","الْكُرْسِيِّ"] },
+      { emoji:"🚪", en:"Go out of the house!", tiles:["اُخْرُجْ","مِنَ","الْبَيْتِ","الْمَسْجِدِ","اِجْلِسْ"], answer:["اُخْرُجْ","مِنَ","الْبَيْتِ"] },
+    ]},
   { id:30, book:2, lessonRef:"2.3", part:"B", title:"الْأَمْرُ (Part 2)", titleEn:"Commands: Feminine & Plural",
     grammar:'Feminine imperative adds ـِي: اُكْتُبِي. Plural masculine adds وا: اُكْتُبُوا. Used in classroom instructions daily.',
     vocab:[{ar:"اُكْتُبِي",en:"Write! (f.)"},{ar:"اُكْتُبُوا",en:"Write! (pl.)"},{ar:"اِفْتَحُوا",en:"Open! (pl.)"},{ar:"اِسْمَعُوا",en:"Listen! (pl.)"}]},
@@ -1502,14 +1648,26 @@ const SESSIONS = [
 
   { id:37, book:2, lessonRef:"2.7", part:"A", title:"الْمَاضِي — هُوَ وَهِيَ (Part 1)", titleEn:"Past Tense: He & She",
     grammar:'Past tense base = 3rd person masculine singular: ذَهَبَ (he went), كَتَبَ (he wrote). Feminine adds تْ: ذَهَبَتْ, كَتَبَتْ.',
-    vocab:[{ar:"ذَهَبَ",en:"he went"},{ar:"ذَهَبَتْ",en:"she went"},{ar:"كَتَبَ",en:"he wrote"},{ar:"كَتَبَتْ",en:"she wrote"}]},
+    vocab:[{ar:"ذَهَبَ",en:"he went"},{ar:"ذَهَبَتْ",en:"she went"},{ar:"كَتَبَ",en:"he wrote"},{ar:"كَتَبَتْ",en:"she wrote"}],
+    patternTiles:[
+      { emoji:"🚶", en:"He went.", tiles:["هُوَ","ذَهَبَ","ذَهَبَتْ","كَتَبَ"], answer:["هُوَ","ذَهَبَ"] },
+      { emoji:"🚶‍♀️", en:"She went.", tiles:["هِيَ","ذَهَبَتْ","ذَهَبَ","كَتَبَتْ"], answer:["هِيَ","ذَهَبَتْ"] },
+      { emoji:"✍️", en:"He wrote.", tiles:["هُوَ","كَتَبَ","كَتَبَتْ","ذَهَبَ"], answer:["هُوَ","كَتَبَ"] },
+      { emoji:"✍️", en:"She wrote.", tiles:["هِيَ","كَتَبَتْ","كَتَبَ","ذَهَبَتْ"], answer:["هِيَ","كَتَبَتْ"] },
+    ]},
   { id:38, book:2, lessonRef:"2.7", part:"B", title:"الْمَاضِي — كُلُّ الضَّمَائِرِ (Part 2)", titleEn:"Past Tense: All Pronouns",
     grammar:'Full past tense: أَنَا ذَهَبْتُ، أَنْتَ ذَهَبْتَ، هُوَ ذَهَبَ، هِيَ ذَهَبَتْ، نَحْنُ ذَهَبْنَا، هُمْ ذَهَبُوا.',
     vocab:[{ar:"ذَهَبْتُ",en:"I went"},{ar:"ذَهَبْتَ",en:"you went (m.)"},{ar:"ذَهَبْنَا",en:"we went"},{ar:"ذَهَبُوا",en:"they went (m.)"}]},
 
   { id:39, book:2, lessonRef:"2.8", part:"A", title:"النَّفْيُ (Part 1)", titleEn:"Negation: لَا، مَا، لَيْسَ",
     grammar:'لَا negates present habits: لَا يَذْهَبُ. مَا negates past: مَا ذَهَبَ. لَيْسَ negates nominal sentences: لَيْسَ طَالِبًا (accusative after لَيْسَ). لَمْ + jussive: لَمْ يَذْهَبْ.',
-    vocab:[{ar:"لَا يَذْهَبُ",en:"he does not go"},{ar:"مَا ذَهَبَ",en:"he did not go"},{ar:"لَيْسَ",en:"is not"},{ar:"لَمْ يَذْهَبْ",en:"he did not go (لَمْ)"}]},
+    vocab:[{ar:"لَا يَذْهَبُ",en:"he does not go"},{ar:"مَا ذَهَبَ",en:"he did not go"},{ar:"لَيْسَ",en:"is not"},{ar:"لَمْ يَذْهَبْ",en:"he did not go (لَمْ)"}],
+    patternTiles:[
+      { emoji:"🚫", en:"He does not go.", tiles:["لَا","يَذْهَبُ","يَكْتُبُ","مَا","ذَهَبَ"], answer:["لَا","يَذْهَبُ"] },
+      { emoji:"🚫", en:"He did not go.", tiles:["مَا","ذَهَبَ","يَذْهَبُ","لَا","كَتَبَ"], answer:["مَا","ذَهَبَ"] },
+      { emoji:"❌", en:"He is not a student.", tiles:["لَيْسَ","طَالِبًا","طَالِبٌ","هُوَ","لَا"], answer:["لَيْسَ","طَالِبًا"] },
+      { emoji:"🚫", en:"He did not go (with لَمْ).", tiles:["لَمْ","يَذْهَبْ","يَذْهَبُ","مَا","ذَهَبَ"], answer:["لَمْ","يَذْهَبْ"] },
+    ]},
   { id:40, book:2, lessonRef:"2.8", part:"B", title:"نَعَمْ وَبَلَى (Part 2)", titleEn:"Yes, No, and Prohibition",
     grammar:'نَعَمْ = yes. لَا = no. بَلَى = yes! (contradicts a negative question). Prohibition: لَا + jussive: لَا تَكْتُبْ هُنَا (Don\'t write here).',
     vocab:[{ar:"نَعَمْ",en:"yes"},{ar:"لَا",en:"no"},{ar:"بَلَى",en:"yes! (contradicting negative)"},{ar:"لَا تَكْتُبْ",en:"do not write (prohibition)"}]},
