@@ -1174,6 +1174,22 @@ const SESSIONS = [
         options:["الْبَيْتُ","الْبَيْتِ","بَيْتُ","الْبَيْتَ"] },
       { word:"بَابٌ", wordEn:"door", correct:"الْبَابُ",
         options:["الْبَابُ","الْبَابِ","بَابُ","الْبَابَ"] },
+    ],
+    patternTiles:[
+      {
+        en:"That is the Book — no doubt in it.",
+        quran:{ref:"Al-Baqarah 2:2", en:"That is the Book, about which there is no doubt"},
+        prebaked:[{ar:"لَا",en:"no"},{ar:"رَيْبَ",en:"doubt"},{ar:"فِيهِ",en:"in it"}],
+        tiles:["ذَٰلِكَ","الْكِتَابُ","الْكِتَابِ","كِتَابٌ"],
+        answer:["ذَٰلِكَ","الْكِتَابُ","لَا","رَيْبَ","فِيهِ"]
+      },
+      {
+        en:"The Ancient House.",
+        quran:{ref:"Al-Hajj 22:29", en:"...and circumambulate the Ancient House"},
+        prebaked:[{ar:"الْعَتِيقُ",en:"the Ancient"}],
+        tiles:["الْبَيْتُ","الْبَيْتِ","بَيْتٌ"],
+        answer:["الْبَيْتُ","الْعَتِيقُ"]
+      },
     ]},
   { id:9, book:1, lessonRef:"1.3", part:"B", title:"الـ — Sun & Moon Letters", titleEn:"Sun Letters (Part 2)",
     grammar:'With "sun letters" (ت،ث،د،ذ،ر،ز،س،ش،ص،ض،ط،ظ،ل،ن) the ل of الـ assimilates. Written but not pronounced — the first letter doubles instead.',
@@ -1192,6 +1208,22 @@ const SESSIONS = [
           {ar:"الْبَيْتُ", en:"the house",   isSun:false},
           {ar:"النَّجْمُ", en:"the star",    isSun:true },
         ]
+      },
+    ],
+    patternTiles:[
+      {
+        en:"The sun and the moon move by precise measure.",
+        quran:{ref:"Ar-Rahman 55:5", en:"The sun and the moon move by precise calculation"},
+        prebaked:[{ar:"بِحُسْبَانٍ",en:"by precise measure"}],
+        tiles:["الشَّمْسُ","وَالْقَمَرُ","الشَّمْسِ","الْقَمَرُ"],
+        answer:["الشَّمْسُ","وَالْقَمَرُ","بِحُسْبَانٍ"]
+      },
+      {
+        en:"The stars and the trees bow down.",
+        quran:{ref:"Ar-Rahman 55:6", en:"And the stars and the trees prostrate"},
+        prebaked:[{ar:"وَالشَّجَرُ",en:"and the trees"},{ar:"يَسْجُدَانِ",en:"bow down"}],
+        tiles:["وَالنَّجْمُ","النَّجْمُ","النَّجْمِ"],
+        answer:["وَالنَّجْمُ","وَالشَّجَرُ","يَسْجُدَانِ"]
       },
     ]},
 
@@ -1217,6 +1249,20 @@ const SESSIONS = [
     patternTiles:[
       {en:"This is a tall man.", tiles:["هَذَا","رَجُلٌ","طَوِيلٌ","قَصِيرٌ","وَلَدٌ"], answer:["هَذَا","رَجُلٌ","طَوِيلٌ"]},
       {en:"That is a noble messenger.", tiles:["ذَلِكَ","رَسُولٌ","كَرِيمٌ","جَمِيلٌ","إِمَامٌ"], answer:["ذَلِكَ","رَسُولٌ","كَرِيمٌ"]},
+      {
+        en:"Indeed, a noble letter has been delivered to me.",
+        quran:{ref:"An-Naml 27:29", en:"Indeed, a noble letter has been delivered to me"},
+        prebaked:[{ar:"إِنِّي",en:"indeed"},{ar:"أُلْقِيَ",en:"was delivered"},{ar:"إِلَيَّ",en:"to me"}],
+        tiles:["كِتَابٌ","كَرِيمٌ","جَمِيلٌ","طَوِيلٌ"],
+        answer:["إِنِّي","أُلْقِيَ","إِلَيَّ","كِتَابٌ","كَرِيمٌ"]
+      },
+      {
+        en:"Indeed it is the word of a noble messenger.",
+        quran:{ref:"At-Takwir 81:19", en:"Indeed, it is the word of a noble messenger"},
+        prebaked:[{ar:"إِنَّهُ",en:"indeed it is"},{ar:"لَقَوْلُ",en:"truly the word of"}],
+        tiles:["رَسُولٍ","كَرِيمٍ","جَمِيلٍ","طَوِيلٍ"],
+        answer:["إِنَّهُ","لَقَوْلُ","رَسُولٍ","كَرِيمٍ"]
+      },
     ]},
 
   { id:12, book:1, lessonRef:"1.5", part:"A", title:"حُرُوفُ الْجَرِّ (Part 1)", titleEn:"Prepositions: في، عَلَى، مِنْ، إِلَى",
@@ -1230,6 +1276,20 @@ const SESSIONS = [
     patternTiles:[
       {en:"The book is on the desk.", tiles:["الْكِتَابُ","عَلَى","الْمَكْتَبِ","فِي","الْبَيْتِ","الْمَكْتَبُ"], answer:["الْكِتَابُ","عَلَى","الْمَكْتَبِ"]},
       {en:"The key is in the house.", tiles:["الْمِفْتَاحُ","فِي","الْبَيْتِ","عَلَى","الْبَابِ","الْبَيْتُ"], answer:["الْمِفْتَاحُ","فِي","الْبَيْتِ"]},
+      {
+        en:"To Allah is the final return.",
+        quran:{ref:"Al-Imran 3:28", en:"And to Allah is the final destination"},
+        prebaked:[{ar:"الْمَصِيرُ",en:"the final return"}],
+        tiles:["إِلَى","اللَّهِ","مِنَ","اللَّهُ","فِي"],
+        answer:["إِلَى","اللَّهِ","الْمَصِيرُ"]
+      },
+      {
+        en:"Let the believers put their trust in Allah.",
+        quran:{ref:"Al-Imran 3:160", en:"And upon Allah let the believers rely"},
+        prebaked:[{ar:"فَلْيَتَوَكَّلِ",en:"so let them trust"},{ar:"الْمُؤْمِنُونَ",en:"the believers"}],
+        tiles:["عَلَى","اللَّهِ","فِي","اللَّهُ","مِنَ"],
+        answer:["عَلَى","اللَّهِ","فَلْيَتَوَكَّلِ","الْمُؤْمِنُونَ"]
+      },
     ]},
   { id:13, book:1, lessonRef:"1.5", part:"B", title:"حُرُوفُ الْجَرِّ (Part 2)", titleEn:"Prepositions: تَحْتَ، فَوْقَ، أَمَامَ",
     grammar:'Location prepositions answer أَيْنَ؟ (where?). The noun after them is genitive — it loses ـٌ and takes ـٍ.',
@@ -1242,6 +1302,20 @@ const SESSIONS = [
     patternTiles:[
       {en:"The pen is under the book.", tiles:["الْقَلَمُ","تَحْتَ","الْكِتَابِ","فَوْقَ","الْمَكْتَبِ"], answer:["الْقَلَمُ","تَحْتَ","الْكِتَابِ"]},
       {en:"The door is in front of the house.", tiles:["الْبَابُ","أَمَامَ","الْبَيْتِ","خَلْفَ","الْمَسْجِدِ"], answer:["الْبَابُ","أَمَامَ","الْبَيْتِ"]},
+      {
+        en:"Rivers flow from beneath them.",
+        quran:{ref:"Al-Baqarah 2:25", en:"...rivers flowing from beneath them"},
+        prebaked:[{ar:"تَجْرِي",en:"flow"},{ar:"مِنْ",en:"from"},{ar:"الْأَنْهَارُ",en:"the rivers"}],
+        tiles:["تَحْتِهَا","فَوْقِهَا","أَمَامَهَا"],
+        answer:["تَجْرِي","مِنْ","تَحْتِهَا","الْأَنْهَارُ"]
+      },
+      {
+        en:"And above them are coverings of Fire.",
+        quran:{ref:"Az-Zumar 39:16", en:"They will have coverings of Fire above them"},
+        prebaked:[{ar:"وَمِنْ",en:"and from"},{ar:"ظُلَلٌ",en:"coverings"},{ar:"مِنَ",en:"of"},{ar:"النَّارِ",en:"the Fire"}],
+        tiles:["فَوْقِهِمْ","تَحْتِهِمْ","أَمَامَهُمْ"],
+        answer:["وَمِنْ","فَوْقِهِمْ","ظُلَلٌ","مِنَ","النَّارِ"]
+      },
     ]},
 
   { id:14, book:1, lessonRef:"1.6", part:"A", title:"الضَّمَائِرُ (Part 1)", titleEn:"Personal Pronouns",
@@ -1255,6 +1329,20 @@ const SESSIONS = [
     patternTiles:[
       {en:"He is a student.", tiles:["هُوَ","طَالِبٌ","أَنَا","مُدَرِّسٌ"], answer:["هُوَ","طَالِبٌ"]},
       {en:"I am a teacher.", tiles:["أَنَا","مُدَرِّسٌ","هُوَ","طَالِبٌ"], answer:["أَنَا","مُدَرِّسٌ"]},
+      {
+        en:"He is Allah, the One.",
+        quran:{ref:"Al-Ikhlas 112:1", en:"Say: He is Allah, the One"},
+        prebaked:[{ar:"أَحَدٌ",en:"the One"}],
+        tiles:["هُوَ","اللَّهُ","هِيَ","أَنَا","اللَّهَ"],
+        answer:["هُوَ","اللَّهُ","أَحَدٌ"]
+      },
+      {
+        en:"Indeed, I am Allah.",
+        quran:{ref:"Ta-Ha 20:14", en:"Indeed, I am Allah"},
+        prebaked:[{ar:"إِنَّنِي",en:"Indeed I"}],
+        tiles:["أَنَا","اللَّهُ","هُوَ","اللَّهَ","أَنْتَ"],
+        answer:["إِنَّنِي","أَنَا","اللَّهُ"]
+      },
     ]},
   { id:15, book:1, lessonRef:"1.6", part:"B", title:"الضَّمَائِرُ (Part 2)", titleEn:"Pronouns with Professions",
     grammar:'مَنْ أَنْتَ؟ = Who are you? أَنَا طَالِبٌ = I am a student. هُوَ مُدَرِّسٌ = He is a teacher.',
@@ -1262,6 +1350,20 @@ const SESSIONS = [
     patternTiles:[
       {emoji:"📨", question:"مَنْ هُوَ؟", en:"He is a messenger.", tiles:["هُوَ","رَسُولٌ","أَنَا","مَلَكٌ"], answer:["هُوَ","رَسُولٌ"]},
       {en:"I am a merchant.", tiles:["أَنَا","تَاجِرٌ","هُوَ","فَلَّاحٌ"], answer:["أَنَا","تَاجِرٌ"]},
+      {
+        en:"Muhammad is the Messenger of Allah.",
+        quran:{ref:"Al-Fath 48:29", en:"Muhammad is the Messenger of Allah"},
+        prebaked:[{ar:"اللَّهِ",en:"of Allah"}],
+        tiles:["مُحَمَّدٌ","رَسُولُ","رَسُولٌ","مَلَكٌ"],
+        answer:["مُحَمَّدٌ","رَسُولُ","اللَّهِ"]
+      },
+      {
+        en:"And Muhammad is nothing but a messenger.",
+        quran:{ref:"Al-Imran 3:144", en:"And Muhammad is not but a messenger"},
+        prebaked:[{ar:"وَمَا",en:"and not"},{ar:"إِلَّا",en:"but only"}],
+        tiles:["مُحَمَّدٌ","رَسُولٌ","رَسُولُ","مَلَكٌ"],
+        answer:["وَمَا","مُحَمَّدٌ","إِلَّا","رَسُولٌ"]
+      },
     ]},
 
   { id:16, book:1, lessonRef:"1.7", part:"A", title:"الْمُؤَنَّثُ (Part 1)", titleEn:"Feminine Nouns & هَذِهِ",
@@ -1293,6 +1395,20 @@ const SESSIONS = [
       {emoji:"🌍", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","أَرْضٌ","سَمَاءٌ","نَارٌ"], answer:["هَذِهِ","أَرْضٌ"]},
       {emoji:"🌿", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","جَنَّةٌ","نَارٌ","أَرْضٌ"], answer:["هَذِهِ","جَنَّةٌ"]},
       {emoji:"🔥", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","نَارٌ","جَنَّةٌ","سَمَاءٌ"], answer:["هَذِهِ","نَارٌ"]},
+      {
+        en:"Who created the heavens and the earth.",
+        quran:{ref:"Al-Furqan 25:59", en:"He who created the heavens and the earth and all between them"},
+        prebaked:[{ar:"الَّذِي",en:"the One who"},{ar:"خَلَقَ",en:"created"}],
+        tiles:["السَّمَاوَاتِ","وَالْأَرْضَ","السَّمَاءَ","الْأَرْضَ"],
+        answer:["الَّذِي","خَلَقَ","السَّمَاوَاتِ","وَالْأَرْضَ"]
+      },
+      {
+        en:"The companions of Paradise are the successful ones.",
+        quran:{ref:"Al-Hashr 59:20", en:"The companions of Paradise — they are the successful ones"},
+        prebaked:[{ar:"أَصْحَابُ",en:"companions of"},{ar:"هُمُ",en:"they are"},{ar:"الْفَائِزُونَ",en:"the successful"}],
+        tiles:["الْجَنَّةِ","النَّارِ","الْجَنَّةُ","النَّارُ"],
+        answer:["أَصْحَابُ","الْجَنَّةِ","هُمُ","الْفَائِزُونَ"]
+      },
     ]},
 
   { id:19, book:1, lessonRef:"1.8", part:"A", title:"الْإِضَافَةُ (Part 1)", titleEn:"Possessive Constructions",
@@ -1764,8 +1880,10 @@ function buildExercises(session, lang = "en") {
       // alternates and definite↔indefinite swaps) to make students attend to iʿrāb.
       // Vocabulary distractors in t.tiles are preserved unchanged.
       const existingSet = new Set(t.tiles);
+      // Skip prebaked tokens — they're pre-placed, not part of the interactive tile bank
+      const prebakedArSet = new Set((t.prebaked || []).map(p => p.ar));
       const caseExtras = shuffle(
-        t.answer.flatMap(tok => makeCaseVariants(tok)).filter(v => !existingSet.has(v))
+        t.answer.filter(tok => !prebakedArSet.has(tok)).flatMap(tok => makeCaseVariants(tok)).filter(v => !existingSet.has(v))
       ).slice(0, 2);
       const augTiles = [...t.tiles, ...caseExtras];
       grammarExs.push({ type:"pattern_tile", ...t, tiles: augTiles, en: urHint });
@@ -2311,23 +2429,63 @@ function TileEx({ exercise, onResult, lang = "en" }) {
 }
 
 // Pattern sentence builder — emoji/Arabic question prompt, no English
+// Supports prebaked gold tiles (same mechanism as ReviewTileEx) and a quran badge.
 function PatternTileEx({ exercise, onResult, lang = "en" }) {
   const { w } = useWindowSize();
   const t = UI_TEXT[lang];
   const isUrdu = lang === "ur";
   const tileFont = w >= 1024 ? 26 : w >= 640 ? 22 : 20;
+
+  const prebakedSet = exercise.prebaked || [];
+  const hasPrebaked = prebakedSet.length > 0;
+  // Tokens the user must actively place (non-prebaked)
+  const nonPrebakedAnswer = exercise.answer.filter(tok => !prebakedSet.some(p => p.ar === tok));
+
   const [placed, setPlaced] = useState([]);
-  const [remaining, setRemaining] = useState(()=>shuffle([...exercise.tiles]));
+  const [remaining, setRemaining] = useState(() =>
+    shuffle(exercise.tiles.filter(tile => !prebakedSet.some(p => p.ar === tile)))
+  );
   const [checked, setChecked] = useState(false);
   const [correct, setCorrect] = useState(false);
+  const [toggled, setToggled] = useState({}); // { ar: bool } — true = show English gloss
   const [activeExp, setActiveExp] = useState(null);
 
-  const addTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced([...placed,tile]);setRemaining(remaining.filter((_,i)=>i!==idx));};
-  const removeTile=(tile,idx)=>{if(checked)return;setActiveExp(null);setPlaced(placed.filter((_,i)=>i!==idx));setRemaining([...remaining,tile]);};
-  const check=()=>{const ok=JSON.stringify(placed)===JSON.stringify(exercise.answer);setCorrect(ok);setChecked(true);if(ok){speak(exercise.answer.join(" "));setTimeout(()=>onResult(true),1400);}};
+  const addTile    = (tile, idx) => { if (checked) return; setActiveExp(null); setPlaced([...placed, tile]); setRemaining(remaining.filter((_, i) => i !== idx)); };
+  const removeTile = (tile, idx) => { if (checked) return; setActiveExp(null); setPlaced(placed.filter((_, i) => i !== idx)); setRemaining([...remaining, tile]); };
+  const togglePrebaked = (ar) => setToggled(prev => ({ ...prev, [ar]: !prev[ar] }));
+
+  const check = () => {
+    const ok = JSON.stringify(placed) === JSON.stringify(nonPrebakedAnswer);
+    setCorrect(ok);
+    setChecked(true);
+    if (ok) { speak(exercise.answer.join(" ")); setTimeout(() => onResult(true), 1400); }
+  };
+
+  // Build the answer zone: prebaked slots + user-placed slots in correct order
+  const answerZone = [];
+  let gapIdx = 0;
+  for (const tile of exercise.answer) {
+    const pb = prebakedSet.find(p => p.ar === tile);
+    if (pb) {
+      answerZone.push({ tile, prebaked: true, en: pb.en });
+    } else {
+      answerZone.push({ tile: placed[gapIdx], prebaked: false, gapIdx: gapIdx++ });
+    }
+  }
+
+  // Show Check button when the user has placed something, or when all tiles are prebaked
+  const canCheck = !checked && (placed.length > 0 || nonPrebakedAnswer.length === 0);
 
   return (
     <div style={{textAlign:"center"}}>
+      {/* Quran badge */}
+      {exercise.quran && (
+        <div style={{display:"flex",alignItems:"center",gap:6,background:"#fffbeb",border:"1px solid #fde68a",borderRadius:8,padding:"6px 12px",marginBottom:10,justifyContent:"center"}}>
+          <span style={{fontSize:14}}>📖</span>
+          <span style={{fontSize:12,fontWeight:700,color:"#92400e"}}>{exercise.quran.ref}</span>
+        </div>
+      )}
+      {/* Prompt — emoji, translated sentence, or Arabic question */}
       {exercise.emoji
         ? <div style={{lineHeight:1,marginBottom:8}}><EmojiImg emoji={exercise.emoji} size={72}/></div>
         : exercise.en && <p style={{fontSize:15,fontWeight:700,color:"#1e293b",marginBottom:8,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>"{exercise.en}"</p>
@@ -2338,6 +2496,8 @@ function PatternTileEx({ exercise, onResult, lang = "en" }) {
           <SpeakBtn text={exercise.question} size={18}/>
         </div>
       )}
+      {/* Gold tiles hint */}
+      {hasPrebaked && <p style={{fontSize:11,color:"#d97706",fontWeight:600,marginBottom:8,fontFamily:isUrdu?urFont:"inherit"}}>{t.goldTiles}</p>}
       {checked && !correct && (
         <p style={{fontSize:12,color:"#94a3b8",marginBottom:10}}>
           <SpeakBtn text={exercise.answer.join(" ")} size={14}/> <span style={{fontFamily:isUrdu?urFont:"inherit"}}>{t.hearAnswer}</span>
@@ -2345,54 +2505,84 @@ function PatternTileEx({ exercise, onResult, lang = "en" }) {
       )}
       {/* Answer zone */}
       <div style={{minHeight:60,background:"#f8fafc",borderRadius:12,border:checked?(correct?"2px solid #22c55e":"2px solid #ef4444"):"2px dashed #cbd5e1",padding:"10px 12px",marginBottom:8,display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",alignItems:"center",direction:"rtl"}}>
-        {placed.length===0&&<span style={{color:"#94a3b8",fontSize:13,fontFamily:isUrdu?urFont:"inherit"}}>{t.tapToAnswer}</span>}
-        {placed.map((tile,i)=>{
-          const grade = checked ? tileGetGrade(tile,i,exercise.answer) : null;
-          const s = grade ? tileGradeStyle(grade) : null;
-          return (
-            <button key={`${tile}-${i}`}
-              onClick={checked ? ()=>setActiveExp(tileGradeExp(tile,grade,exercise.answer,isUrdu)) : ()=>removeTile(tile,i)}
-              style={{padding:"8px 12px",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,
-                background:s?s.bg:(checked?"#dcfce7":"#dbeafe"),
-                border:s?`2px solid ${s.border}`:"none",
-                color:s?s.col:"#1e293b",
-                cursor:"pointer"}}>
-              {tile}
-            </button>
-          );
+        {/* Empty hint — only when no prebaked tiles and nothing placed yet */}
+        {!hasPrebaked && placed.length === 0 && (
+          <span style={{color:"#94a3b8",fontSize:13,fontFamily:isUrdu?urFont:"inherit"}}>{t.tapToAnswer}</span>
+        )}
+        {answerZone.map((item, i) => {
+          if (item.prebaked) {
+            // Gold tile: tappable to toggle Arabic ↔ English gloss
+            const showing = toggled[item.tile];
+            const label = isUrdu ? (getUrHint(item.en) || getUrdu(item.en) || item.en) : item.en;
+            return (
+              <button key={`pb-${i}`} onClick={() => togglePrebaked(item.tile)}
+                style={{padding:"8px 12px",background:checked?"#fef3c7":"#fef9c3",border:"2px solid #f59e0b",borderRadius:8,
+                  fontSize:showing?13:20,fontFamily:showing?(isUrdu?urFont:"inherit"):arFont,
+                  fontWeight:700,cursor:"pointer",color:"#92400e",
+                  direction:showing?(isUrdu?"rtl":"ltr"):"rtl",minWidth:50}}>
+                {showing ? label : item.tile}
+              </button>
+            );
+          } else if (item.tile) {
+            // User-placed tile
+            const grade = checked ? tileGetGrade(item.tile, item.gapIdx, nonPrebakedAnswer) : null;
+            const s = grade ? tileGradeStyle(grade) : null;
+            return (
+              <button key={`pl-${i}`}
+                onClick={checked ? () => setActiveExp(tileGradeExp(item.tile, grade, nonPrebakedAnswer, isUrdu)) : () => removeTile(item.tile, item.gapIdx)}
+                style={{padding:"8px 12px",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,
+                  background:s?s.bg:(checked?"#dcfce7":"#dbeafe"),
+                  border:s?`2px solid ${s.border}`:"none",
+                  color:s?s.col:"#1e293b",cursor:"pointer"}}>
+                {item.tile}
+              </button>
+            );
+          } else if (hasPrebaked) {
+            // Empty gap slot — only show when there are prebaked tiles (otherwise user sees no tiles at all initially)
+            return <span key={`gap-${i}`} style={{width:60,height:40,border:"2px dashed #cbd5e1",borderRadius:8,display:"inline-block"}}/>;
+          }
+          return null;
         })}
       </div>
       {/* Explanation bar */}
-      {checked&&!correct&&activeExp&&(
+      {checked && !correct && activeExp && (
         <div style={{margin:"0 0 8px",padding:"8px 14px",background:"#f0f9ff",border:"1px solid #bae6fd",borderRadius:8,fontSize:13,color:"#0c4a6e",lineHeight:1.5,fontFamily:arFont,direction:"rtl"}}>
           {activeExp}
         </div>
       )}
       {/* Tile bank */}
       <div style={{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",marginBottom:16,direction:"rtl"}}>
-        {remaining.map((tile,i)=>{
-          const missing = checked && exercise.answer.includes(tile);
+        {remaining.map((tile, i) => {
+          const missing = checked && nonPrebakedAnswer.includes(tile);
           const bankExp = isUrdu ? `"${tile}" جملے میں ہونا چاہیے تھا` : `"${tile}" was needed but not placed`;
           return (
             <button key={`${tile}-${i}`}
-              onClick={checked?(missing?()=>setActiveExp(bankExp):undefined):()=>addTile(tile,i)}
+              onClick={checked ? (missing ? () => setActiveExp(bankExp) : undefined) : () => addTile(tile, i)}
               style={{padding:"8px 12px",background:missing?"#fee2e2":"white",border:missing?"2px solid #ef4444":"2px solid #e2e8f0",borderRadius:8,fontSize:tileFont,fontFamily:arFont,fontWeight:700,color:missing?"#991b1b":"#1e293b",cursor:checked?(missing?"pointer":"default"):"pointer",transition:"transform 0.1s"}}
-              onMouseEnter={!checked?e=>{e.currentTarget.style.transform="scale(1.06)"}:undefined}
-              onMouseLeave={!checked?e=>{e.currentTarget.style.transform="scale(1)"}:undefined}>
+              onMouseEnter={!checked ? e => { e.currentTarget.style.transform = "scale(1.06)" } : undefined}
+              onMouseLeave={!checked ? e => { e.currentTarget.style.transform = "scale(1)" } : undefined}>
               {tile}
             </button>
           );
         })}
       </div>
-      {!checked&&placed.length>0&&<button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)",fontFamily:isUrdu?urFont:"inherit"}}>{t.checkBtn}</button>}
-      {checked&&correct&&<div style={{padding:"10px 16px",borderRadius:10,background:"#dcfce7",color:"#166534",fontWeight:700,fontSize:15,fontFamily:isUrdu?urFont:"inherit"}}>{t.perfectMsg}</div>}
-      {checked&&!correct&&(
+      {canCheck && (
+        <button onClick={check} style={{padding:"12px 32px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(5,150,105,0.3)",fontFamily:isUrdu?urFont:"inherit"}}>
+          {t.checkBtn}
+        </button>
+      )}
+      {checked && correct && (
+        <div style={{padding:"10px 16px",borderRadius:10,background:"#dcfce7",color:"#166534",fontWeight:700,fontSize:15,fontFamily:isUrdu?urFont:"inherit"}}>
+          {t.perfectMsg}
+        </div>
+      )}
+      {checked && !correct && (
         <div style={{borderRadius:10,overflow:"hidden",border:"1px solid #fca5a5",marginBottom:10}}>
           <div style={{padding:"10px 16px",background:"#fee2e2",color:"#991b1b",fontWeight:700,fontSize:15}}>
             {isUrdu ? "✗ صحیح: " : "✗ Correct: "}
             <span style={{fontFamily:arFont,direction:"rtl",fontSize:18}}>{exercise.answer.join(" ")}</span>
           </div>
-          <button onClick={()=>onResult(false)} style={{width:"100%",padding:"11px",background:"#ef4444",color:"white",border:"none",fontWeight:700,fontSize:15,cursor:"pointer",fontFamily:isUrdu?urFont:"inherit"}}>
+          <button onClick={() => onResult(false)} style={{width:"100%",padding:"11px",background:"#ef4444",color:"white",border:"none",fontWeight:700,fontSize:15,cursor:"pointer",fontFamily:isUrdu?urFont:"inherit"}}>
             {isUrdu ? "اگلا ←" : "Next →"}
           </button>
         </div>
