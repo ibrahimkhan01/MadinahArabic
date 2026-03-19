@@ -550,7 +550,11 @@ const EMOJI = {
   "big":"🔼","small":"🔽","new":"✨","old":"📜",
   "east":"🌅","west":"🌇","north":"⬆️","south":"⬇️",
 };
-const getEmoji = (en) => EMOJI[en.toLowerCase()] || EMOJI[en] || null;
+const getEmoji = (en) => {
+  const key = en.toLowerCase();
+  // Try exact match first, then strip a leading "the " (for definite-form vocab like "the sun")
+  return EMOJI[key] || EMOJI[en] || EMOJI[key.replace(/^the\s+/, "")] || null;
+};
 
 // ── Urdu vocabulary translations (English → Urdu) ──────────────
 const UR_VOCAB = {
@@ -892,7 +896,15 @@ function speak(text) {
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
 
-  const utt = new SpeechSynthesisUtterance(text);
+  // Arabic TTS applies "pausal form" to utterance-final words, dropping the
+  // final short vowel (case ending). For isolated words (MCQ options, vocab
+  // taps) we want the full ending pronounced — append U+200C (ZWNJ) to
+  // prevent pausal form. For sentences (text contains spaces) pausal form on
+  // the last word is correct Classical Arabic, so leave those unchanged.
+  const isIsolatedWord = !text.includes(" ");
+  const ttsText = (isIsolatedWord && /[\u064B-\u0650]$/.test(text)) ? text + "\u200C" : text;
+
+  const utt = new SpeechSynthesisUtterance(ttsText);
   utt.lang = "ar";
   utt.rate = 0.82;
 
@@ -1617,7 +1629,9 @@ const ALL_SESSIONS = [
 function buildExercises(session, lang = "en") {
   const vocab = session.vocab;
   const allPrior = SESSIONS.filter(s => s.id < session.id).flatMap(s => s.vocab);
-  const pool = vocab.length >= 4 ? vocab : [...vocab, ...shuffle(allPrior).slice(0, 4 - vocab.length)];
+  // Pool of 6 words: session vocab topped up with prior-session words if needed.
+  // Extra prior words give lightweight spaced-repetition alongside new vocab.
+  const pool = vocab.length >= 6 ? vocab.slice(0, 6) : [...vocab, ...shuffle(allPrior).slice(0, 6 - vocab.length)];
 
   // Helper: get display label for a vocab word in the active language
   const getLabel = (w) => lang === "ur" ? (getUrdu(w.en) || w.en) : w.en;
@@ -1672,17 +1686,24 @@ function buildExercises(session, lang = "en") {
   const mcqExs = [];
 
   // MCQ: label → Arabic (en_ar) — English/Urdu prompt, pick the Arabic
-  shuffle(vocab).slice(0, 4).forEach(w => {
+  // Cover all 6 pool words (new session vocab + any prior top-up)
+  const allVocab = [...vocab, ...allPrior];
+  shuffle(pool).forEach(w => {
     const distractors = shuffle(pool.filter(x => x.ar !== w.ar)).slice(0, 3).map(x => x.ar);
     const opts = shuffle([w.ar,...distractors]);
-    const allVocab = [...vocab, ...allPrior];
     const meanings = {};
     opts.forEach(ar => { const found = allVocab.find(x => x.ar === ar); if (found) meanings[ar] = getLabel(found); });
     mcqExs.push({ type:"en_ar", promptEn:getLabel(w), correct:w.ar, options:opts, meanings });
   });
-  // Match pairs
-  if (vocab.length >= 4)
-    mcqExs.push({ type:"match", pairs:shuffle(vocab).slice(0,4).map(w=>({ar:w.ar,en:getLabel(w)})) });
+  // Match pairs — 3+3 split: two rounds of 3 pairs each
+  if (pool.length >= 3) {
+    const poolShuffled = shuffle([...pool]);
+    const firstHalf  = poolShuffled.slice(0, 3);
+    const secondHalf = poolShuffled.slice(3, 6);
+    mcqExs.push({ type:"match", pairs: firstHalf.map(w => ({ ar:w.ar, en:getLabel(w) })) });
+    if (secondHalf.length >= 2)
+      mcqExs.push({ type:"match", pairs: secondHalf.map(w => ({ ar:w.ar, en:getLabel(w) })) });
+  }
 
   // Vocabulary recall first (warm up with words), grammar/sentences second
   return [...shuffle(mcqExs), ...shuffle(grammarExs)];
