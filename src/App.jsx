@@ -44,7 +44,7 @@ const QURAN_CONNECTIONS = {
     { ar: 'عَلَّمَ بِالْقَلَمِ', en: 'He taught by the pen', ur: 'اس نے قلم کے ذریعے سکھایا', ref: 'Al-ʿAlaq 96:4', ref_ur: 'سورۃ العلق ۹۶:۴' },
   ],
   'كرسي': [
-    { ar: 'وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ', en: 'His Kursī extends over the heavens and the earth', ur: 'اس کی کرسی آسمانوں اور زمین پر پھیلی ہوئی ہے', ref: 'Al-Baqarah 2:255 (Āyat al-Kursī)', ref_ur: 'سورۃ البقرہ ۲:۲۵۵ (آیت الکرسی)' },
+    { ar: 'وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ', en: 'And His Kursī extends over the heavens and the earth', ur: 'اس کی کرسی آسمانوں اور زمین پر پھیلی ہوئی ہے', ref: 'Al-Baqarah 2:255 (Āyat al-Kursī)', ref_ur: 'سورۃ البقرہ ۲:۲۵۵ (آیت الکرسی)' },
   ],
   'بيت': [
     { ar: 'إِنَّ أَوَّلَ بَيْتٍ وُضِعَ لِلنَّاسِ لَلَّذِي بِبَكَّةَ', en: 'The first House established for mankind was that at Makkah', ur: 'بے شک پہلا گھر جو لوگوں کے لیے بنایا گیا وہ مکہ میں ہے', ref: 'Āl ʿImrān 3:96', ref_ur: 'سورۃ آل عمران ۳:۹۶' },
@@ -52,18 +52,18 @@ const QURAN_CONNECTIONS = {
     { ar: 'أَن طَهِّرَا بَيْتِيَ لِلطَّائِفِينَ وَالْعَاكِفِينَ', en: 'Purify My House for those who circle it and those who stay there', ur: 'میرے گھر کو طواف کرنے والوں اور اعتکاف والوں کے لیے پاک کرو', ref: 'Al-Baqarah 2:125', ref_ur: 'سورۃ البقرہ ۲:۱۲۵' },
   ],
   'مسجد': [
-    { ar: 'وَأَنَّ الْمَسَاجِدَ لِلَّهِ', en: 'The masājid belong to Allah', ur: 'بے شک مساجد اللہ کے لیے ہیں', ref: 'Al-Jinn 72:18', ref_ur: 'سورۃ الجن ۷۲:۱۸' },
+    { ar: 'وَأَنَّ الْمَسَاجِدَ لِلَّهِ', en: 'And the masājid belong to Allah', ur: 'بے شک مساجد اللہ کے لیے ہیں', ref: 'Al-Jinn 72:18', ref_ur: 'سورۃ الجن ۷۲:۱۸' },
     { ar: 'سُبْحَانَ الَّذِي أَسْرَى بِعَبْدِهِ لَيْلًا مِّنَ الْمَسْجِدِ الْحَرَامِ إِلَى الْمَسْجِدِ الْأَقْصَى', en: 'Glory be to Him who took His servant by night from Al-Masjid Al-Ḥarām to Al-Masjid Al-Aqṣā', ur: 'پاک ہے وہ جو اپنے بندے کو رات میں مسجد حرام سے مسجد اقصیٰ تک لے گیا', ref: 'Al-Isrāʾ 17:1', ref_ur: 'سورۃ الاسراء ۱۷:۱' },
   ],
   'نجم': [
-    { ar: 'وَالنَّجْمِ إِذَا هَوَىٰ', en: 'By the star when it sets', ur: 'ستارے کی قسم جب وہ ڈوبے', ref: 'Al-Najm 53:1', ref_ur: 'سورۃ النجم ۵۳:۱' },
+    { ar: 'وَالنَّجْمِ إِذَا هَوَىٰ', en: 'And by the star when it sets', ur: 'ستارے کی قسم جب وہ ڈوبے', ref: 'Al-Najm 53:1', ref_ur: 'سورۃ النجم ۵۳:۱' },
     { ar: 'وَالنُّجُومَ مُسَخَّرَاتٍ بِأَمْرِهِ', en: 'And the stars, subjected by His command', ur: 'اور ستارے اس کے حکم سے مسخر ہیں', ref: 'Al-Naḥl 16:12', ref_ur: 'سورۃ النحل ۱۶:۱۲' },
   ],
   'مفتاح': [
     { ar: 'وَعِندَهُ مَفَاتِحُ الْغَيْبِ لَا يَعْلَمُهَا إِلَّا هُوَ', en: 'With Him are the keys of the unseen; none knows them except Him', ur: 'اور اسی کے پاس غیب کی کنجیاں ہیں، جنہیں وہی جانتا ہے', ref: 'Al-Anʿām 6:59', ref_ur: 'سورۃ الانعام ۶:۵۹' },
   ],
   'كلب': [
-    { ar: 'وَكَلْبُهُم بَاسِطٌ ذِرَاعَيْهِ بِالْوَصِيدِ', en: 'Their dog stretching its forelegs at the entrance', ur: 'اور ان کا کتا دہلیز پر اپنے بازو پھیلائے بیٹھا تھا', ref: 'Al-Kahf 18:18', ref_ur: 'سورۃ الکہف ۱۸:۱۸' },
+    { ar: 'وَكَلْبُهُم بَاسِطٌ ذِرَاعَيْهِ بِالْوَصِيدِ', en: 'And their dog stretching its forelegs at the entrance', ur: 'اور ان کا کتا دہلیز پر اپنے بازو پھیلائے بیٹھا تھا', ref: 'Al-Kahf 18:18', ref_ur: 'سورۃ الکہف ۱۸:۱۸' },
   ],
   'ذئب': [
     { ar: 'فَأَكَلَهُ الذِّئْبُ', en: 'The wolf has eaten him', ur: 'بھیڑیے نے اسے کھا لیا', ref: 'Yūsuf 12:17', ref_ur: 'سورۃ یوسف ۱۲:۱۷' },
@@ -79,7 +79,7 @@ const QURAN_CONNECTIONS = {
     { ar: 'حَتَّىٰ يَلِجَ الْجَمَلُ فِي سَمِّ الْخِيَاطِ', en: 'Until the camel passes through the eye of a needle', ur: 'یہاں تک کہ اونٹ سوئی کے ناکے میں داخل ہو جائے', ref: 'Al-Aʿrāf 7:40', ref_ur: 'سورۃ الاعراف ۷:۴۰' },
   ],
   'رجل': [
-    { ar: 'وَجَاءَ رَجُلٌ مِّنْ أَقْصَى الْمَدِينَةِ يَسْعَىٰ', en: 'A man came running from the far end of the city', ur: 'اور شہر کے آخری کنارے سے ایک آدمی دوڑتا ہوا آیا', ref: 'Yā-Sīn 36:20', ref_ur: 'سورۃ یٰسین ۳۶:۲۰' },
+    { ar: 'وَجَاءَ رَجُلٌ مِّنْ أَقْصَى الْمَدِينَةِ يَسْعَىٰ', en: 'And a man came running from the far end of the city', ur: 'اور شہر کے آخری کنارے سے ایک آدمی دوڑتا ہوا آیا', ref: 'Yā-Sīn 36:20', ref_ur: 'سورۃ یٰسین ۳۶:۲۰' },
     { ar: 'وَجَاءَ مِنْ أَقْصَى الْمَدِينَةِ رَجُلٌ يَسْعَىٰ', en: 'And from the far end of the city a man came running', ur: 'اور شہر کے کنارے سے ایک آدمی دوڑتا آیا', ref: 'Al-Qaṣaṣ 28:20', ref_ur: 'سورۃ القصص ۲۸:۲۰' },
   ],
   'ولد': [
@@ -88,7 +88,7 @@ const QURAN_CONNECTIONS = {
   ],
   'رسول': [
     { ar: 'مُّحَمَّدٌ رَّسُولُ اللَّهِ', en: 'Muhammad is the messenger of Allah', ur: 'محمد اللہ کے رسول ہیں', ref: 'Al-Fatḥ 48:29', ref_ur: 'سورۃ الفتح ۴۸:۲۹' },
-    { ar: 'وَمَا مُحَمَّدٌ إِلَّا رَسُولٌ', en: 'Muhammad is not but a messenger', ur: 'اور محمد بس ایک رسول ہیں', ref: 'Āl ʿImrān 3:144', ref_ur: 'سورۃ آل عمران ۳:۱۴۴' },
+    { ar: 'وَمَا مُحَمَّدٌ إِلَّا رَسُولٌ', en: 'And Muhammad is not but a messenger', ur: 'اور محمد بس ایک رسول ہیں', ref: 'Āl ʿImrān 3:144', ref_ur: 'سورۃ آل عمران ۳:۱۴۴' },
     { ar: 'يَا أَيُّهَا الرَّسُولُ بَلِّغْ مَا أُنزِلَ إِلَيْكَ', en: 'O Messenger, convey what has been revealed to you', ur: 'اے رسول! جو کچھ آپ کی طرف نازل کیا گیا ہے وہ پہنچا دیجیے', ref: 'Al-Māʾidah 5:67', ref_ur: 'سورۃ المائدہ ۵:۶۷' },
   ],
   'سراج': [
@@ -116,7 +116,7 @@ const QURAN_CONNECTIONS = {
     { ar: 'وَهُوَ الَّذِي خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ', en: 'And He is the one who created the heavens and the earth', ur: 'اور وہی ہے جس نے آسمانوں اور زمین کو پیدا کیا', ref: 'Al-Anʿām 6:73', ref_ur: 'سورۃ الانعام ۶:۷۳' },
   ],
   'جنة': [
-    { ar: 'وَبَشِّرِ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ أَنَّ لَهُمْ جَنَّاتٍ', en: 'Give glad tidings to those who believe and do good deeds — that for them are gardens', ur: 'اور ان لوگوں کو خوشخبری دو جو ایمان لائے اور نیک عمل کیے کہ ان کے لیے باغات ہیں', ref: 'Al-Baqarah 2:25', ref_ur: 'سورۃ البقرہ ۲:۲۵' },
+    { ar: 'وَبَشِّرِ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ أَنَّ لَهُمْ جَنَّاتٍ', en: 'And give glad tidings to those who believe and do good deeds — that for them are gardens', ur: 'اور ان لوگوں کو خوشخبری دو جو ایمان لائے اور نیک عمل کیے کہ ان کے لیے باغات ہیں', ref: 'Al-Baqarah 2:25', ref_ur: 'سورۃ البقرہ ۲:۲۵' },
     { ar: 'وَقِيلَ لَهُمُ ادْخُلُوا الْجَنَّةَ', en: 'And it is said to them: Enter Paradise', ur: 'اور ان سے کہا جائے گا: جنت میں داخل ہو جاؤ', ref: 'Al-Zumar 39:73', ref_ur: 'سورۃ الزمر ۳۹:۷۳' },
   ],
   'نار': [
@@ -128,11 +128,11 @@ const QURAN_CONNECTIONS = {
     { ar: 'أَمَامَهُمْ جَهَنَّمُ وَلَا يُغْنِي عَنْهُمْ مَا كَسَبُوا شَيْئًا', en: 'Before them is Hell, and what they earned will not avail them at all', ur: 'ان کے آگے جہنم ہے اور جو کچھ انہوں نے کمایا وہ ان کے کچھ کام نہ آئے گا', ref: 'Al-Jāthiyah 45:10', ref_ur: 'سورۃ الجاثیہ ۴۵:۱۰' },
   ],
   'شمس': [
-    { ar: 'وَالشَّمْسُ تَجْرِي لِمُسْتَقَرٍّ لَّهَا', en: 'The sun runs to its resting place', ur: 'اور سورج اپنے مقررہ ٹھکانے کی طرف چلتا رہتا ہے', ref: 'Yā-Sīn 36:38', ref_ur: 'سورۃ یٰسین ۳۶:۳۸' },
+    { ar: 'وَالشَّمْسُ تَجْرِي لِمُسْتَقَرٍّ لَّهَا', en: 'And the sun runs to its resting place', ur: 'اور سورج اپنے مقررہ ٹھکانے کی طرف چلتا رہتا ہے', ref: 'Yā-Sīn 36:38', ref_ur: 'سورۃ یٰسین ۳۶:۳۸' },
     { ar: 'وَالشَّمْسِ وَضُحَاهَا', en: 'By the sun and its brightness', ur: 'سورج کی قسم اور اس کی روشنی کی', ref: 'Al-Shams 91:1', ref_ur: 'سورۃ الشمس ۹۱:۱' },
   ],
   'قمر': [
-    { ar: 'وَالْقَمَرَ قَدَّرْنَاهُ مَنَازِلَ', en: 'We have measured out stages for the moon', ur: 'اور چاند کے لیے ہم نے منزلیں مقرر کی ہیں', ref: 'Yā-Sīn 36:39', ref_ur: 'سورۃ یٰسین ۳۶:۳۹' },
+    { ar: 'وَالْقَمَرَ قَدَّرْنَاهُ مَنَازِلَ', en: 'And We have measured out stages for the moon', ur: 'اور چاند کے لیے ہم نے منزلیں مقرر کی ہیں', ref: 'Yā-Sīn 36:39', ref_ur: 'سورۃ یٰسین ۳۶:۳۹' },
     { ar: 'وَالْقَمَرِ إِذَا تَلَاهَا', en: 'And the moon when it follows it', ur: 'اور چاند کی قسم جب وہ سورج کے پیچھے آئے', ref: 'Al-Shams 91:2', ref_ur: 'سورۃ الشمس ۹۱:۲' },
   ],
   'سرير': [
@@ -141,7 +141,7 @@ const QURAN_CONNECTIONS = {
   ],
   'كبير': [
     { ar: 'إِنَّ اللَّهَ كَانَ عَلِيًّا كَبِيرًا', en: 'Indeed, Allah is ever Most High, Greatest', ur: 'بے شک اللہ بلند و عظیم ہے', ref: 'Al-Nisāʾ 4:34', ref_ur: 'سورۃ النساء ۴:۳۴' },
-    { ar: 'وَهُوَ الْعَلِيُّ الْكَبِيرُ', en: 'He is the Most High, the Most Great', ur: 'وہی سب سے بلند اور سب سے بڑا ہے', ref: 'Sabaʾ 34:23', ref_ur: 'سورۃ سبا ۳۴:۲۳' },
+    { ar: 'وَهُوَ الْعَلِيُّ الْكَبِيرُ', en: 'And He is the Most High, the Most Great', ur: 'وہی سب سے بلند اور سب سے بڑا ہے', ref: 'Sabaʾ 34:23', ref_ur: 'سورۃ سبا ۳۴:۲۳' },
   ],
   'جميل': [
     { ar: 'فَاصْبِرْ صَبْرًا جَمِيلًا', en: 'So be patient with beautiful patience', ur: 'پس خوبصورت صبر اختیار کریں', ref: 'Al-Maʿārij 70:5', ref_ur: 'سورۃ المعارج ۷۰:۵' },
@@ -193,7 +193,7 @@ const QURAN_CONNECTIONS = {
   ],
   // ── New entries ─────────────────────────────────────────────────────────────
   'قميص': [
-    { ar: 'وَجَاءُوا عَلَى قَمِيصِهِ بِدَمٍ كَذِبٍ', en: 'They brought his shirt with false blood on it', ur: 'اور وہ اس کی قمیص پر جھوٹا خون لگا کر لائے', ref: 'Yūsuf 12:18', ref_ur: 'سورۃ یوسف ۱۲:۱۸' },
+    { ar: 'وَجَاءُوا عَلَى قَمِيصِهِ بِدَمٍ كَذِبٍ', en: 'And they brought his shirt with false blood on it', ur: 'اور وہ اس کی قمیص پر جھوٹا خون لگا کر لائے', ref: 'Yūsuf 12:18', ref_ur: 'سورۃ یوسف ۱۲:۱۸' },
     { ar: 'اذْهَبُوا بِقَمِيصِي هَٰذَا فَأَلْقُوهُ عَلَى وَجْهِ أَبِي يَأْتِ بَصِيرًا', en: 'Take this shirt of mine and cast it over my father\'s face; he will regain his sight', ur: 'میری یہ قمیص لے جاؤ اور اسے میرے باپ کے چہرے پر ڈال دو، وہ بینا ہو جائیں گے', ref: 'Yūsuf 12:93', ref_ur: 'سورۃ یوسف ۱۲:۹۳' },
   ],
   'جدار': [
@@ -208,7 +208,7 @@ const QURAN_CONNECTIONS = {
     { ar: 'فَأَنبَتْنَا بِهِ حَدَائِقَ ذَاتَ بَهْجَةٍ', en: 'And We caused gardens of joyful beauty to grow by it', ur: 'اور اس سے ہم نے رونق والے باغات اگائے', ref: 'Al-Naml 27:60', ref_ur: 'سورۃ النمل ۲۷:۶۰' },
   ],
   'اب': [
-    { ar: 'وَكَانَ أَبُوهُمَا صَالِحًا', en: 'Their father was a righteous man', ur: 'اور ان کا باپ نیک آدمی تھا', ref: 'Al-Kahf 18:82', ref_ur: 'سورۃ الکہف ۱۸:۸۲' },
+    { ar: 'وَكَانَ أَبُوهُمَا صَالِحًا', en: 'And their father was a righteous man', ur: 'اور ان کا باپ نیک آدمی تھا', ref: 'Al-Kahf 18:82', ref_ur: 'سورۃ الکہف ۱۸:۸۲' },
     { ar: 'وَإِذْ قَالَ إِبْرَاهِيمُ لِأَبِيهِ آزَرَ', en: 'And when Ibrahim said to his father Azar', ur: 'اور جب ابراہیم نے اپنے باپ آزر سے کہا', ref: 'Al-Anʿām 6:74', ref_ur: 'سورۃ الانعام ۶:۷۴' },
   ],
   'ام': [
@@ -216,8 +216,8 @@ const QURAN_CONNECTIONS = {
     { ar: 'حَمَلَتْهُ أُمُّهُ كُرْهًا وَوَضَعَتْهُ كُرْهًا', en: 'His mother carried him with hardship and gave birth to him with hardship', ur: 'اس کی ماں نے اسے تکلیف سے اٹھایا اور تکلیف سے جنا', ref: 'Al-Aḥqāf 46:15', ref_ur: 'سورۃ الاحقاف ۴۶:۱۵' },
   ],
   'اخ': [
-    { ar: 'وَلَمَّا دَخَلُوا عَلَى يُوسُفَ آوَى إِلَيْهِ أَخَاهُ', en: 'When they entered upon Yūsuf, he took his brother to himself', ur: 'جب وہ یوسف کے پاس آئے تو اس نے اپنے بھائی کو اپنے پاس رکھ لیا', ref: 'Yūsuf 12:69', ref_ur: 'سورۃ یوسف ۱۲:۶۹' },
-    { ar: 'وَاجْعَل لِّي وَزِيرًا مِّنْ أَهْلِي هَارُونَ أَخِي', en: 'Appoint for me a minister from my family — Hārūn, my brother', ur: 'اور میرے اہل میں سے ایک وزیر مقرر کر، ہارون میرا بھائی', ref: 'Ṭā-Hā 20:29–30', ref_ur: 'سورۃ طٰہٰ ۲۰:۲۹–۳۰' },
+    { ar: 'وَلَمَّا دَخَلُوا عَلَى يُوسُفَ آوَى إِلَيْهِ أَخَاهُ', en: 'And when they entered upon Yūsuf, he took his brother to himself', ur: 'جب وہ یوسف کے پاس آئے تو اس نے اپنے بھائی کو اپنے پاس رکھ لیا', ref: 'Yūsuf 12:69', ref_ur: 'سورۃ یوسف ۱۲:۶۹' },
+    { ar: 'وَاجْعَل لِّي وَزِيرًا مِّنْ أَهْلِي هَارُونَ أَخِي', en: 'And appoint for me a minister from my family — Hārūn, my brother', ur: 'اور میرے اہل میں سے ایک وزیر مقرر کر، ہارون میرا بھائی', ref: 'Ṭā-Hā 20:29–30', ref_ur: 'سورۃ طٰہٰ ۲۰:۲۹–۳۰' },
   ],
   'اخت': [
     { ar: 'وَقَالَتْ لِأُخْتِهِ قُصِّيهِ', en: 'And she said to his sister: Follow him', ur: 'اور اس نے اس کی بہن سے کہا: اس کا پیچھا کرو', ref: 'Al-Qaṣaṣ 28:11', ref_ur: 'سورۃ القصص ۲۸:۱۱' },
@@ -243,10 +243,10 @@ const QURAN_CONNECTIONS = {
   ],
   'احسن': [
     { ar: 'الَّذِي أَحْسَنَ كُلَّ شَيْءٍ خَلَقَهُ', en: 'Who perfected everything He created', ur: 'جس نے ہر چیز کو اچھا بنایا جو اس نے پیدا کی', ref: 'Al-Sajdah 32:7', ref_ur: 'سورۃ السجدہ ۳۲:۷' },
-    { ar: 'وَمَنْ أَحْسَنُ قَوْلًا مِّمَّن دَعَا إِلَى اللَّهِ', en: 'Who is better in speech than one who calls to Allah', ur: 'اور اس سے اچھی بات کس کی جو اللہ کی طرف بلائے', ref: 'Fuṣṣilat 41:33', ref_ur: 'سورۃ فصلت ۴۱:۳۳' },
+    { ar: 'وَمَنْ أَحْسَنُ قَوْلًا مِّمَّن دَعَا إِلَى اللَّهِ', en: 'And who is better in speech than one who calls to Allah', ur: 'اور اس سے اچھی بات کس کی جو اللہ کی طرف بلائے', ref: 'Fuṣṣilat 41:33', ref_ur: 'سورۃ فصلت ۴۱:۳۳' },
   ],
   'ارسل': [
-    { ar: 'وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِّلْعَالَمِينَ', en: 'We have not sent you except as a mercy to all worlds', ur: 'اور ہم نے آپ کو تمام جہانوں کے لیے رحمت بنا کر بھیجا', ref: 'Al-Anbiyāʾ 21:107', ref_ur: 'سورۃ الانبیاء ۲۱:۱۰۷' },
+    { ar: 'وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِّلْعَالَمِينَ', en: 'And We have not sent you except as a mercy to all worlds', ur: 'اور ہم نے آپ کو تمام جہانوں کے لیے رحمت بنا کر بھیجا', ref: 'Al-Anbiyāʾ 21:107', ref_ur: 'سورۃ الانبیاء ۲۱:۱۰۷' },
     { ar: 'إِنَّا أَرْسَلْنَاكَ شَاهِدًا وَمُبَشِّرًا وَنَذِيرًا', en: 'Indeed We have sent you as a witness, a bringer of good tidings, and a warner', ur: 'بے شک ہم نے آپ کو گواہ، خوشخبری دینے والا اور خبردار کرنے والا بنا کر بھیجا', ref: 'Al-Fatḥ 48:8', ref_ur: 'سورۃ الفتح ۴۸:۸' },
   ],
   'انزل': [
@@ -466,19 +466,16 @@ const QURAN_WORD_FREQ = {
 // based on the vocab from all completed sessions.
 function getQuranCoverage(completedSessionIds) {
   const knownKeys = new Set();
-  let tokenSum = 0;
   SESSIONS
     .filter(s => completedSessionIds.includes(s.id))
     .forEach(s => {
       s.vocab.forEach(w => {
         const k = stripQ(w.ar);
-        if (QURAN_WORD_FREQ[k] && !knownKeys.has(k)) {
-          knownKeys.add(k);
-          tokenSum += QURAN_WORD_FREQ[k];
-        }
+        if (QURAN_WORD_FREQ[k]) knownKeys.add(k);
       });
     });
-  return Math.round((tokenSum / TOTAL_QURAN_TOKENS) * 1000) / 10; // one decimal %
+  const total = Object.keys(QURAN_WORD_FREQ).length;
+  return Math.round((knownKeys.size / total) * 1000) / 10; // one decimal %
 }
 
 // Returns the QURAN_CONNECTIONS key for the primary word in an exercise, or null.
@@ -1219,7 +1216,7 @@ const SESSIONS = [
         answer:["الشَّمْسُ","وَالْقَمَرُ","بِحُسْبَانٍ"]
       },
       {
-        en:"The stars and the trees bow down.",
+        en:"And the stars and the trees bow down.",
         quran:{ref:"Ar-Rahman 55:6", en:"And the stars and the trees prostrate"},
         prebaked:[{ar:"وَالشَّجَرُ",en:"and the trees"},{ar:"يَسْجُدَانِ",en:"bow down"}],
         tiles:["وَالنَّجْمُ","النَّجْمُ","النَّجْمِ"],
@@ -3166,7 +3163,7 @@ function CompleteScreen({ xp, accuracy, isReview, quranCoverage, onContinue }) {
           <span style={{fontSize:20,fontWeight:800,color:"#d97706"}}>{quranCoverage}%</span>
         </div>
         <div style={{background:"#fed7aa",borderRadius:99,height:6,overflow:"hidden"}}>
-          <div style={{height:"100%",borderRadius:99,background:"linear-gradient(90deg,#f59e0b,#d97706)",width:`${Math.min(quranCoverage * 2.5, 100)}%`}}/>
+          <div style={{height:"100%",borderRadius:99,background:"linear-gradient(90deg,#f59e0b,#d97706)",width:`${quranCoverage}%`}}/>
         </div>
         <p style={{fontSize:11,color:"#92400e",margin:"5px 0 0"}}>of the Quran's most frequent words you now recognise</p>
       </div>
@@ -3184,7 +3181,8 @@ function QuranOverlay({ connection, lang, onContinue }) {
       position:"absolute", inset:0, zIndex:100,
       background:"linear-gradient(160deg,#1a3a2a 0%,#0d2218 100%)",
       display:"flex", flexDirection:"column", alignItems:"center",
-      justifyContent:"center", padding:"28px 24px", textAlign:"center",
+      justifyContent:"center", padding:"28px 24px 40px", textAlign:"center",
+      overflowY:"auto",
     }}>
       {/* Crescent + star motif */}
       <div style={{fontSize:36, marginBottom:10}}>🌙✨</div>
@@ -3429,7 +3427,7 @@ export default function MadinahArabicApp() {
                 <span style={{fontWeight:800,fontSize:18,color:"#d97706"}}>{quranCoverage}%</span>
               </div>
               <div style={{background:"#fed7aa",borderRadius:99,height:8,overflow:"hidden"}}>
-                <div style={{height:"100%",borderRadius:99,background:"linear-gradient(90deg,#f59e0b,#d97706)",width:`${Math.min(quranCoverage * 2.5, 100)}%`,transition:"width 0.6s ease"}}/>
+                <div style={{height:"100%",borderRadius:99,background:"linear-gradient(90deg,#f59e0b,#d97706)",width:`${quranCoverage}%`,transition:"width 0.6s ease"}}/>
               </div>
               <p style={{fontSize:11,color:"#92400e",margin:"6px 0 0",fontFamily:lang==="ur"?urFont:"inherit",textAlign:lang==="ur"?"right":"left"}}>
                 {lang==="ur"
