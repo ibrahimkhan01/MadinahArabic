@@ -3260,6 +3260,34 @@ export default function MadinahArabicApp() {
   const [openBooks, setOpenBooks] = useState(() => new Set([1]));
   const [showAbout, setShowAbout] = useState(false);
 
+  // ── Install prompt ──
+  const [installPromptEvt, setInstallPromptEvt] = useState(null); // Android beforeinstallprompt
+  const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isAndroid = /android/i.test(navigator.userAgent);
+  const isInStandalone = window.navigator.standalone === true
+    || window.matchMedia("(display-mode: standalone)").matches;
+  const [installDismissed, setInstallDismissed] = useState(
+    () => localStorage.getItem("ma_install_dismissed") === "1"
+  );
+  const showInstallBanner = !isInStandalone && !installDismissed && (isIos || isAndroid || installPromptEvt);
+  useEffect(() => {
+    const handler = (e) => { e.preventDefault(); setInstallPromptEvt(e); };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+  const dismissInstall = () => {
+    setInstallDismissed(true);
+    localStorage.setItem("ma_install_dismissed", "1");
+  };
+  const triggerInstall = async () => {
+    if (installPromptEvt) {
+      installPromptEvt.prompt();
+      await installPromptEvt.userChoice;
+      setInstallPromptEvt(null);
+    }
+    dismissInstall();
+  };
+
   // Persist completed + unlockAll + lang
   useEffect(() => { localStorage.setItem("ma_completed", JSON.stringify(completed)); }, [completed]);
   useEffect(() => { localStorage.setItem("ma_unlock", unlockAll ? "1" : "0"); }, [unlockAll]);
@@ -3382,6 +3410,35 @@ export default function MadinahArabicApp() {
     return (
       <div style={pageStyle}>
         <div style={cardStyle}>
+          {/* ── Add to Home Screen banner ── */}
+          {showInstallBanner && (
+            <div style={{
+              background:"#fef3c7", borderBottom:"1px solid #fcd34d",
+              padding:"12px 16px", display:"flex", alignItems:"flex-start", gap:10,
+            }}>
+              <div style={{fontSize:22, lineHeight:1, flexShrink:0}}>📱</div>
+              <div style={{flex:1, fontSize:13, color:"#78350f", lineHeight:1.5}}>
+                {isIos ? (
+                  <>
+                    <strong>Add to your Home Screen</strong> for the best experience.<br/>
+                    Tap <strong style={{whiteSpace:"nowrap"}}>Share <span style={{fontSize:15}}>⎙</span></strong> then <strong>"Add to Home Screen"</strong>
+                  </>
+                ) : (
+                  <>
+                    <strong>Install as an app</strong> for the best experience.<br/>
+                    {installPromptEvt
+                      ? <button onClick={triggerInstall} style={{marginTop:6,background:GREEN,color:"white",border:"none",borderRadius:8,padding:"5px 14px",fontSize:13,fontWeight:700,cursor:"pointer"}}>Install app</button>
+                      : <>Tap your browser menu → <strong>"Add to Home Screen"</strong></>
+                    }
+                  </>
+                )}
+              </div>
+              <button onClick={dismissInstall} style={{
+                background:"none", border:"none", color:"#92400e",
+                fontSize:18, cursor:"pointer", lineHeight:1, flexShrink:0, padding:2,
+              }}>✕</button>
+            </div>
+          )}
           <div style={{background:`linear-gradient(135deg,${GREEN},#047857)`,padding:"32px 20px 24px",textAlign:"center",color:"white",position:"relative"}}>
             <button onClick={()=>setScreen("settings")} style={{position:"absolute",top:12,right:12,background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 10px",cursor:"pointer",fontSize:18,lineHeight:1}}>⚙️</button>
             <button onClick={()=>setShowAbout(true)} style={{position:"absolute",top:12,left:12,background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 10px",cursor:"pointer",fontSize:15,lineHeight:1,fontWeight:700}}>ℹ️</button>
