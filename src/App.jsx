@@ -1924,8 +1924,32 @@ function buildExercises(session, lang = "en") {
   // Cover all 6 pool words (new session vocab + any prior top-up)
   const allVocab = [...vocab, ...allPrior];
   shuffle(pool).forEach(w => {
-    const distractors = shuffle(pool.filter(x => x.ar !== w.ar)).slice(0, 3).map(x => x.ar);
-    const opts = shuffle([w.ar,...distractors]);
+    // ── Morphological "near-miss" distractors ─────────────────────────────
+    // Same root, different iʿrāb or definiteness — forces students to read
+    // harakat rather than just recognise the word shape.
+    const NOM_I = '\u064C', NOM_D = '\u064F'; // ٌ ُ
+    const isDefWord = /^ال/.test(w.ar);
+    const definiteAlts = [];
+    if (isDefWord && w.ar.endsWith(NOM_D)) {
+      // الْبَابُ → بَابٌ  (definite nominative → indefinite nominative)
+      const stripped = w.ar.replace(/^الْ?/, '');
+      if (stripped.length > 1) definiteAlts.push(stripped.slice(0, -1) + NOM_I);
+    } else if (!isDefWord && w.ar.endsWith(NOM_I)) {
+      // بَابٌ → الْبَابُ  (indefinite nominative → definite nominative)
+      definiteAlts.push('\u0627\u0644\u0652' + w.ar.slice(0, -1) + NOM_D);
+    }
+    const poolArSet = new Set(pool.map(x => x.ar));
+    const morphCandidates = shuffle(
+      [...new Set([...makeCaseVariants(w.ar), ...definiteAlts])]
+        .filter(v => v !== w.ar && !poolArSet.has(v))
+    );
+    // Up to 2 morph distractors; fill remaining slots with other pool words
+    const morphDs = morphCandidates.slice(0, 2);
+    const wordDs  = shuffle(pool.filter(x => x.ar !== w.ar))
+      .slice(0, 3 - morphDs.length)
+      .map(x => x.ar);
+    const distractors = shuffle([...morphDs, ...wordDs]);
+    const opts = shuffle([w.ar, ...distractors]);
     const meanings = {};
     opts.forEach(ar => { const found = allVocab.find(x => x.ar === ar); if (found) meanings[ar] = getLabel(found); });
     mcqExs.push({ type:"en_ar", promptEn:getLabel(w), correct:w.ar, options:opts, meanings });
