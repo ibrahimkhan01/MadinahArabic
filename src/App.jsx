@@ -365,11 +365,19 @@ const QURAN_CONNECTIONS = {
 };
 
 // Returns the QURAN_CONNECTIONS key for the primary word in an exercise, or null.
-function getQuranWord(exercise) {
+// Skips keys already shown this session (present in shownKeys) and falls through
+// to the next unseen word. If all words have been shown, returns the first available.
+function getQuranWord(exercise, shownKeys = new Set()) {
   const candidates =
     exercise.type === 'ar_en' ? [exercise.prompt] :
     exercise.type === 'en_ar' ? [exercise.correct] :
     exercise.answer ? exercise.answer : [];
+  // First pass: prefer an unseen key
+  for (const w of candidates) {
+    const key = stripQ(w);
+    if (QURAN_CONNECTIONS[key] && !shownKeys.has(key)) return key;
+  }
+  // Fallback: all have been seen — return the first available key
   for (const w of candidates) {
     const key = stripQ(w);
     if (QURAN_CONNECTIONS[key]) return key;
@@ -2930,9 +2938,10 @@ export default function MadinahArabicApp() {
 
     // Check for Quran connection on correct answers
     if (wasCorrect) {
-      const qKey = getQuranWord(exercises[exIdx]);
+      const counts = quranCounts.current;
+      const shownKeys = new Set(Object.keys(counts).filter(k => counts[k] > 0));
+      const qKey = getQuranWord(exercises[exIdx], shownKeys);
       if (qKey) {
-        const counts = quranCounts.current;
         counts[qKey] = (counts[qKey] || 0) + 1;
         // Show on 1st, 4th, 7th, 10th… correct answer for this word (formula: (n-1) % 3 === 0)
         if ((counts[qKey] - 1) % 3 === 0) {
