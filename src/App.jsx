@@ -364,6 +364,123 @@ const QURAN_CONNECTIONS = {
   ],
 };
 
+// ── Quran Word Frequency ──────────────────────────────────────────────────────
+// Term frequencies sourced from qurananalysis.com word-frequency data.
+// Keys are the stripQ-processed form of the Quranic word (diacritics stripped,
+// leading ال removed, أإآ→ا). Used to calculate "Quran Unlocked %" coverage.
+const TOTAL_QURAN_TOKENS = 77800;
+const QURAN_WORD_FREQ = {
+  // ── Top 80 by term frequency ──────────────────────────────────────────────
+  "من":     2763,  // مِن — from/of
+  "له":     2428,  // اللَّه (2153) + لَه (275) — both strip to this key
+  "في":     1185,  // فِي — in
+  "ما":     1010,  // مَا — what/not
+  "ان":      966,  // إِن/أَن — both normalise here; higher taken
+  "لا":      812,  // لَا — no/not
+  "ذين":     810,  // الَّذِين — those who (ال stripped)
+  "على":     670,  // عَلَى — on/upon
+  "الا":     664,  // إِلَّا — except
+  "ولا":     658,  // وَلَا
+  "وما":     646,  // وَمَا
+  "قال":     416,  // قَال — he said
+  "الى":     405,  // إِلَى — towards (إ→ا)
+  "لهم":     373,  // لَهُم — for them
+  "يا":      350,  // يَا — O! (vocative)
+  "ومن":     342,  // وَمَن
+  "لكم":     337,  // لَكُم — for you (pl.)
+  "به":      327,  // بِه — with/by it
+  "كان":     323,  // كَان — he was
+  "بما":     296,  // بِمَا
+  "قل":      294,  // قُل — say!
+  "ارض":     287,  // أَرْض / الأَرْض — earth (أ→ا, ال stripped)
+  "ذلك":     280,  // ذَلِك — that
+  "او":      280,  // أَو — or (أ→ا)
+  "ذي":      268,  // الَّذِي — who/which (ال stripped)
+  "هو":      265,  // هُو — he
+  "امنوا":   263,  // آمَنُوا — they believed (آ→ا)
+  "هم":      261,  // هُم — they
+  "وان":     254,  // وَإِن
+  "قالوا":   250,  // قَالُوا — they said
+  "كل":      245,  // كُل — every/all
+  "فيها":    241,  // فِيهَا — in it/them
+  "كانوا":   229,  // كَانُوا — they were
+  "عن":      223,  // عَن — about/from
+  "اذا":     221,  // إِذَا — when (إ→ا)
+  "يوم":     217,  // يَوم — day
+  "عليهم":   214,  // عَلَيهِم — upon them
+  "شيء":     190,  // شَيء — thing
+  "هذا":     190,  // هَذَا — this (m.)
+  "كفروا":   189,  // كَفَرُوا — they disbelieved
+  "كنتم":    188,  // كُنتُم — you were
+  "سماوات":  182,  // السَّمَاوَات — heavens (ال stripped)
+  "ناس":     182,  // النَّاس — people (ال stripped)
+  "لم":      178,  // لَم — did not
+  "وهو":     171,  // وَهُو
+  "فان":     168,  // فَإِن (إ→ا)
+  "هذه":     168,  // هَذِه — this (f.) [estimated rank ~70]
+  "اذ":      165,  // إِذ — when/while (إ→ا)
+  "عليكم":   164,  // عَلَيكُم — upon you
+  "كتاب":    163,  // الكتاب / كِتَاب — book (ال stripped)
+  "انا":     156,  // إِنَّا — indeed We (إ→ا)
+  "منهم":    153,  // مِنهُم — from them
+  "عذاب":    150,  // عَذَاب — punishment
+  "انه":     147,  // إِنَّه — indeed he/it (إ→ا)
+  "بعد":     146,  // بَعد — after
+  "عليه":    146,  // عَلَيه — upon him/it
+  "حتى":     142,  // حَتَّى — until
+  "اولئك":   133,  // أُولَئِك — those (أ→ا)
+  "اني":     131,  // إِنِّي — indeed I (إ→ا)
+  "امر":     131,  // أَمر — command/matter (أ→ا)
+  "رب":      130,  // رَب — Lord
+  "موسى":    129,  // مُوسَى — Moses
+  "بل":      127,  // بَل — rather/nay
+  "قد":      126,  // قَد — indeed/already
+  "قوم":     126,  // قَوم — people/tribe
+  "عبد":     119,  // عَبد — servant/worshipper
+  "قبل":     118,  // قَبل — before
+  // ── Additional Quranic words taught in the app (verified frequencies) ─────
+  "رسول":    332,  // رَسُول — messenger
+  "ملك":     160,  // مَلَك/مَلِك — angel/king
+  "جنة":     147,  // جَنَّة — paradise/garden
+  "نار":     145,  // نَار — fire
+  "سماء":    120,  // سَمَاء — sky/heaven (singular)
+  "مومن":     95,  // مُؤْمِن — believer (m.)
+  "مومنة":    45,  // مُؤْمِنَة — believer (f.)
+  "رحيم":    114,  // رَحِيم — Most Merciful
+  "كريم":     27,  // كَرِيم — generous/noble
+  "نبي":      75,  // نَبِيّ — prophet
+  "شجرة":     26,  // شَجَرَة — tree
+  "رجل":      55,  // رَجُل — man
+  "باب":      40,  // بَاب — door/gate
+  "بيت":      65,  // بَيْت — house
+  "مسجد":     28,  // مَسْجِد — mosque
+  "كلب":       5,  // كَلْب — dog
+  "ذئب":       2,  // ذِئْب — wolf
+  "جمل":       6,  // جَمَل — camel
+  "فيل":       5,  // فِيل — elephant
+  "سراج":      6,  // سِرَاج — lamp
+  "قوس":       1,  // قَوْس — bow (rare)
+};
+
+// Returns what share of Quranic word tokens the learner can recognise,
+// based on the vocab from all completed sessions.
+function getQuranCoverage(completedSessionIds) {
+  const knownKeys = new Set();
+  let tokenSum = 0;
+  SESSIONS
+    .filter(s => completedSessionIds.includes(s.id))
+    .forEach(s => {
+      s.vocab.forEach(w => {
+        const k = stripQ(w.ar);
+        if (QURAN_WORD_FREQ[k] && !knownKeys.has(k)) {
+          knownKeys.add(k);
+          tokenSum += QURAN_WORD_FREQ[k];
+        }
+      });
+    });
+  return Math.round((tokenSum / TOTAL_QURAN_TOKENS) * 1000) / 10; // one decimal %
+}
+
 // Returns the QURAN_CONNECTIONS key for the primary word in an exercise, or null.
 // Skips keys already shown this session (present in shownKeys) and falls through
 // to the next unseen word. If all words have been shown, returns the first available.
@@ -2785,15 +2902,26 @@ function ReviewIntro({ review, onStart, lang = "en" }) {
 }
 
 // Complete screen
-function CompleteScreen({ xp, accuracy, isReview, onContinue }) {
+function CompleteScreen({ xp, accuracy, isReview, quranCoverage, onContinue }) {
   return (
     <div style={{textAlign:"center",padding:"40px 20px"}}>
       <div style={{fontSize:64,marginBottom:12}}>{accuracy>=80?"🌟":accuracy>=60?"⭐":"💪"}</div>
       <h2 style={{fontSize:26,fontWeight:800,color:"#1e293b",margin:"0 0 4px"}}>{isReview?"Review Complete! 🏆":"Session Complete!"}</h2>
-      {isReview&&<p style={{fontSize:13,color:"#d97706",fontWeight:600,margin:"0 0 20px"}}>Great work revising your Arabic!</p>}
-      <div style={{display:"flex",justifyContent:"center",gap:32,marginBottom:28}}>
-        <div><div style={{fontSize:38,fontWeight:800,color:"#f59e0b"}}>+{xp}</div><div style={{fontSize:12,color:"#6b7280"}}>XP Earned</div></div>
-        <div><div style={{fontSize:38,fontWeight:800,color:accuracy>=80?"#22c55e":"#f59e0b"}}>{accuracy}%</div><div style={{fontSize:12,color:"#6b7280"}}>Accuracy</div></div>
+      {isReview&&<p style={{fontSize:13,color:"#d97706",fontWeight:600,margin:"0 0 16px"}}>Great work revising your Arabic!</p>}
+      <div style={{display:"flex",justifyContent:"center",gap:24,marginBottom:20}}>
+        <div><div style={{fontSize:36,fontWeight:800,color:"#f59e0b"}}>+{xp}</div><div style={{fontSize:12,color:"#6b7280"}}>XP Earned</div></div>
+        <div><div style={{fontSize:36,fontWeight:800,color:accuracy>=80?"#22c55e":"#f59e0b"}}>{accuracy}%</div><div style={{fontSize:12,color:"#6b7280"}}>Accuracy</div></div>
+      </div>
+      {/* Quran Unlocked stat */}
+      <div style={{background:"#fffbeb",border:"1px solid #fde68a",borderRadius:12,padding:"12px 16px",marginBottom:24,textAlign:"left"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:5}}>
+          <span style={{fontSize:13,fontWeight:700,color:"#78350f"}}>📖 Quran Unlocked</span>
+          <span style={{fontSize:20,fontWeight:800,color:"#d97706"}}>{quranCoverage}%</span>
+        </div>
+        <div style={{background:"#fed7aa",borderRadius:99,height:6,overflow:"hidden"}}>
+          <div style={{height:"100%",borderRadius:99,background:"linear-gradient(90deg,#f59e0b,#d97706)",width:`${Math.min(quranCoverage * 2.5, 100)}%`}}/>
+        </div>
+        <p style={{fontSize:11,color:"#92400e",margin:"5px 0 0"}}>of all words in the Quran you can now recognise</p>
       </div>
       <button onClick={onContinue} style={{padding:"14px 40px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:14,fontSize:18,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 14px rgba(5,150,105,0.4)"}}>Continue</button>
     </div>
@@ -3003,6 +3131,8 @@ export default function MadinahArabicApp() {
   if(screen==="home"){
     const totalCount = ALL_SESSIONS.length;
     const doneCount = numCompleted;
+    const completedIds = Object.keys(completed).map(Number);
+    const quranCoverage = getQuranCoverage(completedIds);
     return (
       <div style={pageStyle}>
         <div style={cardStyle}>
@@ -3031,12 +3161,32 @@ export default function MadinahArabicApp() {
             </div>
           </div>
           <div style={{padding:"20px 18px"}}>
-            <div style={{background:"#f8fafc",borderRadius:14,padding:16,marginBottom:18,border:"1px solid #e2e8f0"}}>
+            <div style={{background:"#f8fafc",borderRadius:14,padding:16,marginBottom:12,border:"1px solid #e2e8f0"}}>
               <div style={{display:"flex",justifyContent:"space-between",marginBottom:8}}>
                 <span style={{fontWeight:700,fontSize:14,color:"#1e293b"}}>{UI_TEXT[lang].overallProg}</span>
                 <span style={{fontSize:13,color:"#64748b"}}>{doneCount}/{totalCount} {UI_TEXT[lang].sessions}</span>
               </div>
               <ProgressBar pct={(doneCount/totalCount)*100}/>
+            </div>
+            {/* ── Quran Unlocked ── */}
+            <div style={{background:"#fffbeb",borderRadius:14,padding:16,marginBottom:18,border:"1px solid #fde68a"}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
+                <div style={{display:"flex",alignItems:"center",gap:6}}>
+                  <span style={{fontSize:18}}>📖</span>
+                  <span style={{fontWeight:700,fontSize:14,color:"#78350f"}}>
+                    {lang==="ur" ? "قرآن کریم میں پہچان" : "Quran Unlocked"}
+                  </span>
+                </div>
+                <span style={{fontWeight:800,fontSize:18,color:"#d97706"}}>{quranCoverage}%</span>
+              </div>
+              <div style={{background:"#fed7aa",borderRadius:99,height:8,overflow:"hidden"}}>
+                <div style={{height:"100%",borderRadius:99,background:"linear-gradient(90deg,#f59e0b,#d97706)",width:`${Math.min(quranCoverage * 2.5, 100)}%`,transition:"width 0.6s ease"}}/>
+              </div>
+              <p style={{fontSize:11,color:"#92400e",margin:"6px 0 0",fontFamily:lang==="ur"?urFont:"inherit",textAlign:lang==="ur"?"right":"left"}}>
+                {lang==="ur"
+                  ? `آپ قرآن کریم کے ${quranCoverage}% الفاظ پہچان سکتے ہیں`
+                  : `You can recognise ${quranCoverage}% of all words in the Quran`}
+              </p>
             </div>
             <button onClick={()=>setScreen("map")} style={{width:"100%",padding:"15px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:14,fontSize:17,fontWeight:700,cursor:"pointer",marginBottom:12,boxShadow:"0 4px 14px rgba(5,150,105,0.35)",fontFamily:lang==="ur"?urFont:"inherit"}}>
               {doneCount===0 ? UI_TEXT[lang].startLearn : UI_TEXT[lang].continueLearn}
@@ -3350,10 +3500,14 @@ export default function MadinahArabicApp() {
   if(screen==="complete"&&sessionData){
     const acc = total>0?Math.round((correct/total)*100):0;
     const earned = Math.max(5,Math.round(acc/10)*5);
+    // Coverage is calculated from the updated `completed` state (which already
+    // includes the session just finished, set in doAdvance before setScreen).
+    const completedIds = Object.keys(completed).map(Number);
+    const quranCoverage = getQuranCoverage(completedIds);
     return (
       <div style={pageStyle}>
         <div style={cardStyle}>
-          <CompleteScreen xp={earned} accuracy={acc} isReview={sessionData.type==="review"} onContinue={()=>setScreen("map")}/>
+          <CompleteScreen xp={earned} accuracy={acc} isReview={sessionData.type==="review"} quranCoverage={quranCoverage} onContinue={()=>setScreen("map")}/>
         </div>
       </div>
     );
