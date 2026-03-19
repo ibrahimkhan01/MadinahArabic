@@ -1668,16 +1668,10 @@ function buildExercises(session, lang = "en") {
     });
   }
 
-  // ── BUCKET 2: Vocabulary recall MCQs (shown last) ──────────────────────
+  // ── BUCKET 2: Vocabulary recall MCQs (shown first) ─────────────────────
   const mcqExs = [];
 
-  // MCQ: Arabic → label (ar_en)
-  shuffle(vocab).slice(0, 4).forEach(w => {
-    const distractors = shuffle(pool.filter(x => x.en !== w.en)).slice(0, 3).map(x => getLabel(x));
-    const label = getLabel(w);
-    mcqExs.push({ type:"ar_en", prompt:w.ar, promptEn:w.en, correct:label, options:shuffle([label,...distractors]) });
-  });
-  // MCQ: label → Arabic (en_ar)
+  // MCQ: label → Arabic (en_ar) — English/Urdu prompt, pick the Arabic
   shuffle(vocab).slice(0, 4).forEach(w => {
     const distractors = shuffle(pool.filter(x => x.ar !== w.ar)).slice(0, 3).map(x => x.ar);
     const opts = shuffle([w.ar,...distractors]);
@@ -1690,8 +1684,8 @@ function buildExercises(session, lang = "en") {
   if (vocab.length >= 4)
     mcqExs.push({ type:"match", pairs:shuffle(vocab).slice(0,4).map(w=>({ar:w.ar,en:getLabel(w)})) });
 
-  // Grammar exercises first, vocabulary recall last (each bucket internally shuffled)
-  return [...shuffle(grammarExs), ...shuffle(mcqExs)];
+  // Vocabulary recall first (warm up with words), grammar/sentences second
+  return [...shuffle(mcqExs), ...shuffle(grammarExs)];
 }
 
 function buildReviewExercises(review) {
