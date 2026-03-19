@@ -561,7 +561,7 @@ const UI_TEXT = {
     startReview:    "Start Review 🏆",
     exitBtn:        "← Exit",
     sessionOf:      (n, total) => `Session ${n} of ${total}`,
-    bookLessonPart: (b, l, p) => `Book ${b} · Lesson ${l} · Part ${p}`,
+    bookLessonPart: (b, l, p) => `Book ${b} · Part ${p}`,
   },
   ur: {
     whatMean:       "اس کا کیا مطلب ہے؟",
@@ -620,7 +620,7 @@ const UI_TEXT = {
     startReview:    "دہراؤ شروع کریں 🏆",
     exitBtn:        "← باہر",
     sessionOf:      (n, total) => `سیشن ${n} از ${total}`,
-    bookLessonPart: (b, l, p) => `کتاب ${b} · سبق ${l} · حصہ ${p}`,
+    bookLessonPart: (b, l, p) => `کتاب ${b} · حصہ ${p}`,
   },
 };
 
@@ -647,7 +647,7 @@ const EMOJI = {
   "teacher":"👨‍🏫","teacher (m.)":"👨‍🏫","teacher (f.)":"👩‍🏫",
   "student":"👨‍🎓","student (m.)":"👨‍🎓","student (f.)":"👩‍🎓",
   "friend":"🤝","servant":"🙇",
-  "king":"👑","prophet":"🕌","messenger":"📨","slave":"🙇",
+  "king":"👑","slave":"🙇",
   "doctor":"👨‍⚕️","doctor (m.)":"👨‍⚕️","doctor (f.)":"👩‍⚕️",
   "engineer":"👷","worker":"👷","merchant":"🧑‍💼","farmer":"🧑‍🌾",
   "imam":"👳🏼‍♂️","handkerchief":"🤧","shirt":"👕",
@@ -656,7 +656,7 @@ const EMOJI = {
   "cow":"🐄","camel":"🐪","sheep":"🐑","elephant":"🐘","fish":"🐟",
   // Religion / abstract
   "prayer":"🤲","fasting":"🌙","pilgrimage":"🕌","zakat":"💰",
-  "paradise":"🌹","hellfire":"🔥","angel":"👼","devil":"😈",
+  "paradise":"🌹","hellfire":"🔥","devil":"😈",
   "good":"✅","bad":"❌","mercy":"💚","patience":"⏳","gratitude":"🙏",
   "world":"🌍","hereafter":"⭐","death":"💀","life":"🌱",
   "heart":"❤️","hand":"✋","eye":"👁️","face":"😊","head":"🧠",
@@ -1080,7 +1080,7 @@ const SESSIONS = [
     ]},
 
   { id:3, book:1, lessonRef:"1.1", part:"C", title:"الْحَيَوَانَاتُ", titleEn:"Animals",
-    grammar:'More هَذَا/ذَلِكَ with animals. All these nouns are masculine. وَ means "and" — it attaches directly to the next word: هَذَا ذِئْبٌ وَذَلِكَ كَلْبٌ.',
+    grammar:'More هَذَا/ذَلِكَ with animals. All these nouns are masculine. وَ means "and" — it attaches directly to the next word: هَذَا فِيلٌ وَذَلِكَ جَمَلٌ.',
     vocab:[{ar:"كَلْبٌ",en:"dog"},{ar:"ذِئْبٌ",en:"wolf"},{ar:"حِمَارٌ",en:"donkey"},{ar:"جَمَلٌ",en:"camel"},{ar:"فِيلٌ",en:"elephant"},{ar:"وَ",en:"and"}],
     patternTiles:[
       { en:"This is a wolf and that is a dog.",
@@ -1101,14 +1101,14 @@ const SESSIONS = [
     grammar:'مَنْ هَذَا؟ = Who is this? Used for people: مَنْ هَذَا؟ هَذَا إِمَامٌ. مَا هَذَا؟ هَذَا قَمِيصٌ.',
     vocab:[{ar:"إِمَامٌ",en:"imam"},{ar:"رَسُولٌ",en:"messenger"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"سِرَاجٌ",en:"lamp"},{ar:"قَمِيصٌ",en:"shirt"}],
     patternTiles:[
-      {emoji:"📨", question:"مَنْ هَذَا؟", tiles:["هَذَا","رَسُولٌ","إِمَامٌ","تَاجِرٌ"], answer:["هَذَا","رَسُولٌ"]},
+      {question:"مَنْ هَذَا؟", tiles:["هَذَا","رَسُولٌ","إِمَامٌ","تَاجِرٌ"], answer:["هَذَا","رَسُولٌ"]},
       {emoji:"👕", question:"مَا هَذَا؟", tiles:["هَذَا","قَمِيصٌ","سِرَاجٌ","كِتَابٌ","قَلَمٌ"], answer:["هَذَا","قَمِيصٌ"]},
       {emoji:"🕌", question:"مَنْ هَذَا؟", tiles:["هَذَا","إِمَامٌ","رَسُولٌ","تَاجِرٌ"], answer:["هَذَا","إِمَامٌ"]},
       {emoji:"🪔", question:"مَا هَذَا؟", tiles:["هَذَا","سِرَاجٌ","قَمِيصٌ","بَابٌ","كِتَابٌ"], answer:["هَذَا","سِرَاجٌ"]},
     ]},
 
   { id:5, book:1, lessonRef:"1.1", part:"E", title:"أَسْئِلَةُ نَعَمْ وَلَا", titleEn:"Yes/No Questions",
-    grammar:'أَهَذَا كِتَابٌ؟ = Is this a book? The hamza (أَ) prefix turns a statement into a yes/no question. Answer: نَعَمْ، هَذَا كِتَابٌ (Yes, this is a book) or لَا، هَذَا قَلَمٌ (No, this is a pen). هَلْ هَذَا ____؟ is an alternative form with the same meaning.',
+    grammar:'أَهَذَا مَسْجِدٌ؟ = Is this a mosque? The hamza (أَ) prefix turns a statement into a yes/no question. Answer: نَعَمْ، هَذَا مَسْجِدٌ (Yes, this is a mosque) or لَا، هَذَا بَيْتٌ (No, this is a house). هَلْ هَذَا ____؟ is an alternative form with the same meaning.',
     vocab:[{ar:"نَعَمْ",en:"yes"},{ar:"لَا",en:"no"},{ar:"أَهَذَا",en:"Is this...? (m.)"},{ar:"هَلْ",en:"is/are (question word)"}],
     patternTiles:[
       { emoji:"📖", question:"أَهَذَا كِتَابٌ؟",
@@ -1126,7 +1126,7 @@ const SESSIONS = [
     ]},
 
   { id:6, book:1, lessonRef:"1.2", part:"A", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 1)",
-    grammar:'ذَلِكَ = "that" for masculine objects far away. وَ ("and") joins the two sentences: هَذَا كِتَابٌ وَذَلِكَ قَلَمٌ.',
+    grammar:'ذَلِكَ = "that" for masculine objects far away. وَ ("and") joins the two sentences: هَذَا مَكْتَبٌ وَذَلِكَ سَرِيرٌ.',
     vocab:[{ar:"سَرِيرٌ",en:"bed"},{ar:"كُرْسِيٌّ",en:"chair"},{ar:"مَكْتَبٌ",en:"desk/office"},{ar:"جِدَارٌ",en:"wall"}],
     patternTiles:[
       { en:"This is a chair and that is a bed.",
@@ -1143,7 +1143,7 @@ const SESSIONS = [
         answer:["هَذَا","جِدَارٌ","وَ","ذَلِكَ","بَابٌ"] },
     ]},
   { id:7, book:1, lessonRef:"1.2", part:"B", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 2)",
-    grammar:'Practice هَذَا and ذَلِكَ with more nouns. مَنْ هَذَا؟ = Who is this? (used for people). وَ joins two sentences: هَذَا وَلَدٌ وَذَلِكَ رَجُلٌ.',
+    grammar:'Practice هَذَا and ذَلِكَ with people. مَنْ هَذَا؟ = Who is this? (used for people, not objects). وَ joins two sentences: هَذَا طَالِبٌ وَذَلِكَ مُدَرِّسٌ.',
     vocab:[{ar:"وَلَدٌ",en:"boy"},{ar:"رَجُلٌ",en:"man"},{ar:"طَالِبٌ",en:"student (m.)"},{ar:"مُدَرِّسٌ",en:"teacher (m.)"}],
     patternTiles:[
       { en:"This is a boy and that is a teacher.",
@@ -1348,7 +1348,7 @@ const SESSIONS = [
     grammar:'مَنْ أَنْتَ؟ = Who are you? أَنَا طَالِبٌ = I am a student. هُوَ مُدَرِّسٌ = He is a teacher.',
     vocab:[{ar:"رَسُولٌ",en:"messenger"},{ar:"مَلَكٌ",en:"angel"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"فَلَّاحٌ",en:"farmer"}],
     patternTiles:[
-      {emoji:"📨", question:"مَنْ هُوَ؟", en:"He is a messenger.", tiles:["هُوَ","رَسُولٌ","أَنَا","مَلَكٌ"], answer:["هُوَ","رَسُولٌ"]},
+      {question:"مَنْ هُوَ؟", en:"He is a messenger.", tiles:["هُوَ","رَسُولٌ","أَنَا","مَلَكٌ"], answer:["هُوَ","رَسُولٌ"]},
       {en:"I am a merchant.", tiles:["أَنَا","تَاجِرٌ","هُوَ","فَلَّاحٌ"], answer:["أَنَا","تَاجِرٌ"]},
       {
         en:"Muhammad is the Messenger of Allah.",
@@ -3111,7 +3111,7 @@ function CompleteScreen({ xp, accuracy, isReview, quranCoverage, onContinue }) {
         <div style={{background:"#fed7aa",borderRadius:99,height:6,overflow:"hidden"}}>
           <div style={{height:"100%",borderRadius:99,background:"linear-gradient(90deg,#f59e0b,#d97706)",width:`${Math.min(quranCoverage * 2.5, 100)}%`}}/>
         </div>
-        <p style={{fontSize:11,color:"#92400e",margin:"5px 0 0"}}>of all words in the Quran you can now recognise</p>
+        <p style={{fontSize:11,color:"#92400e",margin:"5px 0 0"}}>of the Quran's most frequent words you now recognise</p>
       </div>
       <button onClick={onContinue} style={{padding:"14px 40px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:14,fontSize:18,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 14px rgba(5,150,105,0.4)"}}>Continue</button>
     </div>
@@ -3203,6 +3203,7 @@ export default function MadinahArabicApp() {
   const [unlockAll, setUnlockAll] = useState(() => localStorage.getItem("ma_unlock") === "1");
   const [lang, setLang] = useState(() => localStorage.getItem("ma_lang") || "en");
   const [openBooks, setOpenBooks] = useState(() => new Set([1]));
+  const [showAbout, setShowAbout] = useState(false);
 
   // Persist completed + unlockAll + lang
   useEffect(() => { localStorage.setItem("ma_completed", JSON.stringify(completed)); }, [completed]);
@@ -3328,6 +3329,7 @@ export default function MadinahArabicApp() {
         <div style={cardStyle}>
           <div style={{background:`linear-gradient(135deg,${GREEN},#047857)`,padding:"32px 20px 24px",textAlign:"center",color:"white",position:"relative"}}>
             <button onClick={()=>setScreen("settings")} style={{position:"absolute",top:12,right:12,background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 10px",cursor:"pointer",fontSize:18,lineHeight:1}}>⚙️</button>
+            <button onClick={()=>setShowAbout(true)} style={{position:"absolute",top:12,left:12,background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 10px",cursor:"pointer",fontSize:15,lineHeight:1,fontWeight:700}}>ℹ️</button>
             <div style={{fontSize:52}}>🕌</div>
             <h1 style={{fontSize:28,fontWeight:800,margin:"8px 0 4px"}}>Madinah Arabic</h1>
             <p style={{fontSize:14,opacity:0.85,margin:"0 0 12px"}}>Complete course · Books 1–4 · 92 sessions</p>
@@ -3374,8 +3376,8 @@ export default function MadinahArabicApp() {
               </div>
               <p style={{fontSize:11,color:"#92400e",margin:"6px 0 0",fontFamily:lang==="ur"?urFont:"inherit",textAlign:lang==="ur"?"right":"left"}}>
                 {lang==="ur"
-                  ? `آپ قرآن کریم کے ${quranCoverage}% الفاظ پہچان سکتے ہیں`
-                  : `You can recognise ${quranCoverage}% of all words in the Quran`}
+                  ? `قرآن کریم کے ${quranCoverage}% پُر تکرار الفاظ آپ پہچانتے ہیں`
+                  : `You recognise ${quranCoverage}% of the Quran's most frequent words`}
               </p>
             </div>
             <button onClick={()=>setScreen("map")} style={{width:"100%",padding:"15px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:14,fontSize:17,fontWeight:700,cursor:"pointer",marginBottom:12,boxShadow:"0 4px 14px rgba(5,150,105,0.35)",fontFamily:lang==="ur"?urFont:"inherit"}}>
@@ -3594,7 +3596,7 @@ export default function MadinahArabicApp() {
                               display:"flex",alignItems:"center",justifyContent:"space-between"}}>
                             <div style={{flex:1}}>
                               <div style={{fontSize:10,color:"#94a3b8",fontWeight:600,marginBottom:1,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr"}}>
-                                {lang==="ur"?`سبق ${s.lessonRef} · حصہ ${s.part}`:`L${s.lessonRef} · Part ${s.part}`}
+                                {lang==="ur"?`حصہ ${s.part}`:`Part ${s.part}`}
                               </div>
                               <div style={{fontSize:15,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl",lineHeight:1.3}}>
                                 {lang==="ur"?s.title.split(" — ")[0].split(" (")[0].trim():s.title}
@@ -3698,6 +3700,56 @@ export default function MadinahArabicApp() {
       <div style={pageStyle}>
         <div style={cardStyle}>
           <CompleteScreen xp={earned} accuracy={acc} isReview={sessionData.type==="review"} quranCoverage={quranCoverage} onContinue={()=>setScreen("map")}/>
+        </div>
+      </div>
+    );
+  }
+
+  // ── ABOUT MODAL ── (overlays any screen)
+  if (showAbout) {
+    return (
+      <div style={pageStyle}>
+        <div style={cardStyle}>
+          <div style={{background:`linear-gradient(135deg,${GREEN},#047857)`,padding:"16px 20px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+            <span style={{color:"white",fontWeight:700,fontSize:16}}>{lang==="ur"?"ہمارے بارے میں":"About"}</span>
+            <button onClick={()=>setShowAbout(false)} style={{background:"rgba(255,255,255,0.2)",border:"none",color:"white",borderRadius:8,padding:"6px 12px",cursor:"pointer",fontWeight:700,fontSize:13}}>✕ {lang==="ur"?"بند":"Close"}</button>
+          </div>
+          <div style={{padding:"24px 20px",overflowY:"auto",maxHeight:scrollH}}>
+            <div style={{textAlign:"center",marginBottom:24}}>
+              <div style={{fontSize:52,marginBottom:8}}>🕌</div>
+              <h2 style={{fontSize:22,fontWeight:800,color:"#0f172a",margin:"0 0 4px"}}>Madinah Arabic</h2>
+              <p style={{fontSize:13,color:"#64748b",margin:0}}>
+                {lang==="ur" ? "قرآن کریم کے لیے عربی سیکھیں" : "Learn Arabic to understand the Quran"}
+              </p>
+            </div>
+            <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:12,padding:16,marginBottom:16}}>
+              <p style={{fontSize:13,color:"#166534",lineHeight:1.7,margin:0,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr",textAlign:lang==="ur"?"right":"left"}}>
+                {lang==="ur"
+                  ? "یہ ایپ مکمل طور پر مفت ہے — کوئی اشتہار نہیں، کوئی ادائیگی نہیں۔ مقصد صرف یہ ہے کہ آپ قرآن کریم کے الفاظ اور جملوں کو براہ راست سمجھ سکیں۔"
+                  : "This app is completely free — no ads, no payments. The goal is simply to help you understand the words and sentences of the Quran directly."}
+              </p>
+            </div>
+            <div style={{background:"#fefce8",border:"1px solid #fde68a",borderRadius:12,padding:16,marginBottom:16}}>
+              <p style={{fontSize:12,fontWeight:700,color:"#78350f",marginBottom:6,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr",textAlign:lang==="ur"?"right":"left"}}>
+                {lang==="ur" ? "📚 ماخذ و الہام" : "📚 Inspiration & Attribution"}
+              </p>
+              <p style={{fontSize:12,color:"#92400e",lineHeight:1.7,margin:0,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr",textAlign:lang==="ur"?"right":"left"}}>
+                {lang==="ur"
+                  ? "قواعد کی ترتیب مدینہ یونیورسٹی کے مدینہ عربی نصاب سے متاثر ہے۔ قرآنی جملے اور الفاظ براہ راست قرآن کریم سے لیے گئے ہیں۔"
+                  : "The grammar sequence is inspired by the Madinah Arabic curriculum, developed at the Islamic University of Madinah. Quranic phrases and vocabulary are drawn directly from the Quran."}
+              </p>
+            </div>
+            <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:12,padding:16,marginBottom:24}}>
+              <p style={{fontSize:12,color:"#475569",lineHeight:1.7,margin:0,fontFamily:lang==="ur"?urFont:"inherit",direction:lang==="ur"?"rtl":"ltr",textAlign:lang==="ur"?"right":"left"}}>
+                {lang==="ur"
+                  ? "اپنے دوستوں اور خاندان کے ساتھ بے جھجھک شیئر کریں۔"
+                  : "Feel free to share with friends and family."}
+              </p>
+            </div>
+            <button onClick={()=>setShowAbout(false)} style={{width:"100%",padding:"13px",background:`linear-gradient(135deg,${GREEN},#047857)`,color:"white",border:"none",borderRadius:12,fontSize:15,fontWeight:700,cursor:"pointer",fontFamily:lang==="ur"?urFont:"inherit"}}>
+              {lang==="ur" ? "واپس جائیں ←" : "← Back"}
+            </button>
+          </div>
         </div>
       </div>
     );
