@@ -679,6 +679,7 @@ const UR_VOCAB = {
   "dog":"کتا","cat":"بلی","donkey":"گدھا","camel":"اونٹ","horse":"گھوڑا",
   // L1.1D — professions & clothing
   "imam":"امام","doctor":"ڈاکٹر","merchant":"تاجر","handkerchief":"رومال","shirt":"قمیص",
+  "messenger":"رسول","lamp":"چراغ",
   // L1.1E — yes/no
   "yes":"ہاں","no":"نہیں","Is this...? (m.)":"کیا یہ ____؟","is/are (question word)":"کیا",
   // L1.2
