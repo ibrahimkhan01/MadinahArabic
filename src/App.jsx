@@ -388,6 +388,36 @@ const QURAN_CONNECTIONS = {
   'سال': [
     { ar: 'وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ', en: 'When My servants ask you about Me — I am near', ur: 'جب میرے بندے آپ سے میرے بارے میں پوچھیں تو بے شک میں قریب ہوں', ref: 'Al-Baqarah 2:186', ref_ur: 'سورۃ البقرہ ۲:۱۸۶' },
   ],
+  // ── iḍāfa phrases — sessions 19–20 ──────────────────────────────────────────
+  'رسول الله': [
+    { ar: 'مُحَمَّدٌ رَّسُولُ اللَّهِ وَالَّذِينَ مَعَهُ أَشِدَّاءُ عَلَى الْكُفَّارِ', en: 'Muhammad is the messenger of Allah; those with him are firm against the disbelievers', ur: 'محمد ﷺ اللہ کے رسول ہیں اور جو ان کے ساتھ ہیں وہ کافروں پر سخت ہیں', ref: 'Al-Fatḥ 48:29', ref_ur: 'سورۃ الفتح ۴۸:۲۹' },
+  ],
+  'يوم الدين': [
+    { ar: 'مَالِكِ يَوْمِ الدِّينِ', en: 'Master of the Day of Judgement', ur: 'یوم جزا کے مالک', ref: 'Al-Fātiḥa 1:4', ref_ur: 'سورۃ الفاتحہ ۱:۴' },
+    { ar: 'وَإِنَّ الدِّينَ لَوَاقِعٌ', en: 'And the Day of Judgement will certainly come to pass', ur: 'اور بے شک یوم جزا ضرور آنے والا ہے', ref: 'Al-Dhāriyāt 51:6', ref_ur: 'سورۃ الذاریات ۵۱:۶' },
+  ],
+  'رب العالمين': [
+    { ar: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', en: 'All praise is for Allah, Lord of all the worlds', ur: 'تمام تعریفیں اللہ کے لیے جو تمام جہانوں کا رب ہے', ref: 'Al-Fātiḥa 1:2', ref_ur: 'سورۃ الفاتحہ ۱:۲' },
+    { ar: 'قَالَ فِرْعَوْنُ وَمَا رَبُّ الْعَالَمِينَ', en: 'Pharaoh said: "And what is the Lord of the worlds?"', ur: 'فرعون نے کہا: رب العالمین کیا ہے؟', ref: 'Al-Shuʿarāʾ 26:23', ref_ur: 'سورۃ الشعراء ۲۶:۲۳' },
+  ],
+  'عبد الله': [
+    { ar: 'إِنِّي عَبْدُ اللَّهِ آتَانِيَ الْكِتَابَ وَجَعَلَنِي نَبِيًّا', en: 'I am the servant of Allah — He has given me the Scripture and made me a prophet', ur: 'بے شک میں اللہ کا بندہ ہوں، اس نے مجھے کتاب دی اور نبی بنایا', ref: 'Maryam 19:30', ref_ur: 'سورۃ مریم ۱۹:۳۰' },
+  ],
+  // ── attached-pronoun forms — session 20 ──────────────────────────────────────
+  'ربي': [
+    { ar: 'لَّكِنَّا هُوَ اللَّهُ رَبِّي وَلَا أُشْرِكُ بِرَبِّي أَحَدًا', en: 'But He is Allah, my Lord — and I associate no one with my Lord', ur: 'لیکن وہ اللہ ہی میرا رب ہے اور میں اپنے رب کے ساتھ کسی کو شریک نہیں کرتا', ref: 'Al-Kahf 18:38', ref_ur: 'سورۃ الکہف ۱۸:۳۸' },
+  ],
+  'ربك': [
+    { ar: 'اقْرَأْ وَرَبُّكَ الْأَكْرَمُ', en: 'Read — and your Lord is the Most Generous', ur: 'پڑھو اور تمہارا رب سب سے بڑا کریم ہے', ref: 'Al-ʿAlaq 96:3', ref_ur: 'سورۃ العلق ۹۶:۳' },
+    { ar: 'وَمَا رَبُّكَ بِظَلَّامٍ لِّلْعَبِيدِ', en: 'Your Lord is never unjust to His servants', ur: 'اور تمہارا رب بندوں پر ذرہ برابر ظلم نہیں کرتا', ref: 'Fuṣṣilat 41:46', ref_ur: 'سورۃ فصلت ۴۱:۴۶' },
+  ],
+  'رحمته': [
+    { ar: 'وَاللَّهُ يَخْتَصُّ بِرَحْمَتِهِ مَن يَشَاءُ', en: 'Allah grants His mercy to whomever He wills', ur: 'اور اللہ جسے چاہے اپنی رحمت سے نوازتا ہے', ref: 'Al-Baqarah 2:105', ref_ur: 'سورۃ البقرہ ۲:۱۰۵' },
+    { ar: 'يُدْخِلُهُم فِي رَحْمَتِهِ', en: 'He will admit them into His mercy', ur: 'وہ انہیں اپنی رحمت میں داخل کرے گا', ref: 'Al-Insān 76:31', ref_ur: 'سورۃ الانسان ۷۶:۳۱' },
+  ],
+  'نوره': [
+    { ar: 'وَاللَّهُ مُتِمُّ نُورِهِ وَلَوْ كَرِهَ الْكَافِرُونَ', en: 'Allah will perfect His light, even if the disbelievers hate it', ur: 'اور اللہ اپنے نور کو پورا کرے گا خواہ کافروں کو ناپسند ہو', ref: 'Al-Ṣaff 61:8', ref_ur: 'سورۃ الصف ۶۱:۸' },
+  ],
 };
 
 // ── Quran Word Frequency ──────────────────────────────────────────────────────
@@ -768,14 +798,14 @@ const UR_VOCAB = {
   "car":"گاڑی","school":"اسکول","room":"کمرہ","garden":"باغ",
   "teacher (f.)":"استانی","student (f.)":"طالبہ","doctor (f.)":"ڈاکٹر",
   "beautiful (f.)":"خوبصورت",
-  // L8 — iḍāfa
-  "the door of the house":"گھر کا دروازہ",
-  "the student's book":"طالب علم کی کتاب",
-  "the director's office":"ڈائریکٹر کا دفتر",
-  "the boy's room":"لڑکے کا کمرہ",
-  // L8b — possessive
-  "my house":"میرا گھر","your book":"آپ کی کتاب",
-  "his pen":"اس کا قلم","her room":"اس کا کمرہ",
+  // L8 — iḍāfa (Quranic phrases)
+  "messenger of Allah":"اللہ کے رسول",
+  "Day of Judgement":"یوم الدین / یوم جزا",
+  "Lord of the worlds":"تمام جہانوں کا رب",
+  "servant of Allah":"اللہ کا بندہ",
+  // L8b — possessive pronouns (Quranic)
+  "my Lord":"میرا رب","your Lord":"تمہارا رب",
+  "His mercy":"اس کی رحمت","His light":"اس کا نور",
   // L9 — family
   "father":"والد","mother":"والدہ","brother":"بھائی","sister":"بہن",
   "husband":"شوہر","wife":"بیوی","son":"بیٹا","daughter":"بیٹی",
@@ -855,8 +885,8 @@ const UR_GRAMMAR = {
   16: 'مؤنث اسم پر ةٌ ہوتی ہے۔ هَذِهِ (یہ مؤنث) اور تِلْكَ (وہ مؤنث): هَذِهِ سَيَّارَةٌ۔ صفت بھی مؤنث: هَذِهِ سَيَّارَةٌ جَمِيلَةٌ۔',
   17: 'مؤنث صفت پر ةٌ آتی ہے: كَبِيرٌ → كَبِيرَةٌ۔ پیشے بھی: مُدَرِّسٌ → مُدَرِّسَةٌ۔ هِيَ مُدَرِّسَةٌ = وہ استانی ہے۔',
   // id:18 Quranic Feminine — inherits from session grammar field
-  19: 'اضافت: پہلا اسم تنوین کھو دیتا ہے، دوسرا مجرور ہوتا ہے: كِتَابُ الطَّالِبِ (طالب علم کی کتاب)۔',
-  20: 'متصل ضمائر: بَيْتِي (میرا گھر)، بَيْتُكَ (تمہارا گھر)، بَيْتُهُ (اس کا گھر)، بَيْتُهَا (اس کا گھر ف.)۔',
+  19: 'اضافت: پہلا اسم (مضاف) تنوین کھو دیتا ہے اور الـ نہیں لے سکتا؛ دوسرا (مضاف الیہ) مجرور ہوتا ہے۔ قرآنی مثالیں: رَسُولُ اللهِ (اللہ کے رسول)، رَبُّ الْعَالَمِينَ (جہانوں کا رب)، يَوْمُ الدِّينِ (یوم جزا)۔',
+  20: 'متصل ضمائر اسم سے براہ راست جڑتے ہیں۔ قرآنی مثالیں: رَبِّي (میرا رب)، رَبُّكَ (تمہارا رب)، رَحْمَتُهُ (اس کی رحمت)، نُورُهُ (اس کا نور)۔ ي سے پہلے حرکت کسرہ بن جاتی ہے۔',
   21: 'أَبٌ اور أَخٌ غیر معمولی: أَبِي (میرے والد)، أَخِي (میرے بھائی)۔ الأسماء الخمسة — خاص اسم۔',
   22: 'عِنْدِي أَخٌ وَأُخْتٌ = میرے ایک بھائی اور ایک بہن ہیں۔ لِي أَبٌ كَرِيمٌ = میرے ایک سخی والد ہیں۔',
   23: 'الَّذِي (جو) مذکر واحد کے لیے۔ الَّتِي مؤنث کے لیے۔ الطَّالِبُ الَّذِي فِي الْفَصْلِ = وہ طالب علم جو کلاس میں ہے۔',
@@ -947,6 +977,11 @@ const UR_HINTS = {
   "Write the lesson!":"سبق لکھو!","Read the book!":"کتاب پڑھو!","Sit on the chair!":"کرسی پر بیٹھو!","Go out of the house!":"گھر سے نکلو!",
   "He went.":"وہ گیا۔","She went.":"وہ گئی۔","He wrote.":"اس نے لکھا۔","She wrote.":"اس نے لکھا۔",
   "He does not go.":"وہ نہیں جاتا۔","He did not go.":"وہ نہیں گیا۔","He is not a student.":"وہ طالب علم نہیں ہے۔","He did not go (with لَمْ).":"وہ نہیں گیا (لَمْ کے ساتھ)۔",
+  // Session 19–20 iḍāfa patternTile hints
+  "Muhammad is the messenger of Allah.":"محمد ﷺ اللہ کے رسول ہیں۔",
+  "Today is the Day of Judgement.":"آج یوم الدین ہے۔",
+  "My Lord is generous.":"میرا رب کریم ہے۔",
+  "His light is great.":"اس کا نور عظیم ہے۔",
 };
 const getUrHint = (en) => UR_HINTS[en] || null;
 
@@ -1540,18 +1575,18 @@ const SESSIONS = [
     ]},
 
   { id:19, book:1, lessonRef:"1.8", part:"A", title:"الْإِضَافَةُ (Part 1)", titleEn:"Possessive Constructions",
-    grammar:'Iḍāfa (possessive construction): كِتَابُ الطَّالِبِ (the student\'s book). The first noun (mudāf) loses tanwīn and CANNOT take الـ. The second noun (mudāf ilayhi) takes genitive ـِ. Key rule: the first noun becomes definite automatically through the construction — بَابُ الْبَيْتِ means THE door of the house, not "a door", because the second noun (الْبَيْتِ) is definite. You cannot say الْبَابُ الْبَيْتِ — that breaks the iḍāfa.',
-    vocab:[{ar:"بَابُ الْبَيْتِ",en:"the door of the house"},{ar:"كِتَابُ الطَّالِبِ",en:"the student's book"},{ar:"مَكْتَبُ الْمُدِيرِ",en:"the director's office"},{ar:"غُرْفَةُ الْوَلَدِ",en:"the boy's room"}],
+    grammar:'Iḍāfa (possessive construction): رَسُولُ اللهِ (messenger of Allah). The first noun (mudāf) loses tanwīn and CANNOT take الـ. The second noun (mudāf ilayhi) takes genitive ـِ. The first noun becomes definite automatically — رَبُّ الْعَالَمِينَ means THE Lord of the worlds, not "a lord". From Al-Fātiḥa: الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ — every word here is a Quranic iḍāfa or genitive link.',
+    vocab:[{ar:"رَسُولُ اللهِ",en:"messenger of Allah"},{ar:"يَوْمُ الدِّينِ",en:"Day of Judgement"},{ar:"رَبُّ الْعَالَمِينَ",en:"Lord of the worlds"},{ar:"عَبْدُ اللهِ",en:"servant of Allah"}],
     patternTiles:[
-      {en:"The student's book is on the desk.", tiles:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ","فِي","الْبَيْتِ"], answer:["كِتَابُ","الطَّالِبِ","عَلَى","الْمَكْتَبِ"]},
-      {en:"The door of the house is big.", tiles:["بَابُ","الْبَيْتِ","كَبِيرٌ","صَغِيرٌ","الْمَسْجِدِ"], answer:["بَابُ","الْبَيْتِ","كَبِيرٌ"]},
+      {en:"Muhammad is the messenger of Allah.", tiles:["مُحَمَّدٌ","رَسُولُ","اللهِ","عَبْدُ","نَبِيٌّ"], answer:["مُحَمَّدٌ","رَسُولُ","اللهِ"]},
+      {en:"Today is the Day of Judgement.", tiles:["الْيَوْمُ","يَوْمُ","الدِّينِ","رَبُّ","الْعَالَمِينَ"], answer:["الْيَوْمُ","يَوْمُ","الدِّينِ"]},
     ]},
   { id:20, book:1, lessonRef:"1.8", part:"B", title:"الْإِضَافَةُ (Part 2)", titleEn:"Possessive Pronouns",
-    grammar:'Attached pronouns: بَيْتِي (my house), بَيْتُكَ (your house), بَيْتُهُ (his house), بَيْتُهَا (her house). Pronoun attaches directly to noun.',
-    vocab:[{ar:"بَيْتِي",en:"my house"},{ar:"كِتَابُكَ",en:"your book"},{ar:"قَلَمُهُ",en:"his pen"},{ar:"غُرْفَتُهَا",en:"her room"}],
+    grammar:'Attached pronouns suffix directly to the noun. رَبِّي (my Lord — ي replaces tanwīn), رَبُّكَ (your Lord — كَ attached), رَحْمَتُهُ (His mercy — هُ attached), نُورُهُ (His light — هُ attached). These exact forms occur throughout the Quran. Note: after ي, the preceding vowel shifts to kasra — رَبِّي not رَبُيِ.',
+    vocab:[{ar:"رَبِّي",en:"my Lord"},{ar:"رَبُّكَ",en:"your Lord"},{ar:"رَحْمَتُهُ",en:"His mercy"},{ar:"نُورُهُ",en:"His light"}],
     patternTiles:[
-      {en:"My house is big.", tiles:["بَيْتِي","كَبِيرٌ","كِتَابُكَ","صَغِيرٌ"], answer:["بَيْتِي","كَبِيرٌ"]},
-      {en:"His pen is on the desk.", tiles:["قَلَمُهُ","عَلَى","الْمَكْتَبِ","فِي","كِتَابُكَ"], answer:["قَلَمُهُ","عَلَى","الْمَكْتَبِ"]},
+      {en:"My Lord is generous.", tiles:["رَبِّي","كَرِيمٌ","رَبُّكَ","عَظِيمٌ"], answer:["رَبِّي","كَرِيمٌ"]},
+      {en:"His light is great.", tiles:["نُورُهُ","عَظِيمٌ","رَحْمَتُهُ","كَبِيرٌ","رَبِّي"], answer:["نُورُهُ","عَظِيمٌ"]},
     ]},
 
   { id:21, book:1, lessonRef:"1.9", part:"A", title:"الْعَائِلَةُ (Part 1)", titleEn:"Family Vocabulary",
@@ -1584,7 +1619,7 @@ const SESSIONS = [
       {en:"Where is the key?", tiles:["أَيْنَ","الْمِفْتَاحُ؟","مَنْ","الْبَابُ؟"], answer:["أَيْنَ","الْمِفْتَاحُ؟"]},
     ]},
 
-// ═══ BOOK 2 · Lessons 1–12 · Sessions 21–44 ═══
+// ═══ BOOK 2 · Lessons 1–12 · Sessions 25–48 ═══
 
   { id:25, book:2, lessonRef:"2.1", part:"A", title:"الْمُضَارِعُ — هُوَ (Part 1)", titleEn:"Present Tense: He",
     grammar:'Present tense (الْمُضَارِعُ) for "he": prefix يَـ + root. يَكْتُبُ (he writes), يَقْرَأُ (he reads), يَذْهَبُ (he goes). Ending ـُ signals present tense.',
@@ -1616,8 +1651,8 @@ const SESSIONS = [
     grammar:'Imperative (الْأَمْرُ) from present tense: يَكْتُبُ → اُكْتُبْ (Write!). For feminine: اُكْتُبِي. For plural: اُكْتُبُوا. Note the hamzat al-waṣl (اُ) at the start.',
     vocab:[{ar:"اُكْتُبْ",en:"Write! (m.)"},{ar:"اقْرَأْ",en:"Read! (m.)"},{ar:"اِجْلِسْ",en:"Sit! (m.)"},{ar:"اُخْرُجْ",en:"Go out! (m.)"}],
     patternTiles:[
-      { emoji:"✍️", en:"Write the lesson!", tiles:["اُكْتُبِ","الدَّرْسَ","الْكِتَابَ","اقْرَأْ"], answer:["اُكْتُبِ","الدَّرْسَ"] },
-      { emoji:"📖", en:"Read the book!", tiles:["اقْرَأِ","الْكِتَابَ","الدَّرْسَ","اُكْتُبِ"], answer:["اقْرَأِ","الْكِتَابَ"] },
+      { emoji:"✍️", en:"Write the lesson!", tiles:["اُكْتُبْ","الدَّرْسَ","الْكِتَابَ","اقْرَأْ"], answer:["اُكْتُبْ","الدَّرْسَ"] },
+      { emoji:"📖", en:"Read the book!", tiles:["اقْرَأْ","الْكِتَابَ","الدَّرْسَ","اُكْتُبْ"], answer:["اقْرَأْ","الْكِتَابَ"] },
       { emoji:"🪑", en:"Sit on the chair!", tiles:["اِجْلِسْ","عَلَى","الْكُرْسِيِّ","الطَّاوِلَةِ","اُكْتُبْ"], answer:["اِجْلِسْ","عَلَى","الْكُرْسِيِّ"] },
       { emoji:"🚪", en:"Go out of the house!", tiles:["اُخْرُجْ","مِنَ","الْبَيْتِ","الْمَسْجِدِ","اِجْلِسْ"], answer:["اُخْرُجْ","مِنَ","الْبَيْتِ"] },
     ]},
@@ -1640,7 +1675,7 @@ const SESSIONS = [
     vocab:[{ar:"كِتَابَانِ",en:"two books"},{ar:"طَالِبَانِ",en:"two students (m.)"},{ar:"هُمَا",en:"the two of them"},{ar:"هَذَانِ",en:"these two (m.)"}]},
 
   { id:35, book:2, lessonRef:"2.6", part:"A", title:"الْأَعْدَادُ ١–٥", titleEn:"Numbers 1–5",
-    grammar:'Numbers 3–10 come before noun, use opposite gender: ثَلَاثَةُ كُتُبٍ (3 books — masc. noun, so number has ةٌ). Noun is plural genitive.',
+    grammar:'1 follows the noun and agrees in gender: كِتَابٌ وَاحِدٌ. 2 uses the dual: كِتَابَانِ. Numbers 3–10 precede the noun and use the OPPOSITE gender: ثَلَاثَةُ كُتُبٍ (3 books — كُتُب is masculine, so number takes ةٌ). The counted noun is plural genitive.',
     vocab:[{ar:"وَاحِدٌ",en:"one"},{ar:"اثْنَانِ",en:"two"},{ar:"ثَلَاثَةٌ",en:"three"},{ar:"أَرْبَعَةٌ",en:"four"},{ar:"خَمْسَةٌ",en:"five"}]},
   { id:36, book:2, lessonRef:"2.6", part:"B", title:"الْأَعْدَادُ ٦–١٠", titleEn:"Numbers 6–10",
     grammar:'كَمْ (how many?) takes singular accusative: كَمْ كِتَابًا؟ Numbers 6–10 follow opposite-gender rule. عَشَرَةٌ = ten.',
