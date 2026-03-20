@@ -683,7 +683,7 @@ const EMOJI = {
   "book":"📖","pen":"🖊️","key":"🔑","door":"🚪","pencil":"✏️",
   "house":"🏠","home":"🏠","mosque":"🕌","star":"⭐","stone":"🪨","rock":"🪨",
   "bed":"🛏️","chair":"🪑","desk":"🖥️","desk/office":"🗂️","office":"🏢","wall":"🧱",
-  "table":"🪑","lamp":"💡","light":"💡","window":"🪟","room":"🛋️",
+  "table":"🪑","lamp":"🪔","light":"💡","window":"🪟","room":"🛋️",
   "shirt":"👕","clothes":"👔","garment":"👔","ring":"💍","sword":"⚔️",
   "car":"🚗","boat":"⛵","ship":"🚢","road":"🛣️","path":"🛤️",
   "food":"🍽️","bread":"🍞","water":"💧","milk":"🥛","fruit":"🍎",
@@ -774,6 +774,7 @@ const UR_VOCAB = {
   "house":"گھر","mosque":"مسجد","star":"ستارہ","stone":"پتھر",
   // L1.1C — animals
   "dog":"کتا","cat":"بلی","donkey":"گدھا","camel":"اونٹ","horse":"گھوڑا",
+  "wolf":"بھیڑیا","elephant":"ہاتھی","and":"اور",
   // L1.1D — professions & clothing
   "imam":"امام","doctor":"ڈاکٹر","merchant":"تاجر","handkerchief":"رومال","shirt":"قمیص",
   "messenger":"رسول","lamp":"چراغ",
@@ -871,7 +872,9 @@ const getUrdu = (en) => UR_VOCAB[en] || null;
 const UR_GRAMMAR = {
   1: 'هَذَا کا مطلب "یہ" ہے مذکر اشیاء کے لیے۔ مَا هَذَا؟ = یہ کیا ہے؟ جواب: هَذَا كِتَابٌ۔ غیر معرفہ اسموں پر ـٌ (تنوین ضم) آتی ہے۔',
   2: 'مزید هَذَا جملے۔ ـٌ سے اسم غیر معرفہ ہوتا ہے ("ایک کتاب")۔ عربی میں ہر اسم مذکر یا مؤنث ہوتا ہے۔',
-  // id:3 Animals, id:4 Professions, id:5 Yes/No — vocab-only sessions, no grammar note
+  3: 'مزید هَذَا/ذَلِكَ جانوروں کے ساتھ — یہ تمام اسم مذکر ہیں۔ وَ کا مطلب "اور" ہے اور یہ اگلے لفظ سے ملا کر لکھا جاتا ہے: هَذَا فِيلٌ وَذَلِكَ جَمَلٌ۔',
+  4: 'مَنْ هَذَا؟ = یہ کون ہے؟ — انسانوں کے لیے مَنْ استعمال ہوتا ہے۔ مَا هَذَا؟ — چیزوں کے لیے۔ مثال: مَنْ هَذَا؟ هَذَا إِمَامٌ۔ مَا هَذَا؟ هَذَا قَمِيصٌ۔',
+  5: 'أَ (ہمزہ سابقہ) جملے کو ہاں/نہیں سوال بناتا ہے: أَهَذَا مَسْجِدٌ؟ = کیا یہ مسجد ہے؟ جواب: نَعَمْ (ہاں) یا لَا (نہیں)۔ هَلْ بھی اسی معنی میں ہے۔',
   6: 'ذَلِكَ = "وہ" — مذکر، دور کے لیے۔ هَذَا كِتَابٌ (یہ کتاب ہے) بمقابلہ ذَلِكَ كِتَابٌ (وہ کتاب ہے)۔',
   7: 'هَذَا اور ذَلِكَ کی مشق۔ مَنْ هَذَا؟ = یہ کون ہے؟ (انسانوں کے لیے)۔',
   8: 'الـ اسم کو معرفہ بناتا ہے: كِتَابٌ → الْكِتَابُ۔ ـٌ ختم ہو کر ـُ آتی ہے۔ "قمری حروف" کے ساتھ الـ پوری پڑھی جاتی ہے: الْبَيْتُ۔',
@@ -970,6 +973,7 @@ const UR_HINTS = {
   "This is a teacher and that is a student.":"یہ ایک استاد ہے اور وہ ایک طالب علم ہے۔",
   "That is a noble messenger.":"وہ ایک شریف رسول ہے۔",
   "He is a messenger.":"وہ رسول ہے۔",
+  "This is a messenger.":"یہ ایک رسول ہے۔",
   "She is a believer.":"وہ مومنہ ہے۔",
   // Book 2 patternTile hints
   "He writes.":"وہ لکھتا ہے۔","He reads.":"وہ پڑھتا ہے۔","He goes.":"وہ جاتا ہے۔","The student sits.":"طالب علم بیٹھتا ہے۔",
@@ -1264,9 +1268,9 @@ const SESSIONS = [
     grammar:'مَنْ هَذَا؟ = Who is this? Used for people: مَنْ هَذَا؟ هَذَا إِمَامٌ. مَا هَذَا؟ هَذَا قَمِيصٌ.',
     vocab:[{ar:"إِمَامٌ",en:"imam"},{ar:"رَسُولٌ",en:"messenger"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"سِرَاجٌ",en:"lamp"},{ar:"قَمِيصٌ",en:"shirt"}],
     patternTiles:[
-      {question:"مَنْ هَذَا؟", tiles:["هَذَا","رَسُولٌ","إِمَامٌ","تَاجِرٌ"], answer:["هَذَا","رَسُولٌ"]},
+      {en:"This is a messenger.", tiles:["هَذَا","رَسُولٌ","إِمَامٌ","تَاجِرٌ"], answer:["هَذَا","رَسُولٌ"]},
       {emoji:"👕", question:"مَا هَذَا؟", tiles:["هَذَا","قَمِيصٌ","سِرَاجٌ","كِتَابٌ","قَلَمٌ"], answer:["هَذَا","قَمِيصٌ"]},
-      {emoji:"🕌", question:"مَنْ هَذَا؟", tiles:["هَذَا","إِمَامٌ","رَسُولٌ","تَاجِرٌ"], answer:["هَذَا","إِمَامٌ"]},
+      {emoji:"👳🏼‍♂️", question:"مَنْ هَذَا؟", tiles:["هَذَا","إِمَامٌ","رَسُولٌ","تَاجِرٌ"], answer:["هَذَا","إِمَامٌ"]},
       {emoji:"🪔", question:"مَا هَذَا؟", tiles:["هَذَا","سِرَاجٌ","قَمِيصٌ","بَابٌ","كِتَابٌ"], answer:["هَذَا","سِرَاجٌ"]},
     ]},
 
@@ -3225,8 +3229,9 @@ function GrammarCard({ session, onStart, lang = "en" }) {
 
       {/* ── Session header ─────────────────────────────────────── */}
       <div style={{background:"linear-gradient(135deg,#eff6ff,#dbeafe)",border:"1px solid #93c5fd",borderRadius:16,padding:"16px 16px 14px",marginBottom:12,textAlign:"center"}}>
-        <div style={{fontSize:11,color:"#3b82f6",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:4,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>
+        <div style={{fontSize:11,color:"#3b82f6",fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:4,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr",display:"flex",alignItems:"center",justifyContent:"center",gap:6}}>
           {t.bookLessonPart(session.book, session.lessonRef, session.part)}
+          {session.book>1&&<span style={{fontSize:9,background:"#dbeafe",color:"#2563eb",border:"1px solid #93c5fd",borderRadius:4,padding:"1px 6px",fontWeight:700,letterSpacing:0.5,textTransform:"uppercase",fontFamily:isUrdu?urFont:"inherit"}}>{isUrdu?"آزمائشی":"Beta"}</span>}
         </div>
         <div style={{fontSize:titleSize,fontWeight:700,color:"#1e40af",fontFamily:arFont,direction:"rtl",marginBottom:4,lineHeight:1.4}}>
           {isUrdu ? session.title.split(" — ")[0].split(" (")[0].trim() : session.title}
@@ -3847,8 +3852,9 @@ export default function MadinahArabicApp() {
                       display:"flex",alignItems:"center",justifyContent:"space-between",
                     }}>
                     <div style={{flex:1}}>
-                      <div style={{fontSize:10,color:bookUnlocked?"rgba(255,255,255,0.75)":"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:0.8,fontFamily:lang==="ur"?urFont:"inherit"}}>
+                      <div style={{fontSize:10,color:bookUnlocked?"rgba(255,255,255,0.75)":"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:0.8,fontFamily:lang==="ur"?urFont:"inherit",display:"flex",alignItems:"center",gap:5}}>
                         {lang==="ur"?`کتاب ${bookNum}`:`BOOK ${bookNum}`}
+                        {bookNum>1&&<span style={{fontSize:8,background:"rgba(255,255,255,0.28)",borderRadius:4,padding:"1px 5px",fontWeight:700,letterSpacing:0.5,textTransform:"uppercase",fontFamily:"inherit"}}>{lang==="ur"?"آزمائشی":"Beta"}</span>}
                       </div>
                       <div style={{fontSize:18,fontWeight:800,color:bookUnlocked?"white":"#475569",fontFamily:arFont,direction:"rtl",lineHeight:1.3,marginTop:2}}>
                         {meta.ar}
