@@ -1326,12 +1326,29 @@ const SESSIONS = [
     ]},
 
   { id:8, book:1, lessonRef:"1.3", part:"A", title:"الـ — The Definite Article (Part 1)", titleEn:"Making Nouns Definite",
+    recognitionOpener:{
+      urHeading:"آپ یہ الفاظ جانتے ہیں",
+      enHeading:"You already know these words",
+      words:[
+        {ar:"الرَّحْمٰنِ", note_ur:"بِسْمِ اللهِ الرَّحْمٰنِ سے", note_en:"from Bismillāh"},
+        {ar:"الرَّحِيمِ",  note_ur:"بِسْمِ اللهِ … الرَّحِيمِ سے", note_en:"from Bismillāh"},
+        {ar:"الْحَمْدُ",  note_ur:"اَلْحَمْدُ لِلَّهِ سے", note_en:"from Al-Ḥamdu lillāh"},
+        {ar:"الْكِتَابُ", note_ur:"ذَٰلِكَ الْكِتَابُ — سورۃ البقرہ", note_en:"Dhālikal-kitābu — Al-Baqarah 2:2"},
+      ],
+      urReveal:'اِن سب میں "ال" ہے — "ال" کا مطلب ہے "وہ مخصوص، وہ خاص"۔ آپ ہمیشہ سے "the" کہتے آئے ہیں، بس معنی نہیں جانتے تھے!',
+      enReveal:'Every word above contains "al-" — meaning "the specific, the particular one." You\'ve always been saying "the," you just didn\'t know it.',
+    },
     grammar:'الـ makes a noun definite: كِتَابٌ → الْكِتَابُ. The ـٌ disappears, replaced by ـُ. With "moon letters" الـ is fully pronounced: الْبَيْتُ.',
     grammarExamples:[
       { ar:"كِتَابٌ ← الْكِتَابُ", en:"a book → the book (tanwīn drops, ـُ stays)", ur:"کتاب ← الکتاب (تنوین گرتی ہے، ـُ رہتی ہے)" },
       { ar:"بَيْتٌ ← الْبَيْتُ", en:"a house → the house (moon letter: ل is heard)", ur:"گھر ← البیت (قمری حرف: ل ادا ہوتا ہے)" },
     ],
-    vocab:[{ar:"الْكِتَابُ",en:"the book"},{ar:"الْقَلَمُ",en:"the pen"},{ar:"الْبَيْتُ",en:"the house"},{ar:"الْبَابُ",en:"the door"}],
+    vocab:[
+      {ar:"الْكِتَابُ", en:"the book",  indef:"كِتَابٌ",  indefUrdu:"کتاب"},
+      {ar:"الْقَلَمُ",  en:"the pen",   indef:"قَلَمٌ",   indefUrdu:"قلم"},
+      {ar:"الْبَيْتُ",  en:"the house", indef:"بَيْتٌ",   indefUrdu:"گھر"},
+      {ar:"الْبَابُ",   en:"the door",  indef:"بَابٌ",    indefUrdu:"دروازہ"},
+    ],
     alTransformExercises:[
       { word:"كِتَابٌ", wordEn:"book", correct:"الْكِتَابُ",
         options:["الْكِتَابُ","الْكِتَابِ","كِتَابُ","الْكِتَابَ"] },
@@ -1344,6 +1361,7 @@ const SESSIONS = [
     ],
     patternTiles:[
       {
+        definiteCtx:true,
         en:"That is the Book — no doubt in it.",
         quran:{ref:"Al-Baqarah 2:2", en:"That is the Book, about which there is no doubt"},
         prebaked:[{ar:"لَا",en:"no"},{ar:"رَيْبَ",en:"doubt"},{ar:"فِيهِ",en:"in it"}],
@@ -1351,6 +1369,7 @@ const SESSIONS = [
         answer:["ذَٰلِكَ","الْكِتَابُ","لَا","رَيْبَ","فِيهِ"]
       },
       {
+        definiteCtx:true,
         en:"The Ancient House.",
         quran:{ref:"Al-Hajj 22:29", en:"...and circumambulate the Ancient House"},
         prebaked:[{ar:"الْعَتِيقُ",en:"the Ancient"}],
@@ -1359,13 +1378,29 @@ const SESSIONS = [
       },
     ]},
   { id:9, book:1, lessonRef:"1.3", part:"B", title:"الـ — Sun & Moon Letters", titleEn:"Sun Letters (Part 2)",
+    recognitionOpener:{
+      urHeading:"یہ بھی آپ کے منہ پر ہیں",
+      enHeading:"These are already on your tongue",
+      words:[
+        {ar:"الرَّحْمٰنِ", note_ur:"رَ شمسی — اَر-رحمٰن (ل خاموش)", note_en:"ر sun letter → ar-raḥmān (ل silent)"},
+        {ar:"الرَّحِيمِ",  note_ur:"رَ شمسی — اَر-رحیم (ل خاموش)",  note_en:"ر sun letter → ar-raḥīm (ل silent)"},
+        {ar:"النَّاسِ",    note_ur:"نَ شمسی — اَن-ناس (ل خاموش)",   note_en:"ن sun letter → an-nās (ل silent)"},
+      ],
+      urReveal:'"ال" میں ل نہیں بولتے جب اگلا حرف شمسی ہو — اگلا حرف دوگنا ہو جاتا ہے۔ آپ نے یہ ہمیشہ صحیح پڑھا، بس قاعدہ نہیں جانتے تھے!',
+      enReveal:'When الـ precedes a sun letter, the ل is silent — the next letter doubles instead. You\'ve always pronounced this correctly without knowing the rule.',
+    },
     grammar:'With "sun letters" (ت،ث،د،ذ،ر،ز،س،ش،ص،ض،ط،ظ،ل،ن) the ل of الـ assimilates. Written but not pronounced — the first letter doubles instead.',
     grammarExamples:[
       { ar:"الْقَمَرُ", en:"Moon letter ق → al-qamar (ل is heard)", ur:"قمری حرف: ق — ل ادا ہوتا ہے" },
       { ar:"الشَّمْسُ", en:"Sun letter ش → ash-shams (ل silent, ش doubles)", ur:"شمسی حرف: ش — ل خاموش، ش دوگنا" },
       { ar:"الرَّجُلُ", en:"Sun letter ر → ar-rajul (ل silent, ر doubles)", ur:"شمسی حرف: ر — ل خاموش، ر دوگنا" },
     ],
-    vocab:[{ar:"الشَّمْسُ",en:"the sun"},{ar:"الرَّجُلُ",en:"the man"},{ar:"النَّجْمُ",en:"the star"},{ar:"الطَّالِبُ",en:"the student"}],
+    vocab:[
+      {ar:"الشَّمْسُ",  en:"the sun",     indef:"شَمْسٌ",   indefUrdu:"سورج"},
+      {ar:"الرَّجُلُ",  en:"the man",     indef:"رَجُلٌ",   indefUrdu:"مرد"},
+      {ar:"النَّجْمُ",  en:"the star",    indef:"نَجْمٌ",   indefUrdu:"ستارہ"},
+      {ar:"الطَّالِبُ", en:"the student", indef:"طَالِبٌ",  indefUrdu:"طالب علم"},
+    ],
     sunMoonExercises:[
       { words:[
           {ar:"الشَّمْسُ",  en:"the sun",     isSun:true },
@@ -1379,6 +1414,7 @@ const SESSIONS = [
     ],
     patternTiles:[
       {
+        definiteCtx:true,
         en:"The sun and the moon move by precise measure.",
         quran:{ref:"Ar-Rahman 55:5", en:"The sun and the moon move by precise calculation"},
         prebaked:[{ar:"بِحُسْبَانٍ",en:"by precise measure"}],
@@ -1386,6 +1422,7 @@ const SESSIONS = [
         answer:["الشَّمْسُ","وَالْقَمَرُ","بِحُسْبَانٍ"]
       },
       {
+        definiteCtx:true,
         en:"And the stars and the trees bow down.",
         quran:{ref:"Ar-Rahman 55:6", en:"And the stars and the trees prostrate"},
         prebaked:[{ar:"وَالشَّجَرُ",en:"and the trees"},{ar:"يَسْجُدَانِ",en:"bow down"}],
@@ -2706,6 +2743,12 @@ function PatternTileEx({ exercise, onResult, lang = "en" }) {
           <span style={{fontSize:12,fontWeight:700,color:"#92400e"}}>{exercise.quran.ref}</span>
         </div>
       )}
+      {/* Definite article context cue */}
+      {exercise.definiteCtx && (
+        <div style={{display:"inline-block",fontSize:11,fontWeight:700,color:"#1d4ed8",background:"#dbeafe",border:"1px solid #93c5fd",borderRadius:20,padding:"2px 12px",marginBottom:8,fontFamily:isUrdu?urFont:"inherit"}}>
+          {isUrdu ? "مخصوص (الـ)" : "definite form (الـ)"}
+        </div>
+      )}
       {/* Prompt — emoji, translated sentence, or Arabic question */}
       {exercise.emoji
         ? <div style={{lineHeight:1,marginBottom:8}}><EmojiImg emoji={exercise.emoji} size={72}/></div>
@@ -3241,6 +3284,31 @@ function GrammarCard({ session, onStart, lang = "en" }) {
         </div>
       </div>
 
+      {/* ── Recognition opener (definite article sessions) ─────── */}
+      {session.recognitionOpener && (() => {
+        const ro = session.recognitionOpener;
+        return (
+          <div style={{background:"linear-gradient(135deg,#f0fdf4,#dcfce7)",border:"1px solid #86efac",borderRadius:14,padding:"14px 16px",marginBottom:14}}>
+            <div style={{fontSize:11,fontWeight:800,color:"#15803d",textTransform:"uppercase",letterSpacing:1,marginBottom:10,fontFamily:isUrdu?urFont:"inherit",textAlign:isUrdu?"right":"left"}}>
+              ✨ {isUrdu ? ro.urHeading : ro.enHeading}
+            </div>
+            <div style={{display:"flex",gap:8,marginBottom:12,justifyContent:"center",flexWrap:"wrap"}}>
+              {ro.words.map((w,i)=>(
+                <div key={i} style={{background:"white",border:"1px solid #86efac",borderRadius:10,padding:"8px 12px",textAlign:"center",minWidth:84}}>
+                  <div style={{fontSize:22,fontFamily:arFont,fontWeight:700,color:"#1e293b",direction:"rtl",lineHeight:1.6}}>{w.ar}</div>
+                  <div style={{fontSize:10,color:"#16a34a",fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr",marginTop:2,lineHeight:1.4}}>
+                    {isUrdu ? w.note_ur : w.note_en}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{fontSize:13,color:"#14532d",lineHeight:1.8,fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr",textAlign:isUrdu?"right":"left",background:"rgba(255,255,255,0.65)",borderRadius:8,padding:"8px 12px"}}>
+              {isUrdu ? ro.urReveal : ro.enReveal}
+            </div>
+          </div>
+        );
+      })()}
+
       {/* ── Grammar section ────────────────────────────────────── */}
       {grammarNote && (
         <div style={{background:"#fffbeb",border:"1px solid #fcd34d",borderRadius:14,padding:"14px 16px",marginBottom:14}}>
@@ -3287,15 +3355,26 @@ function GrammarCard({ session, onStart, lang = "en" }) {
         {session.vocab.map((word,i)=>{
           const em = getEmoji(word.en);
           const meaning = isUrdu ? (getUrdu(word.en) || word.en) : word.en;
+          const hasContrast = !!word.indef;
           return (
-            <div key={i} style={{background:"#f8fafc",borderRadius:10,padding:"12px 10px",border:"1px solid #e2e8f0",textAlign:"center"}}>
+            <div key={i} style={{background:"#f8fafc",borderRadius:10,padding:"12px 10px",border:hasContrast?"1px solid #93c5fd":"1px solid #e2e8f0",textAlign:"center"}}>
               {em && <div style={{lineHeight:1.3,marginBottom:4}}><EmojiImg emoji={em} size={32}/></div>}
               <div style={{fontSize:vocabArSize,fontWeight:700,color:"#1e293b",fontFamily:arFont,direction:"rtl",lineHeight:1.6}}>{word.ar}</div>
               <div style={{
                 fontSize:13,color:"#475569",fontWeight:600,
                 fontFamily:isUrdu?urFont:"inherit",
                 direction:isUrdu?"rtl":"ltr",
-              }}>{meaning}</div>
+              }}>
+                {hasContrast && isUrdu ? `${meaning} (وہی مخصوص)` : meaning}
+              </div>
+              {hasContrast && (
+                <div style={{marginTop:5,paddingTop:5,borderTop:"1px dashed #cbd5e1",display:"flex",alignItems:"center",justifyContent:"center",gap:4,direction:"rtl",flexWrap:"wrap"}}>
+                  <span style={{fontSize:15,fontFamily:arFont,fontWeight:600,color:"#94a3b8"}}>{word.indef}</span>
+                  <span style={{fontSize:10,color:"#94a3b8",fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>
+                    {isUrdu ? `= ${word.indefUrdu || ""} (ایک)` : `= ${word.en.replace("the ","")} (indef.)`}
+                  </span>
+                </div>
+              )}
             </div>
           );
         })}
