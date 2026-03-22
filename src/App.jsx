@@ -2100,8 +2100,16 @@ function buildExercises(session, lang = "en") {
   // Extra prior words give lightweight spaced-repetition alongside new vocab.
   const pool = vocab.length >= 6 ? vocab.slice(0, 6) : [...vocab, ...shuffle(allPrior).slice(0, 6 - vocab.length)];
 
-  // Helper: get display label for a vocab word in the active language
-  const getLabel = (w) => lang === "ur" ? (getUrdu(w.en) || w.en) : w.en;
+  // Helper: get display label for a vocab word in the active language.
+  // In Urdu mode, definite-article words ("the book") get "(مخصوص)" appended so
+  // learners can distinguish الْكِتَابُ from كِتَابٌ — Urdu has no equivalent of "the".
+  const getLabel = (w) => {
+    if (lang === "ur") {
+      const urdu = getUrdu(w.en) || w.en;
+      return w.en.startsWith("the ") ? `${urdu} (مخصوص)` : urdu;
+    }
+    return w.en;
+  };
 
   // ── BUCKET 1: Grammar / production exercises (shown first) ──────────────
   const grammarExs = [];
