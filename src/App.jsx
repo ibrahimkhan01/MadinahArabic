@@ -1279,15 +1279,19 @@ const SESSIONS = [
     vocab:[{ar:"نَعَمْ",en:"yes"},{ar:"لَا",en:"no"},{ar:"أَهَذَا",en:"Is this...? (m.)"},{ar:"هَلْ",en:"Is...? (yes/no question)"}],
     patternTiles:[
       { emoji:"📖", question:"أَهَذَا كِتَابٌ؟",
+        hint:"Yes, this is a book.", hintUr:"ہاں، یہ کتاب ہے۔",
         tiles:["نَعَمْ","هَذَا","كِتَابٌ","لَا","قَلَمٌ"],
         answer:["نَعَمْ","هَذَا","كِتَابٌ"] },
       { emoji:"🐈", question:"أَهَذَا كَلْبٌ؟",
+        hint:"No, this is a cat.", hintUr:"نہیں، یہ بلی ہے۔",
         tiles:["لَا","هَذَا","قِطٌّ","نَعَمْ","حِمَارٌ"],
         answer:["لَا","هَذَا","قِطٌّ"] },
       { emoji:"🏠", question:"أَهَذَا بَيْتٌ؟",
+        hint:"Yes, this is a house.", hintUr:"ہاں، یہ گھر ہے۔",
         tiles:["نَعَمْ","هَذَا","بَيْتٌ","لَا","مَسْجِدٌ"],
         answer:["نَعَمْ","هَذَا","بَيْتٌ"] },
       { emoji:"🐕", question:"أَهَذَا قِطٌّ؟",
+        hint:"No, this is a dog.", hintUr:"نہیں، یہ کتا ہے۔",
         tiles:["لَا","هَذَا","كَلْبٌ","نَعَمْ","حِمَارٌ"],
         answer:["لَا","هَذَا","كَلْبٌ"] },
     ]},
@@ -2766,6 +2770,11 @@ function PatternTileEx({ exercise, onResult, lang = "en" }) {
         <div style={{marginBottom:4}}>
           <span style={{fontSize:28,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl"}}>{exercise.question}</span>
           <SpeakBtn text={exercise.question} size={18}/>
+        </div>
+      )}
+      {exercise.hint && (
+        <div style={{fontSize:13,color:"#475569",marginBottom:6,fontStyle:"italic",fontFamily:isUrdu?urFont:"inherit",direction:isUrdu?"rtl":"ltr"}}>
+          {isUrdu && exercise.hintUr ? exercise.hintUr : exercise.hint}
         </div>
       )}
       {/* Gold tiles hint */}
