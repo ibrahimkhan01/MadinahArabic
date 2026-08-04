@@ -784,6 +784,22 @@ function shuffle(arr) {
 // (nominative / accusative / genitive) and definite/indefinite swaps.
 // Used to generate plausible distractors in tile exercises so students must
 // identify the correct iʿrāb ending, not just the word.
+// ── Sun and moon letters ─────────────────────────────────────────────────────
+// After الـ, a "sun letter" assimilates the lām: it is written with shadda on the
+// letter and no sukūn on the lām (السِّرَاجُ, said "as-sirāju"). A "moon letter"
+// keeps the lām fully pronounced and written with sukūn (الْقَمَرُ, "al-qamaru").
+const SUN_LETTERS = "تثدذرزسشصضطظلن";
+const MOON_LETTERS = "ابجحخعغفقكمهوي";
+
+// Attach the definite article to a bare stem, honouring the sun/moon rule.
+function withArticle(stem) {
+  const first = stem[0];
+  if (!SUN_LETTERS.includes(first)) return "الْ" + stem;          // moon: الْ + stem
+  const rest = stem.slice(1);
+  // Shadda goes directly after the letter, before its vowel; never double it.
+  return "ال" + first + (rest.startsWith("ّ") ? "" : "ّ") + rest;
+}
+
 function makeCaseVariants(ar) {
   const NOM_I = '\u064C'; // ٌ  indefinite nominative (tanwīn ḍamm)
   const GEN_I = '\u064D'; // ٍ  indefinite genitive   (tanwīn kasr)
@@ -799,7 +815,8 @@ function makeCaseVariants(ar) {
   if (last === NOM_I) {
     // Indefinite nominative → add indefinite genitive + definite nominative
     variants.add(stem + GEN_I);
-    if (!isDefinite) variants.add('\u0627\u0644\u0652' + stem + NOM_D); // الْ + stem + ُ
+    // Was a blind "الْ" + stem, which produced الْسِرَاجُ for sun letters.
+    if (!isDefinite) variants.add(withArticle(stem) + NOM_D);
   } else if (last === GEN_I) {
     // Indefinite genitive → add indefinite nominative
     variants.add(stem + NOM_I);
@@ -868,19 +885,39 @@ const TANWIN_RESPELL = { "ٌ": "ُنْ", "ٍ": "ِنْ", "ً": "َنْ" };
 const SHORT_VOWEL_MODE = "lengthen";
 const SHORT_VOWEL_LETTER = { "ُ": "و", "ِ": "ي", "َ": "ا" };
 
-// Words that must never be lengthened, because distorting them is worse than
-// letting the voice use pausal form. Lengthening اللهِ yields "Allāhī", which is
-// simply wrong; "Allāh" is the normal, correct pausal reading.
-const NO_LENGTHEN_FINAL = [/الل[هَهُهِ]?ِ?$/, /^اللهُ?$/];
+// The divine name is left completely alone by every respelling rule below.
+// Every Arabic voice already knows الله as a lexical item and reads it correctly,
+// so rewriting its spelling risks losing that; and lengthening it would yield
+// "Allāhī", plainly wrong where "Allāh" is the normal, correct pausal reading.
+function isDivineName(token) {
+  const n = token.replace(/[ً-ْٰ]/g, "");
+  return n.includes("الله") || /^[وفبتكل]?لل?ه$/.test(n);
+}
+
+// The lām of الـ before a sun letter is silent and the letter is doubled. Voices
+// tend to read the written lām anyway ("al-sirāj"), so drop it for audio and keep
+// the doubled letter: السِّرَاجُ → اَسِّرَاجُ ("as-sirāju"). An attached particle keeps
+// its vowel, since the article's alif elides after it (وَالشَّجَرُ → وَشَّجَرُ).
+function applySunLetter(text) {
+  return text.split(/(\s+)/).map(tok => {
+    if (/^\s*$/.test(tok) || isDivineName(tok)) return tok;
+    return tok.replace(/^([وفبك][َُِ]?)?ا?لْ?([ء-ي])([ً-ْٰ]*)/, (whole, particle, letter, marks) => {
+      if (!SUN_LETTERS.includes(letter)) return whole;      // moon letter: leave alone
+      // Strip any shadda already present, then emit exactly one in canonical
+      // order (shadda before the vowel) so it can never stack up.
+      const rest = letter + "ّ" + marks.replace(/ّ/g, "");
+      return particle ? particle + rest : "اَ" + rest;       // وَالشَّجَرُ → وَشَّجَرُ · السِّرَاجُ → اَسِّرَاجُ
+    });
+  }).join("");
+}
 
 function ttsForm(text) {
   if (SAY_AS[text]) return SAY_AS[text];
-  let out = applyIdgham(text);
+  let out = applySunLetter(applyIdgham(text));
   // Final tanwīn → explicit nūn. The alif of ـًا is dropped; the nūn replaces it.
   out = out.replace(/([ًٌٍ])[اى]?\s*$/, (_, tw) => TANWIN_RESPELL[tw]);
   // Final bare short vowel → keep it from being swallowed by pausal form.
-  const lastWord = out.split(/\s+/).pop();
-  const exempt = NO_LENGTHEN_FINAL.some(re => re.test(lastWord));
+  const exempt = isDivineName(out.split(/\s+/).pop());
   out = out.replace(/([َُِ])\s*$/, (_, v) =>
     (SHORT_VOWEL_MODE === "lengthen" && SHORT_VOWEL_LETTER[v] && !exempt)
       ? v + SHORT_VOWEL_LETTER[v]
