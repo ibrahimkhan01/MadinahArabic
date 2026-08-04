@@ -419,7 +419,7 @@ const QURAN_CONNECTIONS = {
   ],
   // ── Animals (Book 1 sessions 3 & 16) ──────────────────────────────────────
   'حوت': [
-    { ar: 'فَالْتَقَمَهُ الْحُوتُ وَهُوَ مُلِيمٌ', en: 'Then the whale swallowed him, while he was blameworthy', ref: 'Al-Ṣāffāt 37:142' },
+    { ar: 'فَالْتَقَمَهُ الْحُوتُ وَهُوَ مُلِيمٌ', en: 'Then the fish swallowed him, while he was blameworthy', ref: 'Al-Ṣāffāt 37:142' },
     { ar: 'فَلَمَّا بَلَغَا مَجْمَعَ بَيْنِهِمَا نَسِيَا حُوتَهُمَا', en: 'But when they reached the junction between them, they forgot their fish', ref: 'Al-Kahf 18:61' },
   ],
   'خنزير': [
@@ -741,7 +741,7 @@ const EMOJI = {
   // Dual
   "two books":"📚","two students (m.)":"👨‍🎓","the two of them":"👫","these two (m.)":"👉",
   // Book 1 vocab whose exact keys were previously unmapped
-  "wolf":"🐺","donkey":"🫏","whale":"🐋","pig":"🐖","swine":"🐖",
+  "wolf":"🐺","donkey":"🫏","whale":"🐋","large fish (whale)":"🐋","pig":"🐖","swine":"🐖",
   "monkey":"🐒","ape":"🐒","spider":"🕷️","ant":"🐜","bee":"🐝","honey bee":"🐝","fly":"🪰",
   // NOTE: no emoji for مَلَكٌ (angel) or رَسُولٌ (messenger) — these are not depicted.
   "sky/heaven":"☁️","paradise/garden":"🌿","classroom":"🏫",
@@ -992,7 +992,7 @@ const SESSIONS = [
 
   { id:3, book:1, lessonRef:"1.1", part:"C", title:"الْحَيَوَانَاتُ", titleEn:"Animals",
     grammar:'More هَذَا/ذَلِكَ with animals. All these nouns are masculine. وَ means "and" — it attaches directly to the next word: هَذَا فِيلٌ وَذَلِكَ جَمَلٌ. Note: عَنْكَبُوتٌ (spider) can be treated as masculine or feminine; we use هَذَا with it here.',
-    vocab:[{ar:"كَلْبٌ",en:"dog"},{ar:"ذِئْبٌ",en:"wolf"},{ar:"حِمَارٌ",en:"donkey"},{ar:"جَمَلٌ",en:"camel"},{ar:"فِيلٌ",en:"elephant"},{ar:"حُوتٌ",en:"whale"},{ar:"خِنْزِيرٌ",en:"pig"},{ar:"قِرْدٌ",en:"monkey"},{ar:"عَنْكَبُوتٌ",en:"spider"},{ar:"وَ",en:"and"}],
+    vocab:[{ar:"كَلْبٌ",en:"dog"},{ar:"ذِئْبٌ",en:"wolf"},{ar:"حِمَارٌ",en:"donkey"},{ar:"جَمَلٌ",en:"camel"},{ar:"فِيلٌ",en:"elephant"},{ar:"حُوتٌ",en:"large fish (whale)"},{ar:"خِنْزِيرٌ",en:"pig"},{ar:"قِرْدٌ",en:"monkey"},{ar:"عَنْكَبُوتٌ",en:"spider"},{ar:"وَ",en:"and"}],
     patternTiles:[
       { en:"This is a wolf and that is a dog.",
         tiles:["هَذَا","ذِئْبٌ","وَ","ذَلِكَ","كَلْبٌ","حِمَارٌ"],
@@ -1003,7 +1003,7 @@ const SESSIONS = [
       { en:"This is a donkey and that is a camel.",
         tiles:["هَذَا","حِمَارٌ","وَ","ذَلِكَ","جَمَلٌ","ذِئْبٌ"],
         answer:["هَذَا","حِمَارٌ","وَ","ذَلِكَ","جَمَلٌ"] },
-      { en:"This is a whale and that is a monkey.",
+      { en:"This is a large fish and that is a monkey.",
         tiles:["هَذَا","حُوتٌ","وَ","ذَلِكَ","قِرْدٌ","خِنْزِيرٌ"],
         answer:["هَذَا","حُوتٌ","وَ","ذَلِكَ","قِرْدٌ"] },
       { emoji:"🕷️", question:"مَا هَذَا؟",
@@ -1469,7 +1469,9 @@ const REVIEWS = [
 // gloss(es) worth highlighting in a translation. Built from session vocabulary.
 const KEY_TO_EN_TERMS = (() => {
   const extra = {
-    'حوت': ['fish'],            // 18:61 renders حُوت as "fish"
+    // حُوت is a large fish in Quranic usage; "whale" is a later narrowing that
+    // most English translations apply at 37:142. Accept all three.
+    'حوت': ['fish', 'large fish', 'whale'],
     'قرد': ['ape'],             // verses use the plural قِرَدَة → "apes"
     'خنزير': ['swine'],         // 2:173 renders الخنزير as "swine"
     'نحلة': ['bee'],            // 16:68 uses the collective النَّحْل → "bees"
