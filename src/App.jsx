@@ -724,6 +724,7 @@ const EMOJI = {
   "don't go! (m.)":"✋","don't lie!":"✋","don't forget!":"✋","don't despair!":"🌟",
   // Question words
   "what? (what thing?)":"❓","how?":"❓","why?":"❓","which?":"❓",
+  "how":"❓",   // gloss lost its "?", keep كَيْفَ's existing icon
   "how are you?":"💬",
   // Transitive verbs
   "he gave":"🤲","he took":"✋","he understood":"💡","he asked":"❓",
@@ -874,7 +875,7 @@ const SESSIONS = [
 
   { id:1, book:1, lessonRef:"1.1", part:"A", title:"مَا هَذَا؟", titleEn:"What Is This? (Part 1)",
     grammar:'هَذَا means "this" for masculine objects. مَا هَذَا؟ = What is this? Answer: هَذَا كِتَابٌ. Nouns take ـٌ (tanwīn ḍamm) in the indefinite.',
-    vocab:[{ar:"هَذَا",en:"this (m.)"},{ar:"مَا",en:"what?"},{ar:"كِتَابٌ",en:"book"},{ar:"قَلَمٌ",en:"pen"},{ar:"مِفْتَاحٌ",en:"key"},{ar:"بَابٌ",en:"door"}],
+    vocab:[{ar:"هَذَا",en:"this (m.)"},{ar:"مَا",en:"what"},{ar:"كِتَابٌ",en:"book"},{ar:"قَلَمٌ",en:"pen"},{ar:"مِفْتَاحٌ",en:"key"},{ar:"بَابٌ",en:"door"}],
     patternTiles:[
       {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","كِتَابٌ","قَلَمٌ","مِفْتَاحٌ"], answer:["هَذَا","كِتَابٌ"]},
       {emoji:"🔑", question:"مَا هَذَا؟", tiles:["هَذَا","مِفْتَاحٌ","بَابٌ","كِتَابٌ"], answer:["هَذَا","مِفْتَاحٌ"]},
@@ -917,7 +918,7 @@ const SESSIONS = [
 
   { id:4, book:1, lessonRef:"1.1", part:"D", title:"الْمِهَنُ وَالْمَلَابِسُ", titleEn:"Professions & Clothing",
     grammar:'مَنْ هَذَا؟ = Who is this? Used for people: مَنْ هَذَا؟ هَذَا إِمَامٌ. مَا هَذَا؟ هَذَا قَمِيصٌ.',
-    vocab:[{ar:"مَنْ",en:"who?"},{ar:"إِمَامٌ",en:"imam"},{ar:"رَسُولٌ",en:"messenger"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"سِرَاجٌ",en:"lamp"},{ar:"قَمِيصٌ",en:"shirt"}],
+    vocab:[{ar:"مَنْ",en:"who"},{ar:"إِمَامٌ",en:"imam"},{ar:"رَسُولٌ",en:"messenger"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"سِرَاجٌ",en:"lamp"},{ar:"قَمِيصٌ",en:"shirt"}],
     patternTiles:[
       {en:"This is a messenger.", tiles:["هَذَا","رَسُولٌ","إِمَامٌ","تَاجِرٌ"], answer:["هَذَا","رَسُولٌ"]},
       {emoji:"👕", question:"مَا هَذَا؟", tiles:["هَذَا","قَمِيصٌ","سِرَاجٌ","كِتَابٌ","قَلَمٌ"], answer:["هَذَا","قَمِيصٌ"]},
@@ -1286,7 +1287,7 @@ const SESSIONS = [
 
   { id:21, book:1, lessonRef:"1.9", part:"A", title:"الْعَائِلَةُ (Part 1)", titleEn:"Family Vocabulary",
     grammar:'أَبٌ (father) and أَخٌ (brother) are irregular: أَبِي (my father), أَخِي (my brother). These are الْأَسْمَاءُ الْخَمْسَةُ — special nouns.',
-    vocab:[{ar:"أَبٌ",en:"father"},{ar:"أُمٌّ",en:"mother"},{ar:"أَخٌ",en:"brother"},{ar:"أُخْتٌ",en:"sister"},{ar:"كَيْفَ",en:"how?"}],
+    vocab:[{ar:"أَبٌ",en:"father"},{ar:"أُمٌّ",en:"mother"},{ar:"أَخٌ",en:"brother"},{ar:"أُخْتٌ",en:"sister"},{ar:"كَيْفَ",en:"how"}],
     patternTiles:[
       {emoji:"👨", question:"كَيْفَ أَبُوكَ؟", en:"My father is generous.", tiles:["أَبِي","كَرِيمٌ","أُمِّي","أَخِي"], answer:["أَبِي","كَرِيمٌ"]},
       {en:"I have a brother and a sister.", tiles:["عِنْدِي","أَخٌ","وَأُخْتٌ","أَبٌ","وَأُمٌّ"], answer:["عِنْدِي","أَخٌ","وَأُخْتٌ"]},
@@ -1308,7 +1309,7 @@ const SESSIONS = [
     ]},
   { id:24, book:1, lessonRef:"1.10", part:"B", title:"مُرَاجَعَةٌ — Book 1 Review", titleEn:"Book 1 Revision",
     grammar:'Review all Book 1 patterns: هَذَا/ذَلِكَ/هَذِهِ/تِلْكَ, الـ, adjective agreement, prepositions, pronouns, iḍāfa, الَّذِي.',
-    vocab:[{ar:"أَيْنَ",en:"where?"},{ar:"مَنْ",en:"who?"},{ar:"مَا",en:"what?"},{ar:"أَيْضًا",en:"also"}],
+    vocab:[{ar:"أَيْنَ",en:"where"},{ar:"مَنْ",en:"who"},{ar:"مَا",en:"what"},{ar:"أَيْضًا",en:"also"}],
     patternTiles:[
       {emoji:"🪑", question:"مَا ذَلِكَ؟", tiles:["ذَلِكَ","كُرْسِيٌّ","هَذَا","سَرِيرٌ"], answer:["ذَلِكَ","كُرْسِيٌّ"]},
       {en:"Where is the key?", tiles:["أَيْنَ","الْمِفْتَاحُ؟","مَنْ","الْبَابُ؟"], answer:["أَيْنَ","الْمِفْتَاحُ؟"]},
@@ -1500,7 +1501,12 @@ function HighlightedTranslation({ text, hlKey, hlEn }) {
   // Word boundaries here are hand-rolled: \b is ASCII-only and so fails on
   // transliterations such as "Kursī" or "masājid".
   const L = '[A-Za-z\u00C0-\u024F]';
-  const m = text.match(new RegExp(`(?<!${L})(${esc.join('|')})(?!${L})`, 'i'));
+  // When the Arabic carries a possessive suffix (قَمِيصِهِ, كُرْسِيُّهُ, أَبُوهُمَا) the
+  // whole token is highlighted, so the English must include the possessive to
+  // match: "his shirt", not just "shirt". The translation only says "his shirt"
+  // when the Arabic had the suffix, so absorbing it is safe.
+  const POSS = '(?:(?:his|her|their|its|your|my|our)\\s+)?';
+  const m = text.match(new RegExp(`(?<!${L})(${POSS}(?:${esc.join('|')}))(?!${L})`, 'i'));
   if (!m) return <>{text}</>;
   return <>
     {text.slice(0, m.index)}
