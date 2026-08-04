@@ -43,7 +43,7 @@ const QURAN_CONNECTIONS = {
     { ar: 'عَلَّمَ بِالْقَلَمِ', en: 'He taught by the pen', ref: 'Al-ʿAlaq 96:4' },
   ],
   'كرسي': [
-    { ar: 'وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ', en: 'And His Kursī extends over the heavens and the earth', ref: 'Al-Baqarah 2:255 (Āyat al-Kursī)' },
+    { ar: 'وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ', en: 'And His Kursī extends over the heavens and the earth', ref: 'Al-Baqarah 2:255 (Āyat al-Kursī)', hlEn: 'Kursī' },
   ],
   'بيت': [
     { ar: 'إِنَّ أَوَّلَ بَيْتٍ وُضِعَ لِلنَّاسِ لَلَّذِي بِبَكَّةَ', en: 'The first House established for mankind was that at Makkah', ref: 'Āl ʿImrān 3:96' },
@@ -51,15 +51,15 @@ const QURAN_CONNECTIONS = {
     { ar: 'أَن طَهِّرَا بَيْتِيَ لِلطَّائِفِينَ وَالْعَاكِفِينَ', en: 'Purify My House for those who circle it and those who stay there', ref: 'Al-Baqarah 2:125' },
   ],
   'مسجد': [
-    { ar: 'وَأَنَّ الْمَسَاجِدَ لِلَّهِ', en: 'And the masājid belong to Allah', ref: 'Al-Jinn 72:18' },
-    { ar: 'سُبْحَانَ الَّذِي أَسْرَى بِعَبْدِهِ لَيْلًا مِّنَ الْمَسْجِدِ الْحَرَامِ إِلَى الْمَسْجِدِ الْأَقْصَى', en: 'Glory be to Him who took His servant by night from Al-Masjid Al-Ḥarām to Al-Masjid Al-Aqṣā', ref: 'Al-Isrāʾ 17:1' },
+    { ar: 'وَأَنَّ الْمَسَاجِدَ لِلَّهِ', en: 'And the masājid belong to Allah', ref: 'Al-Jinn 72:18', hlEn: 'masājid' },
+    { ar: 'سُبْحَانَ الَّذِي أَسْرَى بِعَبْدِهِ لَيْلًا مِّنَ الْمَسْجِدِ الْحَرَامِ إِلَى الْمَسْجِدِ الْأَقْصَى', en: 'Glory be to Him who took His servant by night from Al-Masjid Al-Ḥarām to Al-Masjid Al-Aqṣā', ref: 'Al-Isrāʾ 17:1', hlEn: 'Al-Masjid' },
   ],
   'نجم': [
     { ar: 'وَالنَّجْمِ إِذَا هَوَىٰ', en: 'And by the star when it sets', ref: 'Al-Najm 53:1' },
     { ar: 'وَالنُّجُومَ مُسَخَّرَاتٍ بِأَمْرِهِ', en: 'And the stars, subjected by His command', ref: 'Al-Naḥl 16:12' },
   ],
   'مفتاح': [
-    { ar: 'وَعِندَهُ مَفَاتِحُ الْغَيْبِ لَا يَعْلَمُهَا إِلَّا هُوَ', en: 'With Him are the keys of the unseen; none knows them except Him', ref: 'Al-Anʿām 6:59' },
+    { ar: 'وَعِندَهُ مَفَاتِحُ الْغَيْبِ لَا يَعْلَمُهَا إِلَّا هُوَ', en: 'With Him are the keys of the unseen; none knows them except Him', ref: 'Al-Anʿām 6:59', hlAr: 'مَفَاتِحُ' },
   ],
   'كلب': [
     { ar: 'وَكَلْبُهُم بَاسِطٌ ذِرَاعَيْهِ بِالْوَصِيدِ', en: 'And their dog stretching its forelegs at the entrance', ref: 'Al-Kahf 18:18' },
@@ -95,7 +95,7 @@ const QURAN_CONNECTIONS = {
     { ar: 'وَجَعَلَ الْقَمَرَ فِيهِنَّ نُورًا وَجَعَلَ الشَّمْسَ سِرَاجًا', en: 'And placed the moon therein as a light and made the sun a lamp', ref: 'Nūḥ 71:16' },
   ],
   'ملك': [
-    { ar: 'وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ إِنِّي جَاعِلٌ فِي الْأَرْضِ خَلِيفَةً', en: 'And when your Lord said to the angels: I am placing a vicegerent on earth', ref: 'Al-Baqarah 2:30' },
+    { ar: 'وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ إِنِّي جَاعِلٌ فِي الْأَرْضِ خَلِيفَةً', en: 'And when your Lord said to the angels: I am placing a vicegerent on earth', ref: 'Al-Baqarah 2:30', hlAr: 'لِلْمَلَائِكَةِ', hlEn: 'angels' },
     { ar: 'وَالْمَلَائِكَةُ يَدْخُلُونَ عَلَيْهِم مِّن كُلِّ بَابٍ', en: 'And the angels will enter upon them from every gate', ref: 'Al-Raʿd 13:23' },
   ],
   'نبي': [
@@ -115,16 +115,16 @@ const QURAN_CONNECTIONS = {
     { ar: 'وَهُوَ الَّذِي خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ', en: 'And He is the one who created the heavens and the earth', ref: 'Al-Anʿām 6:73' },
   ],
   'جنة': [
-    { ar: 'وَبَشِّرِ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ أَنَّ لَهُمْ جَنَّاتٍ', en: 'And give glad tidings to those who believe and do good deeds — that for them are gardens', ref: 'Al-Baqarah 2:25' },
+    { ar: 'وَبَشِّرِ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ أَنَّ لَهُمْ جَنَّاتٍ', en: 'And give glad tidings to those who believe and do good deeds — that for them are gardens', ref: 'Al-Baqarah 2:25', hlAr: 'جَنَّاتٍ', hlEn: 'gardens' },
     { ar: 'وَقِيلَ لَهُمُ ادْخُلُوا الْجَنَّةَ', en: 'And it is said to them: Enter Paradise', ref: 'Al-Zumar 39:73' },
   ],
   'نار': [
     { ar: 'وَاتَّقُوا النَّارَ الَّتِي أُعِدَّتْ لِلْكَافِرِينَ', en: 'And fear the Fire which has been prepared for the disbelievers', ref: 'Āl ʿImrān 3:131' },
-    { ar: 'كُلَّمَا أَرَادُوا أَن يَخْرُجُوا مِنْهَا أُعِيدُوا فِيهَا', en: 'Every time they want to get out of it, they will be returned to it', ref: 'Al-Sajdah 32:20' },
+    { ar: 'فَاتَّقُوا النَّارَ الَّتِي وَقُودُهَا النَّاسُ وَالْحِجَارَةُ', en: 'So guard yourselves against the Fire whose fuel is people and stones', ref: 'Al-Baqarah 2:24', hlAr: 'النَّارَ', hlEn: 'Fire' },
   ],
   'امام': [
-    { ar: 'إِنِّي جَاعِلُكَ لِلنَّاسِ إِمَامًا', en: 'I will make you a leader for the people', ref: 'Al-Baqarah 2:124' },
-    { ar: 'أَمَامَهُمْ جَهَنَّمُ وَلَا يُغْنِي عَنْهُمْ مَا كَسَبُوا شَيْئًا', en: 'Before them is Hell, and what they earned will not avail them at all', ref: 'Al-Jāthiyah 45:10' },
+    { ar: 'إِنِّي جَاعِلُكَ لِلنَّاسِ إِمَامًا', en: 'I will make you a leader for the people', ref: 'Al-Baqarah 2:124', hlEn: 'leader' },
+    { ar: 'أَمَامَهُمْ جَهَنَّمُ وَلَا يُغْنِي عَنْهُمْ مَا كَسَبُوا شَيْئًا', en: 'Before them is Hell, and what they earned will not avail them at all', ref: 'Al-Jāthiyah 45:10', hlEn: 'Before' },
   ],
   'شمس': [
     { ar: 'وَالشَّمْسُ تَجْرِي لِمُسْتَقَرٍّ لَّهَا', en: 'And the sun runs to its resting place', ref: 'Yā-Sīn 36:38' },
@@ -135,19 +135,19 @@ const QURAN_CONNECTIONS = {
     { ar: 'وَالْقَمَرِ إِذَا تَلَاهَا', en: 'And the moon when it follows it', ref: 'Al-Shams 91:2' },
   ],
   'سرير': [
-    { ar: 'عَلَىٰ سُرُرٍ مُّتَقَابِلِينَ', en: 'On thrones, facing one another (in Paradise)', ref: 'Al-Ḥijr 15:47' },
-    { ar: 'عَلَى سُرُرٍ مَّوْضُونَةٍ', en: 'On thrones woven with gold', ref: 'Al-Wāqiʿah 56:15' },
+    { ar: 'عَلَىٰ سُرُرٍ مُّتَقَابِلِينَ', en: 'On thrones, facing one another (in Paradise)', ref: 'Al-Ḥijr 15:47', hlAr: 'سُرُرٍ', hlEn: 'thrones' },
+    { ar: 'عَلَى سُرُرٍ مَّوْضُونَةٍ', en: 'On thrones woven with gold', ref: 'Al-Wāqiʿah 56:15', hlAr: 'سُرُرٍ', hlEn: 'thrones' },
   ],
   'كبير': [
-    { ar: 'إِنَّ اللَّهَ كَانَ عَلِيًّا كَبِيرًا', en: 'Indeed, Allah is ever Most High, Greatest', ref: 'Al-Nisāʾ 4:34' },
-    { ar: 'وَهُوَ الْعَلِيُّ الْكَبِيرُ', en: 'And He is the Most High, the Most Great', ref: 'Sabaʾ 34:23' },
+    { ar: 'إِنَّ اللَّهَ كَانَ عَلِيًّا كَبِيرًا', en: 'Indeed, Allah is ever Most High, Greatest', ref: 'Al-Nisāʾ 4:34', hlEn: 'Greatest' },
+    { ar: 'وَهُوَ الْعَلِيُّ الْكَبِيرُ', en: 'And He is the Most High, the Most Great', ref: 'Sabaʾ 34:23', hlEn: 'Great' },
   ],
   'جميل': [
     { ar: 'فَاصْبِرْ صَبْرًا جَمِيلًا', en: 'So be patient with beautiful patience', ref: 'Al-Maʿārij 70:5' },
     { ar: 'فَصَبْرٌ جَمِيلٌ وَاللَّهُ الْمُسْتَعَانُ', en: 'Beautiful patience — and Allah is the one sought for help', ref: 'Yūsuf 12:18' },
   ],
   'باب': [
-    { ar: 'وَادْخُلُوا الْبَابَ سُجَّدًا', en: 'Enter the gate bowing down', ref: 'Al-Baqarah 2:58' },
+    { ar: 'وَادْخُلُوا الْبَابَ سُجَّدًا', en: 'Enter the gate bowing down', ref: 'Al-Baqarah 2:58', hlEn: 'gate' },
     { ar: 'وَلَوْ فَتَحْنَا عَلَيْهِم بَابًا مِّنَ السَّمَاءِ', en: 'And if We had opened for them a door from the sky', ref: 'Al-Ḥijr 15:14' },
   ],
   'صغير': [
@@ -157,16 +157,16 @@ const QURAN_CONNECTIONS = {
     { ar: 'أَإِنَّا لَمَبْعُوثُونَ خَلْقًا جَدِيدًا', en: 'Shall we indeed be raised up as a new creation?', ref: 'Al-Isrāʾ 17:49' },
   ],
   'حجر': [
-    { ar: 'وَإِنَّ مِنَ الْحِجَارَةِ لَمَا يَتَفَجَّرُ مِنْهُ الْأَنْهَارُ', en: 'And indeed, from some rocks rivers burst forth', ref: 'Al-Baqarah 2:74' },
-    { ar: 'فَقُلْنَا اضْرِب بِّعَصَاكَ الْحَجَرَ', en: 'So We said: Strike the rock with your staff', ref: 'Al-Baqarah 2:60' },
+    { ar: 'وَإِنَّ مِنَ الْحِجَارَةِ لَمَا يَتَفَجَّرُ مِنْهُ الْأَنْهَارُ', en: 'And indeed, from some rocks rivers burst forth', ref: 'Al-Baqarah 2:74', hlEn: 'rocks' },
+    { ar: 'فَقُلْنَا اضْرِب بِّعَصَاكَ الْحَجَرَ', en: 'So We said: Strike the rock with your staff', ref: 'Al-Baqarah 2:60', hlEn: 'rock' },
   ],
   'فوق': [
     { ar: 'وَهُوَ الْقَاهِرُ فَوْقَ عِبَادِهِ', en: 'He is the Subjugator above His servants', ref: 'Al-Anʿām 6:18' },
     { ar: 'وَرَفَعْنَا فَوْقَكُمُ الطُّورَ', en: 'And We raised the mountain above you', ref: 'Al-Baqarah 2:63' },
   ],
   'تحت': [
-    { ar: 'تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ', en: 'Beneath it rivers flow', ref: 'Al-Baqarah 2:25' },
-    { ar: 'فِي جَنَّاتٍ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ', en: 'In gardens beneath which rivers flow', ref: 'Āl ʿImrān 3:15' },
+    { ar: 'تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ', en: 'Beneath it rivers flow', ref: 'Al-Baqarah 2:25', hlEn: 'Beneath' },
+    { ar: 'فِي جَنَّاتٍ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ', en: 'In gardens beneath which rivers flow', ref: 'Āl ʿImrān 3:15', hlEn: 'beneath' },
   ],
   'في': [
     { ar: 'لِلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ', en: 'To Allah belongs all that is in the heavens and all that is on earth', ref: 'Al-Baqarah 2:284' },
@@ -174,9 +174,9 @@ const QURAN_CONNECTIONS = {
     { ar: 'فِي جَنَّاتِ النَّعِيمِ', en: 'In gardens of delight', ref: 'Al-Wāqiʿah 56:12' },
   ],
   'على': [
-    { ar: 'وَعَلَى اللَّهِ فَتَوَكَّلُوا', en: 'And upon Allah rely', ref: 'Al-Māʾidah 5:23' },
-    { ar: 'إِنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ', en: 'Indeed, Allah is over all things competent', ref: 'Al-Baqarah 2:20' },
-    { ar: 'وَعَلَيْهِ تَوَكَّلُوا إِن كُنتُم مُّؤْمِنِينَ', en: 'And upon Him rely, if you are believers', ref: 'Al-Māʾidah 5:23' },
+    { ar: 'وَعَلَى اللَّهِ فَتَوَكَّلُوا', en: 'And upon Allah rely', ref: 'Al-Māʾidah 5:23', hlEn: 'upon' },
+    { ar: 'إِنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ', en: 'Indeed, Allah is over all things competent', ref: 'Al-Baqarah 2:20', hlEn: 'over' },
+    { ar: 'وَعَلَيْهِ تَوَكَّلُوا إِن كُنتُم مُّؤْمِنِينَ', en: 'And upon Him rely, if you are believers', ref: 'Al-Māʾidah 5:23', hlAr: 'وَعَلَيْهِ', hlEn: 'upon' },
   ],
   'من': [
     { ar: 'وَأَنزَلْنَا مِنَ السَّمَاءِ مَاءً طَهُورًا', en: 'And We sent down from the sky pure water', ref: 'Al-Furqān 25:48' },
@@ -185,7 +185,7 @@ const QURAN_CONNECTIONS = {
   ],
   'الى': [
     { ar: 'وَإِلَى اللَّهِ تُرْجَعُ الْأُمُورُ', en: 'And to Allah all matters return', ref: 'Al-Baqarah 2:210' },
-    { ar: 'وَإِلَيْهِ الْمَصِيرُ', en: 'And to Him is the final return', ref: 'Al-Māʾidah 5:18' },
+    { ar: 'وَإِلَيْهِ الْمَصِيرُ', en: 'And to Him is the final return', ref: 'Al-Māʾidah 5:18', hlAr: 'وَإِلَيْهِ', hlEn: 'to' },
   ],
   'خلف': [
     { ar: 'لَهُ مُعَقِّبَاتٌ مِّن بَيْنِ يَدَيْهِ وَمِنْ خَلْفِهِ يَحْفَظُونَهُ', en: 'For him are angels before and behind him, protecting him', ref: 'Al-Raʿd 13:11' },
@@ -199,12 +199,12 @@ const QURAN_CONNECTIONS = {
     { ar: 'أَمَّا الْجِدَارُ فَكَانَ لِغُلَامَيْنِ يَتِيمَيْنِ فِي الْمَدِينَةِ', en: 'As for the wall, it belonged to two orphan boys in the city', ref: 'Al-Kahf 18:82' },
   ],
   'غرفة': [
-    { ar: 'أُولَٰئِكَ يُجْزَوْنَ الْغُرْفَةَ بِمَا صَبَرُوا', en: 'Those will be rewarded with the highest chamber for their patience', ref: 'Al-Furqān 25:75' },
-    { ar: 'وَهُمْ فِي الْغُرُفَاتِ آمِنُونَ', en: 'And they are in the chambers, secure', ref: 'Sabaʾ 34:37' },
+    { ar: 'أُولَٰئِكَ يُجْزَوْنَ الْغُرْفَةَ بِمَا صَبَرُوا', en: 'Those will be rewarded with the highest chamber for their patience', ref: 'Al-Furqān 25:75', hlEn: 'chamber' },
+    { ar: 'وَهُمْ فِي الْغُرُفَاتِ آمِنُونَ', en: 'And they are in the chambers, secure', ref: 'Sabaʾ 34:37', hlAr: 'الْغُرُفَاتِ', hlEn: 'chambers' },
   ],
   'حديقة': [
-    { ar: 'وَحَدَائِقَ غُلْبًا', en: 'And dense gardens', ref: 'Al-Nabaʾ 78:16' },
-    { ar: 'فَأَنبَتْنَا بِهِ حَدَائِقَ ذَاتَ بَهْجَةٍ', en: 'And We caused gardens of joyful beauty to grow by it', ref: 'Al-Naml 27:60' },
+    { ar: 'وَحَدَائِقَ غُلْبًا', en: 'And dense gardens', ref: 'Al-Nabaʾ 78:16', hlAr: 'وَحَدَائِقَ', hlEn: 'gardens' },
+    { ar: 'فَأَنبَتْنَا بِهِ حَدَائِقَ ذَاتَ بَهْجَةٍ', en: 'And We caused gardens of joyful beauty to grow by it', ref: 'Al-Naml 27:60', hlAr: 'حَدَائِقَ', hlEn: 'gardens' },
   ],
   'اب': [
     { ar: 'وَكَانَ أَبُوهُمَا صَالِحًا', en: 'And their father was a righteous man', ref: 'Al-Kahf 18:82' },
@@ -223,11 +223,11 @@ const QURAN_CONNECTIONS = {
   ],
   'ابن': [
     { ar: 'وَإِذْ قَالَ عِيسَى ابْنُ مَرْيَمَ يَا بَنِي إِسْرَائِيلَ إِنِّي رَسُولُ اللَّهِ إِلَيْكُمْ', en: 'And when ʿĪsā son of Maryam said: O Children of Israel, I am the messenger of Allah to you', ref: 'Al-Ṣaff 61:6' },
-    { ar: 'يَا بُنَيَّ لَا تُشْرِكْ بِاللَّهِ إِنَّ الشِّرْكَ لَظُلْمٌ عَظِيمٌ', en: 'O my dear son, do not associate partners with Allah — indeed, shirk is a great injustice', ref: 'Luqmān 31:13' },
+    { ar: 'يَا بُنَيَّ لَا تُشْرِكْ بِاللَّهِ إِنَّ الشِّرْكَ لَظُلْمٌ عَظِيمٌ', en: 'O my dear son, do not associate partners with Allah — indeed, shirk is a great injustice', ref: 'Luqmān 31:13', hlAr: 'بُنَيَّ', hlEn: 'son' },
   ],
   'زوج': [
-    { ar: 'وَخَلَقَ مِنْهَا زَوْجَهَا', en: 'And created from it its mate', ref: 'Al-Nisāʾ 4:1' },
-    { ar: 'وَمِن كُلِّ شَيْءٍ خَلَقْنَا زَوْجَيْنِ', en: 'And of all things We created pairs', ref: 'Al-Dhāriyāt 51:49' },
+    { ar: 'وَخَلَقَ مِنْهَا زَوْجَهَا', en: 'And created from it its mate', ref: 'Al-Nisāʾ 4:1', hlEn: 'mate' },
+    { ar: 'وَمِن كُلِّ شَيْءٍ خَلَقْنَا زَوْجَيْنِ', en: 'And of all things We created pairs', ref: 'Al-Dhāriyāt 51:49', hlEn: 'pairs' },
   ],
   'قديم': [
     { ar: 'حَتَّى عَادَ كَالْعُرْجُونِ الْقَدِيمِ', en: 'Until it returns like an old palm-stalk', ref: 'Yā-Sīn 36:39' },
@@ -262,10 +262,10 @@ const QURAN_CONNECTIONS = {
   ],
   'لا': [
     { ar: 'لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ', en: 'There is no god except Him — the Ever-Living, the Sustainer of all existence', ref: 'Al-Baqarah 2:255' },
-    { ar: 'لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا', en: 'Do not grieve — indeed, Allah is with us', ref: 'Al-Tawbah 9:40' },
+    { ar: 'لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا', en: 'Do not grieve — indeed, Allah is with us', ref: 'Al-Tawbah 9:40', hlEn: 'not' },
   ],
   'اين': [
-    { ar: 'أَيْنَمَا تَكُونُوا يُدْرِككُّمُ الْمَوْتُ', en: 'Wherever you may be, death will overtake you', ref: 'Al-Nisāʾ 4:78' },
+    { ar: 'أَيْنَمَا تَكُونُوا يُدْرِككُّمُ الْمَوْتُ', en: 'Wherever you may be, death will overtake you', ref: 'Al-Nisāʾ 4:78', hlEn: 'Wherever' },
   ],
   // ── Pronouns ──────────────────────────────────────────────────────────────
   'هو': [
@@ -273,14 +273,14 @@ const QURAN_CONNECTIONS = {
     { ar: 'وَهُوَ بِكُلِّ شَيْءٍ عَلِيمٌ', en: 'And He has knowledge of all things', ref: 'Al-Baqarah 2:29' },
   ],
   'هي': [
-    { ar: 'قَالَ هِيَ عَصَايَ أَتَوَكَّأُ عَلَيْهَا', en: 'He said: It is my staff — I lean upon it', ref: 'Ṭāhā 20:18' },
+    { ar: 'قَالَ هِيَ عَصَايَ أَتَوَكَّأُ عَلَيْهَا', en: 'He said: It is my staff — I lean upon it', ref: 'Ṭāhā 20:18', hlEn: 'It' },
   ],
   'هم': [
     { ar: 'أُولَٰئِكَ هُمُ الْمُفْلِحُونَ', en: 'Those are the ones who will succeed', ref: 'Al-Baqarah 2:5' },
     { ar: 'إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ', en: 'The believers are but brothers', ref: 'Al-Ḥujurāt 49:10' },
   ],
   'انا': [
-    { ar: 'إِنَّنِي أَنَا اللَّهُ لَا إِلَٰهَ إِلَّا أَنَا فَاعْبُدْنِي', en: 'Indeed, I am Allah — there is no god except Me, so worship Me', ref: 'Ṭāhā 20:14' },
+    { ar: 'إِنَّنِي أَنَا اللَّهُ لَا إِلَٰهَ إِلَّا أَنَا فَاعْبُدْنِي', en: 'Indeed, I am Allah — there is no god except Me, so worship Me', ref: 'Ṭāhā 20:14', hlEn: 'I' },
   ],
   'انت': [
     { ar: 'إِنَّكَ أَنتَ الْعَلِيمُ الْحَكِيمُ', en: 'Indeed You are the All-Knowing, the All-Wise', ref: 'Al-Baqarah 2:32' },
@@ -338,7 +338,7 @@ const QURAN_CONNECTIONS = {
   // ── Adjectives ────────────────────────────────────────────────────────────
   'كريم': [
     { ar: 'إِنَّهُ لَقُرْآنٌ كَرِيمٌ', en: 'Indeed it is a noble Quran', ref: 'Al-Wāqiʿah 56:77' },
-    { ar: 'إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ', en: 'Indeed the most noble of you in the sight of Allah is the most righteous', ref: 'Al-Ḥujurāt 49:13' },
+    { ar: 'إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ', en: 'Indeed the most noble of you in the sight of Allah is the most righteous', ref: 'Al-Ḥujurāt 49:13', hlAr: 'أَكْرَمَكُمْ', hlEn: 'noble' },
   ],
   'صادق': [
     { ar: 'وَكُونُوا مَعَ الصَّادِقِينَ', en: 'And be with the truthful', ref: 'Al-Tawbah 9:119' },
@@ -393,10 +393,10 @@ const QURAN_CONNECTIONS = {
   ],
   'يوم الدين': [
     { ar: 'مَالِكِ يَوْمِ الدِّينِ', en: 'Master of the Day of Judgement', ref: 'Al-Fātiḥa 1:4' },
-    { ar: 'وَإِنَّ الدِّينَ لَوَاقِعٌ', en: 'And the Day of Judgement will certainly come to pass', ref: 'Al-Dhāriyāt 51:6' },
+    { ar: 'وَإِنَّ الدِّينَ لَوَاقِعٌ', en: 'And the Day of Judgement will certainly come to pass', ref: 'Al-Dhāriyāt 51:6', hlAr: 'الدِّينَ', hlEn: 'Day of Judgement' },
   ],
   'رب العالمين': [
-    { ar: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', en: 'All praise is for Allah, Lord of all the worlds', ref: 'Al-Fātiḥa 1:2' },
+    { ar: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', en: 'All praise is for Allah, Lord of all the worlds', ref: 'Al-Fātiḥa 1:2', hlEn: 'Lord of all the worlds' },
     { ar: 'قَالَ فِرْعَوْنُ وَمَا رَبُّ الْعَالَمِينَ', en: 'Pharaoh said: "And what is the Lord of the worlds?"', ref: 'Al-Shuʿarāʾ 26:23' },
   ],
   'عبد الله': [
@@ -441,10 +441,10 @@ const QURAN_CONNECTIONS = {
     { ar: 'قَالَتْ نَمْلَةٌ يَا أَيُّهَا النَّمْلُ ادْخُلُوا مَسَاكِنَكُمْ', en: 'An ant said: O ants, enter your dwellings — قَالَتْ is feminine, matching نَمْلَةٌ', ref: 'Al-Naml 27:18' },
   ],
   'نحلة': [
-    { ar: 'وَأَوْحَى رَبُّكَ إِلَى النَّحْلِ أَنِ اتَّخِذِي مِنَ الْجِبَالِ بُيُوتًا', en: 'And your Lord inspired the bees: Take homes among the mountains (النَّحْل = bees, collective)', ref: 'Al-Naḥl 16:68' },
+    { ar: 'وَأَوْحَى رَبُّكَ إِلَى النَّحْلِ أَنِ اتَّخِذِي مِنَ الْجِبَالِ بُيُوتًا', en: 'And your Lord inspired the bees: Take homes among the mountains (النَّحْل = bees, collective)', ref: 'Al-Naḥl 16:68', hlAr: 'النَّحْلِ', hlEn: 'bees' },
   ],
   'ذبابة': [
-    { ar: 'إِنَّ الَّذِينَ تَدْعُونَ مِنْ دُونِ اللَّهِ لَنْ يَخْلُقُوا ذُبَابًا', en: 'Those you call upon besides Allah could never create a fly (ذُبَاب = flies, collective)', ref: 'Al-Ḥajj 22:73' },
+    { ar: 'إِنَّ الَّذِينَ تَدْعُونَ مِنْ دُونِ اللَّهِ لَنْ يَخْلُقُوا ذُبَابًا', en: 'Those you call upon besides Allah could never create a fly (ذُبَاب = flies, collective)', ref: 'Al-Ḥajj 22:73', hlAr: 'ذُبَابًا', hlEn: 'fly' },
   ],
 };
 
@@ -1437,20 +1437,29 @@ function arTokenIsKey(token, key, strict) {
 }
 
 // Renders an Arabic verse with the target word emphasised. Multi-word keys such
-// as 'رسول الله' match consecutive tokens.
-function HighlightedVerse({ text, hlKey }) {
-  if (!hlKey) return <>{text}</>;
-  const keyWords = hlKey.split(' ').filter(Boolean);
+// as 'رسول الله' match consecutive tokens. A verse may set `hlAr` to name the
+// exact word(s) to mark, which is required when the verse uses a form no string
+// rule can reach from the vocab word — e.g. مِفْتَاح → مَفَاتِحُ (broken plural with
+// transposed letters) or ابن → بُنَيَّ (diminutive).
+function HighlightedVerse({ text, hlKey, hlAr }) {
+  if (!hlKey && !hlAr) return <>{text}</>;
+  const keyWords = (hlAr || hlKey).split(' ').filter(Boolean);
   const parts = text.split(/(\s+)/);
   const hit = new Array(parts.length).fill(false);
   const wordIdx = parts.map((p, i) => (/^\s+$/.test(p) ? -1 : i)).filter(i => i >= 0);
+  // An explicit hlAr is matched literally (after normalisation), never fuzzily.
+  const passes = hlAr ? [true] : [true, false];
   outer:
-  for (const strict of [true, false]) {
+  for (const strict of passes) {
     for (let a = 0; a < wordIdx.length; a++) {
       let ok = true;
       for (let b = 0; b < keyWords.length; b++) {
         const wi = wordIdx[a + b];
-        if (wi === undefined || !arTokenIsKey(parts[wi], keyWords[b], strict)) { ok = false; break; }
+        if (wi === undefined) { ok = false; break; }
+        const match = hlAr
+          ? arNorm(parts[wi]) === arNorm(keyWords[b])
+          : arTokenIsKey(parts[wi], keyWords[b], strict);
+        if (!match) { ok = false; break; }
       }
       if (ok) { for (let b = 0; b < keyWords.length; b++) hit[wordIdx[a + b]] = true; break outer; }
     }
@@ -1462,8 +1471,8 @@ function HighlightedVerse({ text, hlKey }) {
 
 // Renders an English translation with the target word emphasised. Matches the
 // gloss plus simple inflections (bee → bees, fly → flies, wolf → wolves).
-function HighlightedTranslation({ text, hlKey }) {
-  const terms = (KEY_TO_EN_TERMS[hlKey] || []).filter(t => t.length >= 2);
+function HighlightedTranslation({ text, hlKey, hlEn }) {
+  const terms = hlEn ? [hlEn] : (KEY_TO_EN_TERMS[hlKey] || []).filter(t => t.length >= 2);
   if (!terms.length) return <>{text}</>;
   const variants = new Set();
   for (const t of terms) {
@@ -1477,7 +1486,10 @@ function HighlightedTranslation({ text, hlKey }) {
   }
   const esc = [...variants].sort((a, b) => b.length - a.length)
                            .map(v => v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-  const m = text.match(new RegExp(`\\b(${esc.join('|')})\\b`, 'i'));
+  // Word boundaries here are hand-rolled: \b is ASCII-only and so fails on
+  // transliterations such as "Kursī" or "masājid".
+  const L = '[A-Za-z\u00C0-\u024F]';
+  const m = text.match(new RegExp(`(?<!${L})(${esc.join('|')})(?!${L})`, 'i'));
   if (!m) return <>{text}</>;
   return <>
     {text.slice(0, m.index)}
@@ -2853,7 +2865,7 @@ function QuranOverlay({ connection, lang, onContinue }) {
         padding:"16px 20px", width:"100%", maxWidth:420,
         boxShadow:"inset 0 1px 0 rgba(255,255,255,0.1)",
       }}>
-        <HighlightedVerse text={connection.ar} hlKey={connection.hlKey} />
+        <HighlightedVerse text={connection.ar} hlKey={connection.hlKey} hlAr={connection.hlAr} />
       </div>
 
       {/* Surah reference */}
@@ -2868,7 +2880,7 @@ function QuranOverlay({ connection, lang, onContinue }) {
         direction:"ltr",
         maxWidth:380, marginBottom:28,
       }}>
-        "<HighlightedTranslation text={connection.en} hlKey={connection.hlKey} />"
+        "<HighlightedTranslation text={connection.en} hlKey={connection.hlKey} hlEn={connection.hlEn} />"
       </div>
 
       {/* Continue button */}
