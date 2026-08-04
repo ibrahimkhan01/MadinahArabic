@@ -417,6 +417,35 @@ const QURAN_CONNECTIONS = {
   'نوره': [
     { ar: 'وَاللَّهُ مُتِمُّ نُورِهِ وَلَوْ كَرِهَ الْكَافِرُونَ', en: 'Allah will perfect His light, even if the disbelievers hate it', ref: 'Al-Ṣaff 61:8' },
   ],
+  // ── Animals (Book 1 sessions 3 & 16) ──────────────────────────────────────
+  'حوت': [
+    { ar: 'فَالْتَقَمَهُ الْحُوتُ وَهُوَ مُلِيمٌ', en: 'Then the whale swallowed him, while he was blameworthy', ref: 'Al-Ṣāffāt 37:142' },
+    { ar: 'فَلَمَّا بَلَغَا مَجْمَعَ بَيْنِهِمَا نَسِيَا حُوتَهُمَا', en: 'But when they reached the junction between them, they forgot their fish', ref: 'Al-Kahf 18:61' },
+  ],
+  'خنزير': [
+    { ar: 'إِنَّمَا حَرَّمَ عَلَيْكُمُ الْمَيْتَةَ وَالدَّمَ وَلَحْمَ الْخِنْزِيرِ', en: 'He has only forbidden you carrion, blood, and the flesh of swine', ref: 'Al-Baqarah 2:173' },
+  ],
+  'قرد': [
+    { ar: 'فَقُلْنَا لَهُمْ كُونُوا قِرَدَةً خَاسِئِينَ', en: 'So We said to them: Be apes, despised (plural of قِرْدٌ)', ref: 'Al-Baqarah 2:65' },
+    { ar: 'فَلَمَّا عَتَوْا عَنْ مَا نُهُوا عَنْهُ قُلْنَا لَهُمْ كُونُوا قِرَدَةً خَاسِئِينَ', en: 'When they persisted in what they were forbidden, We said: Be apes, despised', ref: 'Al-Aʿrāf 7:166' },
+  ],
+  'عنكبوت': [
+    { ar: 'كَمَثَلِ الْعَنْكَبُوتِ اتَّخَذَتْ بَيْتًا', en: 'Like the spider that builds a house — note the feminine verb اتَّخَذَتْ', ref: 'Al-ʿAnkabūt 29:41' },
+    { ar: 'وَإِنَّ أَوْهَنَ الْبُيُوتِ لَبَيْتُ الْعَنْكَبُوتِ', en: 'And indeed the frailest of houses is the spider\'s house', ref: 'Al-ʿAnkabūt 29:41' },
+  ],
+  'بقرة': [
+    { ar: 'إِنَّ اللَّهَ يَأْمُرُكُمْ أَنْ تَذْبَحُوا بَقَرَةً', en: 'Indeed, Allah commands you to sacrifice a cow', ref: 'Al-Baqarah 2:67' },
+    { ar: 'بَقَرَةٌ صَفْرَاءُ فَاقِعٌ لَوْنُهَا تَسُرُّ النَّاظِرِينَ', en: 'A cow intensely yellow — its colour pleasing to those who behold it', ref: 'Al-Baqarah 2:69' },
+  ],
+  'نملة': [
+    { ar: 'قَالَتْ نَمْلَةٌ يَا أَيُّهَا النَّمْلُ ادْخُلُوا مَسَاكِنَكُمْ', en: 'An ant said: O ants, enter your dwellings — قَالَتْ is feminine, matching نَمْلَةٌ', ref: 'Al-Naml 27:18' },
+  ],
+  'نحلة': [
+    { ar: 'وَأَوْحَى رَبُّكَ إِلَى النَّحْلِ أَنِ اتَّخِذِي مِنَ الْجِبَالِ بُيُوتًا', en: 'And your Lord inspired the bees: Take homes among the mountains (النَّحْل = bees, collective)', ref: 'Al-Naḥl 16:68' },
+  ],
+  'ذبابة': [
+    { ar: 'إِنَّ الَّذِينَ تَدْعُونَ مِنْ دُونِ اللَّهِ لَنْ يَخْلُقُوا ذُبَابًا', en: 'Those you call upon besides Allah could never create a fly (ذُبَاب = flies, collective)', ref: 'Al-Ḥajj 22:73' },
+  ],
 };
 
 // ── Quran Word Frequency ──────────────────────────────────────────────────────
@@ -700,6 +729,12 @@ const EMOJI = {
   "you (m. plural)":"👥","you (f. plural)":"👥","they (m.)":"👥","these (people)":"👥",
   // Dual
   "two books":"📚","two students (m.)":"👨‍🎓","the two of them":"👫","these two (m.)":"👉",
+  // Book 1 vocab whose exact keys were previously unmapped
+  "wolf":"🐺","donkey":"🫏","whale":"🐋","pig":"🐖","swine":"🐖",
+  "monkey":"🐒","ape":"🐒","spider":"🕷️","ant":"🐜","bee":"🐝","honey bee":"🐝","fly":"🪰",
+  // NOTE: no emoji for مَلَكٌ (angel) or رَسُولٌ (messenger) — these are not depicted.
+  "sky/heaven":"☁️","paradise/garden":"🌿","classroom":"🏫",
+  "husband":"🤵","wife":"👰",
 };
 const getEmoji = (en) => {
   const key = en.toLowerCase();
@@ -847,8 +882,8 @@ const SESSIONS = [
     ]},
 
   { id:3, book:1, lessonRef:"1.1", part:"C", title:"الْحَيَوَانَاتُ", titleEn:"Animals",
-    grammar:'More هَذَا/ذَلِكَ with animals. All these nouns are masculine. وَ means "and" — it attaches directly to the next word: هَذَا فِيلٌ وَذَلِكَ جَمَلٌ.',
-    vocab:[{ar:"كَلْبٌ",en:"dog"},{ar:"ذِئْبٌ",en:"wolf"},{ar:"حِمَارٌ",en:"donkey"},{ar:"جَمَلٌ",en:"camel"},{ar:"فِيلٌ",en:"elephant"},{ar:"وَ",en:"and"}],
+    grammar:'More هَذَا/ذَلِكَ with animals. All these nouns are masculine. وَ means "and" — it attaches directly to the next word: هَذَا فِيلٌ وَذَلِكَ جَمَلٌ. Note: عَنْكَبُوتٌ (spider) takes either gender — we treat it as masculine here, though the Quran uses a feminine verb with it in Sūrat al-ʿAnkabūt.',
+    vocab:[{ar:"كَلْبٌ",en:"dog"},{ar:"ذِئْبٌ",en:"wolf"},{ar:"حِمَارٌ",en:"donkey"},{ar:"جَمَلٌ",en:"camel"},{ar:"فِيلٌ",en:"elephant"},{ar:"حُوتٌ",en:"whale"},{ar:"خِنْزِيرٌ",en:"pig"},{ar:"قِرْدٌ",en:"monkey"},{ar:"عَنْكَبُوتٌ",en:"spider"},{ar:"وَ",en:"and"}],
     patternTiles:[
       { en:"This is a wolf and that is a dog.",
         tiles:["هَذَا","ذِئْبٌ","وَ","ذَلِكَ","كَلْبٌ","حِمَارٌ"],
@@ -859,6 +894,12 @@ const SESSIONS = [
       { en:"This is a donkey and that is a camel.",
         tiles:["هَذَا","حِمَارٌ","وَ","ذَلِكَ","جَمَلٌ","ذِئْبٌ"],
         answer:["هَذَا","حِمَارٌ","وَ","ذَلِكَ","جَمَلٌ"] },
+      { en:"This is a whale and that is a monkey.",
+        tiles:["هَذَا","حُوتٌ","وَ","ذَلِكَ","قِرْدٌ","خِنْزِيرٌ"],
+        answer:["هَذَا","حُوتٌ","وَ","ذَلِكَ","قِرْدٌ"] },
+      { emoji:"🕷️", question:"مَا هَذَا؟",
+        tiles:["هَذَا","عَنْكَبُوتٌ","قِرْدٌ","حُوتٌ","خِنْزِيرٌ"],
+        answer:["هَذَا","عَنْكَبُوتٌ"] },
       { en:"This is a wolf and that is an elephant.",
         tiles:["هَذَا","ذِئْبٌ","وَ","ذَلِكَ","فِيلٌ","جَمَلٌ"],
         answer:["هَذَا","ذِئْبٌ","وَ","ذَلِكَ","فِيلٌ"] },
@@ -1172,12 +1213,15 @@ const SESSIONS = [
 
   { id:16, book:1, lessonRef:"1.7", part:"A", title:"الْمُؤَنَّثُ (Part 1)", titleEn:"Feminine Nouns & هَذِهِ",
     grammar:'Feminine nouns end in ةٌ. Use هَذِهِ (this, f.) and تِلْكَ (that, f.): هَذِهِ شَجَرَةٌ. Adjectives must match: هَذِهِ شَجَرَةٌ جَمِيلَةٌ.',
-    vocab:[{ar:"شَجَرَةٌ",en:"tree"},{ar:"مَدْرَسَةٌ",en:"school"},{ar:"غُرْفَةٌ",en:"room"},{ar:"حَدِيقَةٌ",en:"garden"}],
+    vocab:[{ar:"شَجَرَةٌ",en:"tree"},{ar:"مَدْرَسَةٌ",en:"school"},{ar:"غُرْفَةٌ",en:"room"},{ar:"حَدِيقَةٌ",en:"garden"},{ar:"بَقَرَةٌ",en:"cow"},{ar:"نَمْلَةٌ",en:"ant"},{ar:"نَحْلَةٌ",en:"bee"},{ar:"ذُبَابَةٌ",en:"fly"}],
     patternTiles:[
       {emoji:"🌳", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","شَجَرَةٌ","مَدْرَسَةٌ","غُرْفَةٌ"], answer:["هَذِهِ","شَجَرَةٌ"]},
       {emoji:"🏫", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","مَدْرَسَةٌ","شَجَرَةٌ","حَدِيقَةٌ"], answer:["هَذِهِ","مَدْرَسَةٌ"]},
       {emoji:"🌸", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","حَدِيقَةٌ","غُرْفَةٌ","شَجَرَةٌ"], answer:["هَذِهِ","حَدِيقَةٌ"]},
       {emoji:"🛏️", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","غُرْفَةٌ","حَدِيقَةٌ","مَدْرَسَةٌ"], answer:["هَذِهِ","غُرْفَةٌ"]},
+      {emoji:"🐄", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","بَقَرَةٌ","نَمْلَةٌ","نَحْلَةٌ","ذُبَابَةٌ"], answer:["هَذِهِ","بَقَرَةٌ"]},
+      {emoji:"🐜", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","نَمْلَةٌ","نَحْلَةٌ","بَقَرَةٌ","ذُبَابَةٌ"], answer:["هَذِهِ","نَمْلَةٌ"]},
+      {emoji:"🐝", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","نَحْلَةٌ","ذُبَابَةٌ","نَمْلَةٌ","شَجَرَةٌ"], answer:["هَذِهِ","نَحْلَةٌ"]},
     ]},
   { id:17, book:1, lessonRef:"1.7", part:"B", title:"الْمُؤَنَّثُ (Part 2)", titleEn:"Feminine Adjectives & Professions",
     grammar:'Feminine adjectives add ةٌ: كَبِيرٌ → كَبِيرَةٌ. Professions too: مُدَرِّسٌ → مُدَرِّسَةٌ. هِيَ مُدَرِّسَةٌ = She is a teacher.',
@@ -1325,9 +1369,10 @@ const ALL_SESSIONS = [
 function buildExercises(session, lang = "en") {
   const vocab = session.vocab;
   const allPrior = SESSIONS.filter(s => s.id < session.id).flatMap(s => s.vocab);
-  // Pool of 6 words: session vocab topped up with prior-session words if needed.
+  // Pool of at least 6 words: every word of the session's own vocab, topped up
+  // with prior-session words when the session teaches fewer than 6.
   // Extra prior words give lightweight spaced-repetition alongside new vocab.
-  const pool = vocab.length >= 6 ? vocab.slice(0, 6) : [...vocab, ...shuffle(allPrior).slice(0, 6 - vocab.length)];
+  const pool = vocab.length >= 6 ? [...vocab] : [...vocab, ...shuffle(allPrior).slice(0, 6 - vocab.length)];
 
   const getLabel = (w) => w.en;
 
@@ -2559,7 +2604,7 @@ function GrammarCard({ session, onStart, lang = "en" }) {
                 fontFamily:"inherit",
                 direction:"ltr",
               }}>
-                {hasContrast && meaning}
+                {meaning}
               </div>
               {hasContrast && (
                 <div style={{marginTop:5,paddingTop:5,borderTop:"1px dashed #cbd5e1",display:"flex",alignItems:"center",justifyContent:"center",gap:4,direction:"rtl",flexWrap:"wrap"}}>
