@@ -426,11 +426,11 @@ const QURAN_CONNECTIONS = {
     { ar: 'إِنَّمَا حَرَّمَ عَلَيْكُمُ الْمَيْتَةَ وَالدَّمَ وَلَحْمَ الْخِنْزِيرِ', en: 'He has only forbidden you carrion, blood, and the flesh of swine', ref: 'Al-Baqarah 2:173' },
   ],
   'قرد': [
-    { ar: 'فَقُلْنَا لَهُمْ كُونُوا قِرَدَةً خَاسِئِينَ', en: 'So We said to them: Be apes, despised (plural of قِرْدٌ)', ref: 'Al-Baqarah 2:65' },
+    { ar: 'فَقُلْنَا لَهُمْ كُونُوا قِرَدَةً خَاسِئِينَ', en: 'So We said to them: Be apes, despised', ref: 'Al-Baqarah 2:65' },
     { ar: 'فَلَمَّا عَتَوْا عَنْ مَا نُهُوا عَنْهُ قُلْنَا لَهُمْ كُونُوا قِرَدَةً خَاسِئِينَ', en: 'When they persisted in what they were forbidden, We said: Be apes, despised', ref: 'Al-Aʿrāf 7:166' },
   ],
   'عنكبوت': [
-    { ar: 'كَمَثَلِ الْعَنْكَبُوتِ اتَّخَذَتْ بَيْتًا', en: 'Like the spider that builds a house — note the feminine verb اتَّخَذَتْ', ref: 'Al-ʿAnkabūt 29:41' },
+    { ar: 'كَمَثَلِ الْعَنْكَبُوتِ اتَّخَذَتْ بَيْتًا', en: 'Like the spider that builds a house', ref: 'Al-ʿAnkabūt 29:41' },
     { ar: 'وَإِنَّ أَوْهَنَ الْبُيُوتِ لَبَيْتُ الْعَنْكَبُوتِ', en: 'And indeed the frailest of houses is the spider\'s house', ref: 'Al-ʿAnkabūt 29:41' },
   ],
   'بقرة': [
@@ -438,13 +438,13 @@ const QURAN_CONNECTIONS = {
     { ar: 'بَقَرَةٌ صَفْرَاءُ فَاقِعٌ لَوْنُهَا تَسُرُّ النَّاظِرِينَ', en: 'A cow intensely yellow — its colour pleasing to those who behold it', ref: 'Al-Baqarah 2:69' },
   ],
   'نملة': [
-    { ar: 'قَالَتْ نَمْلَةٌ يَا أَيُّهَا النَّمْلُ ادْخُلُوا مَسَاكِنَكُمْ', en: 'An ant said: O ants, enter your dwellings — قَالَتْ is feminine, matching نَمْلَةٌ', ref: 'Al-Naml 27:18' },
+    { ar: 'قَالَتْ نَمْلَةٌ يَا أَيُّهَا النَّمْلُ ادْخُلُوا مَسَاكِنَكُمْ', en: 'An ant said: O ants, enter your dwellings', ref: 'Al-Naml 27:18' },
   ],
   'نحلة': [
-    { ar: 'وَأَوْحَى رَبُّكَ إِلَى النَّحْلِ أَنِ اتَّخِذِي مِنَ الْجِبَالِ بُيُوتًا', en: 'And your Lord inspired the bees: Take homes among the mountains (النَّحْل = bees, collective)', ref: 'Al-Naḥl 16:68', hlAr: 'النَّحْلِ', hlEn: 'bees' },
+    { ar: 'وَأَوْحَى رَبُّكَ إِلَى النَّحْلِ أَنِ اتَّخِذِي مِنَ الْجِبَالِ بُيُوتًا', en: 'And your Lord inspired the bees: Take homes among the mountains (النَّحْل means bees as a group)', ref: 'Al-Naḥl 16:68', hlAr: 'النَّحْلِ', hlEn: 'bees' },
   ],
   'ذبابة': [
-    { ar: 'إِنَّ الَّذِينَ تَدْعُونَ مِنْ دُونِ اللَّهِ لَنْ يَخْلُقُوا ذُبَابًا', en: 'Those you call upon besides Allah could never create a fly (ذُبَاب = flies, collective)', ref: 'Al-Ḥajj 22:73', hlAr: 'ذُبَابًا', hlEn: 'fly' },
+    { ar: 'إِنَّ الَّذِينَ تَدْعُونَ مِنْ دُونِ اللَّهِ لَنْ يَخْلُقُوا ذُبَابًا', en: 'Those you call upon besides Allah could never create a fly (ذُبَاب means flies as a group)', ref: 'Al-Ḥajj 22:73', hlAr: 'ذُبَابًا', hlEn: 'fly' },
   ],
 };
 
@@ -565,6 +565,11 @@ function getQuranCoverage(completedSessionIds) {
 // Returns the QURAN_CONNECTIONS key for the primary word in an exercise, or null.
 // Skips keys already shown this session (present in shownKeys) and falls through
 // to the next unseen word. If all words have been shown, returns the first available.
+// Diacritics distinguish these words, but stripQ removes them, so they would
+// collide on one QURAN_CONNECTIONS key and show verses for the wrong meaning.
+// مَنْ (who?) shares key 'من' with مِنْ (from); the stored verses are all "from".
+const QURAN_HOMOGRAPH_BLOCK = new Set(['مَنْ']);
+
 function getQuranWord(exercise, shownKeys = new Set()) {
   const candidates =
     exercise.type === 'ar_en' ? [exercise.prompt] :
@@ -572,11 +577,13 @@ function getQuranWord(exercise, shownKeys = new Set()) {
     exercise.answer ? exercise.answer : [];
   // First pass: prefer an unseen key
   for (const w of candidates) {
+    if (QURAN_HOMOGRAPH_BLOCK.has(w)) continue;
     const key = stripQ(w);
     if (QURAN_CONNECTIONS[key] && !shownKeys.has(key)) return key;
   }
   // Fallback: all have been seen — return the first available key
   for (const w of candidates) {
+    if (QURAN_HOMOGRAPH_BLOCK.has(w)) continue;
     const key = stripQ(w);
     if (QURAN_CONNECTIONS[key]) return key;
   }
@@ -589,6 +596,9 @@ const UI_TEXT = {
     whatMean:       "What does this mean?",
     selectArabic:   "Select the Arabic for:",
     buildSentence:  "Build the sentence:",
+    translateTask:  "Translate into Arabic",
+    answerTask:     "Answer the question in Arabic",
+    expectedAnswer: "Expected answer:",
     tapToBuild:     "Tap tiles below to build the sentence",
     tapToAnswer:    "Tap tiles to answer",
     hearSentence:   "hear the sentence",
@@ -864,7 +874,7 @@ const SESSIONS = [
 
   { id:1, book:1, lessonRef:"1.1", part:"A", title:"مَا هَذَا؟", titleEn:"What Is This? (Part 1)",
     grammar:'هَذَا means "this" for masculine objects. مَا هَذَا؟ = What is this? Answer: هَذَا كِتَابٌ. Nouns take ـٌ (tanwīn ḍamm) in the indefinite.',
-    vocab:[{ar:"كِتَابٌ",en:"book"},{ar:"قَلَمٌ",en:"pen"},{ar:"مِفْتَاحٌ",en:"key"},{ar:"بَابٌ",en:"door"}],
+    vocab:[{ar:"هَذَا",en:"this (m., near)"},{ar:"مَا",en:"what?"},{ar:"كِتَابٌ",en:"book"},{ar:"قَلَمٌ",en:"pen"},{ar:"مِفْتَاحٌ",en:"key"},{ar:"بَابٌ",en:"door"}],
     patternTiles:[
       {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","كِتَابٌ","قَلَمٌ","مِفْتَاحٌ"], answer:["هَذَا","كِتَابٌ"]},
       {emoji:"🔑", question:"مَا هَذَا؟", tiles:["هَذَا","مِفْتَاحٌ","بَابٌ","كِتَابٌ"], answer:["هَذَا","مِفْتَاحٌ"]},
@@ -882,7 +892,7 @@ const SESSIONS = [
     ]},
 
   { id:3, book:1, lessonRef:"1.1", part:"C", title:"الْحَيَوَانَاتُ", titleEn:"Animals",
-    grammar:'More هَذَا/ذَلِكَ with animals. All these nouns are masculine. وَ means "and" — it attaches directly to the next word: هَذَا فِيلٌ وَذَلِكَ جَمَلٌ. Note: عَنْكَبُوتٌ (spider) takes either gender — we treat it as masculine here, though the Quran uses a feminine verb with it in Sūrat al-ʿAnkabūt.',
+    grammar:'More هَذَا/ذَلِكَ with animals. All these nouns are masculine. وَ means "and" — it attaches directly to the next word: هَذَا فِيلٌ وَذَلِكَ جَمَلٌ. Note: عَنْكَبُوتٌ (spider) can be treated as masculine or feminine; we use هَذَا with it here.',
     vocab:[{ar:"كَلْبٌ",en:"dog"},{ar:"ذِئْبٌ",en:"wolf"},{ar:"حِمَارٌ",en:"donkey"},{ar:"جَمَلٌ",en:"camel"},{ar:"فِيلٌ",en:"elephant"},{ar:"حُوتٌ",en:"whale"},{ar:"خِنْزِيرٌ",en:"pig"},{ar:"قِرْدٌ",en:"monkey"},{ar:"عَنْكَبُوتٌ",en:"spider"},{ar:"وَ",en:"and"}],
     patternTiles:[
       { en:"This is a wolf and that is a dog.",
@@ -907,7 +917,7 @@ const SESSIONS = [
 
   { id:4, book:1, lessonRef:"1.1", part:"D", title:"الْمِهَنُ وَالْمَلَابِسُ", titleEn:"Professions & Clothing",
     grammar:'مَنْ هَذَا؟ = Who is this? Used for people: مَنْ هَذَا؟ هَذَا إِمَامٌ. مَا هَذَا؟ هَذَا قَمِيصٌ.',
-    vocab:[{ar:"إِمَامٌ",en:"imam"},{ar:"رَسُولٌ",en:"messenger"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"سِرَاجٌ",en:"lamp"},{ar:"قَمِيصٌ",en:"shirt"}],
+    vocab:[{ar:"مَنْ",en:"who?"},{ar:"إِمَامٌ",en:"imam"},{ar:"رَسُولٌ",en:"messenger"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"سِرَاجٌ",en:"lamp"},{ar:"قَمِيصٌ",en:"shirt"}],
     patternTiles:[
       {en:"This is a messenger.", tiles:["هَذَا","رَسُولٌ","إِمَامٌ","تَاجِرٌ"], answer:["هَذَا","رَسُولٌ"]},
       {emoji:"👕", question:"مَا هَذَا؟", tiles:["هَذَا","قَمِيصٌ","سِرَاجٌ","كِتَابٌ","قَلَمٌ"], answer:["هَذَا","قَمِيصٌ"]},
@@ -917,7 +927,7 @@ const SESSIONS = [
 
   { id:5, book:1, lessonRef:"1.1", part:"E", title:"أَسْئِلَةُ نَعَمْ وَلَا", titleEn:"Yes/No Questions",
     grammar:'Both أَ and هَلْ are yes/no question particles — they are interchangeable. أَهَذَا مَسْجِدٌ؟ = هَلْ هَذَا مَسْجِدٌ؟ = Is this a mosque? Answer: نَعَمْ، هَذَا مَسْجِدٌ (Yes) or لَا، هَذَا بَيْتٌ (No). أَ attaches directly to the next word; هَلْ stands alone.',
-    vocab:[{ar:"نَعَمْ",en:"yes"},{ar:"لَا",en:"no"},{ar:"أَهَذَا",en:"Is this...? (m.)"},{ar:"هَلْ",en:"Is...? (yes/no question)"}],
+    vocab:[{ar:"نَعَمْ",en:"yes"},{ar:"لَا",en:"no"},{ar:"أَهَذَا",en:"Is this...? (m.)"},{ar:"هَلْ",en:"Is...? (yes/no question)"},{ar:"قِطٌّ",en:"cat"}],
     patternTiles:[
       { emoji:"📖", question:"أَهَذَا كِتَابٌ؟",
         hint:"Yes, this is a book.",
@@ -939,7 +949,7 @@ const SESSIONS = [
 
   { id:6, book:1, lessonRef:"1.2", part:"A", title:"ذَلِكَ — That Is...", titleEn:"Far Demonstratives (Part 1)",
     grammar:'ذَلِكَ = "that" for masculine objects far away. وَ ("and") joins the two sentences: هَذَا مَكْتَبٌ وَذَلِكَ سَرِيرٌ.',
-    vocab:[{ar:"سَرِيرٌ",en:"bed"},{ar:"كُرْسِيٌّ",en:"chair"},{ar:"مَكْتَبٌ",en:"desk/office"},{ar:"جِدَارٌ",en:"wall"}],
+    vocab:[{ar:"ذَلِكَ",en:"that (m., far)"},{ar:"سَرِيرٌ",en:"bed"},{ar:"كُرْسِيٌّ",en:"chair"},{ar:"مَكْتَبٌ",en:"desk/office"},{ar:"جِدَارٌ",en:"wall"}],
     patternTiles:[
       { en:"This is a chair and that is a bed.",
         tiles:["هَذَا","كُرْسِيٌّ","وَ","ذَلِكَ","سَرِيرٌ","مَكْتَبٌ"],
@@ -1191,7 +1201,7 @@ const SESSIONS = [
     ]},
   { id:15, book:1, lessonRef:"1.6", part:"B", title:"الضَّمَائِرُ (Part 2)", titleEn:"Pronouns with Professions",
     grammar:'مَنْ أَنْتَ؟ = Who are you? أَنَا طَالِبٌ = I am a student. هُوَ مُدَرِّسٌ = He is a teacher.',
-    vocab:[{ar:"رَسُولٌ",en:"messenger"},{ar:"مَلَكٌ",en:"angel"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"فَلَّاحٌ",en:"farmer"}],
+    vocab:[{ar:"رَسُولٌ",en:"messenger"},{ar:"مَلَكٌ",en:"angel"},{ar:"تَاجِرٌ",en:"merchant"},{ar:"فَلَّاحٌ",en:"farmer"},{ar:"مُحَمَّدٌ",en:"Muhammad (name)"}],
     patternTiles:[
       {question:"مَنْ هُوَ؟", en:"He is a messenger.", tiles:["هُوَ","رَسُولٌ","أَنَا","مَلَكٌ"], answer:["هُوَ","رَسُولٌ"]},
       {en:"I am a merchant.", tiles:["أَنَا","تَاجِرٌ","هُوَ","فَلَّاحٌ"], answer:["أَنَا","تَاجِرٌ"]},
@@ -1213,7 +1223,7 @@ const SESSIONS = [
 
   { id:16, book:1, lessonRef:"1.7", part:"A", title:"الْمُؤَنَّثُ (Part 1)", titleEn:"Feminine Nouns & هَذِهِ",
     grammar:'Feminine nouns end in ةٌ. Use هَذِهِ (this, f.) and تِلْكَ (that, f.): هَذِهِ شَجَرَةٌ. Adjectives must match: هَذِهِ شَجَرَةٌ جَمِيلَةٌ.',
-    vocab:[{ar:"شَجَرَةٌ",en:"tree"},{ar:"مَدْرَسَةٌ",en:"school"},{ar:"غُرْفَةٌ",en:"room"},{ar:"حَدِيقَةٌ",en:"garden"},{ar:"بَقَرَةٌ",en:"cow"},{ar:"نَمْلَةٌ",en:"ant"},{ar:"نَحْلَةٌ",en:"bee"},{ar:"ذُبَابَةٌ",en:"fly"}],
+    vocab:[{ar:"هَذِهِ",en:"this (f., near)"},{ar:"تِلْكَ",en:"that (f., far)"},{ar:"شَجَرَةٌ",en:"tree"},{ar:"مَدْرَسَةٌ",en:"school"},{ar:"غُرْفَةٌ",en:"room"},{ar:"حَدِيقَةٌ",en:"garden"},{ar:"بَقَرَةٌ",en:"cow"},{ar:"نَمْلَةٌ",en:"ant"},{ar:"نَحْلَةٌ",en:"bee"},{ar:"ذُبَابَةٌ",en:"fly"}],
     patternTiles:[
       {emoji:"🌳", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","شَجَرَةٌ","مَدْرَسَةٌ","غُرْفَةٌ"], answer:["هَذِهِ","شَجَرَةٌ"]},
       {emoji:"🏫", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","مَدْرَسَةٌ","شَجَرَةٌ","حَدِيقَةٌ"], answer:["هَذِهِ","مَدْرَسَةٌ"]},
@@ -1261,14 +1271,14 @@ const SESSIONS = [
 
   { id:19, book:1, lessonRef:"1.8", part:"A", title:"الْإِضَافَةُ (Part 1)", titleEn:"Possessive Constructions",
     grammar:'Iḍāfa (possessive construction): رَسُولُ اللهِ (messenger of Allah). The first noun (mudāf) loses tanwīn and CANNOT take الـ. The second noun (mudāf ilayhi) takes genitive ـِ. The first noun becomes definite automatically — رَبُّ الْعَالَمِينَ means THE Lord of the worlds, not "a lord". From Al-Fātiḥa: الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ — every word here is a Quranic iḍāfa or genitive link.',
-    vocab:[{ar:"رَسُولُ اللهِ",en:"messenger of Allah"},{ar:"يَوْمُ الدِّينِ",en:"Day of Judgement"},{ar:"رَبُّ الْعَالَمِينَ",en:"Lord of the worlds"},{ar:"عَبْدُ اللهِ",en:"servant of Allah"}],
+    vocab:[{ar:"رَسُولُ اللهِ",en:"messenger of Allah"},{ar:"يَوْمُ الدِّينِ",en:"Day of Judgement"},{ar:"رَبُّ الْعَالَمِينَ",en:"Lord of the worlds"},{ar:"عَبْدُ اللهِ",en:"servant of Allah"},{ar:"نَبِيٌّ",en:"prophet"}],
     patternTiles:[
       {en:"Muhammad is the messenger of Allah.", tiles:["مُحَمَّدٌ","رَسُولُ","اللهِ","عَبْدُ","نَبِيٌّ"], answer:["مُحَمَّدٌ","رَسُولُ","اللهِ"]},
       {en:"Today is the Day of Judgement.", tiles:["الْيَوْمُ","يَوْمُ","الدِّينِ","رَبُّ","الْعَالَمِينَ"], answer:["الْيَوْمُ","يَوْمُ","الدِّينِ"]},
     ]},
   { id:20, book:1, lessonRef:"1.8", part:"B", title:"الْإِضَافَةُ (Part 2)", titleEn:"Possessive Pronouns",
     grammar:'Attached pronouns suffix directly to the noun. رَبِّي (my Lord — ي replaces tanwīn), رَبُّكَ (your Lord — كَ attached), رَحْمَتُهُ (His mercy — هُ attached), نُورُهُ (His light — هُ attached). These exact forms occur throughout the Quran. Note: after ي, the preceding vowel shifts to kasra — رَبِّي not رَبُيِ.',
-    vocab:[{ar:"رَبِّي",en:"my Lord"},{ar:"رَبُّكَ",en:"your Lord"},{ar:"رَحْمَتُهُ",en:"His mercy"},{ar:"نُورُهُ",en:"His light"}],
+    vocab:[{ar:"رَبِّي",en:"my Lord"},{ar:"رَبُّكَ",en:"your Lord"},{ar:"رَحْمَتُهُ",en:"His mercy"},{ar:"نُورُهُ",en:"His light"},{ar:"عَظِيمٌ",en:"great, mighty"}],
     patternTiles:[
       {en:"My Lord is generous.", tiles:["رَبِّي","كَرِيمٌ","رَبُّكَ","عَظِيمٌ"], answer:["رَبِّي","كَرِيمٌ"]},
       {en:"His light is great.", tiles:["نُورُهُ","عَظِيمٌ","رَحْمَتُهُ","كَبِيرٌ","رَبِّي"], answer:["نُورُهُ","عَظِيمٌ"]},
@@ -1276,7 +1286,7 @@ const SESSIONS = [
 
   { id:21, book:1, lessonRef:"1.9", part:"A", title:"الْعَائِلَةُ (Part 1)", titleEn:"Family Vocabulary",
     grammar:'أَبٌ (father) and أَخٌ (brother) are irregular: أَبِي (my father), أَخِي (my brother). These are الْأَسْمَاءُ الْخَمْسَةُ — special nouns.',
-    vocab:[{ar:"أَبٌ",en:"father"},{ar:"أُمٌّ",en:"mother"},{ar:"أَخٌ",en:"brother"},{ar:"أُخْتٌ",en:"sister"}],
+    vocab:[{ar:"أَبٌ",en:"father"},{ar:"أُمٌّ",en:"mother"},{ar:"أَخٌ",en:"brother"},{ar:"أُخْتٌ",en:"sister"},{ar:"كَيْفَ",en:"how?"}],
     patternTiles:[
       {emoji:"👨", question:"كَيْفَ أَبُوكَ؟", en:"My father is generous.", tiles:["أَبِي","كَرِيمٌ","أُمِّي","أَخِي"], answer:["أَبِي","كَرِيمٌ"]},
       {en:"I have a brother and a sister.", tiles:["عِنْدِي","أَخٌ","وَأُخْتٌ","أَبٌ","وَأُمٌّ"], answer:["عِنْدِي","أَخٌ","وَأُخْتٌ"]},
@@ -1369,11 +1379,12 @@ const KEY_TO_EN_TERMS = (() => {
   };
   const map = {};
   SESSIONS.forEach(s => s.vocab.forEach(w => {
+    if (QURAN_HOMOGRAPH_BLOCK.has(w.ar)) return;   // مَنْ must not claim key 'من' from مِنْ
     const k = stripQ(w.ar);
     if (!map[k]) {
       // "the book" → book · "student (m.)" → student · "desk/office" → desk, office
       map[k] = w.en.replace(/^the\s+/i, '').replace(/\s*\([^)]*\)/g, '').split('/')
-                   .map(t => t.trim()).filter(Boolean);
+                   .map(t => t.replace(/[?!.,;:]+$/, '').trim()).filter(Boolean);
     }
   }));
   Object.entries(extra).forEach(([k, terms]) => { map[k] = [...(map[k] || []), ...terms]; });
@@ -2011,7 +2022,7 @@ function TileEx({ exercise, onResult, lang = "en" }) {
 
   return (
     <div style={{textAlign:"center"}}>
-      <p style={{color:"#64748b",fontSize:13,marginBottom:6,fontFamily:"inherit"}}>{t.buildSentence}</p>
+      <p style={{fontSize:11,fontWeight:700,letterSpacing:1,textTransform:"uppercase",color:"#0e9f6e",marginBottom:6,fontFamily:"inherit"}}>{t.translateTask}</p>
       <p style={{fontSize:17,fontWeight:700,color:"#1e293b",marginBottom:4,fontFamily:"inherit",direction:"ltr"}}>"{exercise.en}"</p>
       {checked && !correct && (
         <p style={{fontSize:12,color:"#94a3b8",marginBottom:12}}>
@@ -2138,20 +2149,29 @@ function PatternTileEx({ exercise, onResult, lang = "en" }) {
           {"definite form (الـ)"}
         </div>
       )}
-      {/* Prompt — emoji, translated sentence, or Arabic question */}
-      {exercise.emoji
-        ? <div style={{lineHeight:1,marginBottom:8}}><EmojiImg emoji={exercise.emoji} size={72}/></div>
-        : exercise.en && <p style={{fontSize:15,fontWeight:700,color:"#1e293b",marginBottom:8,fontFamily:"inherit",direction:"ltr"}}>"{exercise.en}"</p>
-      }
+      {/* Task label — an Arabic question means "answer it"; an English sentence
+          on its own means "translate it". Without this the two look identical. */}
+      <div style={{fontSize:11,fontWeight:700,letterSpacing:1,textTransform:"uppercase",
+        color:"#0e9f6e",marginBottom:8,fontFamily:"inherit"}}>
+        {exercise.question ? t.answerTask : t.translateTask}
+      </div>
+      {/* Prompt — emoji and/or Arabic question */}
+      {exercise.emoji && <div style={{lineHeight:1,marginBottom:8}}><EmojiImg emoji={exercise.emoji} size={72}/></div>}
       {exercise.question && (
         <div style={{marginBottom:4}}>
           <span style={{fontSize:28,fontWeight:700,color:"#0f172a",fontFamily:arFont,direction:"rtl"}}>{exercise.question}</span>
           <SpeakBtn text={exercise.question} size={18}/>
         </div>
       )}
-      {exercise.hint && (
-        <div style={{fontSize:13,color:"#475569",marginBottom:6,fontStyle:"italic",fontFamily:"inherit",direction:"ltr"}}>
-          {exercise.hint}
+      {/* With a question, any English text is the answer to aim for; without
+          one it is the sentence to translate. */}
+      {!exercise.question && exercise.en && (
+        <p style={{fontSize:15,fontWeight:700,color:"#1e293b",marginBottom:8,fontFamily:"inherit",direction:"ltr"}}>"{exercise.en}"</p>
+      )}
+      {exercise.question && (exercise.hint || exercise.en) && (
+        <div style={{fontSize:13,color:"#475569",marginBottom:6,fontFamily:"inherit",direction:"ltr"}}>
+          <span style={{color:"#94a3b8",fontSize:11,textTransform:"uppercase",letterSpacing:0.5,marginRight:5}}>{t.expectedAnswer}</span>
+          <span style={{fontStyle:"italic"}}>{exercise.hint || exercise.en}</span>
         </div>
       )}
       {/* Gold tiles hint */}
