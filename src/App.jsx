@@ -822,17 +822,54 @@ function makeCaseVariants(ar) {
 }
 
 // ── Audio (Web Speech API) ──────────────────────
+// ── Idghām for speech synthesis ───────────────────────────────────────────────
+// Tanwīn immediately before ر or ل assimilates into it: the -n sound is dropped
+// and the ر/ل is doubled (idghām bilā ghunnah). So مُحَمَّدٌ رَسُولُ اللهِ reads
+// "Muhammadu-r-rasūlu llāh", not "Muhammadun rasūlu…". A muṣḥaf writes this with a
+// shadda; TTS voices read the raw tanwīn literally, so rewrite it for audio only,
+// never for what is shown on screen.
+// Only ر and ل are handled: assimilation into ن م و ي keeps a nasal (ghunnah),
+// which the literal "-un" reading already approximates.
+const TANWIN_TO_VOWEL = { "ٌ": "ُ", "ٍ": "ِ", "ً": "َ" };
+function applyIdgham(text) {
+  // The optional alif / alif maqṣūra covers fatḥatān written before it
+  // (هُدًى لِّلمُتَّقِينَ). A shadda already present is not doubled twice.
+  return text.replace(
+    /([ًٌٍ])([اى]?)(\s+)([رل])([ً-ْٰ]*)/g,
+    (_, tanwin, alif, space, letter, marks) =>
+      // Strip any shadda already on the ر/ل, then re-emit exactly one in
+      // canonical order (shadda before the vowel) so it never doubles.
+      TANWIN_TO_VOWEL[tanwin] + alif + space + letter + "ّ" + marks.replace(/ّ/g, "")
+  );
+}
+
 function speak(text) {
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
 
-  // Arabic TTS applies "pausal form" to utterance-final words, dropping the
-  // final short vowel (case ending). For isolated words (MCQ options, vocab
-  // taps) we want the full ending pronounced — append U+200C (ZWNJ) to
-  // prevent pausal form. For sentences (text contains spaces) pausal form on
-  // the last word is correct Classical Arabic, so leave those unchanged.
-  const isIsolatedWord = !text.includes(" ");
-  const ttsText = (isIsolatedWord && /[\u064B-\u0650]$/.test(text)) ? text + "\u200C" : text;
+  text = applyIdgham(text);
+
+  // Arabic TTS applies "pausal form" to the utterance-final word, dropping its
+  // final short vowel. This app studies words and phrases in isolation rather
+  // than reading connected prose, so the written iʿrāb must always be heard:
+  // الْكِتَابُ is "al-kitābu", not "al-kitāb". This now applies to every utterance,
+  // multi-word answers included — previously only to single words.
+  //
+  // Two layers, because voices differ in what they honour:
+  //   1. U+200C (ZWNJ) — zero-width, so it adds no sound, but many engines stop
+  //      treating the preceding vowel as utterance-final.
+  //   2. FORCE_FINAL_VOWEL — if a voice ignores the ZWNJ, writing the matching
+  //      vowel letter (ـُ→و, ـِ→ي, ـَ→ا) makes the ending unmissable, at the cost
+  //      of lengthening it. Off by default because it alters vowel quantity.
+  const FORCE_FINAL_VOWEL = false;
+  const FINAL_VOWEL_LETTER = { "\u064F": "\u0648", "\u0650": "\u064A", "\u064E": "\u0627" };
+  let ttsText = text;
+  const finalHaraka = text.match(/[\u064B-\u0650]$/);
+  if (finalHaraka) {
+    ttsText = (FORCE_FINAL_VOWEL && FINAL_VOWEL_LETTER[finalHaraka[0]])
+      ? text + FINAL_VOWEL_LETTER[finalHaraka[0]]
+      : text + "\u200C";
+  }
 
   const utt = new SpeechSynthesisUtterance(ttsText);
   utt.lang = "ar";
