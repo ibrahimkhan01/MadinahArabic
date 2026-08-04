@@ -874,7 +874,7 @@ const SESSIONS = [
 
   { id:1, book:1, lessonRef:"1.1", part:"A", title:"مَا هَذَا؟", titleEn:"What Is This? (Part 1)",
     grammar:'هَذَا means "this" for masculine objects. مَا هَذَا؟ = What is this? Answer: هَذَا كِتَابٌ. Nouns take ـٌ (tanwīn ḍamm) in the indefinite.',
-    vocab:[{ar:"هَذَا",en:"this (m., near)"},{ar:"مَا",en:"what?"},{ar:"كِتَابٌ",en:"book"},{ar:"قَلَمٌ",en:"pen"},{ar:"مِفْتَاحٌ",en:"key"},{ar:"بَابٌ",en:"door"}],
+    vocab:[{ar:"هَذَا",en:"this (m.)"},{ar:"مَا",en:"what?"},{ar:"كِتَابٌ",en:"book"},{ar:"قَلَمٌ",en:"pen"},{ar:"مِفْتَاحٌ",en:"key"},{ar:"بَابٌ",en:"door"}],
     patternTiles:[
       {emoji:"📖", question:"مَا هَذَا؟", tiles:["هَذَا","كِتَابٌ","قَلَمٌ","مِفْتَاحٌ"], answer:["هَذَا","كِتَابٌ"]},
       {emoji:"🔑", question:"مَا هَذَا؟", tiles:["هَذَا","مِفْتَاحٌ","بَابٌ","كِتَابٌ"], answer:["هَذَا","مِفْتَاحٌ"]},
@@ -1223,7 +1223,7 @@ const SESSIONS = [
 
   { id:16, book:1, lessonRef:"1.7", part:"A", title:"الْمُؤَنَّثُ (Part 1)", titleEn:"Feminine Nouns & هَذِهِ",
     grammar:'Feminine nouns end in ةٌ. Use هَذِهِ (this, f.) and تِلْكَ (that, f.): هَذِهِ شَجَرَةٌ. Adjectives must match: هَذِهِ شَجَرَةٌ جَمِيلَةٌ.',
-    vocab:[{ar:"هَذِهِ",en:"this (f., near)"},{ar:"تِلْكَ",en:"that (f., far)"},{ar:"شَجَرَةٌ",en:"tree"},{ar:"مَدْرَسَةٌ",en:"school"},{ar:"غُرْفَةٌ",en:"room"},{ar:"حَدِيقَةٌ",en:"garden"},{ar:"بَقَرَةٌ",en:"cow"},{ar:"نَمْلَةٌ",en:"ant"},{ar:"نَحْلَةٌ",en:"bee"},{ar:"ذُبَابَةٌ",en:"fly"}],
+    vocab:[{ar:"هَذِهِ",en:"this (f.)"},{ar:"تِلْكَ",en:"that (f., far)"},{ar:"شَجَرَةٌ",en:"tree"},{ar:"مَدْرَسَةٌ",en:"school"},{ar:"غُرْفَةٌ",en:"room"},{ar:"حَدِيقَةٌ",en:"garden"},{ar:"بَقَرَةٌ",en:"cow"},{ar:"نَمْلَةٌ",en:"ant"},{ar:"نَحْلَةٌ",en:"bee"},{ar:"ذُبَابَةٌ",en:"fly"}],
     patternTiles:[
       {emoji:"🌳", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","شَجَرَةٌ","مَدْرَسَةٌ","غُرْفَةٌ"], answer:["هَذِهِ","شَجَرَةٌ"]},
       {emoji:"🏫", question:"مَا هَذِهِ؟", tiles:["هَذِهِ","مَدْرَسَةٌ","شَجَرَةٌ","حَدِيقَةٌ"], answer:["هَذِهِ","مَدْرَسَةٌ"]},
