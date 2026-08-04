@@ -843,33 +843,57 @@ function applyIdgham(text) {
   );
 }
 
-function speak(text) {
+// ── Spoken form, decoupled from the displayed form ───────────────────────────
+// What the learner reads and what the synthesiser is handed are now two separate
+// strings. The display stays exactly as authored; the audio gets a respelling
+// engineered to sound right. Nothing here ever reaches the screen.
+//
+// SAY_AS is the escape hatch: key it on the exact displayed string to hand-tune
+// any word the systematic rules below get wrong.
+const SAY_AS = {
+  // 'الْكِتَابُ': 'الْكِتَابُو',
+};
+
+// Tanwīn respelled as an explicit nūn + sukūn. This is precisely how it sounds,
+// and because نْ is a real consonant the voice cannot clip it:
+//   كِتَابٌ → كِتَابُنْ ("kitābun")   بَيْتًا → بَيْتَنْ ("baytan")
+const TANWIN_RESPELL = { "ٌ": "ُنْ", "ٍ": "ِنْ", "ً": "َنْ" };
+
+// A bare short vowel (the definite forms: الْكِتَابُ) has no consonant to lean on,
+// so pick how to keep it audible:
+//   'lengthen' — write the matching vowel letter (ـُ→و). Always audible, but
+//                lengthens the vowel: "al-kitābū" rather than "al-kitābu".
+//   'zwnj'     — append a zero-width non-joiner. No effect on the sound, but
+//                some voices ignore it and still clip the ending.
+const SHORT_VOWEL_MODE = "lengthen";
+const SHORT_VOWEL_LETTER = { "ُ": "و", "ِ": "ي", "َ": "ا" };
+
+// Words that must never be lengthened, because distorting them is worse than
+// letting the voice use pausal form. Lengthening اللهِ yields "Allāhī", which is
+// simply wrong; "Allāh" is the normal, correct pausal reading.
+const NO_LENGTHEN_FINAL = [/الل[هَهُهِ]?ِ?$/, /^اللهُ?$/];
+
+function ttsForm(text) {
+  if (SAY_AS[text]) return SAY_AS[text];
+  let out = applyIdgham(text);
+  // Final tanwīn → explicit nūn. The alif of ـًا is dropped; the nūn replaces it.
+  out = out.replace(/([ًٌٍ])[اى]?\s*$/, (_, tw) => TANWIN_RESPELL[tw]);
+  // Final bare short vowel → keep it from being swallowed by pausal form.
+  const lastWord = out.split(/\s+/).pop();
+  const exempt = NO_LENGTHEN_FINAL.some(re => re.test(lastWord));
+  out = out.replace(/([َُِ])\s*$/, (_, v) =>
+    (SHORT_VOWEL_MODE === "lengthen" && SHORT_VOWEL_LETTER[v] && !exempt)
+      ? v + SHORT_VOWEL_LETTER[v]
+      : v + "‌");
+  return out;
+}
+
+// `sayAs` overrides the spoken string for this one utterance.
+function speak(text, sayAs) {
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
 
-  text = applyIdgham(text);
-
-  // Arabic TTS applies "pausal form" to the utterance-final word, dropping its
-  // final short vowel. This app studies words and phrases in isolation rather
-  // than reading connected prose, so the written iʿrāb must always be heard:
-  // الْكِتَابُ is "al-kitābu", not "al-kitāb". This now applies to every utterance,
-  // multi-word answers included — previously only to single words.
-  //
-  // Two layers, because voices differ in what they honour:
-  //   1. U+200C (ZWNJ) — zero-width, so it adds no sound, but many engines stop
-  //      treating the preceding vowel as utterance-final.
-  //   2. FORCE_FINAL_VOWEL — if a voice ignores the ZWNJ, writing the matching
-  //      vowel letter (ـُ→و, ـِ→ي, ـَ→ا) makes the ending unmissable, at the cost
-  //      of lengthening it. Off by default because it alters vowel quantity.
-  const FORCE_FINAL_VOWEL = false;
-  const FINAL_VOWEL_LETTER = { "\u064F": "\u0648", "\u0650": "\u064A", "\u064E": "\u0627" };
-  let ttsText = text;
-  const finalHaraka = text.match(/[\u064B-\u0650]$/);
-  if (finalHaraka) {
-    ttsText = (FORCE_FINAL_VOWEL && FINAL_VOWEL_LETTER[finalHaraka[0]])
-      ? text + FINAL_VOWEL_LETTER[finalHaraka[0]]
-      : text + "\u200C";
-  }
+  const ttsText = sayAs || ttsForm(text);
 
   const utt = new SpeechSynthesisUtterance(ttsText);
   utt.lang = "ar";
@@ -890,10 +914,10 @@ function speak(text) {
   }
 }
 
-function SpeakBtn({ text, size = 18 }) {
+function SpeakBtn({ text, size = 18, sayAs }) {
   return (
     <button
-      onClick={e => { e.stopPropagation(); speak(text); }}
+      onClick={e => { e.stopPropagation(); speak(text, sayAs); }}
       title="Hear pronunciation"
       style={{ background:"none", border:"none", cursor:"pointer",
                fontSize:size, lineHeight:1, padding:"2px 8px",
