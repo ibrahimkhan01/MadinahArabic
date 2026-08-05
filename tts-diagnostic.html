@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arabic TTS diagnostic — Madinah Arabic</title>
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; max-width: 900px;
+         margin: 0 auto; padding: 24px; color: #0f172a; background: #f8fafc; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  p.sub { color: #64748b; margin: 0 0 20px; font-size: 14px; }
+  h2 { font-size: 15px; margin: 26px 0 8px; color: #059669; text-transform: uppercase;
+       letter-spacing: 1px; }
+  table { border-collapse: collapse; width: 100%; background: white; font-size: 14px; }
+  th, td { border: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; vertical-align: middle; }
+  th { background: #059669; color: white; font-weight: 700; }
+  .ar { font-family: "Noto Naskh Arabic","Segoe UI",serif; font-size: 24px; direction: rtl; }
+  code { font-size: 11px; color: #64748b; word-break: break-all; }
+  button { background: #059669; color: white; border: none; border-radius: 8px;
+           padding: 7px 14px; font-weight: 700; cursor: pointer; font-size: 13px; }
+  button:hover { background: #047857; }
+  .warn { background: #fef3c7; border: 1px solid #f59e0b; padding: 12px 14px;
+          border-radius: 8px; margin: 14px 0; font-size: 14px; }
+  .ok   { background: #dcfce7; border: 1px solid #22c55e; padding: 12px 14px;
+          border-radius: 8px; margin: 14px 0; font-size: 14px; }
+  select { padding: 6px; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>Arabic text-to-speech diagnostic</h1>
+<p class="sub">Tells us whether the pronunciation problem is in the app's text or in your
+computer's voice. Nothing here talks to the app — it uses the same browser speech API directly.</p>
+
+<h2>1. Voices your browser can use</h2>
+<div id="voiceStatus"></div>
+<div id="voiceList"></div>
+
+<h2>2. Speak with</h2>
+<select id="voicePick"></select>
+<label style="margin-left:12px;font-size:14px">
+  rate <input id="rate" type="range" min="0.5" max="1" step="0.02" value="0.82">
+</label>
+
+<h2>3. The comparison that matters</h2>
+<p class="sub">Row 1 is what the app used to send. Row 2 is what it sends now. If row 2 still
+sounds like "madrasahun" — with an h — then your voice is ignoring the letters and no amount
+of respelling in the app will fix it.</p>
+<table id="cases"></table>
+
+<script>
+const CASES = [
+  ['مَدْرَسَةٌ', 'raw — as written in the data', 'expect "madrasatun"'],
+  ['مَدْرَسَتُنْ', '↳ what the app sends', 'should now be correct'],
+  ['الْمَدْرَسَةُ', 'raw definite', 'expect "al-madrasatu"'],
+  ['الْمَدْرَسَتُو', '↳ what the app sends', 'should now be correct'],
+  ['جَنَّةٌ', 'raw', 'expect "jannatun"'],
+  ['جَنَّتُنْ', '↳ what the app sends', 'should now be correct'],
+  ['السِّرَاجُ', 'raw sun letter', 'expect "as-siraaju", lām silent'],
+  ['اَسِّرَاجُو', '↳ what the app sends', 'should now be correct'],
+  ['مُحَمَّدٌ رَسُولُ اللهِ', 'raw', 'expect "Muhammadur rasoolullah"'],
+  ['مُحَمَّدُ رَّسُولُ اللهِ', '↳ what the app sends', 'should now be correct'],
+];
+
+const cps = s => [...s].map(c => c.codePointAt(0).toString(16).padStart(4, '0')).join(' ');
+
+function renderVoices() {
+  const voices = speechSynthesis.getVoices();
+  const arabic = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('ar'));
+  const status = document.getElementById('voiceStatus');
+  if (!voices.length) { status.innerHTML = '<div class="warn">No voices reported yet — reload the page.</div>'; return; }
+  status.innerHTML = arabic.length
+    ? '<div class="ok"><b>' + arabic.length + ' Arabic voice(s) found.</b> Good — the app will pick one of these.</div>'
+    : '<div class="warn"><b>No Arabic voice is installed.</b> This is very likely the cause. '
+      + 'The app asks for lang="ar", but with no Arabic voice the browser falls back to a '
+      + 'non-Arabic voice, which mangles the letters (reading ة as "h"). '
+      + 'On Windows: Settings → Time &amp; language → Language &amp; region → Add a language '
+      + '→ Arabic → include "Speech". Then restart the browser.</div>';
+
+  const t = ['<table><tr><th>Name</th><th>Lang</th><th>Default</th></tr>'];
+  for (const v of voices.slice().sort((a, b) => (b.lang.startsWith('ar') ? 1 : 0) - (a.lang.startsWith('ar') ? 1 : 0)))
+    t.push('<tr' + (v.lang.toLowerCase().startsWith('ar') ? ' style="background:#dcfce7"' : '')
+      + '><td>' + v.name + '</td><td>' + v.lang + '</td><td>' + (v.default ? 'yes' : '') + '</td></tr>');
+  t.push('</table>');
+  document.getElementById('voiceList').innerHTML = t.join('');
+
+  const pick = document.getElementById('voicePick');
+  pick.innerHTML = voices.map((v, i) =>
+    '<option value="' + i + '"' + (v.lang.toLowerCase().startsWith('ar') ? ' selected' : '') + '>'
+    + v.name + ' (' + v.lang + ')</option>').join('');
+}
+
+function say(text) {
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const voices = speechSynthesis.getVoices();
+  const chosen = voices[document.getElementById('voicePick').value];
+  if (chosen) { u.voice = chosen; u.lang = chosen.lang; } else { u.lang = 'ar'; }
+  u.rate = parseFloat(document.getElementById('rate').value);
+  speechSynthesis.speak(u);
+}
+
+const rows = ['<tr><th>Arabic</th><th>Which</th><th>Expected</th><th>Codepoints</th><th></th></tr>'];
+CASES.forEach(([text, which, expect], i) => {
+  rows.push('<tr><td class="ar">' + text + '</td><td>' + which + '</td><td>' + expect
+    + '</td><td><code>' + cps(text) + '</code></td>'
+    + '<td><button data-i="' + i + '">Play</button></td></tr>');
+});
+document.getElementById('cases').innerHTML = rows.join('');
+document.getElementById('cases').addEventListener('click', e => {
+  if (e.target.tagName === 'BUTTON') say(CASES[e.target.dataset.i][0]);
+});
+
+renderVoices();
+speechSynthesis.addEventListener('voiceschanged', renderVoices);
+</script>
+</body>
+</html>

@@ -930,6 +930,35 @@ function ttsForm(text) {
   return out;
 }
 
+// Arabic voices differ enormously in whether they respect harakat. Microsoft's
+// legacy SAPI voices (Naayf, Hoda) normalise the text and largely ignore the
+// vowel marks, so they clip case endings and read ة as /h/ no matter how the
+// word is spelled. The newer "Natural"/"Online" neural voices honour them, as do
+// Apple's. `voices.find(...)` took whichever Arabic voice happened to be first,
+// which on Windows is often the worst one — so rank them instead.
+const VOICE_PREF_KEY = "ma_voice";
+function rankArabicVoice(v) {
+  const n = (v.name || "").toLowerCase();
+  let score = 0;
+  if (/natural|neural|online/.test(n)) score += 100;  // Microsoft/Edge neural
+  if (/google/.test(n)) score += 60;
+  if (/majed|maged|tarik|laila|salma|hamed|zariyah/.test(n)) score += 40; // Apple + MS neural names
+  if (/naayf|hoda/.test(n)) score -= 50;              // legacy SAPI: ignores harakat
+  if ((v.lang || "").toLowerCase() === "ar-sa") score += 5;
+  if (v.localService === false) score += 3;
+  return score;
+}
+function pickArabicVoice(voices) {
+  const saved = (() => { try { return localStorage.getItem(VOICE_PREF_KEY); } catch (_) { return null; } })();
+  if (saved) {
+    const exact = voices.find(v => v.name === saved);
+    if (exact) return exact;
+  }
+  const arabic = voices.filter(v => (v.lang || "").toLowerCase().startsWith("ar"));
+  if (!arabic.length) return null;
+  return arabic.slice().sort((a, b) => rankArabicVoice(b) - rankArabicVoice(a))[0];
+}
+
 // `sayAs` overrides the spoken string for this one utterance.
 function speak(text, sayAs) {
   if (!window.speechSynthesis) return;
@@ -942,9 +971,8 @@ function speak(text, sayAs) {
   utt.rate = 0.82;
 
   const doSpeak = () => {
-    const voices = window.speechSynthesis.getVoices();
-    const arVoice = voices.find(v => v.lang.startsWith("ar"));
-    if (arVoice) utt.voice = arVoice;
+    const voice = pickArabicVoice(window.speechSynthesis.getVoices());
+    if (voice) { utt.voice = voice; utt.lang = voice.lang; }
     window.speechSynthesis.speak(utt);
   };
 
@@ -3051,6 +3079,22 @@ export default function MadinahArabicApp() {
   const lang = "en";
   const [openBooks, setOpenBooks] = useState(() => new Set([1]));
   const [showAbout, setShowAbout] = useState(false);
+  // Arabic voices available on this device, for the Settings picker
+  const [arVoices, setArVoices] = useState([]);
+  const [voicePref, setVoicePref] = useState(() => {
+    try { return localStorage.getItem("ma_voice") || ""; } catch (_) { return ""; }
+  });
+  useEffect(() => {
+    if (!window.speechSynthesis) return;
+    const load = () => setArVoices(
+      window.speechSynthesis.getVoices()
+        .filter(v => (v.lang || "").toLowerCase().startsWith("ar"))
+        .slice().sort((a, b) => rankArabicVoice(b) - rankArabicVoice(a))
+    );
+    load();
+    window.speechSynthesis.addEventListener("voiceschanged", load);
+    return () => window.speechSynthesis.removeEventListener("voiceschanged", load);
+  }, []);
 
   // ── Install prompt ──
   const [installPromptEvt, setInstallPromptEvt] = useState(null); // Android beforeinstallprompt
@@ -3294,6 +3338,43 @@ export default function MadinahArabicApp() {
             <div style={{width:60}}/>
           </div>
           <div style={{padding:"24px 20px",display:"flex",flexDirection:"column",gap:14}}>
+
+            {/* Arabic voice */}
+            <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:14,padding:"16px 18px"}}>
+              <div style={{fontWeight:700,fontSize:15,color:"#1e293b",marginBottom:3}}>🔊 Arabic voice</div>
+              <div style={{fontSize:12,color:"#64748b",marginBottom:10}}>
+                Voices vary in whether they pronounce the harakat. If endings sound clipped or
+                ة sounds like "h", try another voice — on Windows the "Natural" voices are best
+                and the older Naayf/Hoda voices ignore the vowel marks.
+              </div>
+              {arVoices.length === 0 ? (
+                <div style={{fontSize:12,color:"#b45309",background:"#fef3c7",border:"1px solid #fcd34d",borderRadius:8,padding:"8px 10px"}}>
+                  No Arabic voice found on this device. Install one in your system settings, then reload.
+                </div>
+              ) : (
+                <>
+                  <select
+                    value={voicePref}
+                    onChange={e => {
+                      setVoicePref(e.target.value);
+                      try {
+                        if (e.target.value) localStorage.setItem("ma_voice", e.target.value);
+                        else localStorage.removeItem("ma_voice");
+                      } catch (_) {}
+                    }}
+                    style={{width:"100%",padding:"9px 10px",borderRadius:10,border:"1px solid #cbd5e1",
+                            fontSize:13,fontFamily:"inherit",background:"white",marginBottom:10}}>
+                    <option value="">Best available (recommended)</option>
+                    {arVoices.map(v => <option key={v.name} value={v.name}>{v.name} — {v.lang}</option>)}
+                  </select>
+                  <button onClick={() => speak("الْمَدْرَسَةُ جَنَّةٌ")} style={{
+                    padding:"8px 16px",background:GREEN,color:"white",border:"none",borderRadius:10,
+                    fontWeight:700,fontSize:13,cursor:"pointer"}}>
+                    ▶ Test — should be "al-madrasatu jannatun"
+                  </button>
+                </>
+              )}
+            </div>
 
             {/* Unlock all */}
             <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:14,padding:"16px 18px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
