@@ -667,7 +667,7 @@ const EMOJI = {
   "car":"🚗","boat":"⛵","ship":"🚢","road":"🛣️","path":"🛤️",
   "food":"🍽️","bread":"🍞","water":"💧","milk":"🥛","fruit":"🍎",
   "tree":"🌳","garden":"🌿","river":"🌊","mountain":"⛰️","sea":"🌊","ocean":"🌊",
-  "fire":"🔥","earth":"🌍","sky":"☁️","sun":"☀️","moon":"🌙","wind":"💨",
+  "fire":"🔥","earth":"🌍","sky":"🌌","cloud":"☁️","sun":"☀️","moon":"🌙","wind":"💨",
   "night":"🌙","day":"☀️","morning":"🌅","evening":"🌆",
   "book (lesson)":"📖","lesson":"📝","school":"🏫","university":"🎓","class":"🏫",
   "letter":"✉️","word":"💬","speech":"💬","news":"📰","story":"📖",
@@ -744,7 +744,7 @@ const EMOJI = {
   "wolf":"🐺","donkey":"🫏","whale":"🐋","large fish (whale)":"🐋","pig":"🐖","swine":"🐖",
   "monkey":"🐒","ape":"🐒","spider":"🕷️","ant":"🐜","bee":"🐝","honey bee":"🐝","fly":"🪰",
   // NOTE: no emoji for مَلَكٌ (angel) or رَسُولٌ (messenger) — these are not depicted.
-  "sky/heaven":"☁️","paradise/garden":"🌿","classroom":"🏫",
+  "sky/heaven":"🌌","paradise/garden":"🌿","classroom":"🏫",
   "husband":"🤵","wife":"👰",
 };
 const getEmoji = (en) => {
@@ -916,6 +916,11 @@ function ttsForm(text) {
   let out = applySunLetter(applyIdgham(text));
   // Final tanwīn → explicit nūn. The alif of ـًا is dropped; the nūn replaces it.
   out = out.replace(/([ًٌٍ])[اى]?\s*$/, (_, tw) => TANWIN_RESPELL[tw]);
+  // A tāʾ marbūṭah is pronounced /t/ once the case ending is voiced, and /h/ only
+  // in pausal form. Since the ending is now always spoken, write it as ت so the
+  // voice says "jannatun" and not "jannahun":  جَنَّةٌ → جَنَّتُنْ
+  out = out.replace(/ة(?=[َُِ])/g, "ت");
+
   // Final bare short vowel → keep it from being swallowed by pausal form.
   const exempt = isDivineName(out.split(/\s+/).pop());
   out = out.replace(/([َُِ])\s*$/, (_, v) =>
